@@ -1,0 +1,8 @@
+BODY {color: #FFFFFF; background-color: #000000; font-family: verdana, tahoma; font-size: 9pt; font-style: normal;
+scrollbar-face-color: #33CC00; scrollbar-3dlight-color: #339900; scrollbar-highlight-color: #00FF00; scrollbar-shadow-color: #339900; scrollbar-darkshadow-color: #339900; scrollbar-track-color: #000000; scrollbar-arrow-color: #339900;} 
+A:link {text-decoration: underline; color: #33CC00}
+A:visited {text-decoration: underline; color: #339900}
+A:hover {text-decoration: none; color: #00FF00}
+TD {font-family: verdana, tahoma; font-size: 9pt; font-style: normal;}
+.colorfont {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal;}
+.title {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal; font-weight: bold;}

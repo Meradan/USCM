@@ -1,0 +1,35 @@
+SELECT DISTINCT Users.forname FROM Users LEFT JOIN {$_SESSION['table_prefix']}characters as cON Users.id = c.userid WHERE c.id = {$_GET['character_id']};
+
+SELECT DISTINCT Users.lastname FROM Users LEFT JOIN {$_SESSION['table_prefix']}characters as c ON Users.id = c.userid WHERE c.id = {$_GET['character_id']};
+
+SELECT DISTINCT u.emailadress FROM Users as u LEFT JOIN {$_SESSION['table_prefix']}characters as c ON u.id = c.userid WHERE c.id = {$_GET['character_id']};
+
+
+SELECT forname FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT lastname FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT DISTINCT r.ranklong FROM {$_SESSION['table_prefix']}rank_names as r LEFT JOIN {$_SESSION['table_prefix']}ranks as n ON r.id = n.rank_id LEFT JOIN {$_SESSION['table_prefix']}characters as c ON n.character_id = c.id WHERE n.character_id = {$_GET['character_id']};
+
+SELECT DISTINCT s.specialty_name FROM uscm_specialty_names as s LEFT JOIN uscm_specialty as n ON s.id = n.specialty_name_id LEFT JOIN uscm_characters as c ON n.character_id = c.id WHERE n.character_id = {$_GET['character_id']};
+
+SELECT Enlisted FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT Age FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT Gender FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+
+SELECT a.attribute_name, n.value FROM {$_SESSION['table_prefix']}attributes as n LEFT JOIN {$_SESSION['table_prefix']}attribute_names as a ON a.id = n.attribute_id LEFT JOIN {$_SESSION['table_prefix']}characters as c on c.id = n.character_id WHERE c.id = {$_GET['character_id']};
+
+SELECT UnusedXP FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT CoolPoints FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+SELECT PsychoPoints FROM {$_SESSION['table_prefix']}characters WHERE id = {$_GET['character_id']};
+
+
+SELECT mn.mission_name_short, r.rankshort, a.medal_short, m.notes FROM {$_SESSION['table_prefix']}missions as m LEFT JOIN {$_SESSION['table_prefix']}rank_names as r ON m.rank_id = r.id LEFT JOIN {$_SESSION['table_prefix']}medal_names as a ON m.medal_id = a.id LEFT JOIN {$_SESSION['table_prefix']}characters as c ON m.character_id = c.id LEFT JOIN {$_SESSION['table_prefix']}mission_names as mn ON mn.id = m.mission_id WHERE c.id = {$_GET['character_id']};
+
+
+SELECT s.skill_name, n.value FROM {$_SESSION['table_prefix']}skills as n LEFT JOIN {$_SESSION['table_prefix']}skill_names as s ON s.id = n.skill_name_id LEFT JOIN {$_SESSION['table_prefix']}characters as c on c.id = n.character_id WHERE c.id = {$_GET['character_id']};
