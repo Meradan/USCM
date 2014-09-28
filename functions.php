@@ -3,9 +3,14 @@
 include("config.php");
 
 $db_connection = NULL;
-set_exception_handler(die("Caught exception, going to die"));
+//set_exception_handler(die("Caught exception, going to die"));
 
 function myconnect() {
+  return mysql_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_password']) or die("Failed to connect to database");
+}
+
+function getDatabaseConnection() {
+  global $db_connection;
   if ($db_connection != NULL) {
     return $db_connection;
   } else {
@@ -40,7 +45,7 @@ function validate($level){
  * 3: Site admin
  */
 function login($level){
-  myconnect();
+  $db = getDatabaseConnection();
   if(isset($_GET['alt'])){
     $alt=$_GET['alt'];
     if($alt=="logout"){
@@ -78,15 +83,17 @@ function login($level){
         */
       }
       else{
-        mysql_select_db("skynet");
-        $query="select Users.id,emailadress,platoon_id,Admins.userid as Admin,GMs.userid as GM, logintime from Users
+        $query="select Users.id,emailadress,platoon_id,Admins.userid as Admin,GMs.userid as GM,
+                logintime, count(*) as howmany from Users
                 left join Admins on Admins.userid=Users.id
                 left join GMs on GMs.userid=Users.id and GMs.active=1
                 where emailadress='{$_POST['anvandarnamn']}'
                 and password=password('{$_POST['losenord']}')";
-        $res=mysql_query($query);
-        if(mysql_num_rows($res)==1){
-          $userinfo=mysql_fetch_array($res);
+//         $res=mysql_query($query);
+        $stmt = $db->query($query);
+        $row = $stmt->fetch();
+        if ($row['howmany'] == 1){ #we have a match and only one! cool!
+          $userinfo = $row;
           if ($userinfo['Admin']) {
             $userlevel = 3;
           } elseif ($userinfo['GM']) {
@@ -100,13 +107,17 @@ function login($level){
           $_SESSION['table_prefix']=$_POST['rpg'];
           $_SESSION['user_id']=$userinfo['id'];
           $_SESSION['platoon_id']=$userinfo['platoon_id'];
-          $res = mysql_query("UPDATE Users SET lastlogintime = '{$userinfo['logintime']}' WHERE id = {$userinfo['id']}");
-          $res = mysql_query("UPDATE Users SET logintime = NOW() WHERE id = {$userinfo['id']}");
+          $db->exec("UPDATE Users SET lastlogintime = '{$userinfo['logintime']}' WHERE id = {$userinfo['id']}");
+          $db->exec("UPDATE Users SET logintime = NOW() WHERE id = {$userinfo['id']}");
           return 1;
           exit;
-
-        }
-        else{
+        } elseif ($row['howmany']>1) { #more than one row returned
+            //Om det inte finns endast en anvandare med dessa anvandaruppgifter s� lyckas inte inloggningen
+          $_SESSION['inloggad']=0;
+          $_SESSION['level']="0";
+          return 0;
+          exit;
+        } else { #no match in the table ($row['howmany'] == 0)
           //Om det inte finns endast en anvandare med dessa anvandaruppgifter s� lyckas inte inloggningen
           $_SESSION['inloggad']=0;
           $_SESSION['level']="0";

@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>Login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <LINK REL="stylesheet" HREF="style.css" TYPE="text/css"></LINK>
 </head>
 <body style="margin-top:40px">
@@ -15,16 +15,16 @@
 <form action="login.php?alt=login" method="post">
       <table width="100%" border="0">
         <tr>
-          <td width="36%" style="width:35%">Anv�ndarnamn</td>
+          <td width="36%" style="width:35%">Användarnamn</td>
           <td width="64%" style="width:65%"><input type="text" name="anvandarnamn" style="width:100%"></td>
         </tr>
         <tr>
-          <td>L�senord</td>
+          <td>Lösenord</td>
           <td><input type="password" name="losenord" style="width:100%"></td>
         </tr>
         <tr>
           <td>Rollspel:</td>
-          <td>fiiii<select name="rpg" style="width:100%">
+          <td><select name="rpg" style="width:100%">
         <?php
         $db = new PDO('mysql:host=localhost;dbname=skynet;charset=utf8', 'skynet', 'Br1xt0n');
         $rpgsql="select rpg_name_short,table_prefix from RPG order by rpg_name";
