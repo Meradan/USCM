@@ -1,7 +1,9 @@
 <?php
 
 include("config.php");
-
+include("helper_functions.php");
+include("character_functions.php");
+include("auxiliary_functions.php");
 $db_connection = NULL;
 //set_exception_handler(die("Caught exception, going to die"));
 
@@ -9,6 +11,10 @@ function myconnect() {
   return mysql_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_password']) or die("Failed to connect to database");
 }
 
+/**
+ * Returns a new or existing database connection
+ * @return PDO
+ */
 function getDatabaseConnection() {
   global $db_connection;
   if ($db_connection != NULL) {
@@ -89,7 +95,6 @@ function login($level){
                 left join GMs on GMs.userid=Users.id and GMs.active=1
                 where emailadress='{$_POST['anvandarnamn']}'
                 and password=password('{$_POST['losenord']}')";
-//         $res=mysql_query($query);
         $stmt = $db->query($query);
         $row = $stmt->fetch();
         if ($row['howmany'] == 1){ #we have a match and only one! cool!
@@ -179,7 +184,9 @@ function recrusive_dirlist($base_dir) {
   return $getDirList_allfiles;
 }
 
-
+/*
+ * @deprecated
+ */
 function characterlisting($dbreference, $sorttype) {
 // sorttype is either "alive", "dead", "retired" or "glory"
   $characters = array();
@@ -264,7 +271,8 @@ function characterdata ($cid) {
   $char=mysql_fetch_assoc($sqlres);
   return $char;
 }
-function characterattributes ($cid) {
+
+function character_attributes ($cid) {
   myconnect();
   mysql_select_db("skynet");
   $sql = "SELECT attribute_id,attribute_name, value
@@ -280,6 +288,7 @@ function characterattributes ($cid) {
   }
   return $attributearray;
 }
+
 function attributebonus($cid, $modifiertype, $attribute) {
    myconnect();
    mysql_select_db("skynet");
@@ -328,6 +337,7 @@ function attributebonus($cid, $modifiertype, $attribute) {
    }
    return $bonus;
 }
+
 function attribute2visible ($attributearray) {
   $attribarray = array();
   foreach ( $attributearray as $id => $key ) {
@@ -498,6 +508,7 @@ function attribute2visible ($attributearray) {
   }
   return $attribarray;
 }
+
 function characterskills ($cid,$skilltype,$certarray) {
   myconnect();
   mysql_select_db("skynet");
@@ -853,7 +864,8 @@ function medals ($cid) {
   }
   return $medalarray;
 }
-function certificates ($cid,$platoon_id) {
+
+function certificates_ ($cid,$platoon_id) {
   myconnect();
   mysql_select_db("skynet");
   $skillsql = "SELECT skill_name_id as id,value
@@ -964,7 +976,8 @@ function certificates ($cid,$platoon_id) {
 //	exit;
   return $certificatearray;
 }
-function traits( $cid) {
+
+function traits_( $cid) {
   myconnect();
   mysql_select_db("skynet");
   $sql = "SELECT tn.id, trait_name
@@ -979,7 +992,8 @@ function traits( $cid) {
   }
   return $traitarray;
 }
-function advantages( $cid, $onlyvisible = false) {
+
+function advantages_( $cid, $onlyvisible = false) {
   myconnect();
   mysql_select_db("skynet");
   $visible = $onlyvisible ? " AND an.visible = 1" : "";
@@ -995,7 +1009,8 @@ function advantages( $cid, $onlyvisible = false) {
   }
   return $advarray;
 }
-function disadvantages( $cid, $onlyvisible = false) {
+
+function disadvantages_( $cid, $onlyvisible = false) {
   myconnect();
   mysql_select_db("skynet");
   $sql = "SELECT dn.id, disadvantage_name

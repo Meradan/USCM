@@ -1,8 +1,6 @@
 <?php
 $db = getDatabaseConnection();
 
-myconnect();
-mysql_select_db("skynet");
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
 $gm=($_SESSION['level']==2)?(TRUE):(FALSE);
 if (!array_key_exists('platoon', $_GET)) {
@@ -44,25 +42,15 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
               {$_SESSION['table_prefix']}specialty.specialty_name_id
               WHERE c.status != 'Dead' AND c.status != 'Retired' AND (p.id = '0' OR p.id = '59') {$where}
               ORDER BY rank_id DESC";
-$ranksql="SELECT rank_long,rank_short FROM {$_SESSION['table_prefix']}rank_names
-          ORDER BY id DESC";
-$medalsql="SELECT medal_short,medal_name,medal_glory,description
-          FROM {$_SESSION['table_prefix']}medal_names
-          WHERE {$_SESSION['table_prefix']}medal_names.foreign_medal=0
-          ORDER BY medal_glory ASC";
-$foreignmedalsql="SELECT medal_short,medal_name,medal_glory,description
-          FROM {$_SESSION['table_prefix']}medal_names
-          WHERE {$_SESSION['table_prefix']}medal_names.foreign_medal=1
-          ORDER BY medal_glory ASC";
-$platoonsql="SELECT id,name_short,name_long FROM {$_SESSION['table_prefix']}platoon_names";
+
 //echo $charactersql . "<br><br><br><br><br><br>";
 
 ?>
 <div style="text-align:center;">
 
 <?php
-$stmt = $db->query($platoonsql);
-while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+$platoons = getPlatoons();
+foreach ($platoons as $platoon ) { ?>
   <a href="index.php?url=list_characters.php&platoon=<?php echo $platoon['id']; ?>"><?php echo $platoon['name_long']; ?> (<?php echo $platoon['name_short']; ?>)</a>
 <?php } ?>
 
@@ -86,13 +74,12 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
     <TD COLSPAN="7" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
   </TR>
 <?php
-  $characterres=mysql_query($charactersql);
-  $characterarray = characterlisting($characterres, "alive");
+  $characterarray = listCharacters($charactersql, "alive");
   foreach ($characterarray as $character) { ?>
   <TR><?php $overlib = false;
   if ($_SESSION['level']>=1  ) {
     $overlib = true;
-    $attributearray = characterattributes($character['cid']);
+    $attributearray = characterAttributes($character['cid']);
     $attributearray = attribute2visible($attributearray);
     $certificatearray = certificates($character['cid'],$_GET['platoon']);
     $overlibtext = "";
@@ -134,19 +121,13 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
     <TD><?php echo $character['specialty_name'];?></TD>
     <TD><?php echo $character['missions'];?></TD>
     <TD><?php echo $character['enlisted'];?></TD>
-<?php 		$commendationssql="SELECT medal_short,medal_glory FROM {$_SESSION['table_prefix']}characters c
-                    LEFT JOIN {$_SESSION['table_prefix']}missions as missions
-                      ON missions.character_id = c.id
-                    LEFT JOIN {$_SESSION['table_prefix']}medal_names as mn
-                      ON mn.id = missions.medal_id
-                    WHERE character_id='{$character['cid']}' ORDER BY medal_glory DESC";
-      $commendationsres=mysql_query($commendationssql);
+<?php
       $medals = "";
       $glory = 0;
-
-      while ($commendations=mysql_fetch_array($commendationsres)) {
-        if ($commendations['medal_short'] != "") $medals = $medals . " " . $commendations['medal_short'];
-        $glory = $glory + $commendations['medal_glory'];
+      $commendationsArray = getCommendationsForCharacter($character['cid']);
+      foreach ($commendationsArray as $key => $value) {
+        if ($commendationsArray[$key]['medal_short'] != "") $medals = $medals . " " . $commendationsArray[$key]['medal_short'];
+        $glory = $glory + $commendationsArray[$key]['medal_glory'];
       }
       ?>
     <TD><?php echo ($medals != "")?($medals):("-");?></TD>
@@ -173,15 +154,15 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
   <TR>
     <TD COLSPAN="7" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
   </TR>
-<?php $npcres=mysql_query($npcsql);
-  $npcarray = characterlisting($npcres,"alive");
+<?php
+  $npcarray = listCharacters($npcsql,"alive");
   $medals = "";
   $glory = 0;
   foreach ($npcarray as $npc) { ?>
   <TR><?php $overlib = false;
   if ( $_SESSION['level']>=1  ) {
     $overlib = true;
-      $attributearray = characterattributes($character['cid']);
+      $attributearray = characterAttributes($character['cid']);
       $attributearray = attribute2visible($attributearray);
       $certificatearray = certificates($npc['cid'],$_GET['platoon']);
     $overlibtext = "";
@@ -217,26 +198,19 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
     ?><TD><?php echo $npc['rank_short'];?></TD>
     <TD <?php if ($overlib) {?> onmouseover='return overlib("<?php echo $overlibtext;?>");' onmouseout="return nd();" <?php } ?>><?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?><a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>"> <?php } ?><?php echo $npc['forname'] . " " . $npc['lastname'];?></a></TD>
     <TD><?php echo $npc['specialty_name'];?></TD>
-<?php 	$missionssql="SELECT count(id) as missions FROM {$_SESSION['table_prefix']}missions
-                  WHERE character_id='{$npc['cid']}'";
-  $mission=mysql_fetch_array(mysql_query($missionssql)); ?>
-    <TD><?php echo $mission['missions'];?></TD>
+<?php
+  $missionCount = getNumberOfMissionsForCharacter($npc['cid'])?>
+    <TD><?php echo $missionCount;?></TD>
     <TD><?php echo $npc['enlisted'];?></TD>
 <?php
-  $commendationssql="SELECT medal_short,medal_glory FROM {$_SESSION['table_prefix']}characters c
-                    LEFT JOIN {$_SESSION['table_prefix']}missions as missions
-                      ON missions.character_id = c.id
-                    LEFT JOIN {$_SESSION['table_prefix']}medal_names as mn
-                      ON mn.id = missions.medal_id
-                    WHERE character_id='{$npc['cid']}' ORDER BY medal_glory DESC";
-  $commendationsres=mysql_query($commendationssql);
   $medals = "";
   $glory = 0;
-
-  while ($commendations=mysql_fetch_array($commendationsres)) {
-    if ($commendations['medal_short'] != "") $medals = $medals . " " . $commendations['medal_short'];
-    $glory = $glory + $commendations['medal_glory'];
+  $commendationsArray = getCommendationsForCharacter($npc['cid']);
+  foreach ($commendationsArray as $key => $value) {
+    if ($commendationsArray[$key]['medal_short'] != "") $medals = $medals . " " . $commendationsArray[$key]['medal_short'];
+    $glory = $glory + $commendationsArray[$key]['medal_glory'];
   }
+
 ?>
     <TD><?php echo ($medals!="")?($medals):("-");?></TD>
     <TD><?php echo $npc['status'];?></TD>
@@ -278,8 +252,9 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
 <div class="colorfont">Ranks</div>
 <br/>
 <TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-<?php $rankres=mysql_query($ranksql);
-   while ($rank=mysql_fetch_array($rankres)) { ?>
+<?php
+  $ranks = getRanks();
+  foreach ($ranks as $rank) { ?>
   <TR>
     <TD WIDTH="60"><?php echo $rank['rank_short'] ?></TD>
     <TD><?php echo $rank['rank_long'] ?></TD>
@@ -290,8 +265,9 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
 <div class="colorfont">USCM Medals</div>
 <br/>
 <TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-<?php $medalres=mysql_query($medalsql);
-   while ($medal=mysql_fetch_array($medalres)) { ?>
+<?php
+  $medals = getMedals();
+  foreach ($medals as $medal) { ?>
   <TR>
     <TD WIDTH="60"><?php echo $medal['medal_short'] ?></TD>
     <TD width="200"><?php echo $medal['medal_name'] ?></TD>
@@ -305,8 +281,9 @@ while($platoon = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
 <br/>
 
 <TABLE WIDTH="650" CELLSPACING="0" ALIGN="center">
-<?php $foreignmedalres=mysql_query($foreignmedalsql);
-   while ($medal=mysql_fetch_array($foreignmedalres)) { ?>
+<?php
+  $foreignmedals = getMedals();
+  foreach ($foreignmedals as $medal) { ?>
   <TR>
     <TD WIDTH="40"><?php echo $medal['medal_short'] ?></TD>
     <TD width="200"><?php echo $medal['medal_name'] ?></TD>
