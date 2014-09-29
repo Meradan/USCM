@@ -4,6 +4,8 @@ include("config.php");
 include("helper_functions.php");
 include("character_functions.php");
 include("auxiliary_functions.php");
+include("player_functions.php");
+
 $db_connection = NULL;
 //set_exception_handler(die("Caught exception, going to die"));
 

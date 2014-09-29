@@ -1,14 +1,33 @@
 <?php
+
+function getAttributes() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $attributesql="SELECT id, attribute_name FROM " . $tablePrefix . "attribute_names";
+  $stmt = $db->prepare($attributesql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getRanks() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
   $chosencertarray = array();
-  $ranksql="SELECT rank_long,rank_short FROM " . $tablePrefix . "rank_names
+  $ranksql="SELECT id,rank_long,rank_short FROM " . $tablePrefix . "rank_names
           ORDER BY id DESC";
   $stmt = $db->prepare($ranksql);
   $stmt->execute();
   $ranks = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $ranks;
+}
+
+function getSkills() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $skillssql="SELECT id, skill_name,optional FROM " . $tablePrefix . "skill_names";
+  $stmt = $db->prepare($skillssql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getMedals() {
@@ -50,4 +69,14 @@ function getPlatoons() {
   $stmt->execute();
   $platoons = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $platoons;
+}
+
+function getSpecialties () {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $specialtysql = "SELECT id, specialty_name FROM " . $tablePrefix . "specialty_names
+      ORDER BY specialty_name";
+  $stmt = $db->prepare($specialtysql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
