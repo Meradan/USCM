@@ -45,7 +45,7 @@ if ( !function_exists( "PDF_new" ) ) { // only create subclass if PDFLib not ins
             // no footers
         }
 
-        public function getFontAscent() {
+        public function getFontAscent($font, $style = '', $size = 0) {
             return $this->FontAscent;
         }
 
@@ -106,7 +106,7 @@ if ( !function_exists( "PDF_fit_image" ) ) {
         // get original image width and height in pixels
         list($originalWidth, $originalHeight) = $imsize;
         // TCPDF uses the upper left while TCPDF uses the lower left to position the image.
-        // But, we haven't been given the resized dimensions of the image to know where to 
+        // But, we haven't been given the resized dimensions of the image to know where to
         // place the top left of the resized image. Thus, we calculate it.
         // We know both the $height and $width of the box that we'll be placing the image in,
         // and we know the original (pixel) dimensions of the image.
@@ -128,7 +128,7 @@ if ( !function_exists( "PDF_image" ) ) {
         // get original image width and height in pixels
         list($originalWidth, $originalHeight) = $imsize;
         // TCPDF uses the upper left while TCPDF uses the lower left to position the image.
-        // But, we haven't been given the resized dimensions of the image to know where to 
+        // But, we haven't been given the resized dimensions of the image to know where to
         // place the top left of the resized image. Thus, we calculate it.
         // We know both the $height and $width of the box that we'll be placing the image in,
         // and we know the original (pixel) dimensions of the image.

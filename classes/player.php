@@ -28,17 +28,17 @@ class Player {
     if ($this->playerId == NULL) {
       return;
     }
-    $playersql = "SELECT forname, nickname, lastname, emailaddress, use_nickname, platoon_id,
+    $playersql = "SELECT forname, nickname, lastname, emailadress, use_nickname, platoon_id,
         logintime, lastlogintime, count(*) as howmany FROM Users WHERE id = :userid";
     $stmt = $this->db->prepare($playersql);
     $stmt->bindValue(':userid', $this->playerId, PDO::PARAM_INT);
     $stmt->execute();
-    $row = $stmt->fetch();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row ['howmany'] == 1) {
       $this->givenName = $row ['forname'];
       $this->nickname = $row ['nickname'];
       $this->surname = $row ['lastname'];
-      $this->emailaddress = $row ['emailaddress'];
+      $this->emailaddress = $row ['emailadress'];
       $this->use_nickname = $row ['use_nickname'];
       $this->platoon_id = $row ['platoon_id'];
       $this->logintime = $row ['logintime'];
