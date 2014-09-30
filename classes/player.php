@@ -50,6 +50,10 @@ class Player {
     return $this->playerId;
   }
 
+  public function getName() {
+    return $this->givenName . ' ' . $this->surname;
+  }
+
   public function getGivenName() {
     return $this->givenName;
   }

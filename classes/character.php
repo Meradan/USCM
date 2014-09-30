@@ -120,6 +120,30 @@ class Character {
     return $this->fearPoints;
   }
 
+  public function getPsychoLimit() {
+    return $this->getAttribute('Psyche');
+  }
+
+  public function getFearLimit() {
+    return $this->getAttribute('Psyche') * 2;
+  }
+
+  public function getExhaustionLimit() {
+    return $this->getAttribute('Endurance') * 2;
+  }
+
+  private function getAttribute($type) {
+    $sql = "SELECT value FROM uscm_attributes a
+          LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
+          WHERE an.attribute_name=:type AND character_id=:cid";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':type', $type, PDO::PARAM_STR);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row['value'];
+  }
+
   public function getLeadershipPoints() {
     return $this->leadershipPoints;
   }
@@ -330,15 +354,19 @@ class Character {
   public function getWeaponSkills() {
     return $this->skills("Weapons", $this->getCertificates());
   }
+
   public function getPhysicalSkills() {
     return $this->skills("Physical", $this->getCertificates());
   }
+
   public function getVehiclesSkills() {
     return $this->skills("Vehicles", $this->getCertificates());
   }
+
   public function getOtherSkills() {
     return $this->skills("Other", $this->getCertificates());
   }
+
   public function getLanguagesSkills() {
     return $this->skills("Languages", $this->getCertificates());
   }
