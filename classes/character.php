@@ -23,8 +23,10 @@ class Character {
   private $statusDesc = NULL;
   private $rankLong = NULL;
   private $rankShort = NULL;
+  private $rankId = NULL;
   private $rankDesc = NULL;
   private $specialtyName = NULL;
+  private $specialtyId = NULL;
   private $certificates = NULL;
 
   function __construct($characterId = NULL) {
@@ -38,8 +40,8 @@ class Character {
     }
     $sql = "SELECT userid, platoon_id, forname, lastname, Enlisted, Age, Gender, UnusedXP,
         AwarenessPoints, CoolPoints, ExhaustionPoints, FearPoints, LeadershipPoints, PsychoPoints,
-        TraumaPoints, MentalPoints, status, status_desc, specialty_name,
-        rank_short, rank_long, rank_desc, count(*) as howmany
+        TraumaPoints, MentalPoints, status, status_desc, specialty_name, uscm_specialty_names.id as specialty_id,
+        rank_id, rank_short, rank_long, rank_desc, count(*) as howmany
         FROM uscm_characters
         LEFT JOIN uscm_ranks ON uscm_characters.id = uscm_ranks.character_id
         LEFT JOIN uscm_rank_names ON  uscm_ranks.rank_id = uscm_rank_names.id
@@ -72,7 +74,9 @@ class Character {
       $this->rankShort = $row['rank_short'];
       $this->rankLong = $row['rank_long'];
       $this->rankDesc = $row['rank_desc'];
+      $this->rankId = $row['rank_id'];
       $this->specialtyName = $row['specialty_name'];
+      $this->specialtyId = $row['specialty_id'];
     }
   }
 
@@ -80,7 +84,7 @@ class Character {
     return $this->givenName;
   }
 
-  public function getSurename() {
+  public function getSurname() {
     return $this->surname;
   }
 
@@ -105,7 +109,7 @@ class Character {
   }
 
   public function getAwarenessPoints() {
-    return $this->awerenessPoints;
+    return $this->awarenessPoints;
   }
 
   public function getCoolPoints() {
@@ -175,9 +179,16 @@ class Character {
   public function getRankLong() {
     return $this->rankLong;
   }
+  public function getRankId() {
+    return $this->rankId;
+  }
 
   public function getSpecialtyName() {
     return $this->specialtyName;
+  }
+
+  public function getSpecialtyId() {
+    return $this->specialtyId;
   }
 
   public function getAdvantages($onlyvisible = false) {
@@ -514,7 +525,7 @@ class Character {
       $req_met = FALSE;
       // echo "cert test ".$id." ";
       // print_r($req);
-      if (in_array($id, $platooncertarray) || in_array($id, $chosencertarray)) {
+      if (in_array($id, $platooncertarray) || array_key_exists($id, $chosencertarray)) {
         $has_req = FALSE;
         foreach ( $req as $reqid ) {
           // echo $reqid['id'] . "<br>";
@@ -555,13 +566,14 @@ class Character {
 
   public function getCertsForCharacterWithoutReqCheck() {
     $chosencertarray = array ();
-    $chosencertsql = "SELECT certificate_name_id FROM uscm_certificates
+    $chosencertsql = "SELECT certificate_name_id, cn.name FROM uscm_certificates
+        INNER JOIN uscm_certificate_names as cn on cn.id = certificate_name_id
                     WHERE character_id=:cid";
     $stmt = $this->db->prepare($chosencertsql);
     $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $chosencertarray[] = $row['certificate_name_id'];
+      $chosencertarray[$row['certificate_name_id']] = $row['name'];
     }
     return $chosencertarray;
   }
@@ -593,11 +605,31 @@ class Character {
     return $skillarray;
   }
 
+public function getSkillsGrouped() {
+    $skillarray = array ();
+    $skillsql = "SELECT sn.id, sn.skill_name,s.value FROM uscm_skills s
+                    LEFT JOIN uscm_skill_names sn ON s.skill_name_id=sn.id
+                    LEFT JOIN uscm_skill_groups sg ON sn.skill_group_id=sg.id
+                    LEFT JOIN uscm_characters c ON c.id=s.character_id
+                    WHERE c.id=:cid ORDER BY sn.optional,sg.id,sn.skill_name";
+    $stmt = $this->db->prepare($skillsql);
+    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $skillarray[$row['id']] = $row;
+    }
+    return $skillarray;
+  }
+
+  public function getAttributes() {
+    return $this->getAttributesForCharacter();
+  }
+
   public function getAttributesForCharacter() {
     $attribarray = array ();
     $attribsql = "SELECT attribute_id as id,value
           FROM uscm_attributes
-          WHERE character_id=:cid";
+          WHERE character_id=:cid ORDER BY attribute_id";
     $stmt = $this->db->prepare($attribsql);
     $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
     $stmt->execute();
@@ -605,5 +637,21 @@ class Character {
       $attribarray[$row['id']] = $row['value'];
     }
     return $attribarray;
+  }
+
+  public function getTraits() {
+    $traits = array ();
+    $sql = "SELECT tn.id,trait_name FROM uscm_trait_names tn
+              LEFT JOIN uscm_traits t ON t.trait_name_id=tn.id
+              LEFT JOIN uscm_characters c ON c.id=t.character_id
+              WHERE c.id=:cid ORDER BY tn.trait_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $traits[$row['id']] = $row['trait_name'];
+    }
+    return $traits;
+
   }
 }

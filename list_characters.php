@@ -51,7 +51,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
 <?php
 $platoons = getPlatoons();
 foreach ($platoons as $platoon ) { ?>
-  <a href="index.php?url=list_characters.php&platoon=<?php echo $platoon['id']; ?>"><?php echo $platoon['name_long']; ?> (<?php echo $platoon['name_short']; ?>)</a>
+  <a href="index.php?url=list_characters.php&platoon=<?php echo $platoon->getId(); ?>"><?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)</a>
 <?php } ?>
 
 </div>

@@ -44,7 +44,7 @@ if ($admin || $gm) { ?>
             $specialties = getSpecialties(); ?>
           <select name="specialty">
           <?php foreach ($specialties as $specialty) { ?>
-            <option value="<?php echo $specialty['id'];?>"><?php echo $specialty['specialty_name']; ?></option>
+            <option value="<?php echo $specialty->getId();?>"><?php echo $specialty->getName(); ?></option>
           <?php } ?>
           </select></td>
     </tr>

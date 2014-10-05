@@ -3,7 +3,7 @@
 function getAttributes() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $attributesql="SELECT id, attribute_name FROM " . $tablePrefix . "attribute_names";
+  $attributesql = "SELECT id, attribute_name FROM " . $tablePrefix . "attribute_names ORDER BY id";
   $stmt = $db->prepare($attributesql);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -12,8 +12,8 @@ function getAttributes() {
 function getRanks() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $chosencertarray = array();
-  $ranksql="SELECT id,rank_long,rank_short FROM " . $tablePrefix . "rank_names
+  $chosencertarray = array ();
+  $ranksql = "SELECT id,rank_long,rank_short FROM " . $tablePrefix . "rank_names
           ORDER BY id DESC";
   $stmt = $db->prepare($ranksql);
   $stmt->execute();
@@ -24,8 +24,52 @@ function getRanks() {
 function getSkills() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $skillssql="SELECT id, skill_name,optional FROM " . $tablePrefix . "skill_names";
-  $stmt = $db->prepare($skillssql);
+  $sql = "SELECT id, skill_name,optional FROM " . $tablePrefix . "skill_names";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getSkillsGrouped() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $sql = "SELECT sn.id,skill_name,optional FROM " . $tablePrefix . "skill_names sn
+                    LEFT JOIN ". $tablePrefix . "skill_groups sg on sn.skill_group_id=sg.id
+                    ORDER BY sg.id,sn.skill_name";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getTraits() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $sql = "SELECT tn.id,trait_name FROM " . $tablePrefix . "trait_names tn ORDER BY tn.trait_name";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function getAdvantages() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $sql = "SELECT id,advantage_name,value FROM " . $tablePrefix . "advantage_names ORDER BY advantage_name";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function getDisadvantages() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $sql = "SELECT id,disadvantage_name,value FROM " . $tablePrefix . "disadvantage_names ORDER BY disadvantage_name";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function getCertificates() {
+  $db = getDatabaseConnection();
+  $tablePrefix = getTablePrefix();
+  $sql = "SELECT id,name FROM " . $tablePrefix . "certificate_names ORDER BY name";
+  $stmt = $db->prepare($sql);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -33,8 +77,8 @@ function getSkills() {
 function getMedals() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $chosencertarray = array();
-  $medalsql="SELECT medal_short,medal_name,medal_glory,description
+  $chosencertarray = array ();
+  $medalsql = "SELECT medal_short,medal_name,medal_glory,description
           FROM " . $tablePrefix . "medal_names
           WHERE " . $tablePrefix . "medal_names.foreign_medal=0
           ORDER BY medal_glory ASC";
@@ -47,8 +91,8 @@ function getMedals() {
 function getForeignMedals() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $chosencertarray = array();
-  $foreignmedalsql="SELECT medal_short,medal_name,medal_glory,description
+  $chosencertarray = array ();
+  $foreignmedalsql = "SELECT medal_short,medal_name,medal_glory,description
           FROM " . $tablePrefix . "medal_names
           WHERE " . $tablePrefix . "medal_names.foreign_medal=1
           ORDER BY medal_glory ASC";
@@ -59,11 +103,11 @@ function getForeignMedals() {
   return $medals;
 }
 
-function getPlatoons() {
+function getPlatoons_() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $chosencertarray = array();
-  $platoonsql="SELECT id,name_short,name_long FROM " . $tablePrefix . "platoon_names";
+  $chosencertarray = array ();
+  $platoonsql = "SELECT id,name_short,name_long FROM " . $tablePrefix . "platoon_names";
 
   $stmt = $db->prepare($platoonsql);
   $stmt->execute();
@@ -71,7 +115,7 @@ function getPlatoons() {
   return $platoons;
 }
 
-function getSpecialties () {
+function getSpecialties_() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
   $specialtysql = "SELECT id, specialty_name FROM " . $tablePrefix . "specialty_names

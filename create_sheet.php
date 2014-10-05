@@ -358,11 +358,11 @@ if ($user->getPlayerId() == $character->getPlayer() || $user->isAdmin() || $user
   pdf_set_text_pos($pdf, 170, $traitsheight);
   pdf_show($pdf, "Traits");
   fontregular($font, $pdf);
-  $traitarray = traits($characterId);
+  $traitarray = $character->getTraits();
   $traitsheight -= 12;
   foreach ( $traitarray as $trait ) {
     pdf_set_text_pos($pdf, 170, $traitsheight);
-    pdf_show($pdf, $trait['trait_name']);
+    pdf_show($pdf, $trait);
     $traitsheight -= 12;
   }
 
