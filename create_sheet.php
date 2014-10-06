@@ -362,7 +362,7 @@ if ($user->getPlayerId() == $character->getPlayer() || $user->isAdmin() || $user
   $traitsheight -= 12;
   foreach ( $traitarray as $trait ) {
     pdf_set_text_pos($pdf, 170, $traitsheight);
-    pdf_show($pdf, $trait);
+    pdf_show($pdf, $trait['trait_name']);
     $traitsheight -= 12;
   }
 

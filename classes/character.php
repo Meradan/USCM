@@ -194,7 +194,7 @@ class Character {
   public function getAdvantages($onlyvisible = false) {
     $visible = $onlyvisible ? " AND an.visible = 1" : "";
     $advarray = array ();
-    $sql = "SELECT an.id, advantage_name
+    $sql = "SELECT an.id, advantage_name, a.id as uid
           FROM uscm_advantage_names an
           LEFT JOIN uscm_advantages a ON a.advantage_name_id=an.id
           LEFT JOIN uscm_characters c ON c.id=a.character_id
@@ -204,13 +204,14 @@ class Character {
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $advarray[$row['id']]['advantage_name'] = $row['advantage_name'];
+      $advarray[$row['id']]['uid'] = $row['uid'];
     }
     return $advarray;
   }
 
   function getDisadvantages($onlyvisible = false) {
     $disadvarray = array ();
-    $sql = "SELECT dn.id, disadvantage_name
+    $sql = "SELECT dn.id, disadvantage_name, d.id as uid
           FROM uscm_disadvantage_names dn
           LEFT JOIN uscm_disadvantages d ON d.disadvantage_name_id=dn.id
           LEFT JOIN uscm_characters c ON c.id=d.character_id
@@ -220,6 +221,7 @@ class Character {
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $disadvarray[$row['id']]['disadvantage_name'] = $row['disadvantage_name'];
+      $disadvarray[$row['id']]['uid'] = $row['uid'];
     }
     return $disadvarray;
   }
@@ -566,14 +568,15 @@ class Character {
 
   public function getCertsForCharacterWithoutReqCheck() {
     $chosencertarray = array ();
-    $chosencertsql = "SELECT certificate_name_id, cn.name FROM uscm_certificates
+    $chosencertsql = "SELECT certificate_name_id, cn.name, c.id as uid FROM uscm_certificates as c
         INNER JOIN uscm_certificate_names as cn on cn.id = certificate_name_id
                     WHERE character_id=:cid";
     $stmt = $this->db->prepare($chosencertsql);
     $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $chosencertarray[$row['certificate_name_id']] = $row['name'];
+      $chosencertarray[$row['certificate_name_id']]['certificate_name'] = $row['name'];
+      $chosencertarray[$row['certificate_name_id']]['uid'] = $row['uid'];
     }
     return $chosencertarray;
   }
@@ -605,7 +608,18 @@ class Character {
     return $skillarray;
   }
 
-public function getSkillsGrouped() {
+  public function getSkillsWithUid() {
+    $skillarray = array ();
+    $skillsql = "SELECT id as uid, skill_name_id, value
+          FROM uscm_skills
+          WHERE character_id=:cid";
+    $stmt = $this->db->prepare($skillsql);
+    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getSkillsGrouped() {
     $skillarray = array ();
     $skillsql = "SELECT sn.id, sn.skill_name,s.value FROM uscm_skills s
                     LEFT JOIN uscm_skill_names sn ON s.skill_name_id=sn.id
@@ -627,7 +641,7 @@ public function getSkillsGrouped() {
 
   public function getAttributesForCharacter() {
     $attribarray = array ();
-    $attribsql = "SELECT attribute_id as id,value
+    $attribsql = "SELECT attribute_id as id,value, id as uid
           FROM uscm_attributes
           WHERE character_id=:cid ORDER BY attribute_id";
     $stmt = $this->db->prepare($attribsql);
@@ -639,9 +653,20 @@ public function getSkillsGrouped() {
     return $attribarray;
   }
 
+  public function getAttributesWithUid() {
+    $attribarray = array ();
+    $attribsql = "SELECT attribute_id as id,value, id as uid
+          FROM uscm_attributes
+          WHERE character_id=:cid ORDER BY attribute_id";
+    $stmt = $this->db->prepare($attribsql);
+    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getTraits() {
     $traits = array ();
-    $sql = "SELECT tn.id,trait_name FROM uscm_trait_names tn
+    $sql = "SELECT tn.id,trait_name, t.id as uid FROM uscm_trait_names tn
               LEFT JOIN uscm_traits t ON t.trait_name_id=tn.id
               LEFT JOIN uscm_characters c ON c.id=t.character_id
               WHERE c.id=:cid ORDER BY tn.trait_name";
@@ -649,7 +674,8 @@ public function getSkillsGrouped() {
     $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $traits[$row['id']] = $row['trait_name'];
+      $traits[$row['id']]['trait_name'] = $row['trait_name'];
+      $traits[$row['id']]['uid'] = $row['uid'];
     }
     return $traits;
 
