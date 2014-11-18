@@ -348,4 +348,14 @@ function traits($characterId) {
   return $traitarray;
 }
 
+function lastMissionForCharacter($characterId) {
+  $db = getDatabaseConnection();
+  $tablePrefix = $_SESSION ['table_prefix'];
+  $sql = "SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM " . $tablePrefix . "mission_names LEFT JOIN " . $tablePrefix . "missions as m on m.mission_id = " . $tablePrefix . "mission_names.id WHERE character_id = :characterId ORDER BY date DESC LIMIT 1";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':characterId', $characterId, PDO::PARAM_INT);
+  $stmt->execute();
+  return $stmt->fetch();
+}
+
 ?>
