@@ -5,6 +5,7 @@ include ("character_functions.php");
 include ("auxiliary_functions.php");
 include ("classes/bonus.php");
 include ("classes/character.php");
+include ("classes/mission.php");
 include ("classes/player.php");
 include ("classes/platoon.php");
 include ("classes/specialty.php");
@@ -1120,10 +1121,19 @@ function getSpecialties() {
 function getMissions() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
-  $sql = "SELECT mission_name_short,mission_name,mn.id,pn.name_short FROM {$_SESSION['table_prefix']}mission_names mn LEFT JOIN {$_SESSION['table_prefix']}platoon_names pn ON pn.id=mn.platoon_id ORDER BY date DESC,mission_name_short DESC";
+  $sql = "SELECT mission_name_short,mission_name,mn.id as missionid,pn.name_short as platoonnameshort ".
+      "FROM {$_SESSION['table_prefix']}mission_names mn LEFT JOIN {$_SESSION['table_prefix']}platoon_names pn ON pn.id=mn.platoon_id ORDER BY date DESC,mission_name_short DESC";
   $stmt = $db->prepare($sql);
   $stmt->execute();
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+    $mission = new Mission();
+    $mission->setId($row['missionid']);
+    $mission->setName($row['mission_name']);
+    $mission->setShortName($row['mission_name_short']);
+    $mission->setPlatoonShortName($row['platoonnameshort']);
+    $missions[] = $mission;
+  }
+  return $missions;
 }
 
 ?>
