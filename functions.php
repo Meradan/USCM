@@ -9,6 +9,7 @@ include ("classes/mission.php");
 include ("classes/player.php");
 include ("classes/platoon.php");
 include ("classes/specialty.php");
+include ("controllers/mission_controller.php");
 
 $db_connection = NULL;
 // set_exception_handler(die("Caught exception, going to die"));
@@ -1119,21 +1120,59 @@ function getSpecialties() {
 }
 
 function getMissions() {
-  $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
-  $sql = "SELECT mission_name_short,mission_name,mn.id as missionid,pn.name_short as platoonnameshort ".
-      "FROM {$_SESSION['table_prefix']}mission_names mn LEFT JOIN {$_SESSION['table_prefix']}platoon_names pn ON pn.id=mn.platoon_id ORDER BY date DESC,mission_name_short DESC";
-  $stmt = $db->prepare($sql);
-  $stmt->execute();
-  while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-    $mission = new Mission();
-    $mission->setId($row['missionid']);
-    $mission->setName($row['mission_name']);
-    $mission->setShortName($row['mission_name_short']);
-    $mission->setPlatoonShortName($row['platoonnameshort']);
-    $missions[] = $mission;
-  }
-  return $missions;
+  $missionController = new MissionController();
+  return $missionController->getMissions();
+//   $db = getDatabaseConnection();
+//   $tablePrefix = getTablePrefix();
+//   $sql = "SELECT mission_name_short,mission_name,mn.id as missionid,pn.name_short as platoonnameshort ".
+//       "FROM " . $tablePrefix . "mission_names mn " .
+//       "LEFT JOIN " . $tablePrefix . "platoon_names pn ON pn.id=mn.platoon_id ORDER BY date DESC,mission_name_short DESC";
+//   $stmt = $db->prepare($sql);
+//   $stmt->execute();
+//   while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+//     $mission = new Mission();
+//     $mission->setId($row['missionid']);
+//     $mission->setName($row['mission_name']);
+//     $mission->setShortName($row['mission_name_short']);
+//     $mission->setPlatoonShortName($row['platoonnameshort']);
+//     $missions[] = $mission;
+//   }
+//   return $missions;
 }
 
+function getMission($missionId) {
+  $missionController = new MissionController();
+  return $missionController->getMission($missionId);
+//   $db = getDatabaseConnection();
+//   $tablePrefix = getTablePrefix();
+//   $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, " .
+//       "pn.name_short as platoonnameshort, gm, date, briefing, debriefing. platoon_id, count(*) as howmany ".
+//       "FROM " . $tablePrefix . "mission_names mn " .
+//       "LEFT JOIN " . $tablePrefix . "platoon_names pn ON pn.id=mn.platoon_id ".
+//       "WHERE mn.id = :missionId ORDER BY date DESC,mission_name_short DESC";
+//   $stmt = $db->prepare($sql);
+//   $stmt->bindValue(':missionId', $missionId, PDO::PARAM_INT);
+//   $stmt->execute();
+//   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+//   $mission = new Mission();
+//   if ($row['howmany'] == 1) {
+//     $mission->setId($row['missionid']);
+//     $mission->setName($row['mission_name']);
+//     $mission->setShortName($row['mission_name_short']);
+//     $mission->setPlatoonShortName($row['platoonnameshort']);
+//     $mission->setGmId($row['gm']);
+//     $mission->setDate($row['date']);
+//     $mission->setBriefing($row['briefing']);
+//     $mission->setDebriefing($row['debriefing']);
+//     $mission->setPlatoonId($row['platoon_id']);
+
+//   }
+//   return $mission;
+}
+
+function getPlayer($playerId) {
+  $player = new Player($playerId);
+  $player->loadData();
+  return $player;
+}
 ?>
