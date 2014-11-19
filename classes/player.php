@@ -12,6 +12,10 @@ class Player {
   private $platoon_id = NULL;
   private $logintime = NULL;
   private $lastlogintime = NULL;
+  private $gm = NULL;
+  private $gmRpgId = NULL;
+  private $gmActive = NULL;
+  private $admin = NULL;
 
   function __construct($playerId = NULL) {
     $this->level = $_SESSION ['level'];
@@ -24,12 +28,16 @@ class Player {
     }
   }
 
+  //TODO remove this functionality
   public function loadData() {
     if ($this->playerId == NULL) {
       return;
     }
     $playersql = "SELECT forname, nickname, lastname, emailadress, use_nickname, platoon_id,
-        logintime, lastlogintime, count(*) as howmany FROM Users WHERE id = :userid";
+        logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active, ".
+        "Admins.userid as admin, count(*) as howmany FROM Users " .
+        "LEFT JOIN GMs on GMs.userid = Users.id " .
+        "LEFT JOIN Admins on Admins.userid = Users.id WHERE Uers.id = :userid";
     $stmt = $this->db->prepare($playersql);
     $stmt->bindValue(':userid', $this->playerId, PDO::PARAM_INT);
     $stmt->execute();
@@ -43,41 +51,138 @@ class Player {
       $this->platoon_id = $row ['platoon_id'];
       $this->logintime = $row ['logintime'];
       $this->lastlogintime = $row ['lastlogintime'];
+      if ($row['gm']) {
+        $this->gm = TRUE;
+      } else {
+        $this->gm = FALSE;
+      }
+      $this->gmRpgId = $row['RPG_id'];
+      $this->gmActive = $row['active'];
+      if ($row['admin']) {
+        $this->admin = TRUE;
+      } else {
+        $this->admin = FALSE;
+      }
     }
   }
 
-  public function getPlayerId() {
+  public function getId() {
     return $this->playerId;
+  }
+
+  public function setId($id) {
+    $this->playerId = $id;
   }
 
   public function getName() {
     return $this->givenName . ' ' . $this->surname;
   }
 
-  public function getGivenName() {
+    public function getGivenName() {
     return $this->givenName;
+  }
+
+  public function setGivenName($name) {
+    $this->givenName = $name;
   }
 
   public function getSurname() {
     return $this->surname;
   }
 
+  public function setSurname($name) {
+    $this->surname = $name;
+  }
+
+  public function getUseNickname() {
+    return $this->use_nickname;
+  }
+
+  public function setUseNickname($use) {
+    $this->use_nickname = $use;
+  }
+
   public function getNickname() {
     return $this->nickname;
+  }
+
+  public function setNickname($name) {
+    $this->nickname = $name;
   }
 
   public function getEmailaddress() {
     return $this->emailaddress;
   }
 
+  public function setEmailaddress($email) {
+    $this->emailaddress = $email;
+  }
+
+  public function getPlatoonId() {
+    return $this->platoon_id;
+  }
+
+  public function setPlatoonId($id) {
+    $this->platoon_id = $id;
+  }
+
+  public function getLoginTime() {
+    return $this->logintime;
+  }
+
+  public function setLoginTime($time) {
+    $this->logintime = $time;
+  }
+
+  public function getLastLoginTime() {
+    return $this->lastlogintime;
+  }
+
+  public function setLastLoginTime($time) {
+    $this->lastlogintime = $time;
+  }
+
+  public function getGmRpgId() {
+    return $this->gmRpgId;
+  }
+
+  public function setGmRpgId($rpgId) {
+    $this->gmRpgId = $rpgId;
+  }
+
+  public function getGmActive() {
+    return $this->gmActive;
+  }
+
+  public function setGmActive($active) {
+    $this->gmActive = $active;
+  }
+
   public function isAdmin() {
-    return ($this->level == 3) ? (TRUE) : (FALSE);
+    if ($this->admin != NULL) {
+      return $this->admin;
+    } else {
+      return ($this->level == 3) ? (TRUE) : (FALSE);
+    }
+  }
+
+  public function setAdmin($value) {
+    $this->admin = $value;
   }
 
   public function isGm() {
-    return ($this->level == 2) ? (TRUE) : (FALSE);
+  if ($this->gm != NULL) {
+      return $this->gm;
+    } else {
+      return ($this->level == 2) ? (TRUE) : (FALSE);
+    }
   }
 
+  public function setGm($value) {
+    $this->gm = $value;
+  }
+
+  // TODO remove and use playerController stuff, note change in which platoons returned
   public function getAllPlayers() {
     if (!$this->isAdmin()) {
       return $this->getPlayersInPlatoon($this->playerPlatoon);
@@ -91,6 +196,7 @@ class Player {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+    // TODO remove and use playerController stuff
   public function getPlayersInPlatoon($platoonId) {
     $playersql = "SELECT Users.id,forname,lastname,name_short FROM Users
                   LEFT JOIN uscm_platoon_names pn ON pn.id=Users.platoon_id
@@ -102,6 +208,7 @@ class Player {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+    // TODO remove and use platoonController stuff
   public function getPlatoons() {
     $platoonsql = "SELECT id,name_long FROM uscm_platoon_names";
     if (!$this->isAdmin()) {

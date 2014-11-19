@@ -12,7 +12,7 @@ $user = new Player();
 
 $userid = $character->getPlayer();
 
-if ($user->getPlayerId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
+if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
   $platoon_id = $character->getPlatoon();
   $player = new Player($character->getPlayer());
   $player->loadData();

@@ -6,7 +6,7 @@ $user = new Player();
 
 $userid = $character->getPlayer();
 
-if ($user->getPlayerId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
+if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
   $platoon_id = $character->getPlatoon();
   $player = new Player($character->getPlayer());
   $player->loadData();
@@ -22,7 +22,7 @@ if ($user->getPlayerId() == $character->getPlayer() || $user->isAdmin() || $user
                 <td><?php
     echo $player->getName();
     ?>
-                    <input type="hidden" name="player" value="<?php echo $player->getPlayerId(); ?>">
+                    <input type="hidden" name="player" value="<?php echo $player->getId(); ?>">
                     <input type="hidden" name="character" value="<?php echo $characterId; ?>">
 
                 </td>

@@ -33,7 +33,7 @@ class Character {
     $this->characterId = $characterId;
     $this->db = getDatabaseConnection();
   }
-
+//TODO remove this functionality
   public function loadData() {
     if ($this->characterId == NULL) {
       return;
@@ -80,48 +80,111 @@ class Character {
     }
   }
 
+  public function getId() {
+    return $this->characterId;
+  }
+
+  public function setId($id) {
+    $this->characterId = $id;
+  }
   public function getGivenName() {
     return $this->givenName;
+  }
+
+  public function setGivenName($name) {
+    $this->givenName = $name;
   }
 
   public function getSurname() {
     return $this->surname;
   }
 
+  public function setSurname($name) {
+    $this->surname = $name;
+  }
+
   public function getName() {
     return $this->givenName . " " . $this->surname;
+  }
+
+  public function getPlayerId() {
+    return $this->userId;
+  }
+
+  public function setPlayerId($id) {
+    $this->userId = $id;
+  }
+
+  public function getPlatoonId() {
+    return $this->platoonId;
+  }
+
+  public function setPlatoonId($id) {
+    $this->platoonId = $id;
   }
 
   public function getEnlistedDate() {
     return $this->enlisted;
   }
 
+  public function setEnlistedDate($date) {
+    $this->enlisted = $date;
+  }
+
   public function getAge() {
     return $this->age;
+  }
+
+  public function setAge($age) {
+    $this->age = $age;
   }
 
   public function getGender() {
     return $this->gender;
   }
 
+  public function setGender($gender) {
+    $this->gender = $gender;
+  }
+
   public function getUnusedXp() {
     return $this->unusedXp;
+  }
+
+  public function setUnusedXp($xp) {
+    $this->unusedXp = $xp;
   }
 
   public function getAwarenessPoints() {
     return $this->awarenessPoints;
   }
 
+  public function setAwarenessPoints($points) {
+    $this->awarenessPoints = $points;
+  }
+
   public function getCoolPoints() {
     return $this->coolPoints;
+  }
+
+  public function setCoolPoints($points) {
+    $this->coolPoints = $points;
   }
 
   public function getExhaustionPoints() {
     return $this->exhaustionPoints;
   }
 
+  public function setExhaustionPoints($points) {
+    $this->exhaustionPoints = $points;
+  }
+
   public function getFearPoints() {
     return $this->fearPoints;
+  }
+
+  public function setFearPoints($points) {
+    $this->fearPoints = $points;
   }
 
   public function getPsychoLimit() {
@@ -152,43 +215,96 @@ class Character {
     return $this->leadershipPoints;
   }
 
+  public function setLeadershipPoints($points) {
+    $this->leadershipPoints = $points;
+  }
+
   public function getPsychoPoints() {
     return $this->psychoPoints;
+  }
+
+  public function setPsychoPoints($points) {
+    $this->psychoPoints = $points;
   }
 
   public function getTraumaPoints() {
     return $this->traumaPoints;
   }
 
+  public function setTraumaPoints($points) {
+    $this->traumaPoints = $points;
+  }
+
   public function getMentalPoints() {
     return $this->mentalPoints;
+  }
+
+  public function setMentalPoints($points) {
+    $this->mentalPoints = $points;
   }
 
   public function getStatus() {
     return $this->status;
   }
 
+  public function setStatus($status){
+    $this->status = $status;
+  }
+
   public function getStatusDescription() {
     return $this->statusDesc;
+  }
+
+  public function setStatusDescription($description) {
+    $this->statusDesc = $description;
   }
 
   public function getRankShort() {
     return $this->rankShort;
   }
 
+  public function setRankShort($rank) {
+    $this->rankShort = $rank;
+  }
+
   public function getRankLong() {
     return $this->rankLong;
   }
+
+  public function setRankLong($rank) {
+    $this->rankLong = $rank;
+  }
+
+  public function getRankDescription() {
+    return $this->rankDesc;
+  }
+
+  public function setRankDescription($rankdesc) {
+    $this->rankDesc = $rankdesc;
+  }
+
   public function getRankId() {
     return $this->rankId;
+  }
+
+  public function setRankId($rankId) {
+    $this->rankId = $rankId;
   }
 
   public function getSpecialtyName() {
     return $this->specialtyName;
   }
 
+  public function setSpecialtyName($name) {
+    $this->specialtyName = $name;
+  }
+
   public function getSpecialtyId() {
     return $this->specialtyId;
+  }
+
+  public function setSpecialtyId($id) {
+    $this->specialtyId = $id;
   }
 
   public function getAdvantages($onlyvisible = false) {

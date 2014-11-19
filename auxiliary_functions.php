@@ -78,7 +78,7 @@ function getMedals() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
   $chosencertarray = array ();
-  $medalsql = "SELECT medal_short,medal_name,medal_glory,description
+  $medalsql = "SELECT id, medal_short,medal_name,medal_glory,description
           FROM " . $tablePrefix . "medal_names
           WHERE " . $tablePrefix . "medal_names.foreign_medal=0
           ORDER BY medal_glory ASC";

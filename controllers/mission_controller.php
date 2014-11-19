@@ -23,31 +23,31 @@ class MissionController {
     return $missions;
   }
 
-function getMission($missionId) {
-  $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, " .
-      "pn.name_short as platoonnameshort, gm, date, briefing, debriefing, platoon_id, count(*) as howmany ".
-      "FROM uscm_mission_names mn " .
-      "LEFT JOIN uscm_platoon_names pn ON pn.id=mn.platoon_id ".
-      "WHERE mn.id = :missionId ORDER BY date DESC,mission_name_short DESC";
-  $stmt = $this->db->prepare($sql);
-  $stmt->bindValue(':missionId', $missionId, PDO::PARAM_INT);
-  $stmt->execute();
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  $mission = new Mission();
-  if ($row['howmany'] == 1) {
-    $mission->setId($row['missionid']);
-    $mission->setName($row['mission_name']);
-    $mission->setShortName($row['mission_name_short']);
-    $mission->setPlatoonShortName($row['platoonnameshort']);
-    $mission->setGmId($row['gm']);
-    $mission->setDate($row['date']);
-    $mission->setBriefing($row['briefing']);
-    $mission->setDebriefing($row['debriefing']);
-    $mission->setPlatoonId($row['platoon_id']);
+  function getMission($missionId) {
+    $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, " .
+        "pn.name_short as platoonnameshort, gm, date, briefing, debriefing, platoon_id, count(*) as howmany ".
+        "FROM uscm_mission_names mn " .
+        "LEFT JOIN uscm_platoon_names pn ON pn.id=mn.platoon_id ".
+        "WHERE mn.id = :missionId ORDER BY date DESC,mission_name_short DESC";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':missionId', $missionId, PDO::PARAM_INT);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $mission = new Mission();
+    if ($row['howmany'] == 1) {
+      $mission->setId($row['missionid']);
+      $mission->setName($row['mission_name']);
+      $mission->setShortName($row['mission_name_short']);
+      $mission->setPlatoonShortName($row['platoonnameshort']);
+      $mission->setGmId($row['gm']);
+      $mission->setDate($row['date']);
+      $mission->setBriefing($row['briefing']);
+      $mission->setDebriefing($row['debriefing']);
+      $mission->setPlatoonId($row['platoon_id']);
 
+    }
+    return $mission;
   }
-  return $mission;
-}
 
   public function getCharactersAndPlayers($mission) {
     $sql="SELECT c.forname,c.lastname,p.forname as pforname,p.lastname as plastname

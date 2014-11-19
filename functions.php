@@ -10,6 +10,9 @@ include ("classes/player.php");
 include ("classes/platoon.php");
 include ("classes/specialty.php");
 include ("controllers/mission_controller.php");
+include ("controllers/platoon_controller.php");
+include ("controllers/player_controller.php");
+include ("controllers/character_controller.php");
 
 $db_connection = NULL;
 // set_exception_handler(die("Caught exception, going to die"));
