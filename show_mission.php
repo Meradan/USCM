@@ -4,7 +4,8 @@ $gm=($_SESSION['level']>=2)?(TRUE):(FALSE);
 $missionId = $_GET['id'];
 $missionController = new MissionController();
 $mission = $missionController->getMission($missionId);
-$gmUser = getPlayer($mission->getGmId());
+$playerController = new PlayerController();
+$gmUser = $playerController->getPlayer($mission->getGmId());
 ?>
 
 <table width="100%"  border="0" cellpadding="5">

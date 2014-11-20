@@ -1,9 +1,8 @@
 <?php
-class Player {
+class Player extends DbEntity {
   private $level = 0;
   private $playerPlatoon = 0;
   private $db = NULL;
-  private $playerId = NULL;
   private $givenName = NULL;
   private $nickname = NULL;
   private $surname = NULL;
@@ -22,15 +21,15 @@ class Player {
     $this->playerPlatoon = $_SESSION ['platoon_id'];
     $this->db = getDatabaseConnection();
     if ($playerId == NULL) {
-      $this->playerId = $_SESSION ['user_id'];
+      $this->id = $_SESSION ['user_id'];
     } else {
-      $this->playerId = $playerId;
+      $this->id = $playerId;
     }
   }
 
   //TODO remove this functionality
   public function loadData() {
-    if ($this->playerId == NULL) {
+    if ($this->id == NULL) {
       return;
     }
     $playersql = "SELECT forname, nickname, lastname, emailadress, use_nickname, platoon_id,
@@ -39,7 +38,7 @@ class Player {
         "LEFT JOIN GMs on GMs.userid = Users.id " .
         "LEFT JOIN Admins on Admins.userid = Users.id WHERE Uers.id = :userid";
     $stmt = $this->db->prepare($playersql);
-    $stmt->bindValue(':userid', $this->playerId, PDO::PARAM_INT);
+    $stmt->bindValue(':userid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row ['howmany'] == 1) {
@@ -67,11 +66,11 @@ class Player {
   }
 
   public function getId() {
-    return $this->playerId;
+    return $this->id;
   }
 
   public function setId($id) {
-    $this->playerId = $id;
+    $this->id = $id;
   }
 
   public function getName() {

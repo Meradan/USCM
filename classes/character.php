@@ -1,6 +1,6 @@
 <?php
 
-class Character {
+class Character extends DbEntity {
   private $db = NULL;
   private $characterId = NULL;
   private $userId = NULL;
@@ -30,12 +30,12 @@ class Character {
   private $certificates = NULL;
 
   function __construct($characterId = NULL) {
-    $this->characterId = $characterId;
+    $this->id = $characterId;
     $this->db = getDatabaseConnection();
   }
 //TODO remove this functionality
   public function loadData() {
-    if ($this->characterId == NULL) {
+    if ($this->id == NULL) {
       return;
     }
     $sql = "SELECT userid, platoon_id, forname, lastname, Enlisted, Age, Gender, UnusedXP,
@@ -49,7 +49,7 @@ class Character {
         LEFT JOIN uscm_specialty_names ON  uscm_specialty.specialty_name_id = uscm_specialty_names.id
         WHERE uscm_characters.id = :cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch();
     if ($row['howmany'] == 1) {
@@ -80,13 +80,6 @@ class Character {
     }
   }
 
-  public function getId() {
-    return $this->characterId;
-  }
-
-  public function setId($id) {
-    $this->characterId = $id;
-  }
   public function getGivenName() {
     return $this->givenName;
   }
