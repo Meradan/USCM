@@ -1,9 +1,17 @@
 <?php
+require_once 'functions.php';
+$newsController = new NewsController();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+$userController = new UserController();
+$user = $userController->getCurrentUser();
+
 if (isset($_GET['action'])!=true) {
-        myconnect();
-        mysql_select_db("skynet");
-        $admin = ($_SESSION['level'] >= 3) ? (TRUE) : (FALSE);
-        $gm = ($_SESSION['level'] == 2) ? (TRUE) : (FALSE);
+//         myconnect();
+//         mysql_select_db("skynet");
+//         $admin = ($_SESSION['level'] >= 3) ? (TRUE) : (FALSE);
+//         $gm = ($_SESSION['level'] == 2) ? (TRUE) : (FALSE);
         ?>
 
         <div class="title">Brixton's Fightin' Fives - US Colonial Marine Corps 5th Platoon</div>
@@ -14,18 +22,20 @@ if (isset($_GET['action'])!=true) {
 
         <div class="title">News</div>
         <?php
-        $lastyears = date("Y") - 1 . date("-m-d");
-        $sql = "SELECT date,written_by,text FROM {$_SESSION['table_prefix']}news WHERE date > '$lastyears' ORDER BY date DESC, id DESC";
-        $res = mysql_query($sql);
-        while ($news = mysql_fetch_array($res)) {
+//         $lastyears = date("Y") - 1 . date("-m-d");
+//         $sql = "SELECT date,written_by,text FROM {$_SESSION['table_prefix']}news WHERE date > '$lastyears' ORDER BY date DESC, id DESC";
+//         $res = mysql_query($sql);
+//         while ($news = mysql_fetch_array($res)) {
+          $listOfNews = $newsController->getLastYearsNews();
+          foreach ($listOfNews as $news) {
             ?>
-            <div> <font class="colorfont"><?php echo $news['date']; ?></font> <?php echo $news['written_by']; ?></div>
-            <div><?php echo $news['text']; ?></div><br/>
+            <div> <font class="colorfont"><?php echo $news->getDate(); ?></font> <?php echo $news->getWrittenBy(); ?></div>
+            <div><?php echo $news->getText(); ?></div><br/>
         <?php } ?>
         <br/>
         <div align="center"><a href="index.php?url=news_old.php">Old News</a></div><br/>
 
-        <?php if ($admin || $gm) {
+        <?php if ($user->isAdmin() || $user->isGm()) {
             ?>
             <form action="news.php?action=post" method="post">
                 <table width="50%"  border="0" cellspacing="1" cellpadding="1">
@@ -50,14 +60,13 @@ if (isset($_GET['action'])!=true) {
             <?php
         }
 } elseif ($_GET['action'] == "post") {
-    session_start();
-    include("functions.php");
-    myconnect();
-    mysql_select_db("skynet");
-    $admin = ($_SESSION['level'] >= 3) ? (TRUE) : (FALSE);
-    $gm = ($_SESSION['level'] == 2) ? (TRUE) : (FALSE);
-    $sql = "INSERT INTO {$_SESSION['table_prefix']}news SET date='{$_POST['date']}',written_by='{$_POST['written_by']}',text='{$_POST['text']}'";
-    mysql_query($sql);
+    if ($user->isAdmin() || $user->isGm()) {
+      $news = new News();
+      $news->setDate($_POST['date']);
+      $news->setWrittenBy($_POST['written_by']);
+      $news->setText($_POST['text']);
+      $newsController->save($news);
+    }
     header("location:{$url_root}/index.php?url=news.php");
 }
 ?>

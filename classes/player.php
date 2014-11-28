@@ -18,10 +18,14 @@ class Player extends DbEntity {
 
   function __construct($playerId = NULL) {
     $this->level = $_SESSION ['level'];
-    $this->playerPlatoon = $_SESSION ['platoon_id'];
+    if (array_key_exists('platoon_id', $_SESSION)) {
+      $this->playerPlatoon = $_SESSION ['platoon_id'];
+    }
     $this->db = getDatabaseConnection();
     if ($playerId == NULL) {
-      $this->id = $_SESSION ['user_id'];
+      if (array_key_exists('user_id', $_SESSION)) {
+        $this->id = $_SESSION ['user_id'];
+      }
     } else {
       $this->id = $playerId;
     }
