@@ -81,6 +81,15 @@ class Player extends DbEntity {
     return $this->givenName . ' ' . $this->surname;
   }
 
+  public function getNameWithNickname() {
+    $name = $this->givenName;
+    if ($this->use_nickname) {
+      $name .= " '" . $this->nickname . "'";
+    }
+    $name .= " " . $this->surname;
+    return $name;
+  }
+
     public function getGivenName() {
     return $this->givenName;
   }
