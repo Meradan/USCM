@@ -1,21 +1,11 @@
-<?php
-if ($_GET['action'] == "") {
-myconnect();
-mysql_select_db("skynet");
-$admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
-$gm=($_SESSION['level']==2)?(TRUE):(FALSE);
-}
-
-$lastyears = date("Y")-1 . date("-m-d");
-
-$sql="SELECT date,written_by,text FROM {$_SESSION['table_prefix']}news WHERE date < '$lastyears' ORDER BY date DESC, id DESC";
-$res=mysql_query($sql);
-?>
 <div class="title">Old News</div><br/>
 <?php
-while ($news=mysql_fetch_array($res)) { ?>
-<div> <font class="colorfont"><?php echo $news['date'];?></font> <?php echo $news['written_by'];?></div>
-<div><?php echo $news['text'];?></div><br/>
+$newsController = new NewsController();
+$listOfNews = $newsController->getNewsOlderThanAYear();
+foreach ($listOfNews as $news) {
+?>
+<div> <font class="colorfont"><?php echo $news->getDate();?></font> <?php echo $news->getWrittenBy();?></div>
+<div><?php echo $news->getText();?></div><br/>
 
 <?php } ?>
 
@@ -117,7 +107,7 @@ while ($news=mysql_fetch_array($res)) { ?>
 <div>Idag b�rjar LinCon 2004 p� universitetet i Link�ping. USCM kommer sj�lvklart vara med som arrangemang och jag hoppas det �r m�nga som tar chansen att prova p� att spela med oss.</div><br/>
 
 <div><font class="colorfont">2004-05-15 � Oskar</font></div>
-<div>Ytterligare en uppdatering av karakt�rsgeneratorn till version 3.10. Det h�r blir den sista uppdateringen f�r ett tag fram�ver f�rutsatt att inga buggar uppt�cks i den. 
+<div>Ytterligare en uppdatering av karakt�rsgeneratorn till version 3.10. Det h�r blir den sista uppdateringen f�r ett tag fram�ver f�rutsatt att inga buggar uppt�cks i den.
 karakt�rsgeneratorn kan laddas hem under USCM RPG.</div><br/>
 
 <div><font class="colorfont">2004-05-09 � Oskar</font></div>

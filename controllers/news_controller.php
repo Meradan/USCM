@@ -12,7 +12,22 @@ Class NewsController {
    */
   public function getLastYearsNews() {
     $lastyears = date("Y") - 1 . date("-m-d");
-    $sql = "SELECT id, date,written_by,text FROM uscm_news WHERE date > '$lastyears' ORDER BY date DESC, id DESC";
+    $condition = "date > '$lastyears'";
+    return $this->listOfNewsWithCondition($condition);
+  }
+
+  /**
+   *
+   * @return News[]
+   */
+  public function getNewsOlderThanAYear() {
+    $lastyears = date("Y") - 1 . date("-m-d");
+    $condition = "date < '$lastyears'";
+    return $this->listOfNewsWithCondition($condition);
+  }
+
+  private function listOfNewsWithCondition($condition) {
+    $sql = "SELECT id, date,written_by,text FROM uscm_news WHERE ". $condition . " ORDER BY date DESC, id DESC";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $listOfNews = array();
