@@ -1,10 +1,9 @@
 <?php
 
 $characterId = $_GET['character_id'];
+$userController = new UserController();
 $character = new Character($characterId);
-$user = new Player();
-
-$userid = $character->getPlayer();
+$user = $userController->getCurrentUser();
 
 if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
   $platoon_id = $character->getPlatoon();
