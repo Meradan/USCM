@@ -7,10 +7,10 @@ Class PlayerController {
   }
 
   public function getPlayer($playerId) {
-    if ($playerId == NULL) {
-      return;
-    }
     $player = new Player();
+    if ($playerId == NULL) {
+      return $player;
+    }
     $playersql = "SELECT Users.id, forname, nickname, lastname, emailadress, use_nickname, platoon_id,
         logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active, ".
         "Admins.userid as admin, count(*) as howmany FROM Users " .
