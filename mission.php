@@ -92,7 +92,7 @@ elseif ($_GET['what']=="commendations") {
     $character->setId($character_id);
     $medal = new Medal();
     $medal->setId($_POST['medal']);
-    $missionController->giveCharacterPromotionOnMission($character, $medal, $mission);
+    $missionController->giveCharacterCommendationOnMission($character, $medal, $mission);
   }
 }
 elseif ($_GET['what']=="create_mission") {
