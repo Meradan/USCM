@@ -44,47 +44,12 @@ if ($user->isAdmin() || $user->isGm()) {
     $mission->setDebriefing($debriefing);
     $missionController->update($mission);
   } elseif ($_GET['what']=="characters") {
-    $remove_characters=array();
-    $add_characters=array();
-    $old_characters=array();
-    $mission_id=$_GET['mission'];
-    $table=$_SESSION['table_prefix'];
-
-    //
-    // Characters on a mission
-    //
-    // Finds all character currently in database for the mission
-    $sql="select character_id,id,mission_id from {$table}missions where mission_id={$mission_id}";
-    $characterres=mysql_query($sql) or die(mysql_error());
-    while($character=mysql_fetch_array($characterres)){
-      $old_characters[$character['character_id']][mission_id]=$character['mission_id'];
-      $old_characters[$character['character_id']][id]=$character['id'];
+    $characters = array();
+    $mission = $missionController->getMission($missionId);
+    foreach ($_POST['characters'] as $characterId) {
+      $characters[] = $characterController->getCharacter($characterId);
     }
-    // walks through $_POST[] and decides what to delete and insert in database
-    foreach($_POST['characters'] as $character_id) {
-      if($old_characters[$character_id]) {
-        // remove the handled data from old_characters since it's already in the database
-        unset($old_characters[$character_id]);
-      } else {
-        // new data, add it
-        $add_characters[$character_id]=$mission_id;
-      }
-    }
-    // remove the characters that weren't in the $_POST, and thereby were removed from the mission
-    foreach($old_characters as $index => $id){
-
-      $remove_characters[$id[id]]=$id[id];
-      unset($old_characters[$index]);
-    }
-    foreach($remove_characters as  $id) {
-      $sql="DELETE FROM {$table}missions WHERE id='{$id}' LIMIT 1";
-      mysql_query($sql) or die("tabort: " . mysql_error());
-    }
-    foreach($add_characters as $character_id => $mission_id) {
-      $sql="INSERT INTO {$table}missions SET character_id='{$character_id}',mission_id='{$mission_id}'";
-      mysql_query($sql);
-    }
-
+    $missionController->setCharacters($characters, $mission);
   }
   elseif ($_GET['what']=="commendations") {
     foreach ($_POST['characters'] as $character_id => $dummy) {

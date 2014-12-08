@@ -1,9 +1,11 @@
 <?php
 class MissionController {
   private $db = NULL;
+  private $characterController = NULL;
 
   function __construct() {
     $this->db = getDatabaseConnection();
+    $this->characterController = new CharacterController();
   }
 
   /**
@@ -122,7 +124,7 @@ class MissionController {
   /**
    *
    * @param Mission $mission
-   * @return array:
+   * @return array
    */
   public function getCharactersAndPlayers($mission) {
     $sql="SELECT c.forname,c.lastname,p.forname as pforname,p.lastname as plastname
@@ -139,6 +141,27 @@ class MissionController {
     } catch (PDOException $e) {
       return array();
     }
+  }
+
+/**
+   *
+   * @param Mission $mission
+   * @return Character[]
+   */
+  public function getCharacters($mission) {
+    $characters = array();
+    $sql="SELECT character_id FROM uscm_missions m
+                  WHERE mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $stmt->execute();
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $characters[$row['character_id']] = $this->characterController->getCharacter($row['character_id']);
+      }
+    } catch (PDOException $e) {
+    }
+    return $characters;
   }
 
   /**
@@ -303,6 +326,99 @@ class MissionController {
   public function removeCharacterPromotionOnMission($character, $mission) {
     $sql="UPDATE uscm_missions SET rank_id=NULL, previous_rank_id=NULL
             WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  /**
+   * Sets the provided characters as participants on the mission. If there previously where
+   * other characters listed on the mission, those will be removed
+   * @param Character[] $characters All characters that participated on mission
+   * @param Mission $mission
+   */
+  public function setCharacters($characters, $mission) {
+    echo "setCharacters:\n";
+    print_r($characters);
+    $previousParticipants = $this->getCharacters($mission);
+    echo "Previous:\n";
+    print_r($previousParticipants);
+    $previousCharacterIdsOnMission = array();
+    $charactersToRemove = array();
+    foreach ($previousParticipants as $character) {
+      $previousCharacterIdsOnMission[] = $character->getId();
+    }
+    echo "Previous ids:\n";
+    print_r($previousCharacterIdsOnMission);
+    foreach ($characters as $character) {
+      echo "Id: " . $character->getId() . " ";
+      if (array_key_exists($character->getId(), $previousParticipants)) {
+        echo "Character was on mission before: \n";
+        print_r($character);
+        unset($previousParticipants[$character->getId()]);
+      } else {
+        echo "Character not on mission before\n";
+        print_r($character);
+        $this->addCharacter($character, $mission);
+      }
+    }
+    foreach ($previousParticipants as $character) {
+      echo "Removing character that was on mission before: ". $character->getId() . "\n";
+      $this->removeCharacter($character, $mission);
+    }
+  }
+
+  /**
+   *
+   * @param Mission $mission
+   * @param Character $character
+   */
+  public function removeCharacter($character, $mission) {
+    $sql="DELETE FROM uscm_missions WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+  /**
+   *
+   * @param Mission $mission
+   * @param int $characterId Character id
+   */
+  private function removeCharacterId($characterId, $mission) {
+    $sql="DELETE FROM uscm_missions WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':characterId', $characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  /**
+   *
+   * @param Character $character
+   * @param Mission $mission
+   */
+  public function addCharacter($character, $mission) {
+    $sql="INSERT INTO uscm_missions SET character_id=:characterId, mission_id=:missionId";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
     $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
