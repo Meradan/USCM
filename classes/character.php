@@ -197,7 +197,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
           WHERE an.attribute_name=:type AND character_id=:cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':type', $type, PDO::PARAM_STR);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -309,7 +309,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_characters c ON c.id=a.character_id
           WHERE a.character_id=:cid {$visible} ORDER BY advantage_name";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $advarray[$row['id']]['advantage_name'] = $row['advantage_name'];
@@ -326,7 +326,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_characters c ON c.id=d.character_id
           WHERE d.character_id=:cid ORDER BY disadvantage_name";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $disadvarray[$row['id']]['disadvantage_name'] = $row['disadvantage_name'];
@@ -341,7 +341,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_characters c ON c.id=a.character_id
           WHERE an.attribute_name='Perception' AND a.character_id=:cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['value'];
@@ -352,7 +352,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
           WHERE an.attribute_name='strength' AND character_id=:cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['value'];
@@ -363,7 +363,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
           WHERE an.attribute_name='strength' AND character_id=:cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row['value'] >= 3) {
@@ -380,14 +380,14 @@ class Character extends DbEntity {
           LEFT JOIN uscm_ranks r ON r.character_id=c.id
           WHERE an.attribute_name='Charisma' AND a.character_id=:cid";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['value'];
   }
 
   public function getPlayer() {
-    if ($this->userId != NULL || $this->characterId == NULL) {
+    if ($this->userId != NULL || $this->id == NULL) {
       return $this->userId;
     }
     $db = getDatabaseConnection();
@@ -395,7 +395,7 @@ class Character extends DbEntity {
                         LEFT JOIN uscm_characters as c ON c.userid=Users.id
                         WHERE c.id=:cid";
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch();
     $userId = $row['userid'];
@@ -409,7 +409,7 @@ class Character extends DbEntity {
     }
     $sql = "SELECT platoon_id FROM uscm_characters WHERE id=:cid";
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch();
     $platoonId = $row['platoon_id'];
@@ -435,7 +435,7 @@ class Character extends DbEntity {
             LEFT JOIN uscm_medal_names men ON men.id=m.medal_id
             WHERE character_id=:cid AND mn.date < NOW() ORDER BY date";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $missionarray[$row['id']]['mission_name'] = $row['mission_name_short'];
@@ -465,7 +465,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_missions m ON m.medal_id=mn.id
           WHERE m.character_id=:cid ORDER BY medal_glory DESC";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $medalarray[$row['id']]['medal'] = $row['medal_short'] . " (" . $row['medal_glory'] . ")";
@@ -502,7 +502,7 @@ class Character extends DbEntity {
     $certallarray = $this->allCertificateRequirements();
     $skillarray = array ();
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':skilltype', $skilltype, PDO::PARAM_STR);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
@@ -561,7 +561,7 @@ class Character extends DbEntity {
                WHERE column_id = :skillid AND a.character_id = :cid";
     // print_r($advsql);
     $stmt = $this->db->prepare($advsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':skillid', $skillid, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
@@ -578,7 +578,7 @@ class Character extends DbEntity {
                      WHERE column_id = :skillid AND a.character_id = :cid";
     // print_r($disadvsql);
     $stmt = $this->db->prepare($disadvsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':skillid', $skillid, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
@@ -594,7 +594,7 @@ class Character extends DbEntity {
                      WHERE column_id = :skillid AND table_point_name = 'skill_names' AND a.character_id = :cid";
     // print_r($traitsql);
     $stmt = $this->db->prepare($traitsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':skillid', $skillid, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
@@ -630,20 +630,23 @@ class Character extends DbEntity {
     }
     $cert = getCertificateRequirements();
 
-    // print_r($cert);
+//     echo "Certificate requirements: \n";
+//     print_r($cert);
+//     echo "charskillattrb: \n";
+//     print_r($charskillattrib);
     $certificatearray = array ();
     foreach ( $cert as $id => $req ) {
       $req_met = FALSE;
-      // echo "cert test ".$id." ";
-      // print_r($req);
+//       echo "cert test ".$id." ";
+//       print_r($req);
       if (in_array($id, $platooncertarray) || array_key_exists($id, $chosencertarray)) {
         $has_req = FALSE;
         foreach ( $req as $reqid ) {
-          // echo $reqid['id'] . "<br>";
-          // print_r($charskillattrib[$reqid['table_name']]) . "<br>";
-          //
-          // echo "testing ".$charskillattrib[$reqid['table_name']][$reqid['id']]." against ".$reqid['value']." ";
-          // print "\n<br>";
+//           echo $reqid['id'] . "<br>";
+//           print_r($charskillattrib[$reqid['table_name']]) . "<br>";
+
+//           echo "testing ".$charskillattrib[$reqid['table_name']][$reqid['id']]." against ".$reqid['value']." ";
+//           print "\n<br>";
           if ($reqid['value_greater'] == "1") {
             if (array_key_exists($reqid['id'], $charskillattrib[$reqid['table_name']]) &&
                  $charskillattrib[$reqid['table_name']][$reqid['id']] >= $reqid['value']) {
@@ -681,7 +684,7 @@ class Character extends DbEntity {
         INNER JOIN uscm_certificate_names as cn on cn.id = certificate_name_id
                     WHERE character_id=:cid";
     $stmt = $this->db->prepare($chosencertsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $chosencertarray[$row['certificate_name_id']]['certificate_name'] = $row['name'];
@@ -709,7 +712,7 @@ class Character extends DbEntity {
           FROM uscm_skills
           WHERE character_id=:cid";
     $stmt = $this->db->prepare($skillsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $skillarray[$row['id']] = $row['value'];
@@ -723,7 +726,7 @@ class Character extends DbEntity {
           FROM uscm_skills
           WHERE character_id=:cid";
     $stmt = $this->db->prepare($skillsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -736,7 +739,7 @@ class Character extends DbEntity {
                     LEFT JOIN uscm_characters c ON c.id=s.character_id
                     WHERE c.id=:cid ORDER BY sn.optional,sg.id,sn.skill_name";
     $stmt = $this->db->prepare($skillsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $skillarray[$row['id']] = $row;
@@ -754,7 +757,7 @@ class Character extends DbEntity {
           FROM uscm_attributes
           WHERE character_id=:cid ORDER BY attribute_id";
     $stmt = $this->db->prepare($attribsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $attribarray[$row['id']] = $row['value'];
@@ -768,7 +771,7 @@ class Character extends DbEntity {
           FROM uscm_attributes
           WHERE character_id=:cid ORDER BY attribute_id";
     $stmt = $this->db->prepare($attribsql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -780,7 +783,7 @@ class Character extends DbEntity {
               LEFT JOIN uscm_characters c ON c.id=t.character_id
               WHERE c.id=:cid ORDER BY tn.trait_name";
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->characterId, PDO::PARAM_INT);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $traits[$row['id']]['trait_name'] = $row['trait_name'];
