@@ -17,8 +17,8 @@ if ($user->isAdmin() || $user->isGm()) {
   myconnect();
   mysql_select_db("skynet");
 
+  $missionId = $_GET['mission'];
   if ($_GET['what']=="names") {
-    $missionId = $_GET['mission'];
     $short=strtr(htmlspecialchars($_POST['mission_name_short'], ENT_QUOTES, "UTF-8"),array("\n"=>"<br/>\n"));
     $name=strtr(htmlspecialchars($_POST['mission_name'], ENT_QUOTES, "UTF-8"),array("\n"=>"<br/>\n"));
     $date=strtr(htmlspecialchars($_POST['date'], ENT_QUOTES, "UTF-8"),array("\n"=>"<br/>\n"));
