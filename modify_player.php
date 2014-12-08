@@ -2,6 +2,7 @@
 $userController = new UserController();
 $playerController = new PlayerController();
 $user = $userController->getCurrentUser();
+$platoonController = new PlatoonController();
 $playerId = 0;
 if (array_key_exists('player', $_GET)) {
   $playerId = $_GET['player'];
@@ -39,7 +40,20 @@ if ($user->isAdmin() || $user->getId() == $playerId) {
                 </tr>
                 <tr>
                     <td>Platoon</td>
-                    <td><input type="text" name="platoon_id" value="<?php echo $player->getPlatoonId(); ?>" <?php echo ($user->isAdmin()) ? ("") : ("readonly"); ?> ></td>
+                    <td><?php
+                    $platoons = $platoonController->getPlatoons(); ?>
+                    <select name="platoon_id"><?php
+                    foreach ($platoons as $platoon) {
+                      $platoonId = $platoon->getId(); ?>
+                      <option value="<?php echo $platoonId; ?>" <?php
+                      if ($platoonId == $player->getPlatoonId()) {
+                        echo "selected";
+                      } elseif (!$user->isAdmin()) {
+                        echo "disabled";
+                      }
+                      ?> ><?php echo $platoon->getName(); ?></option><?php
+                    } ?>
+                    </select>
                 </tr>
                 <tr>
                     <td>Password</td>

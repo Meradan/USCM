@@ -6,6 +6,70 @@ Class PlayerController {
     $this->db = getDatabaseConnection();
   }
 
+  /**
+   *
+   * @param Player $player
+   */
+  public function save($player) {
+    $sql="INSERT INTO Users SET forname=:givenName,nickname=:nickname,lastname=:surname,
+           emailadress=:emailadress,password=PASSWORD(:password),use_nickname=:useNickname
+           ,platoon_id=:platoonId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':givenName', $player->getGivenName(), PDO::PARAM_STR);
+    $stmt->bindValue(':nickname',  $player->getNickname(), PDO::PARAM_STR);
+    $stmt->bindValue(':surname',  $player->getSurname(), PDO::PARAM_STR);
+    $stmt->bindValue(':emailadress',  $player->getEmailaddress(), PDO::PARAM_STR);
+    $stmt->bindValue(':password',  $player->getPassword(), PDO::PARAM_STR);
+    $stmt->bindValue(':useNickname',  $player->getUseNickname(), PDO::PARAM_INT);
+    $stmt->bindValue(':platoonId',  $player->getPlatoonId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  /**
+   *
+   * @param Player $player
+   */
+  public function update($player) {
+    $sql="UPDATE Users SET forname=:givenName,nickname=:nickname,lastname=:surname,
+           emailadress=:emailadress,use_nickname=:useNickname
+           ,platoon_id=:platoonId WHERE id = :playerId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':playerId', $player->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':givenName', $player->getGivenName(), PDO::PARAM_STR);
+    $stmt->bindValue(':nickname',  $player->getNickname(), PDO::PARAM_STR);
+    $stmt->bindValue(':surname',  $player->getSurname(), PDO::PARAM_STR);
+    $stmt->bindValue(':emailadress',  $player->getEmailaddress(), PDO::PARAM_STR);
+    $stmt->bindValue(':useNickname',  $player->getUseNickname(), PDO::PARAM_INT);
+    $stmt->bindValue(':platoonId',  $player->getPlatoonId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  public function updatePassword($player) {
+    $sql="UPDATE Users SET password=PASSWORD(:password) WHERE id = :playerId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':playerId', $player->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':password',  $player->getPassword(), PDO::PARAM_STR);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
   public function getPlayer($playerId) {
     $player = new Player();
     if ($playerId == NULL) {

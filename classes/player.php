@@ -7,6 +7,7 @@ class Player extends DbEntity {
   private $nickname = NULL;
   private $surname = NULL;
   private $emailaddress = NULL;
+  private $password = NULL;
   private $use_nickname = NULL;
   private $platoon_id = NULL;
   private $logintime = NULL;
@@ -128,6 +129,14 @@ class Player extends DbEntity {
 
   public function setEmailaddress($email) {
     $this->emailaddress = $email;
+  }
+
+  public function getPassword() {
+    return $this->password;
+  }
+
+  public function setPassword($password) {
+    $this->password = $password;
   }
 
   public function getPlatoonId() {

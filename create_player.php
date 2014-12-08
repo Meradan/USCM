@@ -1,6 +1,7 @@
 <?php
 $userController = new UserController();
 $user = $userController->getCurrentUser();
+$platoonController = new PlatoonController();
 if ($user->isAdmin()) {
 ?>
 <br><br>
@@ -17,7 +18,7 @@ if ($user->isAdmin()) {
   <tr>
     <td>Use nickname instead of real name</td>
     <td><input type="radio" name="use_nickname" value="1">Yes
-        <input type="radio" name="use_nickname" value="0">No
+        <input type="radio" name="use_nickname" value="0" checked >No
     </td>
   </tr>
   <tr>
@@ -30,7 +31,15 @@ if ($user->isAdmin()) {
   </tr>
   <tr>
     <td>Platoon</td>
-    <td><input type="text" name="platoon_id" ></td>
+    <td><?php
+                $platoons = $platoonController->getPlatoons();
+    ?>
+        <select name="platoon_id">
+    <?php foreach ($platoons as $platoon) { ?>
+          <option value="<?php echo $platoonId; ?>"><?php echo $platoon->getName(); ?></option>
+    <?php } ?>
+        </select>
+    </td>
   </tr>
   <tr>
     <td>password</td>

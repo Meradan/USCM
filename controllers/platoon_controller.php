@@ -6,6 +6,10 @@ Class PlatoonController {
     $this->db = getDatabaseConnection();
   }
 
+  /**
+   *
+   * @return Platoon[]
+   */
   public function getPlatoons() {
     $platoons = array ();
     $sql = "SELECT id, name_short, name_long
