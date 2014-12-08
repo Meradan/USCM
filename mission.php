@@ -14,9 +14,6 @@ $userController = new UserController();
 $user = $userController->getCurrentUser();
 
 if ($user->isAdmin() || $user->isGm()) {
-  myconnect();
-  mysql_select_db("skynet");
-
   $missionId = $_GET['mission'];
   if ($_GET['what']=="names") {
     $short=strtr(htmlspecialchars($_POST['mission_name_short'], ENT_QUOTES, "UTF-8"),array("\n"=>"<br/>\n"));
