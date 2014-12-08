@@ -2,6 +2,9 @@
 Class DbEntity {
   protected $id = NULL;
 
+  /**
+   * @return int Id of database entry
+   */
   public function getId() {
     return $this->id;
   }
