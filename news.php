@@ -7,13 +7,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 $userController = new UserController();
 $user = $userController->getCurrentUser();
 
-if (isset($_GET['action'])!=true) {
-//         myconnect();
-//         mysql_select_db("skynet");
-//         $admin = ($_SESSION['level'] >= 3) ? (TRUE) : (FALSE);
-//         $gm = ($_SESSION['level'] == 2) ? (TRUE) : (FALSE);
-        ?>
-
+if (isset($_GET['action'])!=true) { ?>
         <div class="title">Brixton's Fightin' Fives - US Colonial Marine Corps 5th Platoon</div>
         <div align="justify">Website for a roleplaying campaign based on the Alien movies. The players are members of the 5th platoon "Brixton's Fightin' Fives" in the 4th US Colonial Marine brigade.<br/>
         </div>
@@ -22,10 +16,6 @@ if (isset($_GET['action'])!=true) {
 
         <div class="title">News</div>
         <?php
-//         $lastyears = date("Y") - 1 . date("-m-d");
-//         $sql = "SELECT date,written_by,text FROM {$_SESSION['table_prefix']}news WHERE date > '$lastyears' ORDER BY date DESC, id DESC";
-//         $res = mysql_query($sql);
-//         while ($news = mysql_fetch_array($res)) {
           $listOfNews = $newsController->getLastYearsNews();
           foreach ($listOfNews as $news) {
             ?>
