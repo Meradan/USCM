@@ -211,6 +211,25 @@ class MissionController {
     }
   }
 
+    /**
+   *
+   * @param Character $character
+   * @param Mission $mission
+   * @return int|NULL Returns the previous Rank id if character was promoted on mission
+   */
+  public function getRankBeforePromotion($character, $mission) {
+    $sql = "SELECT previous_rank_id FROM uscm_missions WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    try {
+      $stmt->execute();
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $row['previous_rank_id'];
+    } catch (PDOException $e) {
+    }
+  }
+
   /**
    *
    * @param Character $character
@@ -239,9 +258,26 @@ class MissionController {
    * @param Mission $mission
    */
   public function promoteCharacterOnMission($character, $rank, $mission) {
-    $sql="UPDATE uscm_missions SET rank_id=:rankId WHERE character_id=:characterId AND mission_id=:missionId";
+    $sql="UPDATE uscm_missions SET rank_id=:rankId, previous_rank_id=:previousRankId
+            WHERE character_id=:characterId AND mission_id=:missionId";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':rankId', $rank->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':previousRankId', $character->getRankId(), PDO::PARAM_INT);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  public function removeCharacterPromotionOnMission($character, $mission) {
+    $sql="UPDATE uscm_missions SET rank_id=NULL, previous_rank_id=NULL
+            WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
     $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
     try {

@@ -124,49 +124,18 @@ elseif ($_GET['what']=="promotion") {
   if ($_POST['rank']) {
     $rank = $rankController->getRank($_POST['rank']);
     $missionController->promoteCharacterOnMission($character, $rank, $mission);
-//     $sql="UPDATE {$_SESSION['table_prefix']}missions SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-//     mysql_query($sql);
-//     $sql="UPDATE {$_SESSION['table_prefix']}ranks SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}'";
-//     mysql_query($sql);
     $rankController->promoteCharacter($rank, $character);
   }
   // A character that previously was selected for promotion on the mission
   // which has been withdrawn. Previous rank should be restored.
   else {
-    // Select the rank that was choosen for this mission
-    $sql="SELECT rank_id FROM {$_SESSION['table_prefix']}missions WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-    $sqlres=mysql_query($sql);
-    $formerrank=mysql_fetch_array($sqlres);
-    // Select the previous rank that the character held before this mission, or rather
-    // the promotion the character had gotten before. If no promotion, result is empty
-    $missiondate=mysql_fetch_array(mysql_query("SELECT date FROM {$_SESSION['table_prefix']}mission_names WHERE id='{$_GET['mission']}'"));
-    $sql="SELECT m.rank_id FROM {$_SESSION['table_prefix']}missions m LEFT JOIN {$_SESSION['table_prefix']}mission_names mn on mn.id =m.mission_id WHERE character_id='{$character_id}' AND date<'{$missiondate['date']}' ORDER BY date DESC LIMIT 1";
-    $sqlres=mysql_query($sql);
-    $rankbeforeformerrank=mysql_fetch_array($sqlres);
-    // The character has been promoted before and should retain that rank
-    if ($rankbeforeformerrank['rank_id']) {
-      $sql="UPDATE {$_SESSION['table_prefix']}ranks SET rank_id='{$rankbeforeformerrank['rank_id']}' WHERE character_id='{$character_id}'";
-      mysql_query($sql);
-      $sql="UPDATE {$_SESSION['table_prefix']}missions SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-      mysql_query($sql);
-    }
-    // The character have not been promoted before the mission and should be restored to the rank
-    // the character had upon joining the corps, i.e. LCpl or Pvt. This however isn't consistent with
-    // characters who has the military family advantage.
-    else {
-      if ($formerrank['rank_id']>2) {
-        $rank = 3; //LCpl
-      }
-      else {
-        $rank = 1; //Pvt
-      }
-      $sql="UPDATE {$_SESSION['table_prefix']}ranks SET rank_id='{$rank}' WHERE character_id='{$character_id}'";
-      mysql_query($sql);
-      $sql="UPDATE {$_SESSION['table_prefix']}missions SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-      mysql_query($sql);
-    }
+    $previousRankId = $missionController->getRankBeforePromotion($character, $mission);
+    $missionController->removeCharacterPromotionOnMission($character, $mission);
+    $previousRank = $rankController->getRank($previousRankId);
+    $rankController->promoteCharacter($previousRank, $character);
   }
 }
+
 
 header("location:{$url_root}/index.php?url=show_mission.php&id={$_GET['mission']}");
 
