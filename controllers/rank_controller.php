@@ -49,4 +49,23 @@ Class RankController extends DbController {
 //     return array($demotionRank, $promotionRank);
     return $this->getRanks();
   }
+
+  /**
+   *
+   * @param Rank $rank
+   * @param Character $character
+   */
+  public function promoteCharacter($rank, $character) {
+    $sql="UPDATE uscm_ranks SET rank_id=:rankId WHERE character_id=:characterId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':rankId', $rank->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
 }

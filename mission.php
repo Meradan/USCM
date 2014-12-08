@@ -8,6 +8,8 @@
 session_start();
 include("functions.php");
 $missionController = new MissionController();
+$characterController = new CharacterController();
+$rankController = new RankController();
 
 myconnect();
 mysql_select_db("skynet");
@@ -114,13 +116,19 @@ elseif ($_GET['what']=="create_mission") {
 }
 elseif ($_GET['what']=="promotion") {
   $character_id=$_POST['character'];
+  $characterId = $_POST['character'];
+  $character = $characterController->getCharacter($characterId);
+  $mission = $missionController->getMission($_GET['mission']);
   // The rank for promotion has been selected, time to insert into
   // the database
   if ($_POST['rank']) {
-    $sql="UPDATE {$_SESSION['table_prefix']}missions SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-    mysql_query($sql);
-    $sql="UPDATE {$_SESSION['table_prefix']}ranks SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}'";
-    mysql_query($sql);
+    $rank = $rankController->getRank($_POST['rank']);
+    $missionController->promoteCharacterOnMission($character, $rank, $mission);
+//     $sql="UPDATE {$_SESSION['table_prefix']}missions SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
+//     mysql_query($sql);
+//     $sql="UPDATE {$_SESSION['table_prefix']}ranks SET rank_id='{$_POST['rank']}' WHERE character_id='{$character_id}'";
+//     mysql_query($sql);
+    $rankController->promoteCharacter($rank, $character);
   }
   // A character that previously was selected for promotion on the mission
   // which has been withdrawn. Previous rank should be restored.

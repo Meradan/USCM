@@ -217,13 +217,34 @@ class MissionController {
    * @param Medal $medal
    * @param Mission $mission
    */
-  public function giveCharacterPromotionOnMission($character, $medal, $mission) {
+  public function giveCharacterCommendationOnMission($character, $medal, $mission) {
     $sql="UPDATE uscm_missions SET medal_id=:medalId WHERE character_id=:characterId AND mission_id=:missionId";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':medalId', $medal->getId(), PDO::PARAM_INT);
     $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
     $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
-  try {
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
+  /**
+   *
+   * @param Character $character
+   * @param Rank $rank
+   * @param Mission $mission
+   */
+  public function promoteCharacterOnMission($character, $rank, $mission) {
+    $sql="UPDATE uscm_missions SET rank_id=:rankId WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':rankId', $rank->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
       $this->db->beginTransaction();
       $stmt->execute();
       $this->db->commit();
