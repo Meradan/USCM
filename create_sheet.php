@@ -7,7 +7,8 @@ include "functions.php";
 include "iconpdf.php";
 
 $characterId = $_GET['character_id'];
-$character = new Character($characterId);
+$characterController = new CharacterController();
+$character = $characterController->getCharacter($characterId);
 $user = new Player();
 
 $userid = $character->getPlayer();
@@ -16,7 +17,6 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
   $platoon_id = $character->getPlatoon();
   $player = new Player($character->getPlayer());
   $player->loadData();
-  $character->loadData();
   $bonuses = new Bonus($characterId);
 
   function fontregular($font, $pdf) {

@@ -86,14 +86,13 @@ elseif ($_GET['what']=="characters") {
 }
 elseif ($_GET['what']=="commendations") {
   foreach ($_POST['characters'] as $character_id => $dummy) {
-    //check for foreign respective national medals
-    $sql="SELECT mn.id,mn.foreign_medal FROM {$_SESSION['table_prefix']}medal_names mn
-          LEFT JOIN {$_SESSION['table_prefix']}missons m ON mn.id=m.medal_id
-          WHERE m.character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-    $sqlres=mysql_query($sql);
-
-    $sql="UPDATE {$_SESSION['table_prefix']}missions SET medal_id='{$_POST['medal']}' WHERE character_id='{$character_id}' AND mission_id='{$_GET['mission']}'";
-    mysql_query($sql);
+    $mission = new Mission();
+    $mission->setId($_GET['mission']);
+    $character = new Character();
+    $character->setId($character_id);
+    $medal = new Medal();
+    $medal->setId($_POST['medal']);
+    $missionController->giveCharacterPromotionOnMission($character, $medal, $mission);
   }
 }
 elseif ($_GET['what']=="create_mission") {

@@ -210,4 +210,25 @@ class MissionController {
     } catch (PDOException $e) {
     }
   }
+
+  /**
+   *
+   * @param Character $character
+   * @param Medal $medal
+   * @param Mission $mission
+   */
+  public function giveCharacterPromotionOnMission($character, $medal, $mission) {
+    $sql="UPDATE uscm_missions SET medal_id=:medalId WHERE character_id=:characterId AND mission_id=:missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':medalId', $medal->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':characterId', $character->getId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+  try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
 }
