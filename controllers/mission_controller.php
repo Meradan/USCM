@@ -34,6 +34,32 @@ class MissionController {
     return $insertId;
   }
 
+/**
+   *
+   * @param Mission $mission
+   */
+  public function update($mission) {
+    $sql = "UPDATE uscm_mission_names SET mission_name_short=:shortName,
+                mission_name=:name, date=:date, gm=:gm, briefing=:briefing,
+                debriefing=:debriefing, platoon_id=:platoonId WHERE id = :missionId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':shortName', $mission->getShortName(), PDO::PARAM_STR);
+    $stmt->bindValue(':name', $mission->getName(), PDO::PARAM_STR);
+    $stmt->bindValue(':date', $mission->getDate(), PDO::PARAM_STR);
+    $stmt->bindValue(':gm', $mission->getGmId(), PDO::PARAM_INT);
+    $stmt->bindValue(':briefing', $mission->getBriefing(),PDO::PARAM_STR);
+    $stmt->bindValue(':debriefing', $mission->getDebriefing(), PDO::PARAM_STR);
+    $stmt->bindValue(':platoonId', $mission->getPlatoonId(), PDO::PARAM_INT);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $this->db->beginTransaction();
+      $stmt->execute();
+      $this->db->commit();
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+    }
+  }
+
   /**
    *
    * @return Mission[]
