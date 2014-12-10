@@ -76,7 +76,6 @@ function login($level) {
   if (isset($_GET['alt'])) {
     $alt = $_GET['alt'];
     if ($alt == "logout") {
-      // Om anvandaren vill logga ut
       $_SESSION['inloggad'] = 0;
       $_SESSION['level'] = "0";
       unset($_SESSION['anvandarnamn']);
@@ -85,30 +84,6 @@ function login($level) {
       unset($_SESSION['platoon_id']);
       return 0;
     } elseif ($alt == "login") {
-      // Unders�k om anvandarnamn och l�senord st�mmer
-
-      if ($level == "konventsadmin") {
-        /*
-         * $query="select anvandarnamn from administrator
-         * where anvandarnamn='{$_POST['anvandarnamn']}'
-         * and losenord=password('{$_POST['losenord']}')";
-         * mysql_select_db("lincon");
-         * $res=mysql_query($query);
-         * if(mysql_num_rows($res)==1){
-         * $_SESSION['anvandarnamn']=$_POST['anvandarnamn'];
-         * $_SESSION['inloggad']=1;
-         * $_SESSION['rattighetsniva']="konventsadmin";
-         * return 1;
-         * exit;
-         * }
-         * else{
-         * $_SESSION['inloggad']=0;
-         * $_SESSION['rattighetsniva']="0";
-         * return 0;
-         * exit;
-         * }
-         */
-      } else {
         $query = "select Users.id,emailadress,platoon_id,Admins.userid as Admin,GMs.userid as GM,
                 logintime, count(*) as howmany from Users
                 left join Admins on Admins.userid=Users.id
@@ -117,7 +92,7 @@ function login($level) {
                 and password=password('{$_POST['losenord']}')";
         $stmt = $db->query($query);
         $row = $stmt->fetch();
-        if ($row['howmany'] == 1) { // we have a match and only one! cool!
+        if ($row['howmany'] == 1) {
           $userinfo = $row;
           if ($userinfo['Admin']) {
             $userlevel = 3;
@@ -136,20 +111,18 @@ function login($level) {
           $db->exec("UPDATE Users SET logintime = NOW() WHERE id = {$userinfo['id']}");
           return 1;
           exit();
-        } elseif ($row['howmany'] > 1) { // more than one row returned
-                                         // Om det inte finns endast en anvandare med dessa anvandaruppgifter s� lyckas inte inloggningen
+        } elseif ($row['howmany'] > 1) {
           $_SESSION['inloggad'] = 0;
           $_SESSION['level'] = "0";
           return 0;
           exit();
-        } else { // no match in the table ($row['howmany'] == 0)
-                 // Om det inte finns endast en anvandare med dessa anvandaruppgifter s� lyckas inte inloggningen
+        } else {
           $_SESSION['inloggad'] = 0;
           $_SESSION['level'] = "0";
           return 0;
           exit();
         }
-      }
+
     }
   }
 }
