@@ -3,17 +3,16 @@
 $characterId = $_GET['character_id'];
 $userController = new UserController();
 $platoonController = new PlatoonController();
+$playerController = new PlayerController();
+$characterController = new CharacterController();
 $character = new Character($characterId);
+$character = $characterController->getCharacter($characterId);
 $user = $userController->getCurrentUser();
 
 if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
-  $platoon_id = $character->getPlatoon();
-  $player = new Player($character->getPlayer());
-  $player->loadData();
-  $character->loadData();
+  $player = $playerController->getPlayer($character->getPlayerId());
   $playerPlatoon = NULL;
     ?>
-
 
     <?php if ( $user->isAdmin() || $user->isGm()) { ?><form method="post" action="character.php?action=update_character"><?php } ?>
         <table width="50%"  border="0">

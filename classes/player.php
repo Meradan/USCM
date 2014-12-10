@@ -32,44 +32,6 @@ class Player extends DbEntity {
     }
   }
 
-  //TODO remove this functionality
-  public function loadData() {
-    if ($this->id == NULL) {
-      return;
-    }
-    $playersql = "SELECT forname, nickname, lastname, emailadress, use_nickname, platoon_id,
-        logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active, ".
-        "Admins.userid as admin, count(*) as howmany FROM Users " .
-        "LEFT JOIN GMs on GMs.userid = Users.id " .
-        "LEFT JOIN Admins on Admins.userid = Users.id WHERE Uers.id = :userid";
-    $stmt = $this->db->prepare($playersql);
-    $stmt->bindValue(':userid', $this->id, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row ['howmany'] == 1) {
-      $this->givenName = $row ['forname'];
-      $this->nickname = $row ['nickname'];
-      $this->surname = $row ['lastname'];
-      $this->emailaddress = $row ['emailadress'];
-      $this->use_nickname = $row ['use_nickname'];
-      $this->platoon_id = $row ['platoon_id'];
-      $this->logintime = $row ['logintime'];
-      $this->lastlogintime = $row ['lastlogintime'];
-      if ($row['gm']) {
-        $this->gm = TRUE;
-      } else {
-        $this->gm = FALSE;
-      }
-      $this->gmRpgId = $row['RPG_id'];
-      $this->gmActive = $row['active'];
-      if ($row['admin']) {
-        $this->admin = TRUE;
-      } else {
-        $this->admin = FALSE;
-      }
-    }
-  }
-
   public function getId() {
     return $this->id;
   }

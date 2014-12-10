@@ -1184,9 +1184,4 @@ function getMission($missionId) {
 //   return $mission;
 }
 
-function getPlayer($playerId) {
-  $player = new Player($playerId);
-  $player->loadData();
-  return $player;
-}
 ?>

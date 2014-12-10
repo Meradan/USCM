@@ -33,52 +33,6 @@ class Character extends DbEntity {
     $this->id = $characterId;
     $this->db = getDatabaseConnection();
   }
-//TODO remove this functionality
-  public function loadData() {
-    if ($this->id == NULL) {
-      return;
-    }
-    $sql = "SELECT userid, platoon_id, forname, lastname, Enlisted, Age, Gender, UnusedXP,
-        AwarenessPoints, CoolPoints, ExhaustionPoints, FearPoints, LeadershipPoints, PsychoPoints,
-        TraumaPoints, MentalPoints, status, status_desc, specialty_name, uscm_specialty_names.id as specialty_id,
-        rank_id, rank_short, rank_long, rank_desc, count(*) as howmany
-        FROM uscm_characters
-        LEFT JOIN uscm_ranks ON uscm_characters.id = uscm_ranks.character_id
-        LEFT JOIN uscm_rank_names ON  uscm_ranks.rank_id = uscm_rank_names.id
-        LEFT JOIN uscm_specialty ON uscm_characters.id = uscm_specialty.character_id
-        LEFT JOIN uscm_specialty_names ON  uscm_specialty.specialty_name_id = uscm_specialty_names.id
-        WHERE uscm_characters.id = :cid";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    if ($row['howmany'] == 1) {
-      $this->givenName = $row['forname'];
-      $this->surname = $row['lastname'];
-      $this->userId = $row['userid'];
-      $this->platoonId = $row['platoon_id'];
-      $this->enlisted = $row['Enlisted'];
-      $this->age = $row['Age'];
-      $this->gender = $row['Gender'];
-      $this->unusedXp = $row['UnusedXP'];
-      $this->awarenessPoints = $row['AwarenessPoints'];
-      $this->coolPoints = $row['CoolPoints'];
-      $this->exhaustionPoints = $row['ExhaustionPoints'];
-      $this->fearPoints = $row['FearPoints'];
-      $this->leadershipPoints = $row['LeadershipPoints'];
-      $this->psychoPoints = $row['PsychoPoints'];
-      $this->traumaPoints = $row['TraumaPoints'];
-      $this->mentalPoints = $row['MentalPoints'];
-      $this->status = $row['status'];
-      $this->statusDesc = $row['status_desc'];
-      $this->rankShort = $row['rank_short'];
-      $this->rankLong = $row['rank_long'];
-      $this->rankDesc = $row['rank_desc'];
-      $this->rankId = $row['rank_id'];
-      $this->specialtyName = $row['specialty_name'];
-      $this->specialtyId = $row['specialty_id'];
-    }
-  }
 
   public function getGivenName() {
     return $this->givenName;

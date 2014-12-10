@@ -5,8 +5,8 @@
  *
  */
 session_start();
-include "functions.php";
-
+require_once "functions.php";
+$characterController = new CharacterController();
 $db = getDatabaseConnection();
 if ($_GET['action'] == "update_character") {
   /*
@@ -39,8 +39,7 @@ if ($_GET['action'] == "update_character") {
   $old_certificate = array ();
   $character_id = $_POST['character'];
   $table = $_SESSION['table_prefix'];
-  $character = new Character($character_id);
-  $character->loadData();
+  $character = $characterController->getCharacter($character_id);
 
   // updates character basic stats
   $player = $_POST['player'];
