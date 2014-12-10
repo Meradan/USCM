@@ -1,4 +1,5 @@
 <?php
+$platoonController = new PlatoonController();
 $db = getDatabaseConnection();
 
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
@@ -49,7 +50,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
 <div style="text-align:center;">
 
 <?php
-$platoons = getPlatoons();
+$platoons = $platoonController->getPlatoons();
 foreach ($platoons as $platoon ) { ?>
   <a href="index.php?url=list_characters.php&platoon=<?php echo $platoon->getId(); ?>"><?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)</a>
 <?php } ?>

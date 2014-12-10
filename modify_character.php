@@ -2,6 +2,7 @@
 
 $characterId = $_GET['character_id'];
 $userController = new UserController();
+$platoonController = new PlatoonController();
 $character = new Character($characterId);
 $user = $userController->getCurrentUser();
 
@@ -37,7 +38,7 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <tr>
                 <td>Platoon</td>
                 <td><?php
-                $platoons = getPlatoons();
+                $platoons = $platoonController->getPlatoons();
     ?>
                     <select name="platoon">
     <?php foreach ($platoons as $platoon) {

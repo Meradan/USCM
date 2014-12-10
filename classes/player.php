@@ -202,42 +202,4 @@ class Player extends DbEntity {
   public function setGm($value) {
     $this->gm = $value;
   }
-
-  // TODO remove and use playerController stuff, note change in which platoons returned
-  public function getAllPlayers() {
-    if (!$this->isAdmin()) {
-      return $this->getPlayersInPlatoon($this->playerPlatoon);
-    }
-
-    $playersql = "SELECT Users.id,forname,lastname,name_short FROM Users
-                  LEFT JOIN uscm_platoon_names pn ON pn.id=Users.platoon_id
-                  ORDER BY platoon_id,lastname,forname";
-    $stmt = $this->db->prepare($playersql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-    // TODO remove and use playerController stuff
-  public function getPlayersInPlatoon($platoonId) {
-    $playersql = "SELECT Users.id,forname,lastname,name_short FROM Users
-                  LEFT JOIN uscm_platoon_names pn ON pn.id=Users.platoon_id
-                  WHERE platoon_id=:platoonid
-                  ORDER BY platoon_id,lastname,forname";
-    $stmt = $this->db->prepare($playersql);
-    $stmt->bindValue(':platoonid', $platoonId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-    // TODO remove and use platoonController stuff
-  public function getPlatoons() {
-    $platoonsql = "SELECT id,name_long FROM uscm_platoon_names";
-    if (!$this->isAdmin()) {
-      $platoonsql .= " WHERE id=:platoonid";
-    }
-    $stmt = $this->db->prepare($platoonsql);
-    $stmt->bindValue(':platoonid', $this->playerPlatoon, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
 }

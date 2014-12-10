@@ -1,4 +1,5 @@
 <?php
+$platoonController = new PlatoonController();
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
 $gm=($_SESSION['level']==2)?(TRUE):(FALSE);
 //echo $_SESSION['level'];
@@ -62,7 +63,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 <div style="text-align:center;">
 <a href="index.php?url=list_hall_of_fame.php">All platoons</a><br><br>
 <?php
-$platoons = getPlatoons();
+$platoons = $platoonController->getPlatoons();
 foreach ($platoons as $platoon) { ?>
   <a href="index.php?url=list_hall_of_fame.php&platoon=<?php echo $platoon->getId(); ?>"><?php
     echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)</a>
