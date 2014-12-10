@@ -1,5 +1,7 @@
 <?php
 $platoonController = new PlatoonController();
+$rankController = new RankController();
+$medalController = new MedalController();
 $db = getDatabaseConnection();
 
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
@@ -254,11 +256,11 @@ foreach ($platoons as $platoon ) { ?>
 <br/>
 <TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
 <?php
-  $ranks = getRanks();
+  $ranks = $rankController->getRanks();
   foreach ($ranks as $rank) { ?>
   <TR>
-    <TD WIDTH="60"><?php echo $rank['rank_short'] ?></TD>
-    <TD><?php echo $rank['rank_long'] ?></TD>
+    <TD WIDTH="60"><?php echo $rank->getShortName() ?></TD>
+    <TD><?php echo $rank->getName() ?></TD>
   </TR>
 <?php } ?>
 </TABLE>
@@ -267,12 +269,12 @@ foreach ($platoons as $platoon ) { ?>
 <br/>
 <TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
 <?php
-  $medals = getMedals();
+  $medals = $medalController->getUscmMedals();
   foreach ($medals as $medal) { ?>
   <TR>
-    <TD WIDTH="60"><?php echo $medal['medal_short'] ?></TD>
-    <TD width="200"><?php echo $medal['medal_name'] ?></TD>
-    <TD>Glory <?php echo $medal['medal_glory'] ?></TD>
+    <TD WIDTH="60"><?php echo $medal->getShortName() ?></TD>
+    <TD width="200"><?php echo $medal->getName() ?></TD>
+    <TD>Glory <?php echo $medal->getGlory() ?></TD>
   </TR>
 <?php } ?>
 </TABLE>
@@ -283,13 +285,13 @@ foreach ($platoons as $platoon ) { ?>
 
 <TABLE WIDTH="650" CELLSPACING="0" ALIGN="center">
 <?php
-  $foreignmedals = getMedals();
+  $foreignmedals = $medalController->getForeignMedals();
   foreach ($foreignmedals as $medal) { ?>
   <TR>
-    <TD WIDTH="40"><?php echo $medal['medal_short'] ?></TD>
-    <TD width="200"><?php echo $medal['medal_name'] ?></TD>
-    <TD width="60">Glory <?php echo $medal['medal_glory'] ?></TD>
-    <TD><?php echo $medal['description'] ?></TD>
+    <TD WIDTH="40"><?php echo $medal->getShortName() ?></TD>
+    <TD width="200"><?php echo $medal->getName() ?></TD>
+    <TD width="60">Glory <?php echo $medal->getGlory() ?></TD>
+    <TD><?php echo $medal->getDescription() ?></TD>
   </TR>
 <?php } ?>
 </TABLE>

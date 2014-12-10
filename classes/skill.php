@@ -35,7 +35,7 @@ Class Skill extends DbEntity {
   }
 
   public function setDefaultValue($defaultValue) {
-    $this-$defaultValue = $defaultValue;
+    $this->$defaultValue = $defaultValue;
   }
 
   public function getDescription() {

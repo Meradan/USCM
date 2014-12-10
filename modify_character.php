@@ -4,6 +4,7 @@ $characterId = $_GET['character_id'];
 $userController = new UserController();
 $platoonController = new PlatoonController();
 $playerController = new PlayerController();
+$rankController = new RankController();
 $characterController = new CharacterController();
 $character = new Character($characterId);
 $character = $characterController->getCharacter($characterId);
@@ -64,12 +65,12 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
                     </select></td>
                 <td>Grad (Bör ej ändras om karaktären har fått befordran)</td>
                 <td><?php
-                    $ranks = getRanks();
+                    $ranks = $rankController->getRanks();
                     ?>
                     <select name="rank">
     <?php foreach ($ranks as $rank) { ?>
-                            <option <?php echo ($rank['id'] == $character->getRankId()) ? ("selected") : (""); ?> value="<?php echo $rank['id']; ?>" >
-        <?php echo $rank['rank_long']; ?></option>
+                            <option <?php echo ($rank->getId() == $character->getRankId()) ? ("selected") : (""); ?> value="<?php echo $rank->getId(); ?>" >
+        <?php echo $rank->getName(); ?></option>
     <?php } ?>
                     </select></td>
             </tr>
@@ -90,13 +91,13 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             </tr>
             <?php
             //Ta ut alla attribut
-            $allattributes = getAttributes();
+            $allattributes = $characterController->getAttributes();
             $characterAttributes = $character->getAttributes();
             foreach ($allattributes as $attribute) {
-              $attributeId = $attribute['id'];
+              $attributeId = $attribute->getId();
                 ?>
                 <tr>
-                    <td><?php echo $attribute['attribute_name']; ?></td>
+                    <td><?php echo $attribute->getName(); ?></td>
                     <td><input name="attribute[<?php echo $attributeId; ?>]" type="text" value="<?php
                     echo (array_key_exists($attributeId, $characterAttributes)) ? ($characterAttributes[$attributeId]) : ("");
 
@@ -149,15 +150,15 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <?php
             //Ta ut alla skills
             $side = 0;
-            $allSkills = getSkillsGrouped();
+            $allSkills = $characterController->getSkillsGrouped();
             $characterSkills = $character->getSkillsGrouped();
             foreach($allSkills as $skill) {
-              $skillId = $skill['id'];
+              $skillId = $skill->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
-                <td><?php echo $skill['skill_name']; ?></td>
+                <td><?php echo $skill->getName(); ?></td>
                 <td><input type="text" name="skills[<?php echo $skillId; ?>]" value="<?php echo (array_key_exists($skillId, $characterSkills)) ? ($characterSkills[$skillId]['value']) : (""); ?>" size="2">
-                    <input type="hidden" name="optional[<?php echo $skillId; ?>]" value="<?php echo $skill['optional']; ?>">
+                    <input type="hidden" name="optional[<?php echo $skillId; ?>]" value="<?php echo $skill->getOptional(); ?>">
                 </td>
                 <?php
                 echo ($side == 1) ? ("</tr>") : ("");
@@ -170,13 +171,13 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <?php
             //Traits
             $side = 0;
-            $allTraits = getTraits();
+            $allTraits = $characterController->getTraits();
             $characterTraits = $character->getTraits();
             foreach ($allTraits as $trait) {
-              $traitId = $trait['id'];
+              $traitId = $trait->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
-                <td><?php echo $trait['trait_name']; ?></td>
+                <td><?php echo $trait->getName(); ?></td>
                 <td><input type="checkbox" name="traits[<?php echo $traitId; ?>]" <?php echo (array_key_exists($traitId, $characterTraits)) ? ("checked") : (""); ?> ></td>
                 <?php
                 echo ($side == 1) ? ("</tr>") : ("");
@@ -189,13 +190,13 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <?php
             //advantages
             $side = 0;
-            $allAdvantages = getAdvantages();
+            $allAdvantages = $characterController->getAdvantages();
             $characterAdvantages = $character->getAdvantages();
             foreach ($allAdvantages as $advantage) {
-              $advantageId = $advantage['id'];
+              $advantageId = $advantage->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
-                <td><?php echo $advantage['advantage_name'] . " (" . $advantage['value'] . ")"; ?></td>
+                <td><?php echo $advantage->getName() . " (" . $advantage->getValue() . ")"; ?></td>
                 <td><input type="checkbox" name="advs[<?php echo $advantageId; ?>]" <?php
                   echo (array_key_exists($advantageId, $characterAdvantages)) ? ("checked") : (""); ?> ></td>
                 <?php
@@ -209,13 +210,13 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <?php
             //disadvantages
             $side = 0;
-            $allDisadvantages = getDisadvantages();
+            $allDisadvantages = $characterController->getDisadvantages();
             $characterDisadvantages = $character->getDisadvantages();
             foreach ($allDisadvantages as $disadvantage) {
-              $disadvantageId = $disadvantage['id'];
+              $disadvantageId = $disadvantage->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
-                <td><?php echo $disadvantage['disadvantage_name'] . " (" . $disadvantage['value'] . ")"; ?></td>
+                <td><?php echo $disadvantage->getName() . " (" . $disadvantage->getValue() . ")"; ?></td>
                 <td><input type="checkbox" name="disadvs[<?php echo $disadvantageId; ?>]" <?php echo (array_key_exists($disadvantageId, $characterDisadvantages)) ? ("checked") : (""); ?> ></td>
                 <?php
                 echo ($side == 1) ? ("</tr>") : ("");
@@ -229,17 +230,17 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             //Certificates
             $allPlatoonCertificates = array();
             foreach ($playerPlatoon->getCertificates() as $certificate) {
-              $allPlatoonCertificates[] = $certificate['certificate_id'];
+              $allPlatoonCertificates[] = $certificate->getId();
             }
-            $allCertificates = getCertificates();
+            $allCertificates = $characterController->getCertificates();
             $characterCertificates = $character->getCertsForCharacterWithoutReqCheck();
             $enumerate_disadv = TRUE;
             $side = 0;
             foreach ($allCertificates as $certificate) {
-              $certificateId = $certificate['id'];
+              $certificateId = $certificate->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
-                <td><?php echo $certificate['name']; ?></td>
+                <td><?php echo $certificate->getName(); ?></td>
                 <td><input type="checkbox" name="certs[<?php echo $certificateId; ?>]" <?php echo (array_key_exists($certificateId, $characterCertificates)) ? ("checked ") : ("");
                 echo (in_array($certificateId, $allPlatoonCertificates)) ? ("disabled ") : (""); ?> ></td>
         <?php

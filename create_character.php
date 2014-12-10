@@ -118,7 +118,6 @@ if ($user->isAdmin() || $user->isGm()) { ?>
         </tr>
 
     <?php //Ta ut alla skills
-    $skills = getSkills();
     $skills = $characterController->getSkills();
     foreach ($skills as $skill) { ?>
     <tr>

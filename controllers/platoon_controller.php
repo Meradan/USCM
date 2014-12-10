@@ -21,15 +21,32 @@ Class PlatoonController {
       $platoon->setId($row['id']);
       $platoon->setName($row['name_long']);
       $platoon->setShortName($row['name_short']);
-      $certsql = "SELECT certificate_id FROM uscm_platoon_certificates
-        WHERE platoon_id = :platoonid";
-      $stmt_cert = $this->db->prepare($certsql);
-      $stmt_cert->execute(array (':platoonid' => $row['id']
-      ));
-      $platoonCerts = $stmt_cert->fetchAll(PDO::FETCH_ASSOC);
-      $platoon->setCertificates($platoonCerts);
+      $platoon->setCertificates($this->platoonCertificates($platoon));
       $platoons[] = $platoon;
     }
     return $platoons;
+  }
+
+  /**
+   *
+   * @param Platoon $platoon
+   * @return Certificate
+   */
+  private function platoonCertificates($platoon) {
+    $certsql = "SELECT certificate_id, name, description FROM uscm_platoon_certificates pc
+        INNER JOIN uscm_certificate_names cn on cn.id = certificate_id
+        WHERE platoon_id = :platoonid";
+    $stmt = $this->db->prepare($certsql);
+    $stmt->bindValue(':platoonid', $platoon->getId(), PDO::PARAM_INT);
+    $stmt->execute();
+    $certificates = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $certificate = new Certificate();
+      $certificate->setId($row['certificate_id']);
+      $certificate->setName($row['name']);
+      $certificate->setDescription($row['description']);
+      $certificates[] = $certificate;
+    }
+    return $certificates;
   }
 }

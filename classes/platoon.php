@@ -29,9 +29,17 @@ class Platoon {
     $this->id = $id;
   }
 
+  /**
+   * @return Certificate[]
+   */
   public function getCertificates() {
     return $this->certificates;
   }
+
+  /**
+   *
+   * @param Certificate[] $certificates
+   */
   public function setCertificates($certificates) {
     $this->certificates = $certificates;
   }

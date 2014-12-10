@@ -155,7 +155,8 @@ Class CharacterController {
    * @return Skill[]
    */
   public function getSkills() {
-    $sql = "SELECT id, skill_name,optional FROM uscm_skill_names";
+    $sql = "SELECT id, skill_name, optional, skill_group_id, default_value, description
+              FROM uscm_skill_names";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $skills = array();
@@ -163,8 +164,119 @@ Class CharacterController {
       $skill = new Skill();
       $skill->setId($row['id']);
       $skill->setName($row['skill_name']);
+      $skill->setOptional($row['optional']);
+      $skill->setDefaultValue($row['default_value']);
+      $skill->setDescription($row['description']);
+      $skill->setSkillGroupId($row['skill_group_id']);
       $skills[] = $skill;
     }
     return $skills;
+  }
+
+  /**
+   *
+   * @return Skill[]
+   */
+  function getSkillsGrouped() {
+    $sql = "SELECT sn.id, skill_name, optional, skill_group_id, default_value, description
+                FROM uscm_skill_names sn
+                LEFT JOIN uscm_skill_groups sg on sn.skill_group_id=sg.id
+                ORDER BY sg.id,sn.skill_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $skills = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $skill = new Skill();
+      $skill->setId($row['id']);
+      $skill->setName($row['skill_name']);
+      $skill->setOptional($row['optional']);
+      $skill->setDefaultValue($row['default_value']);
+      $skill->setDescription($row['description']);
+      $skill->setSkillGroupId($row['skill_group_id']);
+      $skills[] = $skill;
+    }
+    return $skills;
+  }
+
+  /**
+   *
+   * @return CharacterTrait[]
+   */
+  function getTraits() {
+    $sql = "SELECT tn.id,trait_name, description FROM uscm_trait_names tn ORDER BY tn.trait_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $traits = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $trait = new CharacterTrait();
+      $trait->setId($row['id']);
+      $trait->setName($row['trait_name']);
+      $trait->setDescription($row['description']);
+      $traits[] = $trait;
+    }
+    return $traits;
+  }
+
+  /**
+   *
+   * @return Advantage[]
+   */
+  function getAdvantages() {
+    $sql = "SELECT id,advantage_name,value, description, visible
+              FROM uscm_advantage_names ORDER BY advantage_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $advantages = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $advantage = new Advantage();
+      $advantage->setId($row['id']);
+      $advantage->setName($row['advantage_name']);
+      $advantage->setDescription($row['description']);
+      $advantage->setValue($row['value']);
+      $advantage->setVisible($row['visible']);
+      $advantages[] = $advantage;
+    }
+    return $advantages;
+  }
+
+  /**
+   *
+   * @return Disadvantage[]
+   */
+  function getDisadvantages() {
+    $sql = "SELECT id,disadvantage_name,value, description, visible
+              FROM uscm_disadvantage_names ORDER BY disadvantage_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $disadvantages = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $disadvantage = new Disadvantage();
+      $disadvantage->setId($row['id']);
+      $disadvantage->setName($row['disadvantage_name']);
+      $disadvantage->setDescription($row['description']);
+      $disadvantage->setValue($row['value']);
+      $disadvantage->setVisible($row['visible']);
+      $disadvantages[] = $disadvantage;
+    }
+    return $disadvantages;
+  }
+
+  /**
+   *
+   * @return Certificate[]
+   */
+  function getCertificates() {
+    $sql = "SELECT id,name, description FROM uscm_certificate_names ORDER BY name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $certificates = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $certificate = new Certificate();
+      $certificate->setId($row['id']);
+      $certificate->setName($row['name']);
+      $certificate->setDescription($row['description']);
+      $certificates[] = $certificate;
+    }
+    return $certificates;
   }
 }

@@ -1,35 +1,5 @@
 <?php
 
-function getAttributes() {
-  $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
-  $attributesql = "SELECT id, attribute_name FROM " . $tablePrefix . "attribute_names ORDER BY id";
-  $stmt = $db->prepare($attributesql);
-  $stmt->execute();
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function getRanks() {
-  $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
-  $chosencertarray = array ();
-  $ranksql = "SELECT id,rank_long,rank_short FROM " . $tablePrefix . "rank_names
-          ORDER BY id DESC";
-  $stmt = $db->prepare($ranksql);
-  $stmt->execute();
-  $ranks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  return $ranks;
-}
-
-function getSkills() {
-  $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
-  $sql = "SELECT id, skill_name,optional FROM " . $tablePrefix . "skill_names";
-  $stmt = $db->prepare($sql);
-  $stmt->execute();
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 function getSkillsGrouped() {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
