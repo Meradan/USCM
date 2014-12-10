@@ -2,7 +2,6 @@
 require_once ("config.php");
 require_once ("helper_functions.php");
 require_once ("character_functions.php");
-require_once ("auxiliary_functions.php");
 require_once ("classes/db_entity.php");
 require_once ("classes/attribute.php");
 require_once ("classes/advantage.php");
