@@ -53,7 +53,7 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
             <tr>
                 <td>Specialty</td>
                 <td><?php
-    $specialties = getSpecialties();
+          $specialties = $characterController->getSpecialties();
     ?>
                     <select name="specialty">
                     <?php foreach ($specialties as $specialty) {

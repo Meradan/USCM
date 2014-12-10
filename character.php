@@ -477,7 +477,7 @@ if ($_GET['action'] == "update_character") {
   }
 
   $skill = current($_POST['skill']);
-  $skill = quote_smart($skill);
+  $skill = $skill;
   $skill_id = key($_POST['skill']);
   if ($_POST['skill'][$skill_id] != NULL) { // ($_POST['optional'][$skill_id] != 1 || $_POST['skill'][$skill_id] != NULL) && $_POST['skill']!=""
     $skillssql = "INSERT INTO {$_SESSION['table_prefix']}skills (character_id,value,skill_name_id) VALUES (:cid, :value, :sid)";
@@ -488,7 +488,7 @@ if ($_GET['action'] == "update_character") {
     $stmt->execute();
   }
   $skill = next($_POST['skill']);
-  $skill = quote_smart($skill);
+  $skill = $skill;
   while ( $skill_id ) {
     $skill_id = key($_POST['skill']);
     if ($_POST['skill'][$skill_id] != NULL) { // ($_POST['optional'][$skill_id] != 1 || $_POST['skill'][$skill_id] != NULL) && $_POST['skill']!=""
@@ -500,17 +500,16 @@ if ($_GET['action'] == "update_character") {
       $stmt->execute();
     }
     $skill = next($_POST['skill']);
-    $skill = quote_smart($skill);
     $skill_id = key($_POST['skill']);
   }
 
-  $specialty = quote_smart($_POST['specialty']);
+  $specialty = $_POST['specialty'];
   $specialtysql = "INSERT INTO {$_SESSION['table_prefix']}specialty (character_id,specialty_name_id) VALUES (:cid, :specialty)";
   $stmt = $db->prepare($specialtysql);
   $stmt->bindValue(':cid', $characterid, PDO::PARAM_INT);
   $stmt->bindValue(':specialty', $specialty, PDO::PARAM_STR);
   $stmt->execute();
-  $rank = quote_smart($_POST['rank']);
+  $rank = $_POST['rank'];
   $ranksql = "INSERT INTO {$_SESSION['table_prefix']}ranks (character_id,rank_id) VALUES (:cid, :rankid)";
   $stmt = $db->prepare($ranksql);
   $stmt->bindValue(':cid', $characterid, PDO::PARAM_INT);
