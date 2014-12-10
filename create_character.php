@@ -1,31 +1,35 @@
 <?php
 $currentPlayer = new Player();
-$admin = $currentPlayer->isAdmin();
-$gm= $currentPlayer->isGm();
+$characterController = new CharacterController();
+$platoonController = new PlatoonController();
+$playerController = new PlayerController();
+$rankController = new RankController();
+$userController = new UserController();
+$user = $userController->getCurrentUser();
 
-if ($admin || $gm) { ?>
+if ($user->isAdmin() || $user->isGm()) { ?>
 <form method="post" action="character.php?action=create_character">
 <table width="50%"  border="0">
     <tr>
         <td>Player</td>
         <td><?php
-              $players = $currentPlayer->getAllPlayers();
+              $players = $playerController->getAllPlayers();
             ?>
           <select name="player">
-          <?php foreach ($players as $player) { ?>
-            <option value="<?php echo $player['id'];?>"><?php echo $player['name_short'] . ": " . $player['forname'] . " " . $player['lastname']; ?></option>
-          <?php } ?>
             <option value="0">Non Player Character</option>
+          <?php foreach ($players as $player) { ?>
+            <option value="<?php echo $player->getId();?>"><?php echo $player->getNameWithNickname(); ?></option>
+          <?php } ?>
           </select>
         </td>
     </tr>
     <tr>
         <td>Platoon</td>
         <td><?php
-            $platoons = $currentPlayer->getPlatoons(); ?>
+            $platoons = $platoonController->getPlatoons(); ?>
           <select name="platoon">
           <?php foreach ($platoons as $platoon) { ?>
-            <option value="<?php echo $platoon['id'];?>" <?php echo ($platoon['id']==$_SESSION['platoon_id'])?("selected"):("");?> ><?php echo $platoon['name_long']; ?></option>
+            <option value="<?php echo $platoon->getId();?>" <?php echo ($platoon->getId()==$_SESSION['platoon_id'])?("selected"):("");?> ><?php echo $platoon->getName(); ?></option>
           <?php } ?>
           </select>
         </td>
@@ -41,7 +45,7 @@ if ($admin || $gm) { ?>
     <tr>
         <td>Specialty</td>
         <td><?php
-            $specialties = getSpecialties(); ?>
+            $specialties = $characterController->getSpecialties(); ?>
           <select name="specialty">
           <?php foreach ($specialties as $specialty) { ?>
             <option value="<?php echo $specialty->getId();?>"><?php echo $specialty->getName(); ?></option>
@@ -51,11 +55,11 @@ if ($admin || $gm) { ?>
     <tr>
         <td>Rank</td>
         <td><?php
-            $ranks = getRanks(); ?>
+            $ranks = $rankController->getRanks(); ?>
           <select name="rank">
           <?php foreach ($ranks as $rank) { ?>
-            <option <?php echo ($rank['id']=="1")?("selected"):("");?> value="<?php echo $rank['id'];?>" >
-             <?php echo $rank['rank_long']; ?></option>
+            <option <?php echo ($rank->getId()=="1")?("selected"):("");?> value="<?php echo $rank->getId();?>" >
+             <?php echo $rank->getName(); ?></option>
             <?php } ?>
           </select></td>
     </tr>
@@ -77,11 +81,11 @@ if ($admin || $gm) { ?>
         </td>
     </tr>
     <?php //Ta ut alla attribut
-    $attributes = getAttributes();
+    $attributes = $characterController->getAttributes();
     foreach ($attributes as $attribute) { ?>
     <tr>
-        <td><?php echo $attribute['attribute_name'];?></td>
-        <td><input type="text" name="attribute[<?php echo $attribute['id'];?>]"></td>
+        <td><?php echo $attribute->getName();?></td>
+        <td><input type="text" name="attribute[<?php echo $attribute->getId();?>]"></td>
     </tr>
     <?php } ?>
     <tr>
@@ -115,11 +119,12 @@ if ($admin || $gm) { ?>
 
     <?php //Ta ut alla skills
     $skills = getSkills();
+    $skills = $characterController->getSkills();
     foreach ($skills as $skill) { ?>
     <tr>
-        <td><?php echo $skill['skill_name'];?></td>
-        <td><input type="text" name="skill[<?php echo $skill['id'];?>]">
-          <input type="hidden" name="optional[<?php echo $skill['id'];?>]" value="<?php echo $skill['optional'];?>">
+        <td><?php echo $skill->getName();?></td>
+        <td><input type="text" name="skill[<?php echo $skill->getId();?>]">
+          <input type="hidden" name="optional[<?php echo $skill->getId();?>]" value="<?php echo $skill->getOptional();?>">
         </td>
     </tr>
     <?php } ?>

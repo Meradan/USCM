@@ -111,6 +111,10 @@ Class PlayerController {
     return $player;
   }
 
+  /**
+   *
+   * @return Player[]
+   */
   public function getAllPlayers() {
     $playersql = "SELECT Users.id, forname, nickname, lastname, emailadress, use_nickname, platoon_id,
         logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active, ".

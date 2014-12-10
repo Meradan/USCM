@@ -6,6 +6,11 @@ Class CharacterController {
     $this->db = getDatabaseConnection();
   }
 
+  /**
+   *
+   * @param int $characterId
+   * @return void|Character
+   */
   public function getCharacter($characterId) {
     if ($characterId == NULL) {
       return;
@@ -55,6 +60,10 @@ Class CharacterController {
     return $character;
   }
 
+    /**
+   *
+   * @return Character[]
+   */
   public function getActiveCharacters() {
     $characters = array();
     $sql = "SELECT c.id
@@ -70,6 +79,11 @@ Class CharacterController {
     return $characters;
   }
 
+  /**
+   *
+   * @param Mission $mission
+   * @return Character[]
+   */
   public function getCharacterIdsOnMission($mission) {
     $withOnMission = array();
     $sql = "SELECT character_id FROM {$_SESSION['table_prefix']}missions m WHERE mission_id=:missionId";
@@ -82,6 +96,11 @@ Class CharacterController {
     return $withOnMission;
   }
 
+  /**
+   *
+   * @param Mission $mission
+   * @return Character[]
+   */
   public function getCharactersOnMission($mission) {
     $withOnMission = array();
     $sql = "SELECT character_id FROM {$_SESSION['table_prefix']}missions m WHERE mission_id=:missionId";
@@ -93,5 +112,59 @@ Class CharacterController {
       $withOnMission[] = $character;
     }
     return $withOnMission;
+  }
+
+  /**
+   *
+   * @return Specialty[]
+   */
+  public function getSpecialties() {
+    $specialties = array ();
+    $sql = "SELECT id, specialty_name FROM uscm_specialty_names ORDER BY specialty_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $specialty = new Specialty();
+      $specialty->setId($row['id']);
+      $specialty->setName($row['specialty_name']);
+      $specialties[] = $specialty;
+    }
+    return $specialties;
+  }
+
+  /**
+   *
+   * @return Attribute[]
+   */
+  public function getAttributes() {
+    $attributesql = "SELECT id, attribute_name FROM uscm_attribute_names ORDER BY id";
+    $stmt = $this->db->prepare($attributesql);
+    $stmt->execute();
+    $attributes = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $attribute = new Attribute();
+      $attribute->setId($row['id']);
+      $attribute->setName($row['attribute_name']);
+      $attributes[] = $attribute;
+    }
+    return $attributes;
+  }
+
+  /**
+   *
+   * @return Skill[]
+   */
+  public function getSkills() {
+    $sql = "SELECT id, skill_name,optional FROM uscm_skill_names";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $skills = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $skill = new Skill();
+      $skill->setId($row['id']);
+      $skill->setName($row['skill_name']);
+      $skills[] = $skill;
+    }
+    return $skills;
   }
 }
