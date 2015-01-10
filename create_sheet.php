@@ -15,7 +15,7 @@ $user = new Player();
 $userid = $character->getPlayer();
 
 if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
-  $platoon_id = $character->getPlatoon();
+  $platoon_id = $character->getPlatoonId();
   $player = $playerController->getPlayer($character->getPlayer());
   $bonuses = new Bonus($characterId);
 

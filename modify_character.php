@@ -43,10 +43,10 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
                     <select name="platoon">
     <?php foreach ($platoons as $platoon) {
             $platoonId = $platoon->getId();
-            if ($platoonId == $character->getPlatoon()) {
+            if ($platoonId == $character->getPlatoonId()) {
               $playerPlatoon = $platoon;
             } ?>
-                            <option value="<?php echo $platoonId; ?>" <?php echo ($platoonId == $character->getPlatoon()) ? ("selected") : (""); ?> ><?php echo $platoon->getName(); ?></option>
+                            <option value="<?php echo $platoonId; ?>" <?php echo ($platoonId == $character->getPlatoonId()) ? ("selected") : (""); ?> ><?php echo $platoon->getName(); ?></option>
     <?php } ?>
                     </select>
                 </td>
