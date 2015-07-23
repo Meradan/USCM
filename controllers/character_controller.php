@@ -31,11 +31,12 @@ Class CharacterController {
     $stmt->execute();
     $row = $stmt->fetch();
     if ($row['howmany'] == 1) {
-      $platoonId = $row['userid'];
+      $platoonId = $row['platoon_id'];
+      $playerId = $row['userid'];
       $character->setId($characterId);
       $character->setGivenName($row['forname']);
       $character->setSurname($row['lastname']);
-      $character->setPlayerId($row['userid']);
+      $character->setPlayerId($playerId);
       $character->setPlatoonId($platoonId);
       $character->setEnlistedDate($row['Enlisted']);
       $character->setAge($row['Age']);
@@ -58,8 +59,12 @@ Class CharacterController {
       $character->setSpecialtyName($row['specialty_name']);
       $character->setSpecialtyId($row['specialty_id']);
       $platoonController = new PlatoonController();
+      $playerController = new PlayerController();
       $character->setPlatoon(function () use ($platoonController, $platoonId) {
         return $platoonController->getPlatoon($platoonId);
+      });
+      $character->setPlayer(function () use ($playerController, $playerId) {
+        return $playerController->getPlayer($playerId);
       });
     }
     return $character;

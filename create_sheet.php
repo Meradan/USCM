@@ -12,11 +12,11 @@ $playerController = new PlayerController();
 $character = $characterController->getCharacter($characterId);
 $user = new Player();
 
-$userid = $character->getPlayer();
+$userid = $character->getPlayerId();
 
-if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
+if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->isGm()) {
   $platoon_id = $character->getPlatoonId();
-  $player = $playerController->getPlayer($character->getPlayer());
+  $player = $character->getPlayer();
   $bonuses = new Bonus($characterId);
 
   function fontregular($font, $pdf) {

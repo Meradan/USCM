@@ -4,6 +4,7 @@ class Character extends DbEntity {
   private $db = NULL;
   private $characterId = NULL;
   private $userId = NULL;
+  private $user = NULL;
   private $givenName = NULL;
   private $surname = NULL;
   private $platoonId = NULL;
@@ -61,6 +62,10 @@ class Character extends DbEntity {
 
   public function setPlayerId($id) {
     $this->userId = $id;
+  }
+
+  public function setPlayer($playerProvider) {
+    $this->user = new LazyLoader($playerProvider);
   }
 
   public function getPlatoonId() {
@@ -346,6 +351,8 @@ class Character extends DbEntity {
   }
 
   public function getPlayer() {
+    return call_user_func($this->user);
+
     if ($this->userId != NULL || $this->id == NULL) {
       return $this->userId;
     }

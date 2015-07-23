@@ -3,15 +3,14 @@
 $characterId = $_GET['character_id'];
 $userController = new UserController();
 $platoonController = new PlatoonController();
-$playerController = new PlayerController();
 $rankController = new RankController();
 $characterController = new CharacterController();
 $character = new Character($characterId);
 $character = $characterController->getCharacter($characterId);
 $user = $userController->getCurrentUser();
 
-if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm()) {
-  $player = $playerController->getPlayer($character->getPlayerId());
+if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->isGm()) {
+  $player = $character->getPlayer();
   $playerPlatoon = NULL;
     ?>
 
@@ -41,7 +40,9 @@ if ($user->getId() == $character->getPlayer() || $user->isAdmin() || $user->isGm
                 $platoons = $platoonController->getPlatoons();
     ?>
                     <select name="platoon">
-    <?php foreach ($platoons as $platoon) {
+    <?php echo "Platoons: \n"; print_r($platoons); echo "\n Character: " . $character->getPlatoonId();
+    foreach ($platoons as $platoon) {
+      echo "Platoon: " . $platoonId;
             $platoonId = $platoon->getId();
             if ($platoonId == $character->getPlatoonId()) {
               $playerPlatoon = $platoon;
