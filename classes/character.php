@@ -352,37 +352,10 @@ class Character extends DbEntity {
 
   public function getPlayer() {
     return call_user_func($this->user);
-
-    if ($this->userId != NULL || $this->id == NULL) {
-      return $this->userId;
-    }
-    $db = getDatabaseConnection();
-    $sql = "SELECT Users.id as userid FROM Users
-                        LEFT JOIN uscm_characters as c ON c.userid=Users.id
-                        WHERE c.id=:cid";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $userId = $row['userid'];
-    $this->userId = $userId;
-    return $userId;
   }
 
   public function getPlatoon() {
     return call_user_func($this->platoon);
-
-    if ($this->userId != NULL || $this->platoonId == NULL) {
-      return $this->platoonId;
-    }
-    $sql = "SELECT platoon_id FROM uscm_characters WHERE id=:cid";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $platoonId = $row['platoon_id'];
-    $this->platoonId = $platoonId;
-    return $platoonId;
   }
 
   public function getMissionsShort() {
