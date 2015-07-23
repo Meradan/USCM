@@ -7,6 +7,7 @@ class Character extends DbEntity {
   private $givenName = NULL;
   private $surname = NULL;
   private $platoonId = NULL;
+  private $platoon = NULL;
   private $enlisted = NULL;
   private $age = NULL;
   private $gender = NULL;
@@ -68,6 +69,10 @@ class Character extends DbEntity {
 
   public function setPlatoonId($id) {
     $this->platoonId = $id;
+  }
+
+  public function setPlatoon($platoonProvider) {
+    $this->platoon = new LazyLoader($platoonProvider);
   }
 
   public function getEnlistedDate() {
@@ -358,6 +363,8 @@ class Character extends DbEntity {
   }
 
   public function getPlatoon() {
+    return call_user_func($this->platoon);
+
     if ($this->userId != NULL || $this->platoonId == NULL) {
       return $this->platoonId;
     }

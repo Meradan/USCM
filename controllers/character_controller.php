@@ -31,11 +31,12 @@ Class CharacterController {
     $stmt->execute();
     $row = $stmt->fetch();
     if ($row['howmany'] == 1) {
+      $platoonId = $row['userid'];
       $character->setId($characterId);
       $character->setGivenName($row['forname']);
       $character->setSurname($row['lastname']);
       $character->setPlayerId($row['userid']);
-      $character->setPlatoonId($row['platoon_id']);
+      $character->setPlatoonId($platoonId);
       $character->setEnlistedDate($row['Enlisted']);
       $character->setAge($row['Age']);
       $character->setGender($row['Gender']);
@@ -56,6 +57,10 @@ Class CharacterController {
       $character->setRankId($row['rank_id']);
       $character->setSpecialtyName($row['specialty_name']);
       $character->setSpecialtyId($row['specialty_id']);
+      $platoonController = new PlatoonController();
+      $character->setPlatoon(function () use ($platoonController, $platoonId) {
+        return $platoonController->getPlatoon($platoonId);
+      });
     }
     return $character;
   }
@@ -152,6 +157,29 @@ Class CharacterController {
 
   /**
    *
+   * @param Character $character
+   * @return Skill[]
+   */
+  function getAttributesForCharacter($character) {
+    $db = getDatabaseConnection();
+    $attribsql = "SELECT attribute_id as id,value
+            FROM uscm_attributes
+            WHERE character_id=:cid";
+    $stmt = $db->prepare($attribsql);
+    $stmt->bindValue(':cid', $character->getId(), PDO::PARAM_INT);
+    $stmt->execute();
+    $attributes = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $attribute = new Attribute();
+      $attribute->setId($row['id']);
+      $attribute->setName($row['attribute_name']);
+      $attributes[] = $attribute;
+    }
+    return $attributes;
+  }
+
+  /**
+   *
    * @return Skill[]
    */
   public function getSkills() {
@@ -183,6 +211,33 @@ Class CharacterController {
                 LEFT JOIN uscm_skill_groups sg on sn.skill_group_id=sg.id
                 ORDER BY sg.id,sn.skill_name";
     $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $skills = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $skill = new Skill();
+      $skill->setId($row['id']);
+      $skill->setName($row['skill_name']);
+      $skill->setOptional($row['optional']);
+      $skill->setDefaultValue($row['default_value']);
+      $skill->setDescription($row['description']);
+      $skill->setSkillGroupId($row['skill_group_id']);
+      $skills[] = $skill;
+    }
+    return $skills;
+  }
+
+  /**
+   *
+   * @param Character $character
+   * @return Skill[]
+   */
+  function getSkillsForCharacter($character) {
+    $db = getDatabaseConnection();
+    $skillsql = "SELECT skill_name_id as id,value
+            FROM uscm_skills
+            WHERE character_id=:cid";
+    $stmt = $db->prepare($skillsql);
+    $stmt->bindValue(':cid', $character->getId(), PDO::PARAM_INT);
     $stmt->execute();
     $skills = array();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
@@ -279,4 +334,81 @@ Class CharacterController {
     }
     return $certificates;
   }
+
+  /**
+   *
+   * @param Character $character
+   * @return Certificate[] All certificates that the character has
+   */
+  function getAllCertificatesForCharacter($character) {
+    $certificatesForCharacter = array ();
+    $platoon = $character->getPlatoon();
+    $aquiredCertificates = $this->getAquiredCertificatesForCharacter($character);
+    $platoonCertificates = $platoon->getCertificates();
+    $characterSkills = $this->getSkillsForCharacter($character);
+    $characterAttributes = $this->getAttributesForCharacter($character);
+
+    $characterSkillsAndAttributes = array ();
+    foreach ( $characterSkills as $id => $value ) {
+      $characterSkillsAndAttributes ['skill_names'] [$id] = $value;
+    }
+    foreach ( $characterAttributes as $id => $value ) {
+      $characterSkillsAndAttributes ['attribute_names'] [$id] = $value;
+    }
+
+    $cert = getCertificateRequirements();
+    foreach ($cert as $id => $requirements) {
+      $requirementsMet = FALSE;
+      if (in_array($id, $platoonCertificates) || in_array($id, $aquiredCertificates)) {
+        $hasRequirement = FALSE;
+        foreach ($requirements as $requirement) {
+          $hasRequirement = $this->hasCharacterMetRequirement($requirement, $characterSkillsAndAttributes);
+          if (!$hasRequirement) {
+            break;
+          }
+        }
+        $requirementsMet = $hasRequirement;
+      }
+
+      if ($requirementsMet) {
+        $certificatesForCharacter[$id]['id'] = $id;
+        reset($requirements);
+        $name = current($requirements);
+        $certificatesForCharacter[$id]['name'] = $name['name'];
+      }
+    }
+
+    return $certificatesForCharacter;
+  }
+
+  private function hasCharacterMetRequirement($requirement, $characterSkillsAndAttributes) {
+    $hasRequirement = FALSE;
+    if ($this->shouldHaveValueGreaterThanRequirement($requirement)) {
+      if (array_key_exists($requirement['id'], $characterSkillsAndAttributes[$requirement['table_name']]) &&
+           $characterSkillsAndAttributes[$requirement['table_name']][$requirement['id']] >= $requirement['value']) {
+        $hasRequirement = TRUE;
+      }
+    } else {
+      if ($characterSkillsAndAttributes[$requirement['table_name']][$requirement['id']] <= $requirement['value']) {
+        $hasRequirement = TRUE;
+      }
+    }
+
+    return $hasRequirement;
+  }
+
+  private function shouldHaveValueGreaterThanRequirement() {
+    if ($requirement['value_greater'] == "1") {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  function getAquiredCertificatesForCharacter($character) {
+    $characterCertificates = array();
+
+    return $characterCertificates;
+  }
+
+
 }

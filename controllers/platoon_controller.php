@@ -29,6 +29,29 @@ Class PlatoonController {
 
   /**
    *
+   * @param int $platoonId
+   * @return Platoon[]
+   */
+  public function getPlatoon($platoonId) {
+    $platoons = array ();
+    $sql = "SELECT id, name_short, name_long, count(*) as howmany
+                FROM uscm_platoon_names WHERE id = :platoonId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':platoonId', $platoonId, PDO::PARAM_INT);
+    $stmt->execute();
+    $platoon = new Platoon();
+    $row = $stmt->fetch();
+    if ($row['howmany'] == 1) {
+      $platoon->setId($row['id']);
+      $platoon->setName($row['name_long']);
+      $platoon->setShortName($row['name_short']);
+      $platoon->setCertificates($this->platoonCertificates($platoon));
+    }
+    return $platoon;
+  }
+
+  /**
+   *
    * @param Platoon $platoon
    * @return Certificate
    */
