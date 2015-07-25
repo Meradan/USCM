@@ -84,4 +84,31 @@ Class MedalController {
     }
     return $mission;
   }
+
+  /**
+   * @param int $characterId Id of a Character
+   * @return Medal[] List of medals awarded to character sorted by Glory and then Name
+   */
+  public function getMedalsForCharacter($characterId) {
+    $sql = "SELECT mn.id, medal_name, medal_short, medal_glory, description, foreign_medal " .
+        "FROM uscm_medal_names AS mn " .
+        "INNER JOIN uscm_missions AS m ON m.medal_id = mn.id " .
+        "WHERE m.character_id = :cid";
+    $sql = $sql . " ORDER BY medal_glory DESC, medal_name DESC";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    $medals = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $medal = new Medal();
+      $medal->setId($row['id']);
+      $medal->setName($row['medal_name']);
+      $medal->setShortName($row['medal_short']);
+      $medal->setGlory($row['medal_glory']);
+      $medal->setDescription($row['description']);
+      $medal->setForeign($row['foreign_medal']);
+      $medals[] = $medal;
+    }
+    return $medals;
+  }
 }

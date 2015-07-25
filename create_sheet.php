@@ -334,7 +334,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $commendationheight -= 12;
   foreach ( $medalarray as $medal ) {
     pdf_set_text_pos($pdf, 220, $commendationheight);
-    pdf_show($pdf, $medal['medal']);
+    pdf_show($pdf, $medal->getShortName() . " (" . $medal->getGlory() . ")");
     $commendationheight -= 12;
   }
 
@@ -376,11 +376,10 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   pdf_set_text_pos($pdf, 170, $advheight);
   pdf_show($pdf, "Advantages");
   fontregular($font, $pdf);
-  $advarray = $character->getAdvantages();
+  $allAdvantages = $character->getAdvantagesAll();
   $advheight -= 12;
-  foreach ( $advarray as $adv ) {
-    pdf_set_text_pos($pdf, 170, $advheight);
-    pdf_show($pdf, $adv['advantage_name']);
+  foreach ( $allAdvantages as $adv ) {
+    PDF_show_boxed($pdf, $adv->getName(), 170, $advheight, 105, 12, 'L', '');
     $advheight -= 12;
   }
 
@@ -390,11 +389,10 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   pdf_set_text_pos($pdf, 280, $disadvheight);
   pdf_show($pdf, "Disadvantages");
   fontregular($font, $pdf);
-  $disadvarray = $character->getDisadvantages();
+  $allDisadvantages = $character->getDisadvantagesAll();
   $disadvheight -= 12;
-  foreach ( $disadvarray as $disadv ) {
-    pdf_set_text_pos($pdf, 280, $disadvheight);
-    pdf_show($pdf, $disadv['disadvantage_name']);
+  foreach ( $allDisadvantages as $disadvantage ) {
+    PDF_show_boxed($pdf, $disadvantage->getName(), 280, $disadvheight, 95, 12, 'L', '');
     $disadvheight -= 12;
   }
 

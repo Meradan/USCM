@@ -30,6 +30,11 @@ class Character extends DbEntity {
   private $specialtyName = NULL;
   private $specialtyId = NULL;
   private $certificates = NULL;
+  private $medals = NULL;
+  private $advantagesVisible = NULL;
+  private $advantagesAll = NULL;
+  private $disadvantagesVisible = NULL;
+  private $disadvantagesAll = NULL;
 
   function __construct($characterId = NULL) {
     $this->id = $characterId;
@@ -264,6 +269,29 @@ class Character extends DbEntity {
     $this->specialtyId = $id;
   }
 
+  /**
+   * @return Advantage[]
+   */
+  public function getAdvantagesVisible() {
+    return call_user_func($this->advantagesVisible);
+  }
+
+  public function setAdvantagesVisible($advantageProvider) {
+    $this->advantagesVisible = new LazyLoader($advantageProvider);
+  }
+
+    /**
+   * @return Advantage[]
+   */
+  public function getAdvantagesAll() {
+    return call_user_func($this->advantagesAll);
+  }
+
+  public function setAdvantagesAll($advantageProvider) {
+    $this->advantagesAll = new LazyLoader($advantageProvider);
+  }
+
+  //TODO: remove
   public function getAdvantages($onlyvisible = false) {
     $visible = $onlyvisible ? " AND an.visible = 1" : "";
     $advarray = array ();
@@ -282,6 +310,29 @@ class Character extends DbEntity {
     return $advarray;
   }
 
+  /**
+   * $return Disdvantage[]
+   */
+  public function getDisadvantagesVisible() {
+    return call_user_func($this->disadvantagesVisible);
+  }
+
+  public function setDisadvantagesVisible($disadvantageProvider) {
+    $this->disadvantagesVisible = new LazyLoader($disadvantageProvider);
+  }
+
+    /**
+   * $return Disadvantage[]
+   */
+  public function getDisadvantagesAll() {
+    return call_user_func($this->disadvantagesAll);
+  }
+
+  public function setDisadvantagesAll($disadvantageProvider) {
+    $this->disadvantagesAll = new LazyLoader($disadvantageProvider);
+  }
+
+  //TODO:remove
   function getDisadvantages($onlyvisible = false) {
     $disadvarray = array ();
     $sql = "SELECT dn.id, disadvantage_name, d.id as uid
@@ -399,7 +450,16 @@ class Character extends DbEntity {
     return $missionarray;
   }
 
+  public function setMedals($medalsProvider) {
+    $this->medals = new LazyLoader($medalsProvider);
+  }
+
+  /**
+   * @return Medal[]
+   */
   public function getMedals() {
+    return call_user_func($this->medals);
+
     $medalarray = array ();
     $sql = "SELECT m.id, medal_short, medal_glory
           FROM uscm_medal_names mn
@@ -634,6 +694,7 @@ class Character extends DbEntity {
     return $chosencertarray;
   }
 
+  //TODO: move?
   public function getCertsForPlatoon() {
     $platooncertarray = array ();
     $platooncertsql = "SELECT certificate_id FROM uscm_platoon_certificates

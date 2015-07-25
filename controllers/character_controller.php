@@ -60,11 +60,28 @@ Class CharacterController {
       $character->setSpecialtyId($row['specialty_id']);
       $platoonController = new PlatoonController();
       $playerController = new PlayerController();
+      $medalController = new MedalController();
+      $thisController = $this;
       $character->setPlatoon(function () use ($platoonController, $platoonId) {
         return $platoonController->getPlatoon($platoonId);
       });
       $character->setPlayer(function () use ($playerController, $playerId) {
         return $playerController->getPlayer($playerId);
+      });
+      $character->setMedals(function () use ($medalController, $characterId) {
+        return $medalController->getMedalsForCharacter($characterId);
+      });
+      $character->setAdvantagesVisible(function () use ($thisController, $characterId) {
+        return $thisController->getCharactersVisibleAdvantages($characterId);
+      });
+      $character->setAdvantagesAll(function () use ($thisController, $characterId) {
+        return $thisController->getCharactersAllAdvantages($characterId);
+      });
+      $character->setDisadvantagesVisible(function () use ($thisController, $characterId) {
+        return $thisController->getCharactersVisibleDisadvantages($characterId);
+      });
+      $character->setDisadvantagesAll(function () use ($thisController, $characterId) {
+        return $thisController->getCharactersAllDisadvantages($characterId);
       });
     }
     return $character;
@@ -282,7 +299,7 @@ Class CharacterController {
    * @return Advantage[]
    */
   function getAdvantages() {
-    $sql = "SELECT id,advantage_name,value, description, visible
+    $sql = "SELECT id, advantage_name, value, description, visible
               FROM uscm_advantage_names ORDER BY advantage_name";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
@@ -301,10 +318,56 @@ Class CharacterController {
 
   /**
    *
+   * @param int $characterId Id of a Character
+   * @return Advantage[]
+   */
+  function getCharactersVisibleAdvantages($characterId) {
+    return $this->getCharactersAdvantages($characterId, TRUE);
+  }
+
+  /**
+   *
+   * @param int $characterId Id of a Character
+   * @return Advantage[]
+   */
+  function getCharactersAllAdvantages($characterId) {
+    return $this->getCharactersAdvantages($characterId, FALSE);
+  }
+
+  /**
+   * @param int $characterId Id of a Character
+   * @param boolean $onlyvisible If only publicly visible advantages should be returned
+   * @return Advantage[]
+   */
+  private function getCharactersAdvantages($characterId, $onlyvisible) {
+    $visible = $onlyvisible ? " AND an.visible = 1" : "";
+    $sql = "SELECT an.id, advantage_name, value, description, visible, a.id as uid
+            FROM uscm_advantage_names an
+            LEFT JOIN uscm_advantages a ON a.advantage_name_id=an.id
+            LEFT JOIN uscm_characters c ON c.id=a.character_id
+            WHERE a.character_id=:cid " . $visible . " ORDER BY advantage_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    $advantages = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $advantage = new Advantage();
+      $advantage->setId($row['id']);
+      $advantage->setName($row['advantage_name']);
+      $advantage->setDescription($row['description']);
+      $advantage->setValue($row['value']);
+      $advantage->setVisible($row['visible']);
+      $advantages[$row['uid']] = $advantage;
+    }
+    return $advantages;
+  }
+
+  /**
+   *
    * @return Disadvantage[]
    */
   function getDisadvantages() {
-    $sql = "SELECT id,disadvantage_name,value, description, visible
+    $sql = "SELECT id, disadvantage_name, value, description, visible
               FROM uscm_disadvantage_names ORDER BY disadvantage_name";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
@@ -317,6 +380,51 @@ Class CharacterController {
       $disadvantage->setValue($row['value']);
       $disadvantage->setVisible($row['visible']);
       $disadvantages[] = $disadvantage;
+    }
+    return $disadvantages;
+  }
+
+  /**
+   * @param int $characterId Id of a Character
+   * @return Disadvantage[]
+   */
+  function getCharactersVisibleDisadvantages($characterId) {
+    return $this->getCharactersDisadvantages($characterId, TRUE);
+  }
+
+  /**
+   * @param int $characterId Id of a Character
+   * @return Disadvantage[]
+   */
+  function getCharactersAllDisadvantages($characterId) {
+    return $this->getCharactersDisadvantages($characterId, FALSE);
+  }
+
+    /**
+   *
+   * @param int $characterId Id of a Character
+   * @param boolean $onlyvisible If only publicly visible disadvantages should be returned
+   * @return Disadvantage[]
+   */
+  private function getCharactersDisadvantages($characterId, $onlyvisible) {
+    $disadvarray = array ();
+    $sql = "SELECT dn.id, disadvantage_name, value, description, visible, d.id as uid
+            FROM uscm_disadvantage_names dn
+            LEFT JOIN uscm_disadvantages d ON d.disadvantage_name_id=dn.id
+            LEFT JOIN uscm_characters c ON c.id=d.character_id
+            WHERE d.character_id=:cid ORDER BY disadvantage_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
+    $stmt->execute();
+    $disadvantages = array();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $disadvantage = new Disadvantage();
+      $disadvantage->setId($row['id']);
+      $disadvantage->setName($row['disadvantage_name']);
+      $disadvantage->setDescription($row['description']);
+      $disadvantage->setValue($row['value']);
+      $disadvantage->setVisible($row['visible']);
+      $disadvantages[$row['uid']] = $disadvantage;
     }
     return $disadvantages;
   }

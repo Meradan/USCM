@@ -2,15 +2,15 @@
 $platoonController = new PlatoonController();
 $rankController = new RankController();
 $medalController = new MedalController();
-$db = getDatabaseConnection();
+$characterController = new CharacterController();
 
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
 $gm=($_SESSION['level']==2)?(TRUE):(FALSE);
 if (!array_key_exists('platoon', $_GET)) {
   $_GET['platoon']=1;
 }
-$where="AND c.platoon_id={$_GET['platoon']}";
 
+$where="AND c.platoon_id={$_GET['platoon']}";
 
 $charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_short,specialty_name, p.forname as playerforname,p.lastname as playerlastname,p.nickname,
@@ -102,17 +102,15 @@ foreach ($platoons as $platoon ) { ?>
       $trait = $key['trait_name'];
       $overlibtext = $overlibtext . htmlentities($trait,ENT_QUOTES) . "<br>";
     }
-    $advarray = advantages($character['cid'], true);
-    $advarray ? $overlibtext = $overlibtext . "<br>": "";
-    foreach ( $advarray as $id => $key ) {
-      $adv = $key['advantage_name'];
-      $overlibtext = $overlibtext . htmlentities($adv,ENT_QUOTES) . "<br>";
+    $allAdvantages = $characterController->getCharactersVisibleAdvantages($character['cid']);
+    count($allAdvantages) > 0 ? $overlibtext = $overlibtext . "<br>": "";
+    foreach ($allAdvantages as $advantage) {
+      $overlibtext = $overlibtext . htmlentities($advantage->getName(), ENT_QUOTES) . "<br>";
     }
-    $disarray = disadvantages($character['cid'], true);
-    $disarray ? $overlibtext = $overlibtext . "<br>": "";
-    foreach ( $disarray as $id => $key ) {
-      $dis = $key['disadvantage_name'];
-      $overlibtext = $overlibtext . htmlentities($dis,ENT_QUOTES) . "<br>";
+    $visibleDisadvantages = $characterController->getCharactersVisibleDisadvantages($character['cid']);
+    count($visibleDisadvantages) > 0 ? $overlibtext = $overlibtext . "<br>": "";
+    foreach ($visibleDisadvantages as $disadvantage) {
+      $overlibtext = $overlibtext . htmlentities($disadvantage->getName(), ENT_QUOTES) . "<br>";
     }
   }
     ?><TD><?php echo $character['rank_short'];?></TD>
@@ -191,9 +189,9 @@ foreach ($platoons as $platoon ) { ?>
       $adv = $key['advantage_name'];
       $overlibtext = $overlibtext . htmlentities($adv,ENT_QUOTES) . "<br>";
     }
-    $disarray = disadvantages($npc['cid'], true);
-    $disarray ? $overlibtext = $overlibtext . "<br>": "";
-    foreach ( $disarray as $id => $key ) {
+    $disadvantages = disadvantages($npc['cid'], true);
+    $disadvantages ? $overlibtext = $overlibtext . "<br>": "";
+    foreach ( $disadvantages as $id => $key ) {
       $dis = $key['disadvantage_name'];
       $overlibtext = $overlibtext . htmlentities($dis,ENT_QUOTES) . "<br>";
     }

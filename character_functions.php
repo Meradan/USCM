@@ -1,5 +1,6 @@
 <?php
 
+//TODO: remove
 function advantages($characterId, $onlyvisible = false) {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();
@@ -19,6 +20,7 @@ function advantages($characterId, $onlyvisible = false) {
   return $advarray;
 }
 
+//TODO: remove
 function disadvantages($characterId, $onlyvisible = false) {
   $db = getDatabaseConnection();
   $tablePrefix = getTablePrefix();

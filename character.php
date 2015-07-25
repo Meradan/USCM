@@ -276,10 +276,11 @@ if ($_GET['action'] == "update_character") {
   // Advantages
   //
   // Finds all advantages currently in database for character
-  $characterAdvantages = $character->getAdvantages();
-  foreach ( $characterAdvantages as $advantage_name_id => $adv ) {
-    $old_advs[$advantage_name_id]['id'] = $adv['uid'];
+  $characterAdvantages = $character->getAdvantagesAll();
+  foreach ( $characterAdvantages as $key => $advantage) { // $advantage_name_id => $adv ) {
+    $old_advs[$advantage->getId()]['id'] = $key;
   }
+
   // walks through $_POST[] and decides what to delete, update and insert in database
   if ($_POST['advs'] == NULL)
     $_POST['advs'] = array ();
@@ -294,6 +295,7 @@ if ($_GET['action'] == "update_character") {
       $add_advs[$adv_id] = 1;
     }
   }
+
   // remove the advantages that weren't in the $_POST
   foreach ( $old_advs as $adv_id => $id ) {
     $remove_advs[$adv_id] = $id;
@@ -319,10 +321,11 @@ if ($_GET['action'] == "update_character") {
   // Disdvantages
   //
   // Finds all disadvantages currently in database for character
-  $characterDisadvantages = $character->getDisadvantages();
-  foreach ( $characterDisadvantages as $disadvantage_name_id => $disadv ) {
-    $old_disadvs[$disadvantage_name_id]['id'] = $disadv['uid'];
+  $characterDisadvantages = $character->getDisadvantagesAll();
+  foreach ( $characterDisadvantages as $key => $disadvantage) {
+    $old_disadvs[$disadvantage->getId()]['id'] = $key;
   }
+
   // walks through $_POST[] and decides what to delete, update and insert in database
   if ($_POST['disadvs'] == NULL)
     $_POST['disadvs'] = array ();
