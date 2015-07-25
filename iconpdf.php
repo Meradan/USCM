@@ -45,7 +45,7 @@ if ( !function_exists( "PDF_new" ) ) { // only create subclass if PDFLib not ins
             // no footers
         }
 
-        public function getFontAscent($font, $style = '', $size = 0) {
+        public function getFontAscent($font = '', $style = '', $size = 0) {
             return $this->FontAscent;
         }
 
