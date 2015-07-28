@@ -36,6 +36,7 @@ class Character extends DbEntity {
   private $advantageIds = NULL;
   private $disadvantagesVisible = NULL;
   private $disadvantagesAll = NULL;
+  private $disadvantageIds = NULL;
 
   function __construct($characterId = NULL) {
     $this->id = $characterId;
@@ -776,6 +777,11 @@ class Character extends DbEntity {
     return $traits;
   }
 
+  /**
+   *
+   * @param int $advantageId Id of a Advantage object
+   * @return boolean
+   */
   public function hasCharacterAdvantage($advantageId) {
     if ($this->advantageIds == NULL) {
       $this->populateAdvantageIds($this->getAdvantagesAll());
@@ -786,11 +792,34 @@ class Character extends DbEntity {
     return FALSE;
   }
 
+  /**
+   *
+   * @param int $disadvantageId Id of a Disadvantage object
+   * @return boolean
+   */
+  public function hasCharacterDisadvantage($disadvantageId) {
+    if ($this->disadvantageIds == NULL) {
+      $this->populateDisadvantageIds($this->getDisadvantagesAll());
+    }
+    if (array_key_exists($disadvantageId, $this->disadvantageIds)) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
   private function populateAdvantageIds($advantages) {
     $this->advantageIds = array();
     foreach ($advantages as $advantage) {
       $id = $advantage->getId();
       $this->advantageIds[$id] = $id;
+    }
+  }
+
+  private function populateDisadvantageIds($disadvantages) {
+    $this->disadvantageIds = array();
+    foreach ($disadvantages as $disadvantage) {
+      $id = $disadvantage->getId();
+      $this->disadvantageIds[$id] = $id;
     }
   }
 }
