@@ -33,6 +33,7 @@ class Character extends DbEntity {
   private $medals = NULL;
   private $advantagesVisible = NULL;
   private $advantagesAll = NULL;
+  private $advantageIds = NULL;
   private $disadvantagesVisible = NULL;
   private $disadvantagesAll = NULL;
 
@@ -289,25 +290,6 @@ class Character extends DbEntity {
 
   public function setAdvantagesAll($advantageProvider) {
     $this->advantagesAll = new LazyLoader($advantageProvider);
-  }
-
-  //TODO: remove
-  public function getAdvantages($onlyvisible = false) {
-    $visible = $onlyvisible ? " AND an.visible = 1" : "";
-    $advarray = array ();
-    $sql = "SELECT an.id, advantage_name, a.id as uid
-          FROM uscm_advantage_names an
-          LEFT JOIN uscm_advantages a ON a.advantage_name_id=an.id
-          LEFT JOIN uscm_characters c ON c.id=a.character_id
-          WHERE a.character_id=:cid {$visible} ORDER BY advantage_name";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
-    $stmt->execute();
-    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $advarray[$row['id']]['advantage_name'] = $row['advantage_name'];
-      $advarray[$row['id']]['uid'] = $row['uid'];
-    }
-    return $advarray;
   }
 
   /**
@@ -792,6 +774,23 @@ class Character extends DbEntity {
       $traits[$row['id']]['uid'] = $row['uid'];
     }
     return $traits;
+  }
 
+  public function hasCharacterAdvantage($advantageId) {
+    if ($this->advantageIds == NULL) {
+      $this->populateAdvantageIds($this->getAdvantagesAll());
+    }
+    if (array_key_exists($advantageId, $this->advantageIds)) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  private function populateAdvantageIds($advantages) {
+    $this->advantageIds = array();
+    foreach ($advantages as $advantage) {
+      $id = $advantage->getId();
+      $this->advantageIds[$id] = $id;
+    }
   }
 }

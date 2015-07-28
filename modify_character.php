@@ -40,9 +40,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
                 $platoons = $platoonController->getPlatoons();
     ?>
                     <select name="platoon">
-    <?php echo "Platoons: \n"; print_r($platoons); echo "\n Character: " . $character->getPlatoonId();
-    foreach ($platoons as $platoon) {
-      echo "Platoon: " . $platoonId;
+    <?php foreach ($platoons as $platoon) {
             $platoonId = $platoon->getId();
             if ($platoonId == $character->getPlatoonId()) {
               $playerPlatoon = $platoon;
@@ -192,14 +190,14 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
             //advantages
             $side = 0;
             $allAdvantages = $characterController->getAdvantages();
-            $characterAdvantages = $character->getAdvantages();
+            $characterAdvantages = $character->getAdvantagesAll();
             foreach ($allAdvantages as $advantage) {
               $advantageId = $advantage->getId();
                 echo ($side == 0) ? ("<tr>") : ("");
                 ?>
                 <td><?php echo $advantage->getName() . " (" . $advantage->getValue() . ")"; ?></td>
                 <td><input type="checkbox" name="advs[<?php echo $advantageId; ?>]" <?php
-                  echo (array_key_exists($advantageId, $characterAdvantages)) ? ("checked") : (""); ?> ></td>
+                  echo ($character->hasCharacterAdvantage($advantageId)) ? ("checked") : (""); ?> ></td>
                 <?php
                 echo ($side == 1) ? ("</tr>") : ("");
                 $side = ($side + 1) % 2;
