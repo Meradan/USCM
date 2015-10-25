@@ -116,7 +116,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     pdf_set_text_pos($pdf, $aapcolumntwo, $height);
     pdf_show($pdf, $attribute['value']);
     $attributepointsbonus = $bonuses->attributeBonus("modifier_basic_value", $attributeid);
-    pdf_set_text_pos($pdf, $aapcolumntwo + 10, $height);
+    pdf_set_text_pos($pdf, $aapcolumntwo + 7, $height);
     print_pdf_bonus($pdf, $attributepointsbonus);
 
     pdf_set_text_pos($pdf, $attribpcolumnthree, $height);
@@ -423,6 +423,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       }
       pdf_show($pdf, $bonussign . $skill['bonus_always'] . " ");
     }
+    pdf_set_text_pos($pdf, 515, $skillsheight);
     if (is_array($skill['bonus_sometimes'])) {
       foreach ( $skill['bonus_sometimes'] as $bonus ) {
         if ($bonus > 0) {
@@ -453,6 +454,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       }
       pdf_show($pdf, $bonussign . $skill['bonus_always']);
     }
+    pdf_set_text_pos($pdf, 515, $skillsheight);
     if (is_array($skill['bonus_sometimes'])) {
       foreach ( $skill['bonus_sometimes'] as $bonus ) {
         if ($bonus > 0) {
@@ -484,6 +486,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       }
       pdf_show($pdf, $bonussign . $skill['bonus_always']);
     }
+    pdf_set_text_pos($pdf, 515, $skillsheight);
     if (is_array($skill['bonus_sometimes'])) {
       foreach ( $skill['bonus_sometimes'] as $bonus ) {
         if ($bonus > 0) {
@@ -514,6 +517,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       }
       pdf_show($pdf, $bonussign . $skill['bonus_always']);
     }
+    pdf_set_text_pos($pdf, 515, $skillsheight);
     if (is_array($skill['bonus_sometimes'])) {
       foreach ( $skill['bonus_sometimes'] as $bonus ) {
         if ($bonus > 0) {

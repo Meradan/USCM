@@ -348,13 +348,15 @@ function attribute2visible($attributearray) {
 
 
 function print_pdf_bonus($pdf, $bonusarray) {
+  $totalBonus = "";
   if ($bonusarray['always'] != 0) {
     if ($bonusarray['always'] > 0) {
       $bonussign = "+";
     } else {
       $bonussign = "";
     }
-    pdf_show($pdf, $bonussign . $bonusarray['always'] . " ");
+    $totalBonus = $bonussign . $bonusarray['always'];
+    //pdf_show($pdf, $bonussign . $bonusarray['always'] . " ");
   }
   if (is_array($bonusarray['sometimes'])) {
     foreach ( $bonusarray['sometimes'] as $bonus ) {
@@ -363,8 +365,12 @@ function print_pdf_bonus($pdf, $bonusarray) {
       } else {
         $bonussign = "";
       }
-      pdf_show($pdf, " (" . $bonussign . $bonus . ") ");
+      $totalBonus .= " (" . $bonussign . $bonus . ")";
+      //pdf_show($pdf, " (" . $bonussign . $bonus . ") ");
     }
+  }
+  if ($totalBonus != "") {
+    pdf_show($pdf, $totalBonus);
   }
 }
 
