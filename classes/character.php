@@ -372,11 +372,12 @@ class Character extends DbEntity {
   }
 
   public function getLeadership() {
-    $sql = "SELECT value  + (r.rank_id - 2) as value FROM uscm_attributes a
+    $sql = "SELECT value  + IF(r.rank_id>2, r.rank_id - 2, 0) as value FROM uscm_attributes a
           LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
           LEFT JOIN uscm_characters c ON c.id=a.character_id
           LEFT JOIN uscm_ranks r ON r.character_id=c.id
           WHERE an.attribute_name='Charisma' AND a.character_id=:cid";
+  //Need fix for Msgt + advantages
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();

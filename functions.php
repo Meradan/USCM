@@ -179,73 +179,141 @@ function attribute2visible($attributearray) {
       case ("Charisma") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Don't look at it";
+      $astrings = array(
+        '',
+        'Loner',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Ugly";
+            //$attribarray[] = "Ugly";
             break;
           case (3) :
-            $attribarray[] = "Average looks";
+            //$attribarray[] = "Average looks";
             break;
           case (4) :
-            $attribarray[] = "Good looking";
+      $astrings = array(
+        'Good looking',
+        'Nice Person',
+        'Leader',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "Babe magnet / Fox";
+      $astrings = array(
+        'Good leader',
+        'Leader',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Dexterity") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Walking board / Wooden leg";
+      $astrings = array(
+        'Walking board',
+        'Wooden leg',
+        'Clumsy',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Stiff";
+      $astrings = array(
+        '',
+        'Stiff',
+        'Clumsy',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "Agile";
+            //$attribarray[] = "Agile";
             break;
           case (4) :
-            $attribarray[] = "Very agile";
+      $astrings = array(
+        '',
+        'Agile',
+        'Quick-footed',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "Acrobat";
+      $astrings = array(
+        'Acrobat',
+        'Quick-footed',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Endurance") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Can't run a meter";
+      $astrings = array(
+        'Lazy',
+        'Bad fitness',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Bad fitness";
+      $astrings = array(
+        '',
+        'Bad fitness',
+        'Average fitness',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "Fit";
+      $astrings = array(
+        '',
+        'Good fitness',
+        'Average fitness',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (4) :
             $attribarray[] = "Good fitness";
             break;
           case (5) :
-            $attribarray[] = "Cross-country runner";
+      $astrings = array(
+        'Good fitness',
+        'Extreme fitness',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Perception") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Nearly blind";
+      $astrings = array(
+        '',
+        'Nearly blind',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Near sighted";
+      $astrings = array(
+        '',
+        'Near sighted',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "Normal sight";
+            //$attribarray[] = "Normal sight";
             break;
           case (4) :
-            $attribarray[] = "Good sight";
+      $astrings = array(
+        '',
+        'Good sight',
+        'Attentive',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "An eye for details";
+      $astrings = array(
+        '',
+        'An eye for details',
+        'Attentive',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Psionics") :
@@ -254,85 +322,156 @@ function attribute2visible($attributearray) {
             $attribarray[] = "";
             break;
           case (2) :
-            $attribarray[] = "";
+      $astrings = array(
+        '',
+        'Something is strange',
+        'Not like others',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "";
+      $astrings = array(
+        '',
+        'Something is strange',
+        'Not like others',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (4) :
-            $attribarray[] = "";
+      $astrings = array(
+        '',
+        'Something is strange',
+        'Not like others',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "";
+      $astrings = array(
+        '',
+        'Something is strange',
+        'Not like others',
+        'The force is strong with this one',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Psyche") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Coward";
+      $astrings = array(
+        'Coward',
+        'Nervous',
+        'Seems a bit unstable',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Nervous";
+      $astrings = array(
+        '',
+        'Nervous',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "Calm";
+      $astrings = array(
+        '',
+        'Calm',
+        'Reliable',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (4) :
-            $attribarray[] = "Very calm";
+      $astrings = array(
+        'Calm',
+        'Reliable',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "Steady as a Rock";
+      $astrings = array(
+        'Reliable',
+        'Brave',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Reaction") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Slow as a snail";
+            //$attribarray[] = "Slow as a snail";
             break;
           case (2) :
-            $attribarray[] = "Slow";
+            //$attribarray[] = "Slow";
             break;
           case (3) :
-            $attribarray[] = "Fast";
+            //$attribarray[] = "Fast";
             break;
           case (4) :
-            $attribarray[] = "Very fast";
+            //$attribarray[] = "Very fast";
             break;
           case (5) :
-            $attribarray[] = "Lightning reflexes";
+      $astrings = array(
+        'Lightning reflexes',
+        'Phantom reflexes',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Strength") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Weakling";
+      $astrings = array(
+        'Weak',
+        'Weakling',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
-            $attribarray[] = "Weak";
+      $astrings = array(
+        'Weak',
+        '',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (3) :
-            $attribarray[] = "Average strength";
+      $astrings = array(
+        'Average strength',
+        '',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (4) :
-            $attribarray[] = "Strong";
+      $astrings = array(
+        '',
+        'Strong',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (5) :
-            $attribarray[] = "Hercules";
+      $astrings = array(
+        'Very strong',
+        'Hercules',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
         }
         break;
       case ("Toughness") :
         switch ($key['value']) {
           case (1) :
-            $attribarray[] = "Fragile";
+      $astrings = array(
+        'Fragile',
+        'Easily bruised',
+      );
+      $attribarray[] = $astrings[array_rand($astrings)];
             break;
           case (2) :
             $attribarray[] = "Easily bruised";
             break;
           case (3) :
-            $attribarray[] = "Tough";
+            //$attribarray[] = "Tough";
             break;
           case (4) :
-            $attribarray[] = "Very tough";
+            //$attribarray[] = "Very tough";
             break;
           case (5) :
             $attribarray[] = "Tough like a Sergeant";
