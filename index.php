@@ -13,6 +13,7 @@
   if (!array_key_exists('table_prefix', $_SESSION)) {
     $_SESSION['table_prefix']="uscm_";
   }
+  
   include("functions.php");
   //if(validate(1)){?>
     <html>
@@ -38,6 +39,9 @@
           if( in_array("/".$_GET['url'], $pages) ) {
             include($_GET['url']);
           }
+        }
+        else {
+          include('news.php');
         }
         include("footer.php");
       ?>
