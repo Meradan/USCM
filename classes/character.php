@@ -37,6 +37,11 @@ class Character extends DbEntity {
   private $disadvantagesVisible = NULL;
   private $disadvantagesAll = NULL;
   private $disadvantageIds = NULL;
+  private $encounteralien = NULL;
+  private $encountergrey = NULL;
+  private $encounterpredator = NULL;
+  private $encounterai = NULL;
+  private $encounterarachnid = NULL;
 
   function __construct($characterId = NULL) {
     $this->id = $characterId;
@@ -270,6 +275,46 @@ class Character extends DbEntity {
   public function setSpecialtyId($id) {
     $this->specialtyId = $id;
   }
+  
+  public function getEncounterAlien() {
+	  return $this->encounteralien;
+  }
+  
+  public function setEncounterAlien($val) {
+	  $this->encounteralien = $val;
+  }
+  
+  public function getEncounterGrey() {
+	  return $this->encountergrey;
+  }
+  
+  public function setEncounterGrey($val) {
+	  $this->encountergrey = $val;
+  }
+  
+  public function getEncounterPredator() {
+	  return $this->encounterpredator;
+  }
+  
+  public function setEncounterPredator($val) {
+	  $this->encounterpredator = $val;
+  }
+  
+  public function getEncounterAI() {
+	  return $this->encounterai;
+  }
+  
+  public function setEncounterAI($val) {
+	  $this->encounterai = $val;
+  }
+  
+  public function getEncounterArachnid() {
+	  return $this->encounterarachnid;
+  }
+  
+  public function setEncounterArachnid($val) {
+	  $this->encounterarachnid = $val;
+  }
 
   /**
    * @return Advantage[]
@@ -377,7 +422,7 @@ class Character extends DbEntity {
           LEFT JOIN uscm_characters c ON c.id=a.character_id
           LEFT JOIN uscm_ranks r ON r.character_id=c.id
           WHERE an.attribute_name='Charisma' AND a.character_id=:cid";
-  //Need fix for Msgt + advantages
+	//Need fix for Msgt + advantages
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
@@ -456,6 +501,18 @@ class Character extends DbEntity {
       $medalarray[$row['id']]['medal'] = $row['medal_short'] . " (" . $row['medal_glory'] . ")";
     }
     return $medalarray;
+  }
+  
+  /**
+   * @return int
+   */
+  public function getGlory() {
+	  $sql = "select coalesce(sum(medal_glory),0) as glory from uscm_missions join uscm_medal_names on medal_id=uscm_medal_names.id where character_id=:cid";
+	$stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $row['glory'];
   }
 
   public function getWeaponSkills() {
@@ -777,7 +834,27 @@ class Character extends DbEntity {
     }
     return $traits;
   }
-
+  
+    /**
+   * @param int $characterId Id of a Character
+   * @return int
+   */
+  function getXPvalue() {
+	  $sql = "select UnusedXP+coalesce(s.skillxp,0)+coalesce(l.langxp,0)+coalesce(a.attrxp,0)+coalesce(av.advxp,0)+coalesce(dv.dadvxp,0)+coalesce(ce.certxp,0) as xpval from uscm_characters as c
+left join (select character_id as cid, sum(round(value*(value+1)/2)) as skillxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name not like('Language:%') group by cid) as s on c.id=s.cid
+left join (select character_id as cid, sum(case value when 1 then 1 when 2 then 3 when 3 then 3 when 4 then 6 when 5 then 6 else 0 end) as langxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name like('Language:%') group by cid) as l on c.id=l.cid
+left join (select character_id as cid, sum(value*8)-200 as attrxp from uscm_attributes where attribute_id !=9 group by character_id) as a on c.id=a.cid
+left join (select character_id as cid, sum(value) as advxp from uscm_advantages as a join uscm_advantage_names as n on a.advantage_name_id=n.id group by cid) as av on c.id=av.cid
+left join (select character_id as cid, sum(value) as dadvxp from uscm_disadvantages as d join uscm_disadvantage_names as n on d.disadvantage_name_id=n.id group by cid) as dv on c.id=dv.cid
+left join (select character_id as cid, count(distinct certificate_name_id)*2 as certxp from uscm_certificates group by cid) as ce on c.id=ce.cid
+where c.id=:cid";
+	$stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $row['xpval'];
+  }
+  
   /**
    *
    * @param int $advantageId Id of a Advantage object

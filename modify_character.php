@@ -8,14 +8,26 @@ $characterController = new CharacterController();
 $character = new Character($characterId);
 $character = $characterController->getCharacter($characterId);
 $user = $userController->getCurrentUser();
+$canmodify = FALSE;
 
 if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->isGm()) {
   $player = $character->getPlayer();
   $playerPlatoon = NULL;
     ?>
 
-    <?php if ( $user->isAdmin() || $user->isGm()) { ?><form method="post" action="character.php?action=update_character"><?php } ?>
+    <?php
+	if ($user->isAdmin() || ($user->isGm() && $character->getPlatoonId() == $user->getPlatoonId())) {
+		$canmodify = TRUE;
+	}
+	
+	if ($canmodify) { ?><form method="post" action="character.php?action=update_character"><?php } ?>
         <table width="50%"  border="0">
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td><a class="colorfont" href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a></td>
+            </tr>
             <tr>
                 <td>Player</td>
                 <td><?php
@@ -26,7 +38,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 
                 </td>
                 <td>&nbsp;</td>
-                <td><a class="colorfont" href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a></td>
+                <td><a class="colorfont" href="index.php?url=character_more.php&character_id=<?php echo $characterId; ?>">Do you want to know more?</a></td>
             </tr>
             <tr>
                 <td>Forname</td>
@@ -248,16 +260,32 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
             <tr>
                 <td>&nbsp;</td>
             </tr>
+            <tr>
+                <td class="thead">Encounters;</td>
+            </tr>
+            <tr>
+                <td>Alien</td>
+				<td><input type="checkbox" name="cbalien" <?php echo ($character->getEncounterAlien()==1) ? ('checked="1"') : (""); ?>></td>
+            </tr>
+            <tr>
+                <td>Grey</td>
+				<td><input type="checkbox" name="cbgrey" <?php echo ($character->getEncounterGrey()==1) ? ('checked="1"') : (""); ?>></td>
+            </tr>
+            <tr>
+                <td>Predator</td>
+				<td><input type="checkbox" name="cbpredator" <?php echo ($character->getEncounterPredator()==1) ? ('checked="1"') : (""); ?>></td>
+            </tr>
+            <tr>
+                <td>AI</td>
+				<td><input type="checkbox" name="cbai" <?php echo ($character->getEncounterAI()==1) ? ('checked="1"') : (""); ?>></td>
+            </tr>
+            <tr>
+                <td>Arachnid</td>
+				<td><input type="checkbox" name="cbarachnid" <?php echo ($character->getEncounterArachnid()==1) ? ('checked="1"') : (""); ?>></td>
+            </tr>
+
     <?php
-    $missions = $character->getMissionsLong();
-    foreach ($missions as $mission) {
-        ?>
-                <tr>
-                    <td><?php echo $mission['mission_name']; ?></td>
-                    <td colspan="3"><?php echo $mission['text']; ?></td>
-                </tr>
-    <?php }
-    if ($user->isAdmin() || $user->isGm()) {
+    if ($canmodify) {
         ?>
                 <tr>
                     <td>&nbsp;</td>
@@ -267,6 +295,6 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
                 </tr>
     <?php } ?>
         </table>
-    <?php if ($user->isAdmin() || $user->isGm()) { ?></form> <?php }
+    <?php if ($canmodify) { ?></form> <?php }
 }
 ?>

@@ -60,6 +60,17 @@ if ($_GET['action'] == "update_character") {
   $mp = $_POST['mp'];
   $status = $_POST['status'];
   $status_desc = $_POST['status_desc'];
+  $cbalien = 0;
+  $cbgrey = 0;
+  $cbpredator = 0;
+  $cbai = 0;
+  $cbarachnid = 0;
+  if (isset($_POST['cbalien'])) { $cbalien = 1; }
+  if (isset($_POST['cbgrey'])) { $cbgrey = 1; }
+  if (isset($_POST['cbpredator'])) { $cbpredator = 1; }
+  if (isset($_POST['cbai'])) { $cbai = 1; }
+  if (isset($_POST['cbarachnid'])) { $cbarachnid = 1; }
+  
   $charactersql = "UPDATE {$table}characters SET userid=:playerid,
                          platoon_id=:platoonid,
                          forname=:givenname,
@@ -77,7 +88,12 @@ if ($_GET['action'] == "update_character") {
                          TraumaPoints=:tp,
                          MentalPoints=:mp,
                          status=:status,
-                         status_desc=:status_desc
+                         status_desc=:status_desc,
+						 encalien=:cbalien,
+						 encgrey=:cbgrey,
+						 encpred=:cbpredator,
+						 encai=:cbai,
+						 encarach=:cbarachnid
                     WHERE id=:character_id";
 
   $stmt = $db->prepare($charactersql);
@@ -99,6 +115,11 @@ if ($_GET['action'] == "update_character") {
   $stmt->bindValue(':mp', $mp, PDO::PARAM_INT);
   $stmt->bindValue(':status', $status, PDO::PARAM_STR);
   $stmt->bindValue(':status_desc', $status_desc, PDO::PARAM_STR);
+  $stmt->bindValue(':cbalien', $cbalien, PDO::PARAM_INT);
+  $stmt->bindValue(':cbgrey', $cbgrey, PDO::PARAM_INT);
+  $stmt->bindValue(':cbpredator', $cbpredator, PDO::PARAM_INT);
+  $stmt->bindValue(':cbai', $cbai, PDO::PARAM_INT);
+  $stmt->bindValue(':cbarachnid', $cbarachnid, PDO::PARAM_INT);
   $stmt->bindValue(':character_id', $character_id, PDO::PARAM_STR);
   $stmt->execute();
 
