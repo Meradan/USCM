@@ -345,32 +345,32 @@ class MissionController {
    * @param Mission $mission
    */
   public function setCharacters($characters, $mission) {
-    echo "setCharacters:\n";
-    print_r($characters);
+    //echo "setCharacters:\n";
+    //print_r($characters);
     $previousParticipants = $this->getCharacters($mission);
-    echo "Previous:\n";
-    print_r($previousParticipants);
+    //echo "Previous:\n";
+    //print_r($previousParticipants);
     $previousCharacterIdsOnMission = array();
     $charactersToRemove = array();
     foreach ($previousParticipants as $character) {
       $previousCharacterIdsOnMission[] = $character->getId();
     }
-    echo "Previous ids:\n";
+    //echo "Previous ids:\n";
     print_r($previousCharacterIdsOnMission);
     foreach ($characters as $character) {
-      echo "Id: " . $character->getId() . " ";
+      //echo "Id: " . $character->getId() . " ";
       if (array_key_exists($character->getId(), $previousParticipants)) {
-        echo "Character was on mission before: \n";
-        print_r($character);
+        //echo "Character was on mission before: \n";
+        //print_r($character);
         unset($previousParticipants[$character->getId()]);
       } else {
-        echo "Character not on mission before\n";
-        print_r($character);
+        //echo "Character not on mission before\n";
+        //print_r($character);
         $this->addCharacter($character, $mission);
       }
     }
     foreach ($previousParticipants as $character) {
-      echo "Removing character that was on mission before: ". $character->getId() . "\n";
+      //echo "Removing character that was on mission before: ". $character->getId() . "\n";
       $this->removeCharacter($character, $mission);
     }
   }
