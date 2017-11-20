@@ -5,7 +5,7 @@ if ($user->isAdmin() || $user->isGm()) {
 ?>
 <br><br>
 <form method="post" action="mission.php?what=create_mission">
-<input type="hidden" name="platoon_id" value="1">
+<input type="hidden" name="platoon_id" value="<?php echo $user->getPlatoonId(); ?>">
 <table width="50%"  border="0">
   <tr>
     <td>Mission</td>

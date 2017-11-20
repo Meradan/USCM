@@ -7,7 +7,11 @@ $characterController = new CharacterController();
 $admin=($_SESSION['level']>=3)?(TRUE):(FALSE);
 $gm=($_SESSION['level']==2)?(TRUE):(FALSE);
 if (!array_key_exists('platoon', $_GET)) {
-  $_GET['platoon']=1;
+	if (array_key_exists('platoon_id', $_SESSION)) {
+		$_GET['platoon']=$_SESSION['platoon_id'];
+	} else {
+		$_GET['platoon']=1;
+	}
 }
 
 $where="AND c.platoon_id={$_GET['platoon']}";
@@ -28,7 +32,7 @@ $charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enl
             ON {$_SESSION['table_prefix']}specialty_names.id =
               {$_SESSION['table_prefix']}specialty.specialty_name_id
               WHERE c.status != 'Dead' AND c.status != 'Retired' AND p.id != '0' AND p.id != '59' {$where}
-              ORDER BY rank_id DESC,c.lastname,c.forname";
+              ORDER BY rank_id DESC";
 $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_id,rank_short,specialty_name,c.userid
           FROM {$_SESSION['table_prefix']}characters c
@@ -67,6 +71,7 @@ foreach ($platoons as $platoon ) { ?>
     <TD WIDTH="93" class="colorfont">Name</TD>
     <TD WIDTH="82" class="colorfont">Specialty</TD>
     <TD WIDTH="53" class="colorfont">Missions</TD>
+	<TD WIDTH="40" class="colorfont">Last</TD>
     <TD WIDTH="62" class="colorfont">Enlisted</TD>
     <TD WIDTH="100" class="colorfont">Commendations</TD>
     <TD WIDTH="34" class="colorfont">Glory</TD>
@@ -113,6 +118,7 @@ foreach ($platoons as $platoon ) { ?>
       $overlibtext = $overlibtext . htmlentities($disadvantage->getName(), ENT_QUOTES) . "<br>";
     }
   }
+  $lastMission = lastMissionForCharacter($character['cid']);
     ?><TD><?php echo $character['rank_short'];?></TD>
     <TD <?php if ($overlib) {?> onmouseover='return overlib("<?php echo $overlibtext;?>");' onmouseout="return nd();" <?php } ?>><?php
     $link = false;
@@ -120,7 +126,8 @@ foreach ($platoons as $platoon ) { ?>
         <a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"><?php }
     ?><?php echo $character['forname'] . " " . $character['lastname'];?><?php echo $link ? "</a>" : ""; ?></TD>
     <TD><?php echo $character['specialty_name'];?></TD>
-    <TD><?php echo $character['missions'];?></TD>
+    <TD class="center"><?php echo $character['missions'];?></TD>
+	<TD><?php echo $lastMission['mission_name_short'];?></TD>
     <TD><?php echo $character['enlisted'];?></TD>
 <?php
       $medals = "";
@@ -246,6 +253,26 @@ foreach ($platoons as $platoon ) { ?>
     <TD WIDTH="120">Garth</TD>
     <TD WIDTH="107">Synthetic</TD>
     <TD WIDTH="355">00-11-28</TD>
+  </TR>
+</TABLE>
+<?php } elseif ($_GET['platoon'] == "6") {?>
+<div class="colorfont">Special Non-Player Characters</div>
+<br/>
+<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
+  <TR>
+    <TD WIDTH="120" CLASS="colorfont">Rank</TD>
+    <TD WIDTH="120" CLASS="colorfont">Name</TD>
+    <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
+    <TD CLASS="colorfont">Enlisted</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="20">Lieutenant</TD>
+    <TD WIDTH="120">Drake</TD>
+    <TD WIDTH="107">Officer</TD>
+    <TD WIDTH="355">17-10-31</TD>
   </TR>
 </TABLE>
 <?php } ?>
