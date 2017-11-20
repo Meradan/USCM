@@ -298,6 +298,17 @@ function listCharacters($charactersql, $sortType) {
   return $characters;
 }
 
+function servedWith($characterid) {
+	$characters = array ();
+	$dbReference = getDatabaseConnection();
+	$stmt = $dbReference->query("select concat(oc.forname, ' ', oc.lastname) as name,count(om.id) as missions, oc.status from uscm_missions as m join uscm_characters as c on m.character_id=c.id join uscm_missions as om on m.mission_id=om.mission_id and m.id!=om.id join uscm_characters as oc on om.character_id=oc.id where m.character_id=$characterid group by oc.id order by missions desc, status asc");
+	
+	while ( $character = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+		$characters [sizeof($characters)] = $character;
+	}
+	return $characters;
+}
+
 function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
   $medals = "";
   $glory = "";
