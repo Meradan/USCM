@@ -6,3 +6,5 @@ A:hover {text-decoration: none; color: #00FF00}
 TD {font-family: verdana, tahoma; font-size: 9pt; font-style: normal;}
 .colorfont {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal;}
 .title {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal; font-weight: bold;}
+.center {text-align: center;}
+.thead {font-weight: bold; text-decoration: underline;}

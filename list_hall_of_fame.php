@@ -23,7 +23,7 @@ $deadcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE
             ON {$_SESSION['table_prefix']}specialty_names.id =
               {$_SESSION['table_prefix']}specialty.specialty_name_id
               WHERE c.status = 'Dead' AND c.userid != '0' {$where}
-              ORDER BY rank_id DESC,c.lastname,c.forname";
+              ORDER BY rank_id DESC";
 $retiredcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_short,rank_id,specialty_name, p.forname,p.lastname,c.userid,c.status_desc
           FROM {$_SESSION['table_prefix']}characters c
@@ -39,7 +39,7 @@ $retiredcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,D
             ON {$_SESSION['table_prefix']}specialty_names.id =
               {$_SESSION['table_prefix']}specialty.specialty_name_id
               WHERE c.status = 'Retired' {$where}
-              ORDER BY rank_id DESC,c.lastname,c.forname";
+              ORDER BY rank_id DESC";
 $platoonsql="SELECT id,name_short,name_long FROM {$_SESSION['table_prefix']}platoon_names";
 $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_short,rank_id,specialty_name, p.forname,p.lastname,c.userid,c.status
@@ -56,8 +56,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
             ON {$_SESSION['table_prefix']}specialty_names.id =
               {$_SESSION['table_prefix']}specialty.specialty_name_id
               WHERE c.userid != '0' {$where}
-              ORDER BY rank_id DESC,c.lastname,c.forname";
-//echo $charactersql . "<br><br><br><br><br><br>";
+              ORDER BY rank_id DESC";
+//echo $retiredcharactersql . "<br><br><br><br><br><br>";
 
 ?>
 <div style="text-align:center;">

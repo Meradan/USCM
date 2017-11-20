@@ -2,48 +2,48 @@
 
 <div class="title">Swedish Info</div>
 
-Rollspelskampanjen som den här sidan handlar om utspelar sig i samma miljö som Alien-filmerna. Spelarnas karaktärer är
-soldater i framtidens motsvarighet till den amerikanska marinkåren och tillhör plutonen Brixton's Fightin' Fives.
-Stämningen i kampanjen inriktas i första hand på action, spänning och taktisk planering.<BR><BR>
+Det här är en rollspelskampanj i militär science fiction-miljö inspirerad främst av Alien-filmerna, men även Starship Troopers, XCOM m.m. Spelarnas karaktärer är soldater i framtidens motsvarighet till den amerikanska marinkåren. Stämningen i kampanjen inriktas i första hand på action, spänning och taktisk planering, men det kan vara stor variation mellan olika uppdrag.<BR><BR>
 
 Kampanjen har ingen fast spelargrupp. Den är istället organiserad på ett sätt som låter många fler spelare vara med i den.
-Varje uppdrag är ett fristående äventyr. Alla spelare är med på en maillista och när en spelledare har gjort ett nytt äventyr
+Varje uppdrag är ett fristående scenario. Alla spelare är med på en maillista och när en spelledare har gjort ett nytt äventyr
 skickas ett "announcement" för detta ut på maillistan. Detta innehåller tid och plats, antal spelare samt en kort beskrivning
 av uppdraget. Sedan är det först till kvarn. De första spelarna som anmäler sig får en mer detaljerad briefing som bekräftelse
-på att dom har kommit med på uppdraget.<BR> Det gör att det blir variation i spelgruppen från gång till gång och det går bra att
-vara med i kampanjen även om man inte kan spela så ofta. I de fall där alldeles för många
-har velat vara med på ett uppdrag har det spelats två gånger med olika spelargrupper.<BR><BR>
+på att de har kommit med på uppdraget.<BR> Det gör att det blir variation i spelgruppen från gång till gång och det går bra att
+vara med i kampanjen även om man inte kan spela så ofta. Ibland när alldeles för många
+har velat vara med på samma uppdrag har det spelats flera gånger med olika spelargrupper.<BR><BR>
 
-Första uppdraget i kampanjen spelades i november år 2000. Därefter har det blivit många fler. Alla uppdrag finns beskrivna under "missions" med den
-briefing-text som spelarna fick ut innan uppdraget och med sammanfattningen som skrivits efteråt av spelledaren och ibland av
-någon spelare.<BR><BR>
+Första uppdraget i kampanjen spelades i oktober år 2000. Därefter har det blivit många fler och efter en period av cryosleep är vi nu igång igen om än i lägre tempo än tidigare. Alla uppdrag finns beskrivna under "Missions" med den
+briefing-text som spelarna fick ut innan uppdraget och med sammanfattningen som skrivits efteråt av spelledaren eller någon spelare.<BR><BR>
 
-USCM-kampanjen har legat i dvala ett antal år även om den har dykt upp som arrangemang på spelkonventet LinCon ibland.
-Men den är inte död, den finns kvar någonstans där ute i rymdens kalla mörker och kanske väntar på att få döda just din karaktär..<BR><BR>
+Kampanjen håller mestadels till i Linköping där den startade. Men det finns även mer eller mindre aktiva spelgrupper (plutoner) på andra orter. USCM brukar även dyka upp som arrangemang på spelkonventet <A HREF="http://www.lincon.se" TARGET="_blank">LinCon</A>.<BR><BR>
 
 <br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
 
 <div class="title">English Info</div>
-This is the homepage for a roleplaying campaign based on the Alien movies. The players are members of the 5th platoon
-"Brixton's Fightin' Fives" in the 4th US Colonial Marine brigade.<BR><BR>
+This is the homepage for a roleplaying game set in a universe inspired by the Alien movies.<BR><BR>
 
 The goal of this campaign is to mix the atmosphere of the Alien movies with a military-style RPG campaign where
 we focus on action and tactical planning.<BR><BR>
 
-All roleplaying is done in the "traditional" way with paper and dice - there is no online roleplaying. Because of that only
-swedish players can join the campaign and most content on this webpage is in swedish.<BR><BR>
+All roleplaying is done in the traditional pen & paper style - there is no online roleplaying here. The campaign is based in Sweden, but recently we were also joined by a english-speaking group of players in Canada.<BR><BR>
 
 <br/><img src="images/line.jpg" width="449" height="1" align="middle"><br/>
 
-<div class="title">Downloads</div><br/><br/>
+<div class="title">Downloads</div>
+To use the Character Generator you need LibreOffice (free, open source) which can be downloaded from <a href="http://www.libreoffice.org" target="_blank">www.libreoffice.org</a>
+<br/>
+You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".
+<br/><br/>
 
-<A HREF="resources/USCM_generator-2006_06_02.xls" TARGET="_blank">Karaktärsgenerator v.2006-06-02</A> (Excel) - Gammal, ej uppdaterad<br/>
+<A HREF="resources/USCM_Generator.ods" TARGET="_blank">Karaktärsgenerator</A> (OpenDocument - LibreOffice)<br/>
 <A HREF="resources/EquipmentListPrint107.ods" TARGET="_blank">Utrustningslista v1.07</A> (OpenDocument, med viktberäkning)<br/>
 <A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (PDF, en sida för utskrift)<br/>
-<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (A5 häfte)</A><br/><br/>
-
-<A HREF="resources/charactersheet.pdf" TARGET="_blank">Rollformulär</A> (PDF, för utskrift)<br/><br/>
-
+<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (A5 häfte)</A><br/>
+<br/>
+<A HREF="resources/charactersheet.pdf" TARGET="_blank">Rollformulär</A> (PDF, för utskrift)<br/>
+<br/>
+<A HREF="resources/USCM-Regler2.pdf" TARGET="_blank">Regler - Trait/Cert</A> (PDF, beskrivning på alla traits m.m.)<br/>
+<br/>
 <br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
 
 <div class="title">Creators</div>

@@ -15,15 +15,15 @@
 <form action="login.php?alt=login" method="post">
       <table width="100%" border="0">
         <tr>
-          <td width="36%" style="width:35%">Användarnamn</td>
+          <td width="36%" style="width:35%">Username</td>
           <td width="64%" style="width:65%"><input type="text" name="anvandarnamn" style="width:100%"></td>
         </tr>
         <tr>
-          <td>Lösenord</td>
+          <td>Password</td>
           <td><input type="password" name="losenord" style="width:100%"></td>
         </tr>
         <tr>
-          <td>Rollspel:</td>
+          <td>Game:</td>
           <td><select name="rpg" style="width:100%">
         <?php
         $db = new PDO('mysql:host=localhost;dbname=skynet;charset=utf8', 'skynet', 'Br1xt0n');

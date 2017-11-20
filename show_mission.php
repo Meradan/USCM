@@ -34,6 +34,11 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
         <td valign="top"><?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=briefing" class="colorfont">Change</a> <?php } else {?>&nbsp;<?php } ?></td>
     </tr>
     <tr>
+        <td></td>
+        <td><center><img src="images/line.jpg" width="449" height="1"></center></td>
+        <td></td>
+    </tr>
+    <tr>
         <td valign="top" class="colorfont">Debriefing</td>
         <td colspan="3"><?php echo $mission->getDebriefing();?></td>
         <td valign="top"><?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=debriefing" class="colorfont">Change</a> <?php } else {?>&nbsp;<?php } ?></td>
