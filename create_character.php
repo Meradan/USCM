@@ -13,10 +13,9 @@ if ($user->isAdmin() || $user->isGm()) { ?>
     <tr>
         <td>Player</td>
         <td><?php
-              $players = $playerController->getAllPlayers();
+              $players = $playerController->getActivePlayers();
             ?>
           <select name="player">
-            <option value="0">Non Player Character</option>
           <?php foreach ($players as $player) { ?>
             <option value="<?php echo $player->getId();?>"><?php echo $player->getNameWithNickname(); ?></option>
           <?php } ?>

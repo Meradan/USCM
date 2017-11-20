@@ -16,6 +16,7 @@ class Player extends DbEntity {
   private $gmRpgId = NULL;
   private $gmActive = NULL;
   private $admin = NULL;
+  private $playerActive = NULL;
 
   function __construct($playerId = NULL) {
     $this->level = $_SESSION ['level'];
@@ -139,6 +140,14 @@ class Player extends DbEntity {
 
   public function setGmActive($active) {
     $this->gmActive = $active;
+  }
+  
+  public function getPlayerActive() {
+    return $this->playerActive;
+  }
+
+  public function setPlayerActive($active) {
+    $this->playerActive = $active;
   }
 
   public function isAdmin() {

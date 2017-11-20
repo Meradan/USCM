@@ -59,6 +59,10 @@ if ($user->isAdmin() || $user->getId() == $playerId) {
                     <td>Password</td>
                     <td><input type="password" name="password"></td>
                 </tr>
+				<tr>
+                    <td>Active</td>
+                    <td><input type="checkbox" name="active" <?php echo ($player->getPlayerActive()==1) ? ('checked="1"') : (""); ?>></td>
+                </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Modify Player"></td>
                 </tr>
