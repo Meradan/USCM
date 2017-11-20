@@ -14,9 +14,9 @@
 <a href="index.php?url=list_characters.php">Characters</a> | 
 <a href="index.php?url=list_missions.php">Missions</a> | 
 <a href="index.php?url=list_hall_of_fame.php">Hall of Fame</a> |
-<?php //<a href="../forum/index.php">Forum</a> 
+<?php //<a href="../forum/index.php">Forum</a>
     ?>
-Forum
+<a href="http://uscm.swedishforum.net/" target="_blank">Forum</a>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_character.php">Create character</a>'):(""); ?>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_mission.php">Create mission</a>'):(""); ?>
 <?php if ($_SESSION['level']==3) {
@@ -25,7 +25,7 @@ Forum
 	echo " | <a href=\"index.php?url=modify_player.php&player={$_SESSION['user_id']}\">Modify player</a>"; 
 }	?>
 <?php echo ($_SESSION['level']>=3)?(' | <a href="index.php?url=create_player.php">Create player</a>'):(""); ?>
-<?php echo ($_SESSION['level']>=1)?(' | <a href="index.php?url=cg1.php">Character Generator</a>'):(""); ?>
+<?php //echo ($_SESSION['level']>=1)?(' | <a href="index.php?url=cg1.php">Character Generator</a>'):(""); ?>
 <?php echo ($_SESSION['inloggad']==1)?(' | <a href="login.php?alt=logout">Log Out</a>'):('| <a href="login2.php?alt=login">Log In</a>'); ?>
 </TD>
 </TR></TABLE>
