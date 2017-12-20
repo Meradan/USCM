@@ -23,7 +23,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 	if ($canmodify) { ?><form method="post" action="character.php?action=update_character"><?php } ?>
         <table width="50%"  border="0">
             <tr>
-                <td>&nbsp;</td>
+                <td><a href="index.php?url=list_characters.php&platoon=<?php echo $character->getPlatoonId(); ?>">Back</a></td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td><a class="colorfont" href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a></td>
