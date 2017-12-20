@@ -1,4 +1,6 @@
-<strong>Testing - more info to be added here later</strong>
+<a href="index.php?url=modify_character.php&character_id=<?php echo $characterId;?>">Back</a><br />
+<strong>More things coming on this page later..</strong>
+<br />
 <br />
 <?php
 $characterId = $_GET['character_id'];
