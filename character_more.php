@@ -1,7 +1,3 @@
-<a href="index.php?url=modify_character.php&character_id=<?php echo $characterId;?>">Back</a><br />
-<strong>More things coming on this page later..</strong>
-<br />
-<br />
 <?php
 $characterId = $_GET['character_id'];
 $userController = new UserController();
@@ -9,22 +5,27 @@ $characterController = new CharacterController();
 $character = new Character($characterId);
 $character = $characterController->getCharacter($characterId);
 $user = $userController->getCurrentUser();
-
+?>
+<a href="index.php?url=modify_character.php&character_id=<?php echo $characterId;?>">Back</a><br />
+<strong>More things coming on this page later..</strong>
+<br />
+<br />
+<?php
 if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->isGm()) {
   $player = $character->getPlayer();
   $missionCount = getNumberOfMissionsForCharacter($characterId);
   $xpval = $character->getXPvalue();
   $totglory = $character->getGlory();
   $skillarray = $character->getSkillsForCharacter();
-	$attribarray = $character->getAttributesForCharacter();
+  $attribarray = $character->getAttributesForCharacter();
 
-	$charskillattrib = array ();
-	foreach ( $skillarray as $id => $value ) {
-	  $charskillattrib['skill_names'][$id] = $value;
-	}
-	foreach ( $attribarray as $id => $value ) {
-	  $charskillattrib['attribute_names'][$id] = $value;
-	}
+  $charskillattrib = array ();
+  foreach ( $skillarray as $id => $value ) {
+	$charskillattrib['skill_names'][$id] = $value;
+  }
+  foreach ( $attribarray as $id => $value ) {
+	$charskillattrib['attribute_names'][$id] = $value;
+  }
   ?>
   <div class="title">Character Statistics</div>
   <table cellspacing="10" border="0">
