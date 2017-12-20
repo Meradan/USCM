@@ -448,26 +448,29 @@ class Character extends DbEntity {
 
   private function missions($length) {
     $missionarray = array ();
-    $sql = "SELECT mn.id,mission_name_short, rank_short, medal_short
+    $sql = "SELECT mn.id,p.name_short,mission_name_short,mission_name,rank_short,medal_short
             FROM uscm_mission_names mn
             LEFT JOIN uscm_missions m ON m.mission_id=mn.id
             LEFT JOIN uscm_characters c ON c.id=m.character_id
             LEFT JOIN uscm_rank_names rn ON rn.id=m.rank_id
             LEFT JOIN uscm_medal_names men ON men.id=m.medal_id
+            LEFT JOIN uscm_platoon_names p ON p.id=mn.platoon_id
             WHERE character_id=:cid AND mn.date < NOW() ORDER BY date";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $missionarray[$row['id']]['mission_name'] = $row['mission_name_short'];
       $missionarray[$row['id']]['text'] = "";
       if ($length == "short") {
+		$missionarray[$row['id']]['mission_name'] = $row['mission_name_short'];
         if ($row['rank_short']) {
           $missionarray[$row['id']]['text'] = "Prom. " . $row['rank_short'];
         } elseif ($row['medal_short']) {
           $missionarray[$row['id']]['text'] = "Awarded " . $row['medal_short'];
         }
       } elseif ($length == "long") {
+		$missionarray[$row['id']]['mission_name'] = $row['name_short'] . ' ' . $row['mission_name_short'];
+		//$missionarray[$row['id']]['mission_name_long'] = $row['mission_name'];
         if ($row['rank_short']) {
           $missionarray[$row['id']]['text'] = "Prom. " . $row['rank_short'];
         }
