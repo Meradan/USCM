@@ -720,6 +720,7 @@ class Character extends DbEntity {
     return $certificatearray;
   }
 
+  //get non-platoon certs assigned in db
   public function getCertsForCharacterWithoutReqCheck() {
     $chosencertarray = array ();
     $chosencertsql = "SELECT certificate_name_id, cn.name, c.id as uid FROM uscm_certificates as c
@@ -733,6 +734,22 @@ class Character extends DbEntity {
       $chosencertarray[$row['certificate_name_id']]['uid'] = $row['uid'];
     }
     return $chosencertarray;
+  }
+  
+  public function getCertsBuyableWithoutReqCheck() {
+	  $certarray = array ();
+	  $certsql = "select id from uscm_certificate_names where id not in (select cn.id from uscm_characters as c
+join uscm_certificates as cc on c.id=cc.character_id
+join uscm_platoon_certificates as pc on c.platoon_id=pc.platoon_id
+join uscm_certificate_names as cn on cn.id=cc.certificate_name_id or cn.id=pc.certificate_id
+where c.id=:cid group by cn.id)";
+	  $stmt = $this->db->prepare($certsql);
+	  $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
+	  $stmt->execute();
+	  while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $certarray[] = $row['id'];
+    }
+    return $certarray;
   }
 
   //TODO: move?
