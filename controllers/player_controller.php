@@ -117,7 +117,7 @@ Class PlayerController {
    * @return Player[]
    */
   public function getActivePlayers() {
-    $playersql = "SELECT Users.id, forname, nickname, lastname, emailadress, use_nickname, platoon_id, logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active as gmactive, Users.active as playeractive, Admins.userid as admin FROM Users LEFT JOIN GMs on GMs.userid = Users.id LEFT JOIN Admins on Admins.userid = Users.id WHERE Users.active=1 ORDER BY forname, lastname";
+    $playersql = "SELECT Users.id, forname, nickname, lastname, emailadress, use_nickname, platoon_id, logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active as gmactive, Users.active as playeractive, Admins.userid as admin FROM Users LEFT JOIN GMs on GMs.userid = Users.id LEFT JOIN Admins on Admins.userid = Users.id WHERE Users.active=1 ORDER BY platoon_id, forname, lastname";
     $stmt = $this->db->prepare($playersql);
     $stmt->execute();
     $playerList = array();
