@@ -254,7 +254,37 @@ foreach ($platoons as $platoon ) { ?>
     <TD WIDTH="107">Synthetic</TD>
     <TD WIDTH="355">00-11-28</TD>
   </TR>
-</TABLE>
+</TABLE><br/>
+<div class="colorfont">Other platoon info</div>
+Assigned ship: USS Deliverance (Conestoga-class frigate)<br/>
+<?php } elseif ($_GET['platoon'] == "5") {?>
+<div class="colorfont">Special Non-Player Characters</div>
+<br/>
+<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
+  <TR>
+    <TD WIDTH="120" CLASS="colorfont">Rank</TD>
+    <TD WIDTH="120" CLASS="colorfont">Name</TD>
+    <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
+    <TD CLASS="colorfont">Enlisted</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="20">Lieutenant</TD>
+    <TD WIDTH="120">Lionel Lee</TD>
+    <TD WIDTH="107">Officer</TD>
+    <TD WIDTH="355">18-01-21</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="20">Android</TD>
+    <TD WIDTH="120">Ishmael</TD>
+    <TD WIDTH="107">Synthetic</TD>
+    <TD WIDTH="355">18-01-21</TD>
+  </TR>
+</TABLE><br/>
+<div class="colorfont">Other platoon info</div>
+Assigned ship: USS Nautilus (Conestoga-class frigate)<br/>
 <?php } elseif ($_GET['platoon'] == "6") {?>
 <div class="colorfont">Special Non-Player Characters</div>
 <br/>
