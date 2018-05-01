@@ -91,6 +91,30 @@ Class CharacterController {
     }
     return $character;
   }
+  
+    /**
+   *
+   * @return Character[]
+   */
+  public function getUserActiveCharacters($userId) {
+    if ($userId == NULL) {
+      return;
+    }
+    $characters = array();
+    $sql = "SELECT c.id
+              FROM {$_SESSION['table_prefix']}characters c
+              WHERE c.userid=:uid AND c.status!='Dead' AND c.status!='Retired'
+              ORDER BY c.lastname,c.forname";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':uid', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $character = $this->getCharacter($row['id']);
+      $characters[] = $character;
+    }
+    return $characters;
+  }
+  
 
     /**
    *

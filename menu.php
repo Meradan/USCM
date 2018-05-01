@@ -26,6 +26,7 @@
 }	?>
 <?php echo ($_SESSION['level']>=3)?(' | <a href="index.php?url=create_player.php">Create player</a>'):(""); ?>
 <?php //echo ($_SESSION['level']>=1)?(' | <a href="index.php?url=cg1.php">Character Generator</a>'):(""); ?>
+<?php echo ($_SESSION['level']>=3)?(' | <a href="index.php?url=simulator.php">Simulator</a>'):(""); ?>
 <?php echo ($_SESSION['inloggad']==1)?(' | <a href="login.php?alt=logout">Log Out</a>'):('| <a href="login2.php?alt=login">Log In</a>'); ?>
 </TD>
 </TR></TABLE>
