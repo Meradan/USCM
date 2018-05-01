@@ -75,7 +75,7 @@ function certificates($characterId, $platoonId) {
         // echo "testing ".$charskillattrib[$reqid['table_name']][$reqid['id']]." against ".$reqid['value']." ";
         // print "\n<br>";
         if ($reqid ['value_greater'] == "1") {
-          if (array_key_exists($reqid ['id'], $charskillattrib [$reqid ['table_name']]) &&
+          if (!empty($charskillattrib[$reqid['table_name']]) && array_key_exists($reqid ['id'], $charskillattrib [$reqid ['table_name']]) &&
                $charskillattrib [$reqid ['table_name']] [$reqid ['id']] >= $reqid ['value']) {
             $has_req = TRUE;
           } else {
