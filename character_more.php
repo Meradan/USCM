@@ -37,12 +37,12 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 	<tr>
 		<td>Total XP value</td>
 		<td><?php echo $xpval ?></td>
-		<td>Disadvantages earned through play can reduce this</td>
+		<td>New characters start at 117 XP.</td>
 	</tr>
 	<tr>
 		<td>Average XP per mission</td>
 		<td><?php echo ($missionCount>0 ? round(($xpval-117)/$missionCount,2) : 0) ?></td>
-		<td></td>
+		<td>Disadvantages earned through play can reduce this number.</td>
 	</tr>
 	<tr>
 		<td>Average glory per mission</td>
@@ -102,10 +102,10 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       if (in_array($id, $availableCerts)) {
         $has_req = FALSE;
         foreach ( $req as $reqid ) {
-//           echo "testing ".$charskillattrib[$reqid['table_name']][$reqid['id']]." against ".$reqid['value']." ";
-//           print "\n<br>";
+			//echo "testing ".$charskillattrib[$reqid['table_name']][$reqid['id']]." against ".$reqid['value']." ";
+			//print "\n<br>";
           if ($reqid['value_greater'] == "1") {
-            if (array_key_exists($reqid['id'], $charskillattrib[$reqid['table_name']]) &&
+            if (!empty($charskillattrib[$reqid['table_name']]) && array_key_exists($reqid['id'], $charskillattrib[$reqid['table_name']]) &&
                  $charskillattrib[$reqid['table_name']][$reqid['id']] >= $reqid['value']) {
               $has_req = TRUE;
             } else {
