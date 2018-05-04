@@ -40,7 +40,7 @@ Class Simulation {
   
   public function getHighScores($number) {
 	$scores = array();
-	$sql = "SELECT p.name_short AS platoon,CONCAT_WS(' ', c.forname, c.lastname) AS charactername,CONCAT_WS(' ', u.forname,u.lastname) as playername,u.nickname,u.use_nickname,score,scoretime FROM uscm_simulation_scores JOIN uscm_characters AS c ON character_id=c.id JOIN uscm_platoon_names as p ON c.platoon_id=p.id LEFT JOIN Users as u ON c.userid = u.id WHERE mission_id=:mId ORDER BY score,scoretime desc LIMIT :num";
+	$sql = "SELECT p.name_short AS platoon,CONCAT_WS(' ', c.forname, c.lastname) AS charactername,CONCAT_WS(' ', u.forname,u.lastname) as playername,u.nickname,u.use_nickname,score,scoretime FROM uscm_simulation_scores JOIN uscm_characters AS c ON character_id=c.id JOIN uscm_platoon_names as p ON c.platoon_id=p.id LEFT JOIN Users as u ON c.userid = u.id WHERE mission_id=:mId ORDER BY score desc,scoretime desc LIMIT :num";
 	$stmt = $this->db->prepare($sql);
 	$stmt->bindValue(':mId', $this->id, PDO::PARAM_INT);
     $stmt->bindValue(':num', $number, PDO::PARAM_INT);
