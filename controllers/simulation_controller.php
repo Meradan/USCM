@@ -12,8 +12,8 @@ class SimulationController {
    */
   function getSimulations() {
     $simulations = array();
-    $sql = "SELECT sn.id as simulationid,sn.name as simulation_name ".
-        "FROM uscm_simulation_names ORDER BY sn.id DESC";
+    $sql = "SELECT id as simulationid,name as simulation_name,description ".
+        "FROM uscm_simulation_names ORDER BY id DESC";
     $stmt = $this->db->prepare($sql);
     try {
       $stmt->execute();
@@ -21,6 +21,7 @@ class SimulationController {
         $simulation = new Simulation();
         $simulation->setId($row['simulationid']);
         $simulation->setName($row['simulation_name']);
+		$simulation->setDescription($row['description']);
         $simulations[] = $simulation;
       }
     } catch (PDOException $e) {

@@ -16,6 +16,7 @@ require_once ("classes/mission.php");
 require_once ("classes/player.php");
 require_once ("classes/platoon.php");
 require_once ("classes/rank.php");
+require_once ("classes/score.php");
 require_once ("classes/simulation.php");
 require_once ("classes/skill.php");
 require_once ("classes/specialty.php");
