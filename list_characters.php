@@ -19,34 +19,34 @@ $where="AND c.platoon_id={$_GET['platoon']}";
 $charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_short,specialty_name, p.forname as playerforname,p.lastname as playerlastname,p.nickname,
               p.use_nickname,c.userid
-          FROM {$_SESSION['table_prefix']}characters c
+          FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
-          LEFT JOIN {$_SESSION['table_prefix']}ranks
-            ON {$_SESSION['table_prefix']}ranks.character_id = c.id
-          LEFT JOIN {$_SESSION['table_prefix']}rank_names
-            ON {$_SESSION['table_prefix']}rank_names.id =
-              {$_SESSION['table_prefix']}ranks.rank_id
-          LEFT JOIN {$_SESSION['table_prefix']}specialty
-            ON {$_SESSION['table_prefix']}specialty.character_id = c.id
-          LEFT JOIN {$_SESSION['table_prefix']}specialty_names
-            ON {$_SESSION['table_prefix']}specialty_names.id =
-              {$_SESSION['table_prefix']}specialty.specialty_name_id
+          LEFT JOIN uscm_ranks
+            ON uscm_ranks.character_id = c.id
+          LEFT JOIN uscm_rank_names
+            ON uscm_rank_names.id =
+              uscm_ranks.rank_id
+          LEFT JOIN uscm_specialty
+            ON uscm_specialty.character_id = c.id
+          LEFT JOIN uscm_specialty_names
+            ON uscm_specialty_names.id =
+              uscm_specialty.specialty_name_id
               WHERE c.status != 'Dead' AND c.status != 'Retired' AND p.id != '0' AND p.id != '59' {$where}
               ORDER BY rank_id DESC";
 $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
               rank_id,rank_short,specialty_name,c.userid
-          FROM {$_SESSION['table_prefix']}characters c
+          FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
-          LEFT JOIN {$_SESSION['table_prefix']}ranks
-            ON {$_SESSION['table_prefix']}ranks.character_id = c.id
-          LEFT JOIN {$_SESSION['table_prefix']}rank_names
-            ON {$_SESSION['table_prefix']}rank_names.id =
-              {$_SESSION['table_prefix']}ranks.rank_id
-          LEFT JOIN {$_SESSION['table_prefix']}specialty
-            ON {$_SESSION['table_prefix']}specialty.character_id = c.id
-          LEFT JOIN {$_SESSION['table_prefix']}specialty_names
-            ON {$_SESSION['table_prefix']}specialty_names.id =
-              {$_SESSION['table_prefix']}specialty.specialty_name_id
+          LEFT JOIN uscm_ranks
+            ON uscm_ranks.character_id = c.id
+          LEFT JOIN uscm_rank_names
+            ON uscm_rank_names.id =
+              uscm_ranks.rank_id
+          LEFT JOIN uscm_specialty
+            ON uscm_specialty.character_id = c.id
+          LEFT JOIN uscm_specialty_names
+            ON uscm_specialty_names.id =
+              uscm_specialty.specialty_name_id
               WHERE c.status != 'Dead' AND c.status != 'Retired' AND (p.id = '0' OR p.id = '59') {$where}
               ORDER BY rank_id DESC";
 
