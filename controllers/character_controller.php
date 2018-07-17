@@ -96,15 +96,18 @@ Class CharacterController {
    *
    * @return Character[]
    */
-  public function getUserActiveCharacters($userId) {
+  public function getUserActiveCharacters($userId, $includepow=FALSE) {
     if ($userId == NULL) {
       return;
     }
     $characters = array();
     $sql = "SELECT c.id
               FROM {$_SESSION['table_prefix']}characters c
-              WHERE c.userid=:uid AND c.status!='Dead' AND c.status!='Retired'
-              ORDER BY c.lastname,c.forname";
+              WHERE c.userid=:uid AND c.status='Active'";
+    if ($includepow) {
+		$sql = $sql . " OR c.status='PoW'";
+	}
+	$sql = $sql . "ORDER BY c.lastname,c.forname";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':uid', $userId, PDO::PARAM_INT);
     $stmt->execute();
@@ -209,7 +212,7 @@ Class CharacterController {
   /**
    *
    * @param Character $character
-   * @return Skill[]
+   * @return Attribute[]
    */
   function getAttributesForCharacter($character) {
     $db = getDatabaseConnection();
