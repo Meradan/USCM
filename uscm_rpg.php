@@ -41,9 +41,9 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 <A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (PDF, en sida för utskrift)<br/>
 <A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (A5 häfte)</A><br/>
 <br/>
-<A HREF="resources/charactersheet.pdf" TARGET="_blank">Rollformulär</A> (PDF, för utskrift)<br/>
+<A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
 <br/>
-<A HREF="resources/USCM-Regler2.pdf" TARGET="_blank">Regler - Trait/Cert</A> (PDF, beskrivning på alla traits m.m.)<br/>
+<A HREF="resources/USCM-Rules2.pdf" TARGET="_blank">Rules - Properties/Cert</A> (PDF, description of all properties etc.)<br/>
 <br/>
 <br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
 
