@@ -9,7 +9,7 @@ $user = $userController->getCurrentUser();
 
 if (isset($_GET['action'])!=true) { ?>
         <div class="title">Brixton's Fightin' Fives - US Colonial Marine Corps 5th Platoon</div>
-        <div align="justify">Website for a roleplaying campaign based on the Alien movies. The players are members of the 5th platoon "Brixton's Fightin' Fives" in the 4th US Colonial Marine brigade.<br/>
+        <div align="justify">Website for a roleplaying campaign partially based on the Alien movies. The players are members of one of the platoons in the 4th US Colonial Marine brigade.<br/>
         </div>
 
         <br/><center><img src="images/line.jpg" width="449" heigth="1"></center><br/>
@@ -47,7 +47,13 @@ if (isset($_GET['action'])!=true) { ?>
                 </table>
             </form>
 
+			<br/>
+			Note, to put in links within the site do it like this:<br/>
+			<code>
+			&lt;a href="index.php?url=uscm_rpg.php"&gt;USCM RPG&lt;/a&gt;
+			</code>
             <?php
+
         }
 } elseif ($_GET['action'] == "post") {
     if ($user->isAdmin() || $user->isGm()) {
