@@ -35,11 +35,10 @@ To use the Character Generator you need LibreOffice (free, open source) which ca
 You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".
 <br/><br/>
 
-<A HREF="resources/USCM_Generator.ods" TARGET="_blank">Character Generator - Swedish</A> (Default version, OpenDocument - LibreOffice)<br/>
-<A HREF="resources/USCM_Generator_ENG.ods" TARGET="_blank">Character Generator - English</A> (By Jerry for LL11, OpenDocument - LibreOffice)<br/>
-<A HREF="resources/EquipmentListPrint107.ods" TARGET="_blank">Utrustningslista v1.07</A> (OpenDocument, med viktberäkning)<br/>
-<A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (PDF, en sida för utskrift)<br/>
-<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (A5 häfte)</A><br/>
+<A HREF="resources/USCM_Generator.ods" TARGET="_blank">Character Generator</A> (OpenDocument - LibreOffice)<br/>
+<A HREF="resources/EquipmentListPrint107.ods" TARGET="_blank">Utrustningslista v1.07</A> (Swedish OpenDocument, med viktberäkning)<br/>
+<A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (Swedish PDF, en sida för utskrift)<br/>
+<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (Swedish A5 häfte)</A><br/>
 <br/>
 <A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
 <br/>
