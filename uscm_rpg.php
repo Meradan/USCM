@@ -36,9 +36,10 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 <br/><br/>
 
 <A HREF="resources/USCM_Generator.ods" TARGET="_blank">Character Generator</A> (OpenDocument - LibreOffice)<br/>
-<A HREF="resources/EquipmentListPrint107.ods" TARGET="_blank">Utrustningslista v1.07</A> (Swedish OpenDocument, med viktberäkning)<br/>
-<A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (Swedish PDF, en sida för utskrift)<br/>
-<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet (Swedish A5 häfte)</A><br/>
+<A HREF="resources/EquipmentListPrint108.pdf" TARGET="_blank">Equipment list v1.08</A> (English PDF)<br/>
+<A HREF="resources/EquipmentListPrint107.ods" TARGET="_blank">Utrustningslista v1.07</A> (Old - Swedish OpenDocument, med viktberäkning)<br/>
+<A HREF="resources/EquipmentListPrint107.pdf" TARGET="_blank">Utrustningslista v1.07</A> (Old - Swedish PDF, en sida för utskrift)<br/>
+<A HREF="resources/utr-folder.booklet.rotated.pdf" TARGET="_blank">Utrustningshäftet</A> (Old - Swedish A5 booklet)<br/>
 <br/>
 <A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
 <br/>
