@@ -238,21 +238,31 @@ foreach ($platoons as $platoon ) { ?>
     <TD WIDTH="120" CLASS="colorfont">Name</TD>
     <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
     <TD CLASS="colorfont">Enlisted</TD>
+	<TD CLASS="colorfont">Status</TD>
   </TR>
   <TR>
     <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
   </TR>
   <TR>
     <TD WIDTH="20">Lieutenant</TD>
+    <TD WIDTH="120">Louise Wheatly</TD>
+    <TD WIDTH="107">Officer</TD>
+    <TD WIDTH="20">19-08-10</TD>
+	<TD WIDTH="335">Active (Acting commander)</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="20">Lieutenant</TD>
     <TD WIDTH="120">Michael Brixton</TD>
     <TD WIDTH="107">Officer</TD>
-    <TD WIDTH="355">00-10-14</TD>
+    <TD WIDTH="20">00-10-14</TD>
+	<TD WIDTH="335">PoW (CTF)</TD>
   </TR>
   <TR>
     <TD WIDTH="20">Android</TD>
     <TD WIDTH="120">Garth</TD>
     <TD WIDTH="107">Synthetic</TD>
-    <TD WIDTH="355">00-11-28</TD>
+    <TD WIDTH="20">00-11-28</TD>
+	<TD WIDTH="335">Active</TD>
   </TR>
 </TABLE><br/>
 <div class="colorfont">Other platoon info</div>
