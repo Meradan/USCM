@@ -91,14 +91,19 @@ function login($level) {
       unset($_SESSION['platoon_id']);
       return 0;
     } elseif ($alt == "login") {
-        $query = "select Users.id,emailadress,platoon_id,Admins.userid as Admin,GMs.userid as GM,
-                logintime, count(*) as howmany from Users
-                left join Admins on Admins.userid=Users.id
-                left join GMs on GMs.userid=Users.id and GMs.active=1
-                where emailadress='{$_POST['anvandarnamn']}'
-                and password=password('{$_POST['losenord']}')";
-        $stmt = $db->query($query);
-        $row = $stmt->fetch();
+        $query = "SELECT Users.id, emailadress, platoon_id, Admins.userid AS Admin, GMs.userid AS GM,
+                logintime, count(Users.id) AS howmany
+                FROM Users
+                LEFT JOIN Admins ON Admins.userid=Users.id
+                LEFT JOIN GMs ON GMs.userid=Users.id AND GMs.active=1
+                WHERE emailadress=:userName
+                AND password=password(:password)
+                GROUP BY Users.id";
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(':userName', $_POST['anvandarnamn'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $_POST['losenord'], PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row['howmany'] == 1) {
           $userinfo = $row;
           if ($userinfo['Admin']) {
