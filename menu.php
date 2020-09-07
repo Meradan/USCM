@@ -16,7 +16,7 @@
 <a href="index.php?url=list_hall_of_fame.php">Hall of Fame</a> |
 <?php //<a href="../forum/index.php">Forum</a>
     ?>
-<a href="http://uscm.swedishforum.net/" target="_blank">Forum</a>
+<a href="https://uscm.swedishforum.net/" target="_blank">Forum</a>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_character.php">Create character</a>'):(""); ?>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_mission.php">Create mission</a>'):(""); ?>
 <?php if ($_SESSION['level']==3) {
