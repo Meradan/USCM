@@ -324,10 +324,10 @@ function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
   $missions = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $characters [$key] ['missions'] = $missions [0] ['missions'];
 
-  $commendationssql = "SELECT medal_short,medal_glory FROM {$_SESSION['table_prefix']}characters c
-                LEFT JOIN {$_SESSION['table_prefix']}missions as missions
+  $commendationssql = "SELECT medal_short,medal_glory FROM characters c
+                LEFT JOIN missions as missions
                   ON missions.character_id = c.id
-                LEFT JOIN {$_SESSION['table_prefix']}medal_names as mn
+                LEFT JOIN medal_names as mn
                   ON mn.id = missions.medal_id
                 WHERE character_id=:cid ORDER BY medal_glory DESC";
   $stmt = $db->prepare($commendationssql);

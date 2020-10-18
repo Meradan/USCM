@@ -12,25 +12,25 @@ Class CharacterController {
    * @return void|Character
    */
   public function getCharacter($characterId) {
-    if ($characterId == NULL) {
+    if ($characterId == null || $characterId == 0) {
       return;
     }
     $character = new Character();
     $sql = "SELECT userid, platoon_id, forname, lastname, Enlisted, Age, Gender, UnusedXP,
         AwarenessPoints, CoolPoints, ExhaustionPoints, FearPoints, LeadershipPoints, PsychoPoints,
         TraumaPoints, MentalPoints, status, status_desc, specialty_name, uscm_specialty_names.id as specialty_id,
-        rank_id, rank_short, rank_long, rank_desc, encalien, encgrey, encpred, encai, encarach, count(*) as howmany
+        rank_id, rank_short, rank_long, rank_desc, encalien, encgrey, encpred, encai, encarach
         FROM uscm_characters
         LEFT JOIN uscm_ranks ON uscm_characters.id = uscm_ranks.character_id
         LEFT JOIN uscm_rank_names ON  uscm_ranks.rank_id = uscm_rank_names.id
         LEFT JOIN uscm_specialty ON uscm_characters.id = uscm_specialty.character_id
         LEFT JOIN uscm_specialty_names ON  uscm_specialty.specialty_name_id = uscm_specialty_names.id
-        WHERE uscm_characters.id = :cid";
+        WHERE uscm_characters.id = :cid LIMIT 1";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch();
-    if ($row['howmany'] == 1) {
+    if ($row != null) {
       $platoonId = $row['platoon_id'];
       $playerId = $row['userid'];
       $character->setId($characterId);

@@ -77,15 +77,15 @@ Class PlayerController {
       return $player;
     }
     $playersql = "SELECT Users.id, forname, nickname, lastname, emailadress, use_nickname, platoon_id,
-        logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id, GMs.active as gmactive, Users.active as playeractive, ".
-        "Admins.userid as admin, count(*) as howmany FROM Users " .
+        logintime, lastlogintime, GMs.userid as gm, GMs.RPG_id as RPG_id, GMs.active as gmactive, Users.active as playeractive, ".
+        "Admins.userid as admin FROM Users " .
         "LEFT JOIN GMs on GMs.userid = Users.id " .
-        "LEFT JOIN Admins on Admins.userid = Users.id WHERE Users.id = :userid";
+        "LEFT JOIN Admins on Admins.userid = Users.id WHERE Users.id = :userid LIMIT 1";
     $stmt = $this->db->prepare($playersql);
     $stmt->bindValue(':userid', $playerId, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row ['howmany'] == 1) {
+    if ($row != null) {
 //       $player->setId($playerId);
 //       $player->setGivenName($row ['forname']);
 //       $player->setNickname($row ['nickname']);
@@ -195,7 +195,7 @@ Class PlayerController {
     $gms = array();
     $gmsql = "SELECT Users.id,forname,lastname FROM Users LEFT JOIN GMs on GMs.userid=Users.id
                 LEFT JOIN RPG on RPG.id=GMs.rpg_id
-                WHERE table_prefix='{$_SESSION['table_prefix']}'";
+                WHERE table_prefix='uscm'";
     $stmt = $this->db->prepare($gmsql);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {

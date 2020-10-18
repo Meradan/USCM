@@ -562,7 +562,7 @@ class Character extends DbEntity {
 
   private function allCertificateRequirements() {
     $certificates = array ();
-    $sql = "SELECT cn.id as cid, sn.id as sid
+    $sql = "SELECT MIN(cn.id) as cid, MIN(sn.id) as sid
               FROM uscm_certificate_names cn
               LEFT JOIN uscm_certificate_requirements cr ON cn.id = cr.certificate_id
               LEFT JOIN uscm_skill_names sn ON cr.req_item = sn.id
