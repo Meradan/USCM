@@ -36,7 +36,7 @@ if ($user->isAdmin()) {
     ?>
         <select name="platoon_id">
     <?php foreach ($platoons as $platoon) { ?>
-          <option value="<?php echo $platoonId; ?>"><?php echo $platoon->getName(); ?></option>
+          <option value="<?php echo $platoon->getId(); ?>"><?php echo $platoon->getName(); ?></option>
     <?php } ?>
         </select>
     </td>
