@@ -195,7 +195,7 @@ Class PlayerController {
     $gms = array();
     $gmsql = "SELECT Users.id,forname,lastname FROM Users LEFT JOIN GMs on GMs.userid=Users.id
                 LEFT JOIN RPG on RPG.id=GMs.rpg_id
-                WHERE table_prefix='uscm'";
+                WHERE GMs.active=1";
     $stmt = $this->db->prepare($gmsql);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
