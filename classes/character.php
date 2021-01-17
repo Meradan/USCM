@@ -562,11 +562,7 @@ class Character extends DbEntity {
 
   private function allCertificateRequirements() {
     $certificates = array ();
-    $sql = "SELECT MIN(cn.id) as cid, MIN(sn.id) as sid
-              FROM uscm_certificate_names cn
-              LEFT JOIN uscm_certificate_requirements cr ON cn.id = cr.certificate_id
-              LEFT JOIN uscm_skill_names sn ON cr.req_item = sn.id
-              GROUP BY cr.certificate_id";
+    $sql = "SELECT cn.id as cid, cn.mainskill as sid FROM uscm_certificate_names cn";
     $stmt = $this->db->query($sql);
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $certificates[$row['cid']]['sid'] = $row['sid'];
@@ -581,7 +577,7 @@ class Character extends DbEntity {
     foreach ( $certarray as $key => $value ) {
       // print_r($key);
       // print_r($certallarray[$key]);
-      // print_r($skillid);
+       //print_r($skillid);
       if ($certallarray[$key]['sid'] == $skillid) {
         $skillbonus['always'] = $skillbonus['always'] + 1;
       }
@@ -589,9 +585,9 @@ class Character extends DbEntity {
     }
     // if (certarray[
     // print_r($skillbonus);
-    // print_r($certarray);
-    // print_r($certallarray);
-    // exit;
+     //print_r($certarray);
+     //print_r($certallarray);
+     //exit;
 
     // Check adv/disadv/trait bonus
     // $sql = "SELECT skill_name_id, value, skill_name FROM {$_SESSION['table_prefix']}skills s
@@ -682,7 +678,7 @@ class Character extends DbEntity {
     $certificatearray = array ();
     foreach ( $cert as $id => $req ) {
       $req_met = FALSE;
-//       echo "cert test ".$id." ";
+//       echo "cert test $id";
 //       print_r($req);
       if (in_array($id, $platooncertarray) || array_key_exists($id, $chosencertarray)) {
         $has_req = FALSE;
@@ -716,10 +712,11 @@ class Character extends DbEntity {
         reset($req);
         $name = current($req);
         $certificatearray[$id]['name'] = $name['name'];
+//		echo "\n<br>Has $id";
       }
     }
-    // print_r($certificatearray);
-    // exit;
+//	  print_r($certificatearray);
+//    exit;
     return $certificatearray;
   }
 
