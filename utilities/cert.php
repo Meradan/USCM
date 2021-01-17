@@ -17,7 +17,7 @@ mysql_select_db("skynet");
 <table width="50%"  border="0" cellspacing="1" cellpadding="1">
   <tr>
     <td colspan="4"><select name="certname"><?
-$certsql="SELECT name, id FROM {$_SESSION['table_prefix']}certificate_names";
+$certsql="SELECT name, id FROM uscm_certificate_names";
 $certres=mysql_query($certsql);
 while ($cert = mysql_fetch_assoc($certres) ) { ?>
   <option value="<?php echo $cert['id']; ?>"><?php echo $cert['name']?></option>
@@ -25,8 +25,8 @@ while ($cert = mysql_fetch_assoc($certres) ) { ?>
   </tr>
   <tr>
     <td><select name="req1"><?
-$attribsql="SELECT id, attribute_name FROM {$_SESSION['table_prefix']}attribute_names";
-$skillsql="SELECT id, skill_name FROM  {$_SESSION['table_prefix']}skill_names ORDER BY skill_name";
+$attribsql="SELECT id, attribute_name FROM uscm_attribute_names";
+$skillsql="SELECT id, skill_name FROM  uscm_skill_names ORDER BY skill_name";
 $attribres=mysql_query($attribsql);
 $skillres=mysql_query($skillsql);
 while ($attrib=mysql_fetch_assoc($attribres)) { ?>
@@ -42,8 +42,8 @@ while ($skill=mysql_fetch_assoc($skillres)) { ?>
   </tr>
   <tr>
     <td><select name="req2"><?
-$attribsql="SELECT id, attribute_name FROM {$_SESSION['table_prefix']}attribute_names";
-$skillsql="SELECT id, skill_name FROM  {$_SESSION['table_prefix']}skill_names ORDER BY skill_name";
+$attribsql="SELECT id, attribute_name FROM uscm_attribute_names";
+$skillsql="SELECT id, skill_name FROM  uscm_skill_names ORDER BY skill_name";
 $attribres=mysql_query($attribsql);
 $skillres=mysql_query($skillsql);
 while ($attrib=mysql_fetch_assoc($attribres)) { ?>
@@ -59,8 +59,8 @@ while ($skill=mysql_fetch_assoc($skillres)) { ?>
   </tr>
   <tr>
     <td><select name="req3"><?
-$attribsql="SELECT id, attribute_name FROM {$_SESSION['table_prefix']}attribute_names";
-$skillsql="SELECT id, skill_name FROM  {$_SESSION['table_prefix']}skill_names ORDER BY skill_name";
+$attribsql="SELECT id, attribute_name FROM uscm_attribute_names";
+$skillsql="SELECT id, skill_name FROM  uscm_skill_names ORDER BY skill_name";
 $attribres=mysql_query($attribsql);
 $skillres=mysql_query($skillsql);
 while ($attrib=mysql_fetch_assoc($attribres)) { ?>
@@ -76,8 +76,8 @@ while ($skill=mysql_fetch_assoc($skillres)) { ?>
   </tr>
   <tr>
     <td><select name="req4"><?
-$attribsql="SELECT id, attribute_name FROM {$_SESSION['table_prefix']}attribute_names";
-$skillsql="SELECT id, skill_name FROM  {$_SESSION['table_prefix']}skill_names ORDER BY skill_name";
+$attribsql="SELECT id, attribute_name FROM uscm_attribute_names";
+$skillsql="SELECT id, skill_name FROM  uscm_skill_names ORDER BY skill_name";
 $attribres=mysql_query($attribsql);
 $skillres=mysql_query($skillsql);
 while ($attrib=mysql_fetch_assoc($attribres)) { ?>
@@ -93,8 +93,8 @@ while ($skill=mysql_fetch_assoc($skillres)) { ?>
   </tr>
   <tr>
     <td><select name="req5"><?
-$attribsql="SELECT id, attribute_name FROM {$_SESSION['table_prefix']}attribute_names";
-$skillsql="SELECT id, skill_name FROM  {$_SESSION['table_prefix']}skill_names ORDER BY skill_name";
+$attribsql="SELECT id, attribute_name FROM uscm_attribute_names";
+$skillsql="SELECT id, skill_name FROM  uscm_skill_names ORDER BY skill_name";
 $attribres=mysql_query($attribsql);
 $skillres=mysql_query($skillsql);
 while ($attrib=mysql_fetch_assoc($attribres)) { ?>
