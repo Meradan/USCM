@@ -8,6 +8,7 @@ session_start();
 require_once "functions.php";
 $characterController = new CharacterController();
 $db = getDatabaseConnection();
+
 if ($_GET['action'] == "update_character") {
   /*
    * Updates a characters stats and skills
@@ -38,7 +39,6 @@ if ($_GET['action'] == "update_character") {
   $updated_certificate = array ();
   $old_certificate = array ();
   $character_id = $_POST['character'];
-  $table = $_SESSION['table_prefix'];
   $character = $characterController->getCharacter($character_id);
 
   // updates character basic stats
@@ -71,7 +71,7 @@ if ($_GET['action'] == "update_character") {
   if (isset($_POST['cbai'])) { $cbai = 1; }
   if (isset($_POST['cbarachnid'])) { $cbarachnid = 1; }
   
-  $charactersql = "UPDATE {$table}characters SET userid=:playerid,
+  $charactersql = "UPDATE uscm_characters SET userid=:playerid,
                          platoon_id=:platoonid,
                          forname=:givenname,
                          lastname=:lastname,
@@ -124,14 +124,14 @@ if ($_GET['action'] == "update_character") {
   $stmt->execute();
 
   $specialty = $_POST['specialty'];
-  $specialtysql = "UPDATE {$table}specialty SET specialty_name_id=:specialty WHERE character_id=:cid";
+  $specialtysql = "UPDATE uscm_specialty SET specialty_name_id=:specialty WHERE character_id=:cid";
   $stmt = $db->prepare($specialtysql);
   $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
   $stmt->bindValue(':specialty', $specialty, PDO::PARAM_STR);
   $stmt->execute();
 
   $rank = $_POST['rank'];
-  $ranksql = "UPDATE {$table}ranks SET rank_id=:rank WHERE character_id=:cid LIMIT 1";
+  $ranksql = "UPDATE uscm_ranks SET rank_id=:rank WHERE character_id=:cid LIMIT 1";
   $stmt = $db->prepare($ranksql);
   $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
   $stmt->bindValue(':rank', $rank, PDO::PARAM_INT);
@@ -170,14 +170,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_attributes as $attribute_id => $id ) {
-    $sql = "DELETE FROM {$table}attributes WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_attributes WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_attributes as $attribute_id => $value ) {
-    $sql = "INSERT INTO {$table}attributes SET character_id=:cid,attribute_id=:attribute_id,value=:value";
+    $sql = "INSERT INTO uscm_attributes SET character_id=:cid,attribute_id=:attribute_id,value=:value";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':attribute_id', $attribute_id, PDO::PARAM_INT);
@@ -185,7 +185,7 @@ if ($_GET['action'] == "update_character") {
     $stmt->execute();
   }
   foreach ( $updated_attributes as $attribute_id => $value ) {
-    $sql = "UPDATE {$table}attributes SET value=:value WHERE character_id=:cid AND attribute_id=:attribute_id LIMIT 1";
+    $sql = "UPDATE uscm_attributes SET value=:value WHERE character_id=:cid AND attribute_id=:attribute_id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':attribute_id', $attribute_id, PDO::PARAM_INT);
@@ -227,14 +227,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_skills as $skill_name_id => $id ) {
-    $sql = "DELETE FROM {$table}skills WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_skills WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_skills as $skill_name_id => $value ) {
-    $sql = "INSERT INTO {$table}skills SET character_id=:cid, skill_name_id=:skill_name_id,value=:value";
+    $sql = "INSERT INTO uscm_skills SET character_id=:cid, skill_name_id=:skill_name_id,value=:value";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':skill_name_id', $skill_name_id, PDO::PARAM_INT);
@@ -242,7 +242,7 @@ if ($_GET['action'] == "update_character") {
     $stmt->execute();
   }
   foreach ( $updated_skills as $skill_name_id => $value ) {
-    $sql = "UPDATE {$table}skills SET value=:value WHERE character_id=:cid AND skill_name_id=:skill_name_id LIMIT 1";
+    $sql = "UPDATE uscm_skills SET value=:value WHERE character_id=:cid AND skill_name_id=:skill_name_id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':skill_name_id', $skill_name_id, PDO::PARAM_INT);
@@ -279,14 +279,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_traits as $trait_id => $id ) {
-    $sql = "DELETE FROM {$table}traits WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_traits WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id['id'], PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_traits as $trait_id => $value ) {
-    $sql = "INSERT INTO {$table}traits SET character_id=:cid,trait_name_id=:trait_name_id";
+    $sql = "INSERT INTO uscm_traits SET character_id=:cid,trait_name_id=:trait_name_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':trait_name_id', $trait_id, PDO::PARAM_INT);
@@ -324,14 +324,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_advs as $adv_id => $id ) {
-    $sql = "DELETE FROM {$table}advantages WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_advantages WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id['id'], PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_advs as $adv_id => $value ) {
-    $sql = "INSERT INTO {$table}advantages SET character_id=:cid,advantage_name_id=:advantage_name_id";
+    $sql = "INSERT INTO uscm_advantages SET character_id=:cid,advantage_name_id=:advantage_name_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':advantage_name_id', $adv_id, PDO::PARAM_INT);
@@ -368,14 +368,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_disadvs as $disadv_id => $id ) {
-    $sql = "DELETE FROM {$table}disadvantages WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_disadvantages WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id['id'], PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_disadvs as $disadv_id => $value ) {
-    $sql = "INSERT INTO {$table}disadvantages SET character_id=:cid,disadvantage_name_id=:disadvantage_name_id";
+    $sql = "INSERT INTO uscm_disadvantages SET character_id=:cid,disadvantage_name_id=:disadvantage_name_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':disadvantage_name_id', $disadv_id, PDO::PARAM_INT);
@@ -410,14 +410,14 @@ if ($_GET['action'] == "update_character") {
   }
 
   foreach ( $remove_certificate as $certificate_id => $id ) {
-    $sql = "DELETE FROM {$table}certificates WHERE character_id=:cid AND id=:id LIMIT 1";
+    $sql = "DELETE FROM uscm_certificates WHERE character_id=:cid AND id=:id LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id['id'], PDO::PARAM_INT);
     $stmt->execute();
   }
   foreach ( $add_certificate as $certificate_id => $value ) {
-    $sql = "INSERT INTO {$table}certificates SET character_id=:cid,certificate_name_id=:certificate_name_id";
+    $sql = "INSERT INTO uscm_certificates SET character_id=:cid,certificate_name_id=:certificate_name_id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cid', $character_id, PDO::PARAM_INT);
     $stmt->bindValue(':certificate_name_id', $certificate_id, PDO::PARAM_INT);
