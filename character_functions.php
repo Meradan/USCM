@@ -3,13 +3,12 @@
 //TODO: remove
 function advantages($characterId, $onlyvisible = false) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $advarray = array ();
   $visible = $onlyvisible ? " AND an.visible = 1" : "";
   $sql = "SELECT an.id, advantage_name
-          FROM " . $tablePrefix . "advantage_names an
-          LEFT JOIN " . $tablePrefix . "advantages a ON a.advantage_name_id=an.id
-          LEFT JOIN " . $tablePrefix . "characters c ON c.id=a.character_id
+          FROM uscm_advantage_names an
+          LEFT JOIN uscm_advantages a ON a.advantage_name_id=an.id
+          LEFT JOIN uscm_characters c ON c.id=a.character_id
           WHERE a.character_id=:cid " . $visible . " ORDER BY advantage_name";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -23,12 +22,11 @@ function advantages($characterId, $onlyvisible = false) {
 //TODO: remove
 function disadvantages($characterId, $onlyvisible = false) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $disadvarray = array ();
   $sql = "SELECT dn.id, disadvantage_name
-          FROM " . $tablePrefix . "disadvantage_names dn
-          LEFT JOIN " . $tablePrefix . "disadvantages d ON d.disadvantage_name_id=dn.id
-          LEFT JOIN " . $tablePrefix . "characters c ON c.id=d.character_id
+          FROM uscm_disadvantage_names dn
+          LEFT JOIN uscm_disadvantages d ON d.disadvantage_name_id=dn.id
+          LEFT JOIN uscm_characters c ON c.id=d.character_id
           WHERE d.character_id=:cid ORDER BY disadvantage_name";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -113,11 +111,10 @@ function certificates($characterId, $platoonId) {
  */
 function characterAttributes($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $sql = "SELECT attribute_id,attribute_name, value
-                  FROM " . $tablePrefix . "characters c
-                  LEFT JOIN " . $tablePrefix . "attributes a ON a.character_id=c.id
-                  LEFT JOIN " . $tablePrefix . "attribute_names an ON an.id=a.attribute_id
+                  FROM uscm_characters c
+                  LEFT JOIN uscm_attributes a ON a.character_id=c.id
+                  LEFT JOIN uscm_attribute_names an ON an.id=a.attribute_id
                   WHERE c.id=:cid ORDER BY attribute_name";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -131,10 +128,9 @@ function characterAttributes($characterId) {
 
 function getAttributesForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $attribarray = array ();
   $attribsql = "SELECT attribute_id as id,value
-          FROM " . $tablePrefix . "attributes
+          FROM uscm_attributes
           WHERE character_id=:cid";
   $stmt = $db->prepare($attribsql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -147,10 +143,9 @@ function getAttributesForCharacter($characterId) {
 
 function getCertificateRequirements() {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $certreqsql = "SELECT certificate_id, req_item,value,value_greater,table_name,name
-                FROM " . $tablePrefix . "certificate_requirements cr
-                LEFT JOIN " . $tablePrefix . "certificate_names cn ON cn.id=cr.certificate_id";
+                FROM uscm_certificate_requirements cr
+                LEFT JOIN uscm_certificate_names cn ON cn.id=cr.certificate_id";
   $cert = array ();
   $stmt = $db->prepare($certreqsql);
   $stmt->execute();
@@ -180,9 +175,8 @@ function getCertificateRequirements() {
 
 function getCertForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $chosencertarray = array ();
-  $chosencertsql = "SELECT certificate_name_id FROM " . $tablePrefix . "certificates
+  $chosencertsql = "SELECT certificate_name_id FROM uscm_certificates
                     WHERE character_id=:cid";
   $stmt = $db->prepare($chosencertsql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -195,12 +189,11 @@ function getCertForCharacter($characterId) {
 
 function getCommendationsForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $chosencertarray = array ();
-  $commendationssql = "SELECT medal_short,medal_glory FROM " . $tablePrefix . "characters c
-                    LEFT JOIN " . $tablePrefix . "missions as missions
+  $commendationssql = "SELECT medal_short,medal_glory FROM uscm_characters c
+                    LEFT JOIN uscm_missions as missions
                       ON missions.character_id = c.id
-                    LEFT JOIN " . $tablePrefix . "medal_names as mn
+                    LEFT JOIN uscm_medal_names as mn
                       ON mn.id = missions.medal_id
                     WHERE character_id=:cid ORDER BY medal_glory DESC";
   $stmt = $db->prepare($commendationssql);
@@ -213,9 +206,8 @@ function getCommendationsForCharacter($characterId) {
 
 function getNumberOfMissionsForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $chosencertarray = array ();
-  $missionssql = "SELECT count(id) as missions FROM " . $tablePrefix . "missions
+  $missionssql = "SELECT count(id) as missions FROM uscm_missions
                   WHERE character_id=:cid";
   $stmt = $db->prepare($missionssql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -227,10 +219,9 @@ function getNumberOfMissionsForCharacter($characterId) {
 
 function getSkillsForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $skillarray = array ();
   $skillsql = "SELECT skill_name_id as id,value
-          FROM " . $tablePrefix . "skills
+          FROM uscm_skills
           WHERE character_id=:cid";
   $stmt = $db->prepare($skillsql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -243,9 +234,8 @@ function getSkillsForCharacter($characterId) {
 
 function getCertForPlatoon($platoonId) {
   $db = getDatabaseConnection();
-  $tablePrefix = getTablePrefix();
   $platooncertarray = array ();
-  $platooncertsql = "SELECT certificate_id FROM " . $tablePrefix . "platoon_certificates
+  $platooncertsql = "SELECT certificate_id FROM uscm_platoon_certificates
                     WHERE platoon_id=:platoonid";
 
   $stmt = $db->prepare($platooncertsql);
@@ -314,9 +304,8 @@ function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
   $glory = "";
   $characterId = $character ['cid'];
   $db = getDatabaseConnection();
-  $tablePrefix = $_SESSION ['table_prefix'];
-  $sql = 'SELECT count(m.id) as missions FROM ' . $tablePrefix . 'missions m
-        LEFT JOIN ' . $tablePrefix . 'mission_names mn ON mn.id=m.mission_id
+  $sql = 'SELECT count(m.id) as missions FROM uscm_missions m
+        LEFT JOIN uscm_mission_names mn ON mn.id=m.mission_id
                 WHERE character_id=:cid AND mn.date < NOW()';
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -345,12 +334,11 @@ function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
 
 function traits($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = $_SESSION ['table_prefix'];
   $traitarray = array ();
   $sql = "SELECT tn.id, trait_name
-          FROM " . $tablePrefix . "trait_names tn
-          LEFT JOIN " . $tablePrefix . "traits t ON t.trait_name_id=tn.id
-          LEFT JOIN " . $tablePrefix . "characters c ON c.id=t.character_id
+          FROM uscm_trait_names tn
+          LEFT JOIN uscm_traits t ON t.trait_name_id=tn.id
+          LEFT JOIN uscm_characters c ON c.id=t.character_id
           WHERE t.character_id=cid ORDER BY trait_name";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
@@ -363,8 +351,7 @@ function traits($characterId) {
 
 function lastMissionForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $tablePrefix = $_SESSION ['table_prefix'];
-  $sql = "SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM " . $tablePrefix . "mission_names LEFT JOIN " . $tablePrefix . "missions as m on m.mission_id = " . $tablePrefix . "mission_names.id WHERE character_id = :characterId ORDER BY date DESC LIMIT 1";
+  $sql = "SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = :characterId ORDER BY date DESC LIMIT 1";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':characterId', $characterId, PDO::PARAM_INT);
   $stmt->execute();
