@@ -263,10 +263,10 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $exhaustionpointsbonus = $bonuses->exhaustionPoints();
   print_pdf_bonus($pdf, $exhaustionpointsbonus);
 
-  pdf_set_text_pos($pdf, $aapcolumnone, 290);
-  pdf_show($pdf, "Trauma:");
-  pdf_set_text_pos($pdf, $aapcolumntwo, 290);
-  pdf_show($pdf, $character->getTraumaPoints());
+  //pdf_set_text_pos($pdf, $aapcolumnone, 290);
+  //pdf_show($pdf, "Trauma:");
+  //pdf_set_text_pos($pdf, $aapcolumntwo, 290);
+  //pdf_show($pdf, $character->getTraumaPoints());
 
   pdf_set_text_pos($pdf, $aapcolumnfour, 374);
   pdf_show($pdf, "Carry Capacity:");
