@@ -14,9 +14,8 @@
 <a href="index.php?url=list_characters.php">Characters</a> | 
 <a href="index.php?url=list_missions.php">Missions</a> | 
 <a href="index.php?url=list_hall_of_fame.php">Hall of Fame</a> |
-<?php //<a href="../forum/index.php">Forum</a>
-    ?>
 <a href="https://uscm.swedishforum.net/" target="_blank">Forum</a>
+<a href="https://discord.gg/Ym9kR7g5y4" target="_blank">Discord</a>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_character.php">Create character</a>'):(""); ?>
 <?php echo ($_SESSION['level']>=2)?(' | <a href="index.php?url=create_mission.php">Create mission</a>'):(""); ?>
 <?php if ($_SESSION['level']==3) {
