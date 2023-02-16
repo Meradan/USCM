@@ -37,11 +37,13 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 
 <A HREF="resources/USCM_Generator.ods" TARGET="_blank">Character Generator</A> (OpenDocument - LibreOffice)<br/>
 <A HREF="resources/EquipmentListPrint2.pdf" TARGET="_blank">Equipment list</A> Version 2.01<br/>
-<A HREF="resources/EquipmentBookletPrint.pdf" TARGET="_blank">Reference Booklet</A> Background info and equipment details. New 2019 version<br/>
+<A HREF="resources/EquipmentBookletPrint.pdf" TARGET="_blank">Reference Booklet</A> Background info and equipment details. 2019 version<br/>
 <br/>
 <A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
 <br/>
 <A HREF="resources/USCM-Rules2.pdf" TARGET="_blank">Rules - Properties/Cert</A> (PDF, description of all properties etc.)<br/>
+<br/>
+<A HREF="resources/InofficiellBriefingBF5.pdf" TARGET="_blank">Unofficial briefing</A> (BF5 campaign knowledge about aliens, in swedish)<br/>
 <br/>
 <br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
 
