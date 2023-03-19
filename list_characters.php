@@ -255,7 +255,7 @@ foreach ($platoons as $platoon ) { ?>
     <TD WIDTH="120">Michael Brixton</TD>
     <TD WIDTH="107">Officer</TD>
     <TD WIDTH="20">00-10-14</TD>
-	<TD WIDTH="335">PoW (CTF)</TD>
+	<TD WIDTH="335">Active</TD>
   </TR>
   <TR>
     <TD WIDTH="20">Android</TD>
