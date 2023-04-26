@@ -1,0 +1,579 @@
+{
+    "Player": "New Player",
+    "E-mail": "test@test.com",
+    "Name": "Test Player",
+    "Platoon": 0,
+    "Rank": "private",
+    "Speciality": 0,
+    "Gender": 0,
+    "Age": 21,
+    "Config": {
+        "Starting EP": 100,
+        "Starting AP": 22,
+        "specialities": [
+            "APC",
+            "Close Combat",
+            "Com-tech"
+        ],
+        "platoons": [
+            "BF5",
+            "LL11",
+            "DU4"
+        ],
+        "genders": [
+            "Male",
+            "Female"
+        ],
+        "skill_cost_table": [
+            0,
+            1,
+            3,
+            6,
+            10,
+            15
+        ],
+        "specialization_cost_table": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "age": {
+            "min": 21,
+            "max": 28
+        }
+    },
+    "Attributes": {
+        "Strength": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Reaction": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Dexterity": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Endurance": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Toughness": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Charisma": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        },
+        "Psyche": {
+            "value": 3,
+            "min": 1,
+            "max": 5
+        }
+    },
+    "Traits": {
+        "ARM Sympathizer": {
+            "value": 0,
+            "requirements": {
+                "not_allowed": [
+                    {
+                        "type": "trait",
+                        "ref": "Live long and prosper"
+                    }
+                ]
+            }
+        },
+        "Bloodthirst": {
+            "value": 1,
+            "requirements": {
+                "not_allowed": [
+                    {
+                        "type": "trait",
+                        "ref": "Domesticated"
+                    },
+                    {
+                        "type": "trait",
+                        "ref": "Religious"
+                    },
+                    {
+                        "type": "trait",
+                        "ref": "Righteous"
+                    }
+                ]
+            }
+        },
+        "Collector": {
+            "value": 0
+        },
+        "Criminal": {
+            "value": 0
+        },
+        "Domesticated": {
+            "value": 0
+        },
+        "Dr. Gamble": {
+            "value": 0
+        },
+        "Glory Hunter": {
+            "value": 0
+        }
+    },
+    "Disadvantages": {
+        "Absent-minded": {
+            "value": 0,
+            "cost": -4
+        },
+        "Bad aura": {
+            "value": 0,
+            "cost": -2
+        },
+        "Blabbermouth": {
+            "value": 0,
+            "cost": -1,
+            "requirements": {
+                "atleast": [
+                    {
+                        "type": "attribute",
+                        "ref": "charisma",
+                        "value": 3
+                    }
+                ]
+            }
+        },
+        "Canary": {
+            "value": 1,
+            "cost": -1
+        },
+        "Compulsive Gambler": {
+            "value": 0,
+            "cost": -1
+        },
+        "Debt to the Mafia": {
+            "value": 0,
+            "cost": -4
+        }
+    },
+    "Advantages": {
+        "2nd in Command": {
+            "value": 0,
+            "cost": 3,
+            "requirements": {
+                "atleast": [
+                    {
+                        "type": "skill",
+                        "ref": "Computer Operation",
+                        "value": 4
+                    }
+                ],
+                "exact": [
+                    {
+                        "type": "character",
+                        "ref": "rank",
+                        "value": "Staff Sergeant"
+                    }
+                ]
+            }
+        },
+        "Aye, aye skipper!": {
+            "value": 0,
+            "cost": 4,
+            "requirements": {
+                "atleast": [
+                    {
+                        "type": "skill",
+                        "ref": "swiming",
+                        "value": 2
+                    }
+                ]
+            },
+            "bonus": {
+                "add": [
+                    {
+                        "type": "skill",
+                        "ref": "Swiming",
+                        "value": 2
+                    }
+                ]
+            }
+        },
+        "Avid Hunter": {
+            "value": 0,
+            "cost": 4
+        },
+        "Baseball Player": {
+            "value": 0,
+            "cost": 3
+        },
+        "Bilingual": {
+            "value": 0,
+            "cost": 6
+        },
+        "Blood Brothers": {
+            "value": 0,
+            "cost": 2
+        },
+        "Bodyguard": {
+            "value": 0,
+            "cost": 1
+        }
+    },
+    "Skills": {
+        "Weapon Skills": {
+            "Shooting: Aimed": {
+                "value": 4,
+                "min": 1,
+                "max": 5
+            },
+            "Shooting: Dynamic": {
+                "value": 1,
+                "min": 1,
+                "max": 5
+            },
+            "Shooting: Auto": {
+                "value": 1,
+                "min": 1,
+                "max": 5
+            },
+            "Indirect Fire": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            }
+        },
+        "Physical Skills": {
+            "Throwing": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Close Combat: Standup": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Close Combat: Grappling": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Stealth": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            }
+        },
+        "Driving Skills": {
+            "Driving": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Parachute": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Pilot: Atmospheric": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Pilot: Space": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Remote Piloting": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            }
+        },
+        "Technical Skills": {
+            "Navigation": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Comtech": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Computer Systems": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            },
+            "Sensor Systems": {
+                "value": 0,
+                "min": 0,
+                "max": 5
+            },
+            "Science Equipment": {
+                "value": 0,
+                "min": 0,
+                "max": 5
+            },
+            "Electronic Tools": {
+                "value": 1,
+                "min": 0,
+                "max": 5
+            }
+        }
+    },
+    "Specializations": {
+        "Aircraft": {
+            "Shuttle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Gliderplane": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Rotorcraft": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Cargo": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Platform": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "UD4 Dropship": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "UD22 Dropship": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M421 Firefly": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "AD-17 Cougar": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "AD-19 Bearcat": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M86 UAV": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            }
+        },
+        "Land Vehicle": {
+            "Car": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "ATVL": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Hoverbike": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Cargo": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Tractor": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Truck": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M577 APC": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M579 APC": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M34 Longstreet": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M22 Jackson": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M40 Ridgeway": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M572 APC": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M292 Artillery": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            }
+        },
+        "Starship": {
+            "Freighter": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Colony Ship": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Salvage Vessel": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Survey Ship": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Tanker": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Conestoga Frigate": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Bougainville Attack Transport": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Tientsin Assault Ship": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Valley Forge Class": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Henderson Field Transport": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Okinawa Assault Carrier": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            }
+        },
+        "Weapons": {
+            "M39 SMG": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "VP55 LR Pistol": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Dartgun": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M42 Sniper Rifle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M240 Flamer": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "M56 Smartgun": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "SK813 Pulse Rifle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "NSG23 Assault Rifle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Weyland Storm Rifle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Pistol": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Shotgun": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            },
+            "Deer Rifle": {
+                "value": 0,
+                "min": 0,
+                "max": 3
+            }
+        }
+    }
+}
