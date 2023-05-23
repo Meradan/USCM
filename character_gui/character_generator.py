@@ -29,6 +29,7 @@ class CharacterGenerator:
             "traits": dict(),
             "advantages": dict(),
             "disadvantages": dict(),
+            "psychotic disadvantages": dict(),
             "skills": dict(),
             "stats": dict(),
             "expertise": dict(),
@@ -239,7 +240,7 @@ class CharacterGenerator:
         )
 
     @staticmethod
-    def _split_dict(source, num_per_part):
+    def _split_dict(source, num_per_part, max_row_count=24):
         """
         Helper function to dived a set of components into groups
         in order to control the number of items shown horisontally.
@@ -250,14 +251,17 @@ class CharacterGenerator:
         split_items = []
         part = dict()
         row_count = 0
+        category_count = 0
         for item_key, item_value in source.items():
             part[item_key] = item_value
-            row_count = row_count + 1
-            if row_count >= num_per_part:
+            category_count = category_count + 1
+            row_count = row_count + len(item_value)
+            if (category_count >= num_per_part) or (row_count >= max_row_count):
                 split_items.append(part)
                 part = dict()
+                category_count = 0
                 row_count = 0
-        if row_count > 0:
+        if category_count > 0:
             split_items.append(part)
         return split_items
 
@@ -443,6 +447,7 @@ class CharacterGenerator:
                                                     "category": category_key,
                                                     "label": property_key,
                                                 },
+                                                indent=5,
                                                 callback=callback,
                                                 default_value=propery_value["value"],
                                                 enabled=self._is_check_box_change_allowed(
@@ -505,7 +510,7 @@ class CharacterGenerator:
     def main(self):
         with dpg.window(
             width=300,
-            height=800,
+            height=1000,
             pos=[0, 0],
             no_move=True,
             no_close=True,
@@ -539,8 +544,8 @@ class CharacterGenerator:
                     dpg.add_button(label="Submit update to Skynet")
 
         with dpg.window(
-            width=800,
-            height=800,
+            width=1400,
+            height=1000,
             pos=[301, 0],
             no_move=True,
             no_close=True,
@@ -567,7 +572,7 @@ class CharacterGenerator:
                         self._item_refs["Exptertise"] = self._add_property_check_boxes(
                             character=self._current_character,
                             property="Expertise",
-                            num_per_row=2,
+                            num_per_row=3,
                             callback=self._property_callback,
                         )
 
@@ -583,6 +588,7 @@ class CharacterGenerator:
                         self._item_refs["Advantages"] = self._add_property_check_boxes(
                             character=self._current_character,
                             property="Advantages",
+                            num_per_row=1,
                             callback=self._property_callback,
                         )
 
@@ -592,10 +598,32 @@ class CharacterGenerator:
                         ] = self._add_property_check_boxes(
                             character=self._current_character,
                             property="Disadvantages",
+                            num_per_row=1,
                             cost_width=30,
                             callback=self._property_callback,
                         )
-
+                    
+                    with dpg.tab(label="Psychotic Disadvantages:"):
+                        self._item_refs[
+                            "psychotic disadvantages"
+                        ] = self._add_property_check_boxes(
+                            character=self._current_character,
+                            property="Psychotic Disadvantages",
+                            num_per_row=1,
+                            cost_width=30,
+                            callback=self._property_callback,
+                        )
+                    with dpg.tab(label="Cybernetics:"):
+                        self._item_refs[
+                            "Cybernetics"
+                        ] = self._add_property_check_boxes(
+                            character=self._current_character,
+                            property="Cybernetics",
+                            num_per_row=1,
+                            cost_width=30,
+                            callback=self._property_callback,
+                        )
+                    
         self._update_xp_status()
 
 
@@ -681,6 +709,18 @@ class CharacterSelector:
         Set Login options.
         Select existing character or create new
         """
+
+        # Uncomment this and comment below to skip selector page and
+        # go directly to character creation.
+        """ 
+        self._selected_character_file = r"local_characters/template/template.json"
+
+        ci = CharacterImport.from_json(self._selected_character_file)
+        cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
+        cg.main()
+        """
+        
+        
         with dpg.window(
             width=380,
             height=400,
@@ -709,7 +749,7 @@ class CharacterImport:
             imported_character = json.load(setup_file)
 
         # Convert from json 0/1 to false/true
-        for category in ["Traits", "Advantages", "Disadvantages", "Expertise"]:
+        for category in ["Traits", "Advantages", "Psychotic Disadvantages", "Disadvantages", "Expertise", "Cybernetics"]:
             for group in imported_character[category].keys():
                 for item_key in imported_character[category][group].keys():
                     imported_character[category][group][item_key]["value"] = bool(
@@ -726,7 +766,7 @@ if __name__ == "__main__":
     cs = CharacterSelector()
     cs.main()
 
-    dpg.create_viewport(title="USCM Character Editor", width=1150, height=850)
+    dpg.create_viewport(title="USCM Character Editor", width=1730, height=1050)
     dpg.setup_dearpygui()
     dpg.show_viewport()
     dpg.start_dearpygui()
