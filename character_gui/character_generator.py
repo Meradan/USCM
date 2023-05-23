@@ -31,7 +31,7 @@ class CharacterGenerator:
             "disadvantages": dict(),
             "skills": dict(),
             "stats": dict(),
-            "specialization": dict(),
+            "expertise": dict(),
         }
 
         self._stats = {
@@ -54,13 +54,13 @@ class CharacterGenerator:
 
     @staticmethod
     def _get_total_knowledge_cost(
-        skills_or_specializations: dict, default_cost: list
+        skills: dict, default_cost: list
     ) -> int:
         """
-        Calulate the xp cost for either all skills or all specializations.
+        Calulate the xp cost for either all skills.
         """
         sum_cost = 0
-        for category in skills_or_specializations.values():
+        for category in skills.values():
             for knowledge in category.values():
                 if "cost_table" in knowledge:
                     cost_table = knowledge["cost_table"]
@@ -78,15 +78,10 @@ class CharacterGenerator:
     def _get_total_xp_usage(self) -> int:
         return (
             self._get_total_knowledge_cost(
-                skills_or_specializations=self._current_character["Skills"],
+                skills=self._current_character["Skills"],
                 default_cost=self._imported_character["Config"]["skill_cost_table"],
             )
-            + self._get_total_knowledge_cost(
-                skills_or_specializations=self._current_character["Specializations"],
-                default_cost=self._imported_character["Config"][
-                    "specialization_cost_table"
-                ],
-            )
+            + self._get_total_property_cost(self._current_character["Expertise"])
             + self._get_total_property_cost(self._current_character["Advantages"])
             + self._get_total_property_cost(self._current_character["Disadvantages"])
         )
@@ -98,9 +93,11 @@ class CharacterGenerator:
         For example 'Advantages'.
         """
         sum_cost = 0
-        for property in properties.values():
-            if property["value"]:
-                sum_cost = sum_cost + property["cost"]
+        
+        for group in properties:
+            for property in properties[group].values():
+                if property["value"]:
+                    sum_cost = sum_cost + property["cost"]
         return sum_cost
 
     def _get_allowed_min_value(self, item: dict) -> int:
@@ -187,9 +184,9 @@ class CharacterGenerator:
         else:
             dpg.set_item_label(item=sender, label="")
 
-    def _skills_specializations_callback(self, sender, app_data, user_data: dict):
+    def _skills_callback(self, sender, app_data, user_data: dict):
         """
-        Triggered when any slider for skill/specialization points have changed.
+        Triggered when any slider for skill points have changed.
         """
         self._set_value_and_display_difference(
             property=user_data["property"],
@@ -207,6 +204,7 @@ class CharacterGenerator:
         self._set_value_in_character_state(
             state=self._current_character,
             property=user_data["property"],
+            category=user_data["category"],
             label=user_data["label"],
             value=app_data,
         )
@@ -247,7 +245,7 @@ class CharacterGenerator:
         in order to control the number of items shown horisontally.
         For example.
         * Limit the amount traits/advantages/disadvantages for each column.
-        " Limit the amount of skill/specialization sub categories for each column.
+        " Limit the amount of skill sub categories for each column.
         """
         split_items = []
         part = dict()
@@ -413,43 +411,48 @@ class CharacterGenerator:
         with dpg.group(horizontal=True):
             for part in split_items:
                 with dpg.group():
-                    for property_key, propery_value in part.items():
-                        with dpg.group(horizontal=True):
-                            with dpg.table(
-                                header_row=False,
-                                row_background=False,
-                                no_host_extendX=True,
-                            ):
-                                dpg.add_table_column(
-                                    width_fixed=True, init_width_or_weight=20
-                                )
-                                dpg.add_table_column(
-                                    width_fixed=True, init_width_or_weight=label_width
-                                )
-                                if show_cost:
-                                    dpg.add_table_column(
-                                        width_fixed=True,
-                                        init_width_or_weight=cost_width,
-                                    )
-                                    cost = propery_value["cost"]
-                                else:
-                                    cost = None
-                                with dpg.table_row():
-                                    item_id = dpg.add_checkbox(
-                                        user_data={
-                                            "property": property,
-                                            "label": property_key,
-                                        },
-                                        callback=callback,
-                                        default_value=propery_value["value"],
-                                        enabled=self._is_check_box_change_allowed(
-                                            propery_value
-                                        ),
-                                    )
-                                    item_refs[property_key] = item_id
-                                    dpg.add_text(property_key)
-                                    if show_cost:
-                                        dpg.add_text(f"({propery_value['cost']})")
+                    for category_key, category_value in part.items():
+                        with dpg.group(width=300):
+                            if not category_key == 'None':
+                                dpg.add_text(category_key, color=self._section_title_color)
+                            for property_key, propery_value in category_value.items():
+                                with dpg.group(horizontal=True):
+                                    with dpg.table(
+                                        header_row=False,
+                                        row_background=False,
+                                        no_host_extendX=True,
+                                    ):
+                                        dpg.add_table_column(
+                                            width_fixed=True, init_width_or_weight=20
+                                        )
+                                        dpg.add_table_column(
+                                            width_fixed=True, init_width_or_weight=label_width
+                                        )
+                                        if show_cost:
+                                            dpg.add_table_column(
+                                                width_fixed=True,
+                                                init_width_or_weight=cost_width,
+                                            )
+                                            cost = propery_value["cost"]
+                                        else:
+                                            cost = None
+                                        with dpg.table_row():
+                                            item_id = dpg.add_checkbox(
+                                                user_data={
+                                                    "property": property,
+                                                    "category": category_key,
+                                                    "label": property_key,
+                                                },
+                                                callback=callback,
+                                                default_value=propery_value["value"],
+                                                enabled=self._is_check_box_change_allowed(
+                                                    propery_value
+                                                ),
+                                            )
+                                            item_refs[property_key] = item_id
+                                            dpg.add_text(property_key)
+                                            if show_cost:
+                                                dpg.add_text(f"({propery_value['cost']})")
         return item_refs
 
     def _add_skill_input(
@@ -558,14 +561,14 @@ class CharacterGenerator:
                         self._item_refs["Skills"] = self._add_skill_input(
                             character=self._current_character,
                             property="Skills",
-                            callback=self._skills_specializations_callback,
+                            callback=self._skills_callback,
                         )
-                    with dpg.tab(label="Specializations"):
-                        self._item_refs["Specializations"] = self._add_skill_input(
+                    with dpg.tab(label="Expertise"):
+                        self._item_refs["Exptertise"] = self._add_property_check_boxes(
                             character=self._current_character,
-                            property="Specializations",
+                            property="Expertise",
                             num_per_row=2,
-                            callback=self._skills_specializations_callback,
+                            callback=self._property_callback,
                         )
 
                     with dpg.tab(label="Traits:"):
@@ -690,7 +693,7 @@ class CharacterSelector:
             no_title_bar=True,
         ):
             self._add_login()
-
+        
 
 class CharacterImport:
     """
@@ -706,11 +709,12 @@ class CharacterImport:
             imported_character = json.load(setup_file)
 
         # Convert from json 0/1 to false/true
-        for category in ["Traits", "Advantages", "Disadvantages"]:
-            for item_key in imported_character[category].keys():
-                imported_character[category][item_key]["value"] = bool(
-                    imported_character[category][item_key]["value"]
-                )
+        for category in ["Traits", "Advantages", "Disadvantages", "Expertise"]:
+            for group in imported_character[category].keys():
+                for item_key in imported_character[category][group].keys():
+                    imported_character[category][group][item_key]["value"] = bool(
+                        imported_character[category][group][item_key]["value"]
+                    )
         return cls(imported_character)
 
     def get_character(self):
