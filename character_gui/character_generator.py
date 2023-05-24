@@ -56,9 +56,7 @@ class CharacterGenerator:
         return self._imported_character["Config"]["Starting EP"]
 
     @staticmethod
-    def _get_total_knowledge_cost(
-        skills: dict, default_cost: list
-    ) -> int:
+    def _get_total_knowledge_cost(skills: dict, default_cost: list) -> int:
         """
         Calulate the xp cost for either all skills.
         """
@@ -96,7 +94,7 @@ class CharacterGenerator:
         For example 'Advantages'.
         """
         sum_cost = 0
-        
+
         for group in properties:
             for property in properties[group].values():
                 if property["value"]:
@@ -233,8 +231,8 @@ class CharacterGenerator:
         """
 
         dpg.set_value(
-            item=self._item_refs["stats"]["Psycho Limit"], 
-            value=self._current_character["Attributes"]["Psyche"]["value"]
+            item=self._item_refs["stats"]["Psycho Limit"],
+            value=self._current_character["Attributes"]["Psyche"]["value"],
         )
 
     def _update_stress_limit(self):
@@ -244,74 +242,78 @@ class CharacterGenerator:
         """
 
         dpg.set_value(
-            item=self._item_refs["stats"]["Stress Limit"], 
-            value=self._current_character["Attributes"]["Psyche"]["value"] + 1
+            item=self._item_refs["stats"]["Stress Limit"],
+            value=self._current_character["Attributes"]["Psyche"]["value"] + 1,
         )
-    
-    def _update_stunt_cap(self):
-            """
-            Update the printout of current stunt cap.
-            Must be called whenever a related value have been change.
-            """
 
-            dpg.set_value(
-                item=self._item_refs["stats"]["Stunt Cap"], 
-                value=self._current_character["Attributes"]["Charisma"]["value"]
-            )
+    def _update_stunt_cap(self):
+        """
+        Update the printout of current stunt cap.
+        Must be called whenever a related value have been change.
+        """
+
+        dpg.set_value(
+            item=self._item_refs["stats"]["Stunt Cap"],
+            value=self._current_character["Attributes"]["Charisma"]["value"],
+        )
 
     def _update_health_limit(self):
-            """
-            Update the printout of current health.
-            Must be called whenever a related value have been change.
-            """
+        """
+        Update the printout of current health.
+        Must be called whenever a related value have been change.
+        """
 
-            dpg.set_value(
-                item=self._item_refs["stats"]["Health"], 
-                value=self._current_character["Attributes"]["Endurance"]["value"] + 3
-            )
+        dpg.set_value(
+            item=self._item_refs["stats"]["Health"],
+            value=self._current_character["Attributes"]["Endurance"]["value"] + 3,
+        )
 
     def _update_carry_capacity(self):
-            """
-            Update the printout of current carry capacity.
-            Must be called whenever a related value have been change.
-            """
+        """
+        Update the printout of current carry capacity.
+        Must be called whenever a related value have been change.
+        """
 
-            dpg.set_value(
-                item=self._item_refs["stats"]["Carry Capacity"], 
-                value=self._current_character["Config"]["Carry Capacity Table"][self._current_character["Attributes"]["Strength"]["value"] - 1] 
-            )
+        dpg.set_value(
+            item=self._item_refs["stats"]["Carry Capacity"],
+            value=self._current_character["Config"]["Carry Capacity Table"][
+                self._current_character["Attributes"]["Strength"]["value"] - 1
+            ],
+        )
 
     def _update_combat_load(self):
-            """
-            Update the printout of current combat load.
-            Must be called whenever a related value have been change.
-            """
+        """
+        Update the printout of current combat load.
+        Must be called whenever a related value have been change.
+        """
 
-            dpg.set_value(
-                item=self._item_refs["stats"]["Combat Load"], 
-                value=self._current_character["Config"]["Combat Load Table"][self._current_character["Attributes"]["Strength"]["value"] - 1] 
-            )
+        dpg.set_value(
+            item=self._item_refs["stats"]["Combat Load"],
+            value=self._current_character["Config"]["Combat Load Table"][
+                self._current_character["Attributes"]["Strength"]["value"] - 1
+            ],
+        )
 
     def _update_leadership_points(self):
-            """
-            Update the printout of current health.
-            Must be called whenever a related value have been change.
-            """
+        """
+        Update the printout of current health.
+        Must be called whenever a related value have been change.
+        """
 
-            dpg.set_value(
-                item=self._item_refs["stats"]["Leadership Points"], 
-                value=self._current_character["Config"]["Rank Bonus"][self._current_character["Rank"]] 
-                + self._current_character["Attributes"]["Charisma"]["value"]
-            )
+        dpg.set_value(
+            item=self._item_refs["stats"]["Leadership Points"],
+            value=self._current_character["Config"]["Rank Bonus"][
+                self._current_character["Rank"]
+            ]
+            + self._current_character["Attributes"]["Charisma"]["value"],
+        )
 
     def _update_ap_status(self):
         """
         Update the printout of available attribute points.
         Must be called whenever a related value have been change.
         """
-        remaining = (
-            self._get_base_attribute_points() - self._get_total_attribute_cost()
-        )
+        remaining = self._get_base_attribute_points() - self._get_total_attribute_cost()
         dpg.set_value(
             item=self._item_refs["stats"]["Attribute Points"], value=remaining
         )
@@ -325,6 +327,14 @@ class CharacterGenerator:
         dpg.set_value(
             item=self._item_refs["stats"]["Experience Points"], value=remaining
         )
+
+    def _save_character_callback(self):
+        path = os.path.abspath(
+            "local_characters/"
+            + self._current_character["Name"].replace(" ", "_").lower()
+            + ".json"
+        )
+        CharacterExport.to_json(path, self._current_character)
 
     @staticmethod
     def _split_dict(source, num_per_part, max_row_count=24):
@@ -434,7 +444,11 @@ class CharacterGenerator:
 
             with dpg.table_row():
                 dpg.add_text("Rank:")
-                dpg.add_text(self._current_character["Config"]["Rank Labels"][self._current_character["Rank"]])
+                dpg.add_text(
+                    self._current_character["Config"]["Rank Labels"][
+                        self._current_character["Rank"]
+                    ]
+                )
 
             with dpg.table_row():
                 dpg.add_text("Speciality:")
@@ -504,8 +518,10 @@ class CharacterGenerator:
                 with dpg.group():
                     for category_key, category_value in part.items():
                         with dpg.group(width=300):
-                            if not category_key == 'None':
-                                dpg.add_text(category_key, color=self._section_title_color)
+                            if not category_key == "None":
+                                dpg.add_text(
+                                    category_key, color=self._section_title_color
+                                )
                             for property_key, propery_value in category_value.items():
                                 with dpg.group(horizontal=True):
                                     with dpg.table(
@@ -517,7 +533,8 @@ class CharacterGenerator:
                                             width_fixed=True, init_width_or_weight=20
                                         )
                                         dpg.add_table_column(
-                                            width_fixed=True, init_width_or_weight=label_width
+                                            width_fixed=True,
+                                            init_width_or_weight=label_width,
                                         )
                                         if show_cost:
                                             dpg.add_table_column(
@@ -544,7 +561,9 @@ class CharacterGenerator:
                                             item_refs[property_key] = item_id
                                             dpg.add_text(property_key)
                                             if show_cost:
-                                                dpg.add_text(f"({propery_value['cost']})")
+                                                dpg.add_text(
+                                                    f"({propery_value['cost']})"
+                                                )
         return item_refs
 
     def _add_skill_input(
@@ -623,6 +642,13 @@ class CharacterGenerator:
                             self._item_refs["stats"][stat_label] = dpg.add_text(
                                 stat_value
                             )
+
+            with dpg.group(width=300):
+                dpg.add_spacer(height=50)
+                dpg.add_button(
+                    label="Save Character", callback=self._save_character_callback
+                )
+
             with dpg.group(width=300):
                 dpg.add_spacer(height=50)
                 if self._create_mode:
@@ -689,7 +715,7 @@ class CharacterGenerator:
                             cost_width=30,
                             callback=self._property_callback,
                         )
-                    
+
                     with dpg.tab(label="Psychotic Disadvantages:"):
                         self._item_refs[
                             "psychotic disadvantages"
@@ -701,16 +727,14 @@ class CharacterGenerator:
                             callback=self._property_callback,
                         )
                     with dpg.tab(label="Cybernetics:"):
-                        self._item_refs[
-                            "Cybernetics"
-                        ] = self._add_property_check_boxes(
+                        self._item_refs["Cybernetics"] = self._add_property_check_boxes(
                             character=self._current_character,
                             property="Cybernetics",
                             num_per_row=1,
                             cost_width=30,
                             callback=self._property_callback,
                         )
-                    
+
         self._update_xp_status()
         self._update_psycho_limit()
         self._update_stress_limit()
@@ -813,8 +837,7 @@ class CharacterSelector:
         cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
         cg.main()
         """
-        
-        
+
         with dpg.window(
             width=380,
             height=400,
@@ -827,7 +850,7 @@ class CharacterSelector:
             no_title_bar=True,
         ):
             self._add_login()
-        
+
 
 class CharacterImport:
     """
@@ -843,7 +866,14 @@ class CharacterImport:
             imported_character = json.load(setup_file)
 
         # Convert from json 0/1 to false/true
-        for category in ["Traits", "Advantages", "Psychotic Disadvantages", "Disadvantages", "Expertise", "Cybernetics"]:
+        for category in [
+            "Traits",
+            "Advantages",
+            "Psychotic Disadvantages",
+            "Disadvantages",
+            "Expertise",
+            "Cybernetics",
+        ]:
             for group in imported_character[category].keys():
                 for item_key in imported_character[category][group].keys():
                     imported_character[category][group][item_key]["value"] = bool(
@@ -853,6 +883,38 @@ class CharacterImport:
 
     def get_character(self):
         return self._character
+
+
+class CharacterExport:
+    """
+    Handle import of character. Currenty only from json-file.
+    """
+
+    def __init__(self, character_path, character):
+        self._character = deepcopy(character)
+        self._character_path = character_path
+
+    @classmethod
+    def to_json(cls, character_path, character):
+        character_out = deepcopy(character)
+        # Convert from false/true to 1/0
+        for category in [
+            "Traits",
+            "Advantages",
+            "Psychotic Disadvantages",
+            "Disadvantages",
+            "Expertise",
+            "Cybernetics",
+        ]:
+            for group in character_out[category].keys():
+                for item_key in character_out[category][group].keys():
+                    character_out[category][group][item_key]["value"] = int(
+                        character_out[category][group][item_key]["value"]
+                    )
+        as_json = json.dumps(character_out, indent=4)
+        with open(character_path, "w") as out_file:
+            out_file.write(as_json)
+        return cls(character_path, character)
 
 
 if __name__ == "__main__":
