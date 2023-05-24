@@ -3,7 +3,7 @@
     "E-mail": "test@test.com",
     "Name": "Test Player",
     "Platoon": 0,
-    "Rank": "private",
+    "Rank": 3,
     "Speciality": 0,
     "Gender": 0,
     "Age": 21,
@@ -35,7 +35,26 @@
         "age": {
             "min": 21,
             "max": 28
-        }
+        },
+        "Rank Labels": [
+            "Pvt",
+            "Pfc",
+            "LCpl",
+            "Cpl",
+            "Sgt",
+            "SSgt",
+            "GSgt",
+            "MSgt"
+        ],
+        "Rank Bonus": [
+            0, 0, 1, 2, 3, 4, 5, 5
+        ],
+        "Carry Capacity Table": [
+            45, 50, 55, 60, 65
+        ],
+        "Combat Load Table": [
+            20, 25, 25, 30, 35
+        ]
     },
     "Attributes": {
         "Strength": {

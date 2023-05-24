@@ -39,10 +39,12 @@ class CharacterGenerator:
             "Carry Capacity": 55,
             "Combat Load": 25,
             "Psycho Limit": 4,
-            "Fear Limit": 4,
+            "Stress Limit": 4,
             "Stunt Cap": 2,
+            "Leadership Points": 1,
+            "Health": 1,
             "Attribute Points": self._get_base_attribute_points()
-            - self._get_total_attribute_points(),
+            - self._get_total_attribute_cost(),
             "Experience Points": self._get_base_experience_points()
             - self._get_total_xp_usage(),
         }
@@ -70,7 +72,7 @@ class CharacterGenerator:
                 sum_cost = sum_cost + cost_table[knowledge["value"]]
         return sum_cost
 
-    def _get_total_attribute_points(self) -> int:
+    def _get_total_attribute_cost(self) -> int:
         sum_points = 0
         for attribute in self._current_character["Attributes"].values():
             sum_points = sum_points + attribute["value"]
@@ -127,6 +129,13 @@ class CharacterGenerator:
             new_value=app_data,
         )
         self._update_ap_status()
+        self._update_psycho_limit()
+        self._update_stress_limit()
+        self._update_stunt_cap()
+        self._update_health_limit()
+        self._update_leadership_points()
+        self._update_carry_capacity()
+        self._update_combat_load()
 
     def _get_value_from_character_state(
         self, state: dict, property: str, label: str, category: str = None
@@ -217,13 +226,91 @@ class CharacterGenerator:
         """
         self._current_character["Traits"]["value"] = app_data
 
+    def _update_psycho_limit(self):
+        """
+        Update the printout of current Psycho limit.
+        Must be called whenever a related value have been change.
+        """
+
+        dpg.set_value(
+            item=self._item_refs["stats"]["Psycho Limit"], 
+            value=self._current_character["Attributes"]["Psyche"]["value"]
+        )
+
+    def _update_stress_limit(self):
+        """
+        Update the printout of current Stress limit.
+        Must be called whenever a related value have been change.
+        """
+
+        dpg.set_value(
+            item=self._item_refs["stats"]["Stress Limit"], 
+            value=self._current_character["Attributes"]["Psyche"]["value"] + 1
+        )
+    
+    def _update_stunt_cap(self):
+            """
+            Update the printout of current stunt cap.
+            Must be called whenever a related value have been change.
+            """
+
+            dpg.set_value(
+                item=self._item_refs["stats"]["Stunt Cap"], 
+                value=self._current_character["Attributes"]["Charisma"]["value"]
+            )
+
+    def _update_health_limit(self):
+            """
+            Update the printout of current health.
+            Must be called whenever a related value have been change.
+            """
+
+            dpg.set_value(
+                item=self._item_refs["stats"]["Health"], 
+                value=self._current_character["Attributes"]["Endurance"]["value"] + 3
+            )
+
+    def _update_carry_capacity(self):
+            """
+            Update the printout of current carry capacity.
+            Must be called whenever a related value have been change.
+            """
+
+            dpg.set_value(
+                item=self._item_refs["stats"]["Carry Capacity"], 
+                value=self._current_character["Config"]["Carry Capacity Table"][self._current_character["Attributes"]["Strength"]["value"] - 1] 
+            )
+
+    def _update_combat_load(self):
+            """
+            Update the printout of current combat load.
+            Must be called whenever a related value have been change.
+            """
+
+            dpg.set_value(
+                item=self._item_refs["stats"]["Combat Load"], 
+                value=self._current_character["Config"]["Combat Load Table"][self._current_character["Attributes"]["Strength"]["value"] - 1] 
+            )
+
+    def _update_leadership_points(self):
+            """
+            Update the printout of current health.
+            Must be called whenever a related value have been change.
+            """
+
+            dpg.set_value(
+                item=self._item_refs["stats"]["Leadership Points"], 
+                value=self._current_character["Config"]["Rank Bonus"][self._current_character["Rank"]] 
+                + self._current_character["Attributes"]["Charisma"]["value"]
+            )
+
     def _update_ap_status(self):
         """
         Update the printout of available attribute points.
         Must be called whenever a related value have been change.
         """
         remaining = (
-            self._get_base_attribute_points() - self._get_total_attribute_points()
+            self._get_base_attribute_points() - self._get_total_attribute_cost()
         )
         dpg.set_value(
             item=self._item_refs["stats"]["Attribute Points"], value=remaining
@@ -347,7 +434,7 @@ class CharacterGenerator:
 
             with dpg.table_row():
                 dpg.add_text("Rank:")
-                dpg.add_text(self._current_character["Rank"])
+                dpg.add_text(self._current_character["Config"]["Rank Labels"][self._current_character["Rank"]])
 
             with dpg.table_row():
                 dpg.add_text("Speciality:")
@@ -625,6 +712,13 @@ class CharacterGenerator:
                         )
                     
         self._update_xp_status()
+        self._update_psycho_limit()
+        self._update_stress_limit()
+        self._update_stunt_cap()
+        self._update_health_limit()
+        self._update_leadership_points()
+        self._update_carry_capacity()
+        self._update_combat_load()
 
 
 class CharacterSelector:
