@@ -20,6 +20,7 @@ class CharacterGenerator:
             "specialities"
         ]
         self._gender_alternatives = self._current_character["Config"]["genders"]
+        self._rank_alternatives = self._current_character["Config"]["Rank Labels"]
 
         self._create_mode = create_mode
         self._section_title_color = [150, 250, 150]
@@ -218,11 +219,11 @@ class CharacterGenerator:
         )
         self._update_xp_status()
 
-    def _trait_callback(self, sender, app_data, user_data):
+    def _player_info_callback(self, sender, app_data, user_data: dict):
         """
-        Triggered when any checkbox for advantages points have changed.
+        Triggered when changing player info such as name, platoon etc.
         """
-        self._current_character["Traits"]["value"] = app_data
+        state=self._current_character["Player Info"][user_data["label"]] = app_data
 
     def _update_psycho_limit(self):
         """
@@ -299,12 +300,10 @@ class CharacterGenerator:
         Update the printout of current health.
         Must be called whenever a related value have been change.
         """
-
+        rank_index = self._rank_alternatives.index(self._current_character["Player Info"]["Rank"])
         dpg.set_value(
             item=self._item_refs["stats"]["Leadership Points"],
-            value=self._current_character["Config"]["Rank Bonus"][
-                self._current_character["Rank"]
-            ]
+            value=self._current_character["Config"]["Rank Bonus"][rank_index]
             + self._current_character["Attributes"]["Charisma"]["value"],
         )
 
@@ -331,7 +330,7 @@ class CharacterGenerator:
     def _save_character_callback(self):
         path = os.path.abspath(
             "local_characters/"
-            + self._current_character["Name"].replace(" ", "_").lower()
+            + self._current_character["Player Info"]["Name"].replace(" ", "_").lower()
             + ".json"
         )
         CharacterExport.to_json(path, self._current_character)
@@ -398,78 +397,80 @@ class CharacterGenerator:
                 if self._create_mode:
                     dpg.add_input_text(
                         tag="player_input_text",
-                        default_value=self._current_character["Player"],
+                        default_value=self._current_character["Player Info"]["Player"],
                         width=self._text_input_width,
                         enabled=self._create_mode,
+                        user_data={"label": "Player"},
+                        callback=self._player_info_callback,
                     )
                 else:
-                    dpg.add_text(self._current_character["Player"])
+                    dpg.add_text(self._current_character["Player Info"]["Player"])
 
             with dpg.table_row():
                 dpg.add_text("E-mail:")
                 if self._create_mode:
                     dpg.add_input_text(
                         tag="email_input_text",
-                        default_value=self._current_character["E-mail"],
+                        default_value=self._current_character["Player Info"]["E-mail"],
                         width=self._text_input_width,
                         enabled=self._create_mode,
+                        user_data={"label": "E-mail"},
+                        callback=self._player_info_callback,
                     )
                 else:
-                    dpg.add_text(self._current_character["E-mail"])
+                    dpg.add_text(self._current_character["Player Info"]["E-mail"])
 
             with dpg.table_row():
                 dpg.add_text("Name:")
                 if self._create_mode:
                     dpg.add_input_text(
-                        default_value=self._current_character["Name"],
+                        default_value=self._current_character["Player Info"]["Name"],
                         width=self._text_input_width,
                         enabled=self._create_mode,
+                        user_data={"label": "Name"},
+                        callback=self._player_info_callback,
                     )
                 else:
-                    dpg.add_text(self._current_character["Name"])
+                    dpg.add_text(self._current_character["Player Info"]["Name"])
 
             with dpg.table_row():
                 dpg.add_text("Platoon:")
-                current_platoon = self._platoon_alternatives[
-                    self._current_character["Platoon"]
-                ]
+                current_platoon = self._current_character["Player Info"]["Platoon"]
+
                 if self._create_mode:
                     dpg.add_combo(
                         items=self._platoon_alternatives,
                         width=self._text_input_width,
-                        default_value=current_platoon,
+                        default_value=self._platoon_alternatives[0],
+                        user_data={"label": "Platoon"},
+                        callback=self._player_info_callback,
                     )
                 else:
                     dpg.add_text(current_platoon)
 
             with dpg.table_row():
                 dpg.add_text("Rank:")
-                dpg.add_text(
-                    self._current_character["Config"]["Rank Labels"][
-                        self._current_character["Rank"]
-                    ]
-                )
+                dpg.add_text(self._current_character["Player Info"]["Rank"])
 
             with dpg.table_row():
                 dpg.add_text("Speciality:")
-                current_speciality = self._speciality_alternatives[
-                    self._current_character["Speciality"]
-                ]
+                current_speciality = self._current_character["Player Info"]["Speciality"]
                 if self._create_mode:
                     dpg.add_combo(
                         items=self._speciality_alternatives,
                         width=self._text_input_width,
                         default_value=current_speciality,
                         enabled=self._create_mode,
+                        user_data={"label": "Speciality"},
+                        callback=self._player_info_callback,
                     )
                 else:
                     dpg.add_text(current_speciality)
 
             with dpg.table_row():
                 dpg.add_text("Gender:")
-                current_gender = self._gender_alternatives[
-                    self._current_character["Gender"]
-                ]
+                current_gender = self._current_character["Player Info"]["Gender"]
+
                 if self._create_mode:
                     dpg.add_combo(
                         tag="gender_input_combo",
@@ -477,13 +478,15 @@ class CharacterGenerator:
                         width=self._text_input_width,
                         default_value=current_gender,
                         enabled=self._create_mode,
+                        user_data={"label": "Gender"},
+                        callback=self._player_info_callback,
                     )
                 else:
                     dpg.add_text(current_gender)
 
             with dpg.table_row():
                 dpg.add_text("Age:")
-                current_age = self._current_character["Age"]
+                current_age = self._current_character["Player Info"]["Age"]
 
                 if self._create_mode:
                     dpg.add_slider_int(
@@ -492,6 +495,8 @@ class CharacterGenerator:
                         max_value=self._imported_character["Config"]["age"]["max"],
                         default_value=current_age,
                         enabled=self._create_mode,
+                        user_data={"label": "Age"},
+                        callback=self._player_info_callback,
                     )
                 else:
                     dpg.add_text(current_age)
@@ -518,10 +523,10 @@ class CharacterGenerator:
                 with dpg.group():
                     for category_key, category_value in part.items():
                         with dpg.group(width=300):
-                            if not category_key == "None":
-                                dpg.add_text(
-                                    category_key, color=self._section_title_color
-                                )
+                            
+                            dpg.add_text(
+                                category_key, color=self._section_title_color
+                            )
                             for property_key, propery_value in category_value.items():
                                 with dpg.group(horizontal=True):
                                     with dpg.table(
@@ -694,7 +699,7 @@ class CharacterGenerator:
                             character=self._current_character,
                             property="Traits",
                             show_cost=False,
-                            callback=self._trait_callback,
+                            callback=self._property_callback,
                         )
 
                     with dpg.tab(label="Advantages:"):
@@ -897,7 +902,7 @@ class CharacterExport:
     @classmethod
     def to_json(cls, character_path, character):
         character_out = deepcopy(character)
-        # Convert from false/true to 1/0
+        # Convert from true/false to 1/0
         for category in [
             "Traits",
             "Advantages",
