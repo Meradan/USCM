@@ -73,19 +73,25 @@ class CharacterGenerator:
 
     def _get_total_attribute_cost(self) -> int:
         sum_points = 0
-        for attribute in self._current_character["Attributes"].values():
+        for attribute in self._current_character["Integer"]["Attributes"].values():
             sum_points = sum_points + attribute["value"]
         return sum_points
 
     def _get_total_xp_usage(self) -> int:
         return (
             self._get_total_knowledge_cost(
-                skills=self._current_character["Skills"],
+                skills=self._current_character["Integer"]["Skills"],
                 default_cost=self._imported_character["Config"]["skill_cost_table"],
             )
-            + self._get_total_property_cost(self._current_character["Expertise"])
-            + self._get_total_property_cost(self._current_character["Advantages"])
-            + self._get_total_property_cost(self._current_character["Disadvantages"])
+            + self._get_total_property_cost(
+                self._current_character["Boolean"]["Expertise"]
+            )
+            + self._get_total_property_cost(
+                self._current_character["Boolean"]["Advantages"]
+            )
+            + self._get_total_property_cost(
+                self._current_character["Boolean"]["Disadvantages"]
+            )
         )
 
     @staticmethod
@@ -171,14 +177,14 @@ class CharacterGenerator:
         and display the difference compared to the previous saved state.
         """
         self._set_value_in_character_state(
-            state=self._current_character,
+            state=self._current_character["Integer"],
             property=property,
             category=category,
             label=label,
             value=new_value,
         )
         difference = new_value - self._get_value_from_character_state(
-            state=self._imported_character,
+            state=self._imported_character["Integer"],
             property=property,
             category=category,
             label=label,
@@ -211,7 +217,7 @@ class CharacterGenerator:
         Triggered when any checkbox for advantages points have changed.
         """
         self._set_value_in_character_state(
-            state=self._current_character,
+            state=self._current_character["Boolean"],
             property=user_data["property"],
             category=user_data["category"],
             label=user_data["label"],
@@ -223,7 +229,7 @@ class CharacterGenerator:
         """
         Triggered when changing player info such as name, platoon etc.
         """
-        state=self._current_character["Player Info"][user_data["label"]] = app_data
+        state = self._current_character["Player Info"][user_data["label"]] = app_data
 
     def _update_psycho_limit(self):
         """
@@ -233,7 +239,7 @@ class CharacterGenerator:
 
         dpg.set_value(
             item=self._item_refs["stats"]["Psycho Limit"],
-            value=self._current_character["Attributes"]["Psyche"]["value"],
+            value=self._current_character["Integer"]["Attributes"]["Psyche"]["value"],
         )
 
     def _update_stress_limit(self):
@@ -244,7 +250,8 @@ class CharacterGenerator:
 
         dpg.set_value(
             item=self._item_refs["stats"]["Stress Limit"],
-            value=self._current_character["Attributes"]["Psyche"]["value"] + 1,
+            value=self._current_character["Integer"]["Attributes"]["Psyche"]["value"]
+            + 1,
         )
 
     def _update_stunt_cap(self):
@@ -255,7 +262,7 @@ class CharacterGenerator:
 
         dpg.set_value(
             item=self._item_refs["stats"]["Stunt Cap"],
-            value=self._current_character["Attributes"]["Charisma"]["value"],
+            value=self._current_character["Integer"]["Attributes"]["Charisma"]["value"],
         )
 
     def _update_health_limit(self):
@@ -266,7 +273,8 @@ class CharacterGenerator:
 
         dpg.set_value(
             item=self._item_refs["stats"]["Health"],
-            value=self._current_character["Attributes"]["Endurance"]["value"] + 3,
+            value=self._current_character["Integer"]["Attributes"]["Endurance"]["value"]
+            + 3,
         )
 
     def _update_carry_capacity(self):
@@ -278,7 +286,8 @@ class CharacterGenerator:
         dpg.set_value(
             item=self._item_refs["stats"]["Carry Capacity"],
             value=self._current_character["Config"]["Carry Capacity Table"][
-                self._current_character["Attributes"]["Strength"]["value"] - 1
+                self._current_character["Integer"]["Attributes"]["Strength"]["value"]
+                - 1
             ],
         )
 
@@ -291,7 +300,8 @@ class CharacterGenerator:
         dpg.set_value(
             item=self._item_refs["stats"]["Combat Load"],
             value=self._current_character["Config"]["Combat Load Table"][
-                self._current_character["Attributes"]["Strength"]["value"] - 1
+                self._current_character["Integer"]["Attributes"]["Strength"]["value"]
+                - 1
             ],
         )
 
@@ -300,11 +310,13 @@ class CharacterGenerator:
         Update the printout of current health.
         Must be called whenever a related value have been change.
         """
-        rank_index = self._rank_alternatives.index(self._current_character["Player Info"]["Rank"])
+        rank_index = self._rank_alternatives.index(
+            self._current_character["Player Info"]["Rank"]
+        )
         dpg.set_value(
             item=self._item_refs["stats"]["Leadership Points"],
             value=self._current_character["Config"]["Rank Bonus"][rank_index]
-            + self._current_character["Attributes"]["Charisma"]["value"],
+            + self._current_character["Integer"]["Attributes"]["Charisma"]["value"],
         )
 
     def _update_ap_status(self):
@@ -454,7 +466,9 @@ class CharacterGenerator:
 
             with dpg.table_row():
                 dpg.add_text("Speciality:")
-                current_speciality = self._current_character["Player Info"]["Speciality"]
+                current_speciality = self._current_character["Player Info"][
+                    "Speciality"
+                ]
                 if self._create_mode:
                     dpg.add_combo(
                         items=self._speciality_alternatives,
@@ -523,10 +537,7 @@ class CharacterGenerator:
                 with dpg.group():
                     for category_key, category_value in part.items():
                         with dpg.group(width=300):
-                            
-                            dpg.add_text(
-                                category_key, color=self._section_title_color
-                            )
+                            dpg.add_text(category_key, color=self._section_title_color)
                             for property_key, propery_value in category_value.items():
                                 with dpg.group(horizontal=True):
                                     with dpg.table(
@@ -676,69 +687,26 @@ class CharacterGenerator:
                     with dpg.tab(label="Attributes"):
                         # Display attributes
                         self._item_refs["Attributes"] = self._add_attributes_tab(
-                            self._current_character["Attributes"],
+                            self._current_character["Integer"]["Attributes"],
                             callback=self._attribute_callback,
                         )
 
                     with dpg.tab(label="Skills"):
                         self._item_refs["Skills"] = self._add_skill_input(
-                            character=self._current_character,
+                            character=self._current_character["Integer"],
                             property="Skills",
                             callback=self._skills_callback,
                         )
-                    with dpg.tab(label="Expertise"):
-                        self._item_refs["Exptertise"] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Expertise",
-                            num_per_row=3,
-                            callback=self._property_callback,
-                        )
-
-                    with dpg.tab(label="Traits:"):
-                        self._item_refs["Traits"] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Traits",
-                            show_cost=False,
-                            callback=self._property_callback,
-                        )
-
-                    with dpg.tab(label="Advantages:"):
-                        self._item_refs["Advantages"] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Advantages",
-                            num_per_row=1,
-                            callback=self._property_callback,
-                        )
-
-                    with dpg.tab(label="Disadvantages:"):
-                        self._item_refs[
-                            "Disadvantages"
-                        ] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Disadvantages",
-                            num_per_row=1,
-                            cost_width=30,
-                            callback=self._property_callback,
-                        )
-
-                    with dpg.tab(label="Psychotic Disadvantages:"):
-                        self._item_refs[
-                            "psychotic disadvantages"
-                        ] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Psychotic Disadvantages",
-                            num_per_row=1,
-                            cost_width=30,
-                            callback=self._property_callback,
-                        )
-                    with dpg.tab(label="Cybernetics:"):
-                        self._item_refs["Cybernetics"] = self._add_property_check_boxes(
-                            character=self._current_character,
-                            property="Cybernetics",
-                            num_per_row=1,
-                            cost_width=30,
-                            callback=self._property_callback,
-                        )
+                    for bool_propery in self._current_character["Boolean"].keys():
+                        with dpg.tab(label=bool_propery):
+                            self._item_refs[
+                                bool_propery
+                            ] = self._add_property_check_boxes(
+                                character=self._current_character["Boolean"],
+                                property=bool_propery,
+                                num_per_row=3,
+                                callback=self._property_callback,
+                            )
 
         self._update_xp_status()
         self._update_psycho_limit()
@@ -768,8 +736,12 @@ class CharacterSelector:
             character, ext = file.split(".")
             self._available_characters.append(character.replace("_", " ").title())
 
-        self._selected_character = self._available_characters[0]
-        self._selected_character_file = self._characters_files[0]
+        if self._available_characters:
+            self._selected_character = self._available_characters[0]
+            self._selected_character_file = self._characters_files[0]
+        else:
+            self._selected_character = None
+            self._selected_character_file = None
 
     def _character_list_callback(self, sender, app_data):
         """
@@ -871,18 +843,15 @@ class CharacterImport:
             imported_character = json.load(setup_file)
 
         # Convert from json 0/1 to false/true
-        for category in [
-            "Traits",
-            "Advantages",
-            "Psychotic Disadvantages",
-            "Disadvantages",
-            "Expertise",
-            "Cybernetics",
-        ]:
-            for group in imported_character[category].keys():
-                for item_key in imported_character[category][group].keys():
-                    imported_character[category][group][item_key]["value"] = bool(
-                        imported_character[category][group][item_key]["value"]
+        for category in imported_character["Boolean"].keys():
+            for group in imported_character["Boolean"][category].keys():
+                for item_key in imported_character["Boolean"][category][group].keys():
+                    imported_character["Boolean"][category][group][item_key][
+                        "value"
+                    ] = bool(
+                        imported_character["Boolean"][category][group][item_key][
+                            "value"
+                        ]
                     )
         return cls(imported_character)
 
@@ -903,18 +872,11 @@ class CharacterExport:
     def to_json(cls, character_path, character):
         character_out = deepcopy(character)
         # Convert from true/false to 1/0
-        for category in [
-            "Traits",
-            "Advantages",
-            "Psychotic Disadvantages",
-            "Disadvantages",
-            "Expertise",
-            "Cybernetics",
-        ]:
-            for group in character_out[category].keys():
-                for item_key in character_out[category][group].keys():
-                    character_out[category][group][item_key]["value"] = int(
-                        character_out[category][group][item_key]["value"]
+        for category in character_out["Boolean"]:
+            for group in character_out["Boolean"][category].keys():
+                for item_key in character_out["Boolean"][category][group].keys():
+                    character_out["Boolean"][category][group][item_key]["value"] = int(
+                        character_out["Boolean"][category][group][item_key]["value"]
                     )
         as_json = json.dumps(character_out, indent=4)
         with open(character_path, "w") as out_file:

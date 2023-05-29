@@ -10,7 +10,7 @@
         "Age": 21
     },
     "Config": {
-        "Starting EP": 134,
+        "Starting EP": 117,
         "Starting AP": 22,
         "specialities": [
             "APC",
@@ -61,1519 +61,1551 @@
             "MSgt"
         ],
         "Rank Bonus": [
-            0, 0, 1, 2, 3, 4, 5, 5
+            0,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            5
         ],
         "Carry Capacity Table": [
-            45, 50, 55, 60, 65
+            45,
+            50,
+            55,
+            60,
+            65
         ],
         "Combat Load Table": [
-            20, 25, 25, 30, 35
+            20,
+            25,
+            25,
+            30,
+            35
         ]
     },
-    "Attributes": {
-        "Strength": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Reaction": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Dexterity": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Endurance": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Toughness": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Charisma": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        },
-        "Psyche": {
-            "value": 3,
-            "min": 1,
-            "max": 5
-        }
-    },
-    "Traits": {
-        " ": {
-            "ARM Sympathizer": {
-                "value": 0,
-                "requirements": {
-                    "not_allowed": [
-                        {
-                            "type": "trait",
-                            "ref": "Live long and prosper"
-                        }
-                    ]
-                }
-            },
-            "Bloodthirst": {
-                "value": 1,
-                "requirements": {
-                    "not_allowed": [
-                        {
-                            "type": "trait",
-                            "ref": "Domesticated"
-                        },
-                        {
-                            "type": "trait",
-                            "ref": "Religious"
-                        },
-                        {
-                            "type": "trait",
-                            "ref": "Righteous"
-                        }
-                    ]
-                }
-            },
-            "Collector": {
-                "value": 0
-            },
-            "Criminal": {
-                "value": 0
-            },
-            "Domesticated": {
-                "value": 0
-            },
-            "Dr. Gamble": {
-                "value": 0
-            },
-            "Glory Hunter": {
-                "value": 0
-            },
-            "Hamster": {
-                "value": 0
-            },
-            "Live long and prosper": {
-                "value": 0
-            },
-            "Nosy": {
-                "value": 0
-            },
-            "Paranoid": {
-                "value": 0
-            },
-            "Private who?": {
-                "value": 0
-            },
-            "Religious": {
-                "value": 0
-            },
-            "Small frame": {
-                "value": 0
-            },
-            "Strategic reserves": {
-                "value": 0
-            },
-            "Tacticool": {
-                "value": 0
-            },
-            "Trigger-happy": {
-                "value": 0
-            }
-        }
-    },
-    "Disadvantages": {
-        " ": {
-            "Absent-minded": {
-                "value": 0,
-                "cost": -4
-            },
-            "Bad aura": {
-                "value": 0,
-                "cost": -2
-            },
-            "Blabbermouth": {
-                "value": 0,
-                "cost": -1,
-                "requirements": {
-                    "atleast": [
-                        {
-                            "type": "attribute",
-                            "ref": "charisma",
-                            "value": 3
-                        }
-                    ]
-                }
-            },
-            "Canary": {
-                "value": 0,
-                "cost": -1
-            },
-            "Compulsive Gambler": {
-                "value": 0,
-                "cost": -4
-            },
-            "Debt to the Mafia": {
-                "value": 0,
-                "cost": -4
-            },
-            "Dislike androids": {
-                "value": 0,
-                "cost": -1
-            },
-            "Fear of the dark": {
-                "value": 0,
-                "cost": -3
-            },
-            "Fire in the hole!": {
-                "value": 0,
-                "cost": -2
-            },
-            "Former Alcoholic": {
-                "value": 0,
-                "cost": -3
-            },
-            "Glass Joe": {
-                "value": 0,
-                "cost": -2
-            },
-            "Heart Issue": {
-                "value": 0,
-                "cost": -2
-            },
-            "Inflated Ego": {
-                "value": 0,
-                "cost": -2
-            },
-            "Jinxed": {
-                "value": 0,
-                "cost": -4
-            },
-            "Just a flesh wound": {
-                "value": 0,
-                "cost": -2
-            },
-            "Kleptomaniac": {
-                "value": 0,
-                "cost": -2
-            },
-            "Low Tolerance": {
-                "value": 0,
-                "cost": -1
-            },
-            "Lucky Charm": {
-                "value": 0,
-                "cost": -2
-            },
-            "Mean Bastard": {
-                "value": 0,
-                "cost": -4
-            },
-            "Mentally unstable": {
-                "value": 0,
-                "cost": -1
-            },
-            "Nervous": {
-                "value": 0,
-                "cost": -1
-            },
-            "Not one step back": {
-                "value": 0,
-                "cost": -1
-            }
-        },
-        "  ": {
-            "Psychic powers": {
-                "value": 0,
-                "cost": -1
-            },
-            "Rival": {
-                "value": 0,
-                "cost": -1
-            },
-            "Scapegoat": {
-                "value": 0,
-                "cost": -2
-            },
-            "Soft hearted": {
-                "value": 0,
-                "cost": -3
-            },
-            "Voodoo curse": {
-                "value": 0,
-                "cost": -2
-            },
-            "Wanted": {
-                "value": 0,
-                "cost": -4
-            },
-            "Watched": {
-                "value": 0,
-                "cost": 0
-            },
-            "Whisper-voiced": {
-                "value": 0,
-                "cost": -1
-            }
-        }
-    },
-    "Psychotic Disadvantages": {
-        " ": {
-            "3rd Deck Dive Team": {
-                "value": 0,
-                "cost": 1
-            },
-            "Alcoholic": {
-                "value": 0,
-                "cost": 1
-            },
-            "Anger issues": {
-                "value": 0,
-                "cost": 1
-            },
-            "Flashbacks": {
-                "value": 0,
-                "cost": 1
-            },
-            "Killer": {
-                "value": 0,
-                "cost": 3
-            },
-            "Loner": {
-                "value": 0,
-                "cost": 1
-            },
-            "Monophobia": {
-                "value": 0,
-                "cost": 1
-            },
-            "Nightmares": {
-                "value": 0,
-                "cost": 1
-            },
-            "Post-Combat shakes": {
-                "value": 0,
-                "cost": 1
-            },
-            "Psychiatric care": {
-                "value": 0,
-                "cost": 2
-            },
-            "Pyromaniac": {
-                "value": 0,
-                "cost": 2
-            },
-            "Twisted Thoughts": {
-                "value": 0,
-                "cost": 1
-            }
-        }
-    },
-    "Cybernetics": {
-        " ": {
-            "Left arm": {
-                "value": 0,
-                "cost": 0
-            },
-            "Right arm": {
-                "value": 0,
-                "cost": 0
-            },
-            "Left leg": {
-                "value": 0,
-                "cost": 0
-            },
-            "Right leg": {
-                "value": 0,
-                "cost": 0
-            },
-            "Vitals": {
-                "value": 0,
-                "cost": 1
-            },
-            "Gun Hand": {
-                "value": 0,
-                "cost": 0
-            },
-            "Hook Hand": {
-                "value": 0,
-                "cost": 0
-            }
-        }
-    },
-    "Advantages": {
-        " ": {
-            "2nd in Command": {
-                "value": 0,
-                "cost": 3,
-                "requirements": {
-                    "atleast": [
-                        {
-                            "type": "skill",
-                            "ref": "Computer Operation",
-                            "value": 4
-                        }
-                    ],
-                    "exact": [
-                        {
-                            "type": "character",
-                            "ref": "rank",
-                            "value": "Staff Sergeant"
-                        }
-                    ]
-                }
-            },
-            "Access to the files": {
-                "value": 0,
-                "cost": 1
-            },
-            "Alert": {
-                "value": 0,
-                "cost": 2
-            },
-            "Authority": {
-                "value": 0,
-                "cost": 4
-            },
-            "Baseball Player": {
-                "value": 0,
-                "cost": 3
-            },
-            "Bilingual": {
-                "value": 0,
-                "cost": 6
-            },
-            "Brown Noser ": {
-                "value": 0,
-                "cost": 2
-            },
-            "Catnapper": {
-                "value": 0,
-                "cost": 3
-            },
-            "Cautious": {
-                "value": 0,
-                "cost": 3
-            },
-            "Coal Lungs": {
-                "value": 0,
-                "cost": 1
-            },
-            "Combat Correspondent": {
-                "value": 0,
-                "cost": 1
-            },
-            "Combat Drop Wings": {
-                "value": 0,
-                "cost": 1
-            },
-            "Cowboy": {
-                "value": 0,
-                "cost": 1
-            },
-            "Cross Country Driver": {
-                "value": 0,
-                "cost": 3
-            },
-            "Die bastards!": {
-                "value": 0,
-                "cost": 2
-            },
-            "Doubletap": {
-                "value": 0,
-                "cost": 3
-            },
-            "Draw Stranger": {
-                "value": 0,
-                "cost": 2
-            },
-            "Efficient Packing ": {
-                "value": 0,
-                "cost": 2
-            },
-            "Farmer Family": {
-                "value": 0,
-                "cost": 3
-            },
-            "Fixer": {
-                "value": 0,
-                "cost": 5
-            },
-            "Gun Nut": {
-                "value": 0,
-                "cost": 2
-            },
-            "Hardened Veteran": {
-                "value": 0,
-                "cost": 4
-            }
-        },
-        "  ": {
-            "HEMA Fighter": {
-                "value": 0,
-                "cost": 3
-            },
-            "Impressive Stature": {
-                "value": 0,
-                "cost": 1
-            },
-            "Instructor": {
-                "value": 0,
-                "cost": 1
-            },
-            "Iron-fist  ": {
-                "value": 0,
-                "cost": 2
-            },
-            "I’ve been through worse": {
-                "value": 0,
-                "cost": 2
-            },
-            "Jungle Jim": {
-                "value": 0,
-                "cost": 2
-            },
-            "Kendoka": {
-                "value": 0,
-                "cost": 1
-            },
-            "Language": {
-                "value": 0,
-                "cost": 3
-            },
-            "Leading from the front": {
-                "value": 0,
-                "cost": 4
-            },
-            "Let’s Rock!": {
-                "value": 0,
-                "cost": 1
-            },
-            "Life of the party": {
-                "value": 0,
-                "cost": 4
-            },
-            "Lucky Bastard": {
-                "value": 0,
-                "cost": 4
-            },
-            "Machete": {
-                "value": 0,
-                "cost": 3
-            },
-            "Maintenance Fanatic": {
-                "value": 0,
-                "cost": 1
-            },
-            "Martial Artist: Grappler": {
-                "value": 0,
-                "cost": 3
-            },
-            "Martial Artist: Striker": {
-                "value": 0,
-                "cost": 3
-            },
-            "Mule": {
-                "value": 0,
-                "cost": 3
-            },
-            "Natural Leader": {
-                "value": 0,
-                "cost": 2
-            },
-            "Nintendo Kid": {
-                "value": 0,
-                "cost": 3
-            },
-            "Offhand Shooter": {
-                "value": 0,
-                "cost": 1
-            }
-        },
-        "   ": {
-            "Quick Learner": {
-                "value": 0,
-                "cost": 1
-            },
-            "Ranger Roll ": {
-                "value": 0,
-                "cost": 1
-            },
-            "Rise and shine ": {
-                "value": 0,
-                "cost": 1
-            },
-            "Scarred Veteran": {
-                "value": 0,
-                "cost": 2
-            },
-            "Sea legs": {
-                "value": 0,
-                "cost": 1
-            },
-            "Secondary Weapon": {
-                "value": 0,
-                "cost": 3
-            },
-            "Scaling": {
-                "value": 0,
-                "cost": 5
-            },
-            "Shake n’ Bake Colonist ": {
-                "value": 0,
-                "cost": 3
-            },
-            "Shellback": {
-                "value": 0,
-                "cost": 2
-            },
-            "Spotter": {
-                "value": 0,
-                "cost": 1
-            },
-            "Squad Leader": {
-                "value": 0,
-                "cost": 4
-            },
-            "Stiff upper lip": {
-                "value": 0,
-                "cost": 2
-            },
-            "Streetfighter": {
-                "value": 0,
-                "cost": 2
-            },
-            "Streetwise": {
-                "value": 0,
-                "cost": 2
-            },
-            "The Big Five ": {
-                "value": 0,
-                "cost": 1
-            },
-            "Thick-skulled": {
-                "value": 0,
-                "cost": 2
-            },
-            "Tough": {
-                "value": 0,
-                "cost": 6
-            },
-            "Tunnel Rat": {
-                "value": 0,
-                "cost": 3
-            },
-            "Trusted Leader": {
-                "value": 0,
-                "cost": 2
-            },
-            "Ultimate Badass ": {
-                "value": 0,
-                "cost": 3
-            },
-            "Womanizer/Femme Fatale": {
-                "value": 0,
-                "cost": 3
-            }
-        }
-    },
-    "Skills": {
-        "Weapon Skills": {
-            "Shooting: Aimed": {
+    "Integer": {
+        "Attributes": {
+            "Strength": {
                 "value": 3,
-                "min": 0,
+                "min": 1,
                 "max": 5
             },
-            "Shooting: Dynamic": {
+            "Reaction": {
                 "value": 3,
-                "min": 0,
+                "min": 1,
                 "max": 5
             },
-            "Shooting: Auto": {
+            "Dexterity": {
                 "value": 3,
-                "min": 0,
+                "min": 1,
                 "max": 5
             },
-            "Indirect Fire": {
-                "value": 1,
-                "min": 0,
+            "Endurance": {
+                "value": 3,
+                "min": 1,
                 "max": 5
             },
-            "Shoulder-launched": {
-                "value": 1,
-                "min": 0,
+            "Toughness": {
+                "value": 3,
+                "min": 1,
                 "max": 5
+            },
+            "Charisma": {
+                "value": 3,
+                "min": 1,
+                "max": 5
+            },
+            "Psyche": {
+                "value": 3,
+                "min": 1,
+                "max": 5
+            }
+        },
+        "Skills": {
+            "Weapon Skills": {
+                "Shooting: Aimed": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Shooting: Dynamic": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Shooting: Auto": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Indirect Fire": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Shoulder-launched": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Missile Weapons": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Heavy Cannon": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "Physical Skills": {
+                "Throwing": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Close Combat: Standup": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Close Combat: Grappling": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Stealth": {
+                    "value": 2,
+                    "min": 0,
+                    "max": 5
+                },
+                "Swimming": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Sleight of Hand": {
+                    "value": 2,
+                    "min": 0,
+                    "max": 5
+                },
+                "Zero-G ": {
+                    "value": 2,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "Vehicle Skills": {
+                "Driving": {
+                    "value": 3,
+                    "min": 0,
+                    "max": 5
+                },
+                "Parachute": {
+                    "value": 2,
+                    "min": 0,
+                    "max": 5
+                },
+                "Pilot: Atmospheric": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Pilot: Space": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Remote Piloting": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Seamanship": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Utility Equipment": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "Technical Skills": {
+                "Navigation": {
+                    "value": 2,
+                    "min": 0,
+                    "max": 5
+                },
+                "Comtech": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Computer Systems": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Sensor Systems": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Science Equipment": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Electronic Tools": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Mechanic Tools": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Welding": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Space Crew": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Starship Bridge": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "Military Skills": {
+                "Soldiering": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "CBRN Warfare ": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Demolition": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Mine Warfare ": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Camouflage": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Tactics": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "General Skills": {
+                "First Aid": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Outdoorsman": {
+                    "value": 1,
+                    "min": 0,
+                    "max": 5
+                },
+                "Animal Handling": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Colonist": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "Expert Skills": {
+                "Engineering": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Medical": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                },
+                "Science": {
+                    "value": 0,
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        }
+    },
+    "Boolean": {
+        "Traits": {
+            " ": {
+                "ARM Sympathizer": {
+                    "value": 0,
+                    "cost": 0,
+                    "requirements": {
+                        "not_allowed": [
+                            {
+                                "type": "trait",
+                                "ref": "Live long and prosper"
+                            }
+                        ]
+                    }
+                },
+                "Bloodthirst": {
+                    "value": 1,
+                    "cost": 0,
+                    "requirements": {
+                        "not_allowed": [
+                            {
+                                "type": "trait",
+                                "ref": "Domesticated"
+                            },
+                            {
+                                "type": "trait",
+                                "ref": "Religious"
+                            },
+                            {
+                                "type": "trait",
+                                "ref": "Righteous"
+                            }
+                        ]
+                    }
+                },
+                "Collector": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Criminal": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Domesticated": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Dr. Gamble": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Glory Hunter": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Hamster": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Live long and prosper": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Nosy": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Paranoid": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Private who?": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Religious": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Small frame": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Strategic reserves": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Tacticool": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Trigger-happy": {
+                    "value": 0,
+                    "cost": 0
+                }
+            }
+        },
+        "Expertise": {
+            "Aircrafts": {
+                "Shuttle": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Gliderplane": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Rotorcraft": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Cargo Platform": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "COTS Drone": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "UD4 Dropship": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "M421 Firefly": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "M86 UAV": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "PUPS 15": {
+                    "value": 0,
+                    "cost": 5
+                }
+            },
+            "Land Vehicles": {
+                "Car": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "ATVL": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Motorcycle": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Hoverbike": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Tractor": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Truck": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "M577 APC": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "M579 APC": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "M572 APC": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "M292 Artillery": {
+                    "value": 0,
+                    "cost": 5
+                }
+            },
+            "Sea Vehicles": {
+                "CRRC": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Kayak": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Motorboat": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Sailing": {
+                    "value": 0,
+                    "cost": 5
+                }
+            },
+            "Starship": {
+                "Freighter": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Colony Ship": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Salvage Vessel": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Survey Ship": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Tanker": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Conestoga Frigate": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Bougainville Attack Transport": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Tientsin Assault Ship": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Valley Forge Class": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Henderson Field Transport": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Okinawa Assault Carrier": {
+                    "value": 0,
+                    "cost": 15
+                }
+            },
+            "Hand Held Weapons": {
+                "M41 Pulse Rifle 5": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "M39 SMG": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "VP55 LR Pistol": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "M42 Sniper Rifle": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "M240 Flamer": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "M56 Smartgun": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Morita I AR": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Pistol": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Shotgun": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Deer Rifle": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Hand Grenade": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Dartgun": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Harpoon": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "SK813 PR": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "NSG23 AR": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Weyland Storm Rifle": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "X-9 AR": {
+                    "value": 0,
+                    "cost": 3
+                }
+            },
+            "Mounted Weapons": {
+                "HMG": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Ballistic": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Laser": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Railgun": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Particle Beam": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Plasma": {
+                    "value": 0,
+                    "cost": 6
+                },
+                "Flamer": {
+                    "value": 0,
+                    "cost": 3
+                }
+            },
+            "Support Weapons": {
+                "Mortar": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Artillery": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "M112 HIMAT": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "M5 RPG": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "M78 PIG": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "M790 Grenade Launcher": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "M83 SADAR": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "SIM-118": {
+                    "value": 0,
+                    "cost": 3
+                }
             },
             "Missile Weapons": {
-                "value": 0,
-                "min": 0,
-                "max": 5
+                "AAM": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "ABM": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "ASAT": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "ASM": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "SAM": {
+                    "value": 0,
+                    "cost": 3
+                }
             },
-            "Heavy Cannon": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "Physical Skills": {
-            "Throwing": {
-                "value": 3,
-                "min": 0,
-                "max": 5
+            "Close Combat Weapons": {
+                "Baton": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Bayonet": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Handcuffs": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Knife": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Sword": {
+                    "value": 0,
+                    "cost": 3
+                }
             },
-            "Close Combat: Standup": {
-                "value": 3,
-                "min": 0,
-                "max": 5
+            "Terrain": {
+                "Urban": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Barren": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Temperate": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Jungle": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Swamp": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Arctic": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Mountain": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Sea": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Desert": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Space": {
+                    "value": 0,
+                    "cost": 2
+                }
             },
-            "Close Combat: Grappling": {
-                "value": 3,
-                "min": 0,
-                "max": 5
-            },
-            "Stealth": {
-                "value": 2,
-                "min": 0,
-                "max": 5
-            },
-            "Swimming": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Sleight of Hand": {
-                "value": 2,
-                "min": 0,
-                "max": 5
-            },
-            "Zero-G ": {
-                "value": 2,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "Vehicle Skills": {
-            "Driving": {
-                "value": 3,
-                "min": 0,
-                "max": 5
-            },
-            "Parachute": {
-                "value": 2,
-                "min": 0,
-                "max": 5
-            },
-            "Pilot: Atmospheric": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Pilot: Space": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Remote Piloting": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Seamanship": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Utility Equipment": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "Technical Skills": {
-            "Navigation": {
-                "value": 2,
-                "min": 0,
-                "max": 5
-            },
-            "Comtech": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Computer Systems": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Sensor Systems": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Science Equipment": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Electronic Tools": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Mechanic Tools": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Welding": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Space Crew": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Starship Bridge": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "Military Skills": {
-            "Soldiering": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "CBRN Warfare ": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Demolition": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Mine Warfare ": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Camouflage": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Tactics": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "General Skills": {
-            "First Aid": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Outdoorsman": {
-                "value": 1,
-                "min": 0,
-                "max": 5
-            },
-            "Animal Handling": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            },
-            "Colonist": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            }
-        },
-        "Expert Skills": {
             "Engineering": {
-                "value": 0,
-                "min": 0,
-                "max": 5
+                "Building demolition": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Carpentry": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Chainsaw": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "EOD": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Hull breaching": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "IED": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Lockpicking": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "Ordnance": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Power Tools": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Underwater demolition": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Weaponsmith": {
+                    "value": 0,
+                    "cost": 3
+                }
+            },
+            "Military Training": {
+                "Infantry Tactics": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Mobile Tactics": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Airforce Tactics": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Space Tactics": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Naval Tactics": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Forward Observer": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "FAC": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Military Law": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "Interrogation": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Starship Identification": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Vehicle Identification": {
+                    "value": 0,
+                    "cost": 3
+                }
+            },
+            "Sensors & technical": {
+                "Lidar": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Life Support": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Motion Tracker": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Thrusterpack": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "EW": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "FTL Communication": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Morse": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Radar": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Radio": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Sensor Networking": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Tightbeam": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Interface 2037": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "USCM Interface ": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "USN Interface": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Forensics": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Laboratory equipment": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Meteorology": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Oceanography": {
+                    "value": 0,
+                    "cost": 3
+                }
+            },
+            "Nature & Animals": {
+                "Bushcrafting": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Fishing": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Herbalism": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Herding": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Hunting": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "K9": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "Riding": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Skiing": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Tracking": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Trapping": {
+                    "value": 0,
+                    "cost": 5
+                }
+            },
+            "Navigation": {
+                "Land": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Interplanetary": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "Interstellar": {
+                    "value": 0,
+                    "cost": 15
+                },
+                "Oceanic": {
+                    "value": 0,
+                    "cost": 3
+                }
             },
             "Medical": {
-                "value": 0,
-                "min": 0,
-                "max": 5
+                "Aerospace Medicine": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Altitude Medicine": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Autodoc": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "CBRN Treatment": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Cold climate": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Dive Medicine": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Field Surgery": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Hot climate": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Infections": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "IV": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Toxicology": {
+                    "value": 0,
+                    "cost": 5
+                }
             },
-            "Science": {
-                "value": 0,
-                "min": 0,
-                "max": 5
-            }
-        }
-    },
-    "Expertise": {
-        "Aircrafts": {
-            "Shuttle": {
-                "value": 0,
-                "cost": 5
-            },
-            "Gliderplane": {
-                "value": 0,
-                "cost": 3
-            },
-            "Rotorcraft": {
-                "value": 0,
-                "cost": 5
-            },
-            "Cargo Platform": {
-                "value": 0,
-                "cost": 5
-            },
-            "COTS Drone": {
-                "value": 0,
-                "cost": 3
-            },
-            "UD4 Dropship": {
-                "value": 0,
-                "cost": 15
-            },
-            "M421 Firefly": {
-                "value": 0,
-                "cost": 5
-            },
-            "M86 UAV": {
-                "value": 0,
-                "cost": 5
-            },
-            "PUPS 15": {
-                "value": 0,
-                "cost": 5
-            }
-        },
-        "Land Vehicles": {
-            "Car": {
-                "value": 0,
-                "cost": 2
-            },
-            "ATVL": {
-                "value": 0,
-                "cost": 2
-            },
-            "Motorcycle": {
-                "value": 0,
-                "cost": 2
-            },
-            "Hoverbike": {
-                "value": 0,
-                "cost": 2
-            },
-            "Tractor": {
-                "value": 0,
-                "cost": 3
-            },
-            "Truck": {
-                "value": 0,
-                "cost": 3
-            },
-            "M577 APC": {
-                "value": 0,
-                "cost": 8
-            },
-            "M579 APC": {
-                "value": 0,
-                "cost": 8
-            },
-            "M572 APC": {
-                "value": 0,
-                "cost": 5
-            },
-            "M292 Artillery": {
-                "value": 0,
-                "cost": 5
+            "Other": {
+                "Powerloader": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Crane": {
+                    "value": 0,
+                    "cost": 8
+                },
+                "Diving equipment": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Environmental Suit": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "HALO": {
+                    "value": 0,
+                    "cost": 3
+                }
             }
         },
-        "Sea Vehicles": {
-            "CRRC": {
-                "value": 0,
-                "cost": 2
+        "Advantages": {
+            " ": {
+                "2nd in Command": {
+                    "value": 0,
+                    "cost": 3,
+                    "requirements": {
+                        "atleast": [
+                            {
+                                "type": "skill",
+                                "ref": "Computer Operation",
+                                "value": 4
+                            }
+                        ],
+                        "exact": [
+                            {
+                                "type": "character",
+                                "ref": "rank",
+                                "value": "Staff Sergeant"
+                            }
+                        ]
+                    }
+                },
+                "Access to the files": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Alert": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Authority": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Baseball Player": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Bilingual": {
+                    "value": 0,
+                    "cost": 6
+                },
+                "Brown Noser ": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Catnapper": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Cautious": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Coal Lungs": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Combat Correspondent": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Combat Drop Wings": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Cowboy": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Cross Country Driver": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Die bastards!": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Doubletap": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Draw Stranger": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Efficient Packing ": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Farmer Family": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Fixer": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Gun Nut": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Hardened Veteran": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "HEMA Fighter": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Impressive Stature": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Instructor": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Iron-fist  ": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "I’ve been through worse": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Jungle Jim": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Kendoka": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Language": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Leading from the front": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Let’s Rock!": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Life of the party": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Lucky Bastard": {
+                    "value": 0,
+                    "cost": 4
+                }
             },
-            "Kayak": {
-                "value": 0,
-                "cost": 2
-            },
-            "Motorboat": {
-                "value": 0,
-                "cost": 3
-            },
-            "Sailing": {
-                "value": 0,
-                "cost": 5
+            "  ": {
+                "Machete": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Maintenance Fanatic": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Martial Artist: Grappler": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Martial Artist: Striker": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Mule": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Natural Leader": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Nintendo Kid": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Offhand Shooter": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Quick Learner": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Ranger Roll ": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Rise and shine ": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Scarred Veteran": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Sea legs": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Secondary Weapon": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Scaling": {
+                    "value": 0,
+                    "cost": 5
+                },
+                "Shake n’ Bake Colonist ": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Shellback": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Spotter": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Squad Leader": {
+                    "value": 0,
+                    "cost": 4
+                },
+                "Stiff upper lip": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Streetfighter": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Streetwise": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "The Big Five ": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Thick-skulled": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Tough": {
+                    "value": 0,
+                    "cost": 6
+                },
+                "Tunnel Rat": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Trusted Leader": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Ultimate Badass ": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Womanizer/Femme Fatale": {
+                    "value": 0,
+                    "cost": 3
+                }
             }
         },
-        "Starship": {
-            "Freighter": {
-                "value": 0,
-                "cost": 15
-            },
-            "Colony Ship": {
-                "value": 0,
-                "cost": 15
-            },
-            "Salvage Vessel": {
-                "value": 0,
-                "cost": 15
-            },
-            "Survey Ship": {
-                "value": 0,
-                "cost": 15
-            },
-            "Tanker": {
-                "value": 0,
-                "cost": 15
-            },
-            "Conestoga Frigate": {
-                "value": 0,
-                "cost": 15
-            },
-            "Bougainville Attack Transport": {
-                "value": 0,
-                "cost": 15
-            },
-            "Tientsin Assault Ship": {
-                "value": 0,
-                "cost": 15
-            },
-            "Valley Forge Class": {
-                "value": 0,
-                "cost": 15
-            },
-            "Henderson Field Transport": {
-                "value": 0,
-                "cost": 15
-            },
-            "Okinawa Assault Carrier": {
-                "value": 0,
-                "cost": 15
+        "Disadvantages": {
+            " ": {
+                "Absent-minded": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Bad aura": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Blabbermouth": {
+                    "value": 0,
+                    "cost": -1,
+                    "requirements": {
+                        "atleast": [
+                            {
+                                "type": "attribute",
+                                "ref": "charisma",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                "Canary": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Compulsive Gambler": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Debt to the Mafia": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Dislike androids": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Fear of the dark": {
+                    "value": 0,
+                    "cost": -3
+                },
+                "Fire in the hole!": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Former Alcoholic": {
+                    "value": 0,
+                    "cost": -3
+                },
+                "Glass Joe": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Heart Issue": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Inflated Ego": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Jinxed": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Just a flesh wound": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Kleptomaniac": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Low Tolerance": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Lucky Charm": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Mean Bastard": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Mentally unstable": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Nervous": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Not one step back": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Psychic powers": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Rival": {
+                    "value": 0,
+                    "cost": -1
+                },
+                "Scapegoat": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Soft hearted": {
+                    "value": 0,
+                    "cost": -3
+                },
+                "Voodoo curse": {
+                    "value": 0,
+                    "cost": -2
+                },
+                "Wanted": {
+                    "value": 0,
+                    "cost": -4
+                },
+                "Watched": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Whisper-voiced": {
+                    "value": 0,
+                    "cost": -1
+                }
             }
         },
-        "Hand Held Weapons": {
-            "M41 Pulse Rifle 5": {
-                "value": 0,
-                "cost": 5
-            },
-            "M39 SMG": {
-                "value": 0,
-                "cost": 3
-            },
-            "VP55 LR Pistol": {
-                "value": 0,
-                "cost": 3
-            },
-            "M42 Sniper Rifle": {
-                "value": 0,
-                "cost": 15
-            },
-            "M240 Flamer": {
-                "value": 0,
-                "cost": 3
-            },
-            "M56 Smartgun": {
-                "value": 0,
-                "cost": 15
-            },
-            "Morita I AR": {
-                "value": 0,
-                "cost": 3
-            },
-            "Pistol": {
-                "value": 0,
-                "cost": 2
-            },
-            "Shotgun": {
-                "value": 0,
-                "cost": 2
-            },
-            "Deer Rifle": {
-                "value": 0,
-                "cost": 3
-            },
-            "Hand Grenade": {
-                "value": 0,
-                "cost": 3
-            },
-            "Dartgun": {
-                "value": 0,
-                "cost": 3
-            },
-            "Harpoon": {
-                "value": 0,
-                "cost": 3
-            },
-            "SK813 PR": {
-                "value": 0,
-                "cost": 5
-            },
-            "NSG23 AR": {
-                "value": 0,
-                "cost": 5
-            },
-            "Weyland Storm Rifle": {
-                "value": 0,
-                "cost": 5
-            },
-            "X-9 AR": {
-                "value": 0,
-                "cost": 3
+        "Psychotic Disadvantages": {
+            " ": {
+                "3rd Deck Dive Team": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Alcoholic": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Anger issues": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Flashbacks": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Killer": {
+                    "value": 0,
+                    "cost": 3
+                },
+                "Loner": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Monophobia": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Nightmares": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Post-Combat shakes": {
+                    "value": 0,
+                    "cost": 1
+                },
+                "Psychiatric care": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Pyromaniac": {
+                    "value": 0,
+                    "cost": 2
+                },
+                "Twisted Thoughts": {
+                    "value": 0,
+                    "cost": 1
+                }
             }
         },
-        "Mounted Weapons": {
-            "HMG": {
-                "value": 0,
-                "cost": 3
-            },
-            "Ballistic": {
-                "value": 0,
-                "cost": 3
-            },
-            "Laser": {
-                "value": 0,
-                "cost": 5
-            },
-            "Railgun": {
-                "value": 0,
-                "cost": 5
-            },
-            "Particle Beam": {
-                "value": 0,
-                "cost": 5
-            },
-            "Plasma": {
-                "value": 0,
-                "cost": 6
-            },
-            "Flamer": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Support Weapons": {
-            "Mortar": {
-                "value": 0,
-                "cost": 3
-            },
-            "Artillery": {
-                "value": 0,
-                "cost": 5
-            },
-            "M112 HIMAT": {
-                "value": 0,
-                "cost": 5
-            },
-            "M5 RPG": {
-                "value": 0,
-                "cost": 3
-            },
-            "M78 PIG": {
-                "value": 0,
-                "cost": 8
-            },
-            "M790 Grenade Launcher": {
-                "value": 0,
-                "cost": 3
-            },
-            "M83 SADAR": {
-                "value": 0,
-                "cost": 3
-            },
-            "SIM-118": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Missile Weapons": {
-            "AAM": {
-                "value": 0,
-                "cost": 3
-            },
-            "ABM": {
-                "value": 0,
-                "cost": 3
-            },
-            "ASAT": {
-                "value": 0,
-                "cost": 3
-            },
-            "ASM": {
-                "value": 0,
-                "cost": 3
-            },
-            "SAM": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Close Combat Weapons": {
-            "Baton": {
-                "value": 0,
-                "cost": 2
-            },
-            "Bayonet": {
-                "value": 0,
-                "cost": 2
-            },
-            "Handcuffs": {
-                "value": 0,
-                "cost": 2
-            },
-            "Knife": {
-                "value": 0,
-                "cost": 3
-            },
-            "Sword": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Terrain": {
-            "Urban": {
-                "value": 0,
-                "cost": 2
-            },
-            "Barren": {
-                "value": 0,
-                "cost": 2
-            },
-            "Temperate": {
-                "value": 0,
-                "cost": 2
-            },
-            "Jungle": {
-                "value": 0,
-                "cost": 2
-            },
-            "Swamp": {
-                "value": 0,
-                "cost": 2
-            },
-            "Arctic": {
-                "value": 0,
-                "cost": 2
-            },
-            "Mountain": {
-                "value": 0,
-                "cost": 2
-            },
-            "Sea": {
-                "value": 0,
-                "cost": 2
-            },
-            "Desert": {
-                "value": 0,
-                "cost": 2
-            },
-            "Space": {
-                "value": 0,
-                "cost": 2
-            }
-        },
-        "Engineering": {
-            "Building demolition": {
-                "value": 0,
-                "cost": 3
-            },
-            "Carpentry": {
-                "value": 0,
-                "cost": 4
-            },
-            "Chainsaw": {
-                "value": 0,
-                "cost": 3
-            },
-            "EOD": {
-                "value": 0,
-                "cost": 5
-            },
-            "Hull breaching": {
-                "value": 0,
-                "cost": 3
-            },
-            "IED": {
-                "value": 0,
-                "cost": 5
-            },
-            "Lockpicking": {
-                "value": 0,
-                "cost": 8
-            },
-            "Ordnance": {
-                "value": 0,
-                "cost": 5
-            },
-            "Power Tools": {
-                "value": 0,
-                "cost": 2
-            },
-            "Underwater demolition": {
-                "value": 0,
-                "cost": 3
-            },
-            "Weaponsmith": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Military Training": {
-            "Infantry Tactics": {
-                "value": 0,
-                "cost": 5
-            },
-            "Mobile Tactics": {
-                "value": 0,
-                "cost": 5
-            },
-            "Airforce Tactics": {
-                "value": 0,
-                "cost": 5
-            },
-            "Space Tactics": {
-                "value": 0,
-                "cost": 5
-            },
-            "Naval Tactics": {
-                "value": 0,
-                "cost": 5
-            },
-            "Forward Observer": {
-                "value": 0,
-                "cost": 3
-            },
-            "FAC": {
-                "value": 0,
-                "cost": 3
-            },
-            "Military Law": {
-                "value": 0,
-                "cost": 8
-            },
-            "Interrogation": {
-                "value": 0,
-                "cost": 5
-            },
-            "Starship Identification": {
-                "value": 0,
-                "cost": 3
-            },
-            "Vehicle Identification": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Sensors & technical": {
-            "Lidar": {
-                "value": 0,
-                "cost": 5
-            },
-            "Life Support": {
-                "value": 0,
-                "cost": 3
-            },
-            "Motion Tracker": {
-                "value": 0,
-                "cost": 3
-            },
-            "Thrusterpack": {
-                "value": 0,
-                "cost": 3
-            },
-            "EW": {
-                "value": 0,
-                "cost": 8
-            },
-            "FTL Communication": {
-                "value": 0,
-                "cost": 3
-            },
-            "Morse": {
-                "value": 0,
-                "cost": 3
-            },
-            "Radar": {
-                "value": 0,
-                "cost": 5
-            },
-            "Radio": {
-                "value": 0,
-                "cost": 3
-            },
-            "Sensor Networking": {
-                "value": 0,
-                "cost": 3
-            },
-            "Tightbeam": {
-                "value": 0,
-                "cost": 3
-            },
-            "Interface 2037": {
-                "value": 0,
-                "cost": 3
-            },
-            "USCM Interface ": {
-                "value": 0,
-                "cost": 3
-            },
-            "USN Interface": {
-                "value": 0,
-                "cost": 3
-            },
-            "Forensics": {
-                "value": 0,
-                "cost": 3
-            },
-            "Laboratory equipment": {
-                "value": 0,
-                "cost": 3
-            },
-            "Meteorology": {
-                "value": 0,
-                "cost": 3
-            },
-            "Oceanography": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Nature & Animals": {
-            "Bushcrafting": {
-                "value": 0,
-                "cost": 3
-            },
-            "Fishing": {
-                "value": 0,
-                "cost": 3
-            },
-            "Herbalism": {
-                "value": 0,
-                "cost": 3
-            },
-            "Herding": {
-                "value": 0,
-                "cost": 5
-            },
-            "Hunting": {
-                "value": 0,
-                "cost": 5
-            },
-            "K9": {
-                "value": 0,
-                "cost": 8
-            },
-            "Riding": {
-                "value": 0,
-                "cost": 5
-            },
-            "Skiing": {
-                "value": 0,
-                "cost": 3
-            },
-            "Tracking": {
-                "value": 0,
-                "cost": 5
-            },
-            "Trapping": {
-                "value": 0,
-                "cost": 5
-            }
-        },
-        "Navigation": {
-            "Land": {
-                "value": 0,
-                "cost": 2
-            },
-            "Interplanetary": {
-                "value": 0,
-                "cost": 8
-            },
-            "Interstellar": {
-                "value": 0,
-                "cost": 15
-            },
-            "Oceanic": {
-                "value": 0,
-                "cost": 3
-            }
-        },
-        "Medical": {
-            "Aerospace Medicine": {
-                "value": 0,
-                "cost": 5
-            },
-            "Altitude Medicine": {
-                "value": 0,
-                "cost": 5
-            },
-            "Autodoc": {
-                "value": 0,
-                "cost": 5
-            },
-            "CBRN Treatment": {
-                "value": 0,
-                "cost": 5
-            },
-            "Cold climate": {
-                "value": 0,
-                "cost": 5
-            },
-            "Dive Medicine": {
-                "value": 0,
-                "cost": 5
-            },
-            "Field Surgery": {
-                "value": 0,
-                "cost": 5
-            },
-            "Hot climate": {
-                "value": 0,
-                "cost": 5
-            },
-            "Infections": {
-                "value": 0,
-                "cost": 5
-            },
-            "IV": {
-                "value": 0,
-                "cost": 5
-            },
-            "Toxicology": {
-                "value": 0,
-                "cost": 5
-            }
-        },
-        "Other": {
-            "Powerloader": {
-                "value": 0,
-                "cost": 4
-            },
-            "Crane": {
-                "value": 0,
-                "cost": 8
-            },
-            "Diving equipment": {
-                "value": 0,
-                "cost": 3
-            },
-            "Environmental Suit": {
-                "value": 0,
-                "cost": 3
-            },
-            "HALO": {
-                "value": 0,
-                "cost": 3
+        "Cybernetics": {
+            " ": {
+                "Left arm": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Right arm": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Left leg": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Right leg": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Vitals": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Gun Hand": {
+                    "value": 0,
+                    "cost": 0
+                },
+                "Hook Hand": {
+                    "value": 0,
+                    "cost": 0
+                }
             }
         }
     }
