@@ -728,6 +728,11 @@ class CharacterSelector:
 
         self._available_characters = []
 
+        """
+        When true, the character i fully editable in the same way as creating a new character.
+        When False, XP can only be spend, not removed.
+        This feature will be remove/hidden in the final version.
+        """
         self._create_mode = False
 
         self._characters_files = glob.glob("local_characters/*.json")
@@ -753,14 +758,19 @@ class CharacterSelector:
         """
         Continue with the selected character and setup next stage for edit mode.
         """
-        self._create_mode = False
         self._selected_character_file = self._characters_files[
             self._available_characters.index(self._selected_character)
         ]
 
         ci = CharacterImport.from_json(self._selected_character_file)
-        cg = CharacterGenerator(character=ci.get_character(), create_mode=False)
+        cg = CharacterGenerator(character=ci.get_character(), create_mode=self._create_mode)
         cg.main()
+
+    def _admin_button_callback(self, sender, app_data):
+        """
+        Update creation mode.
+        """
+        self._create_mode = app_data
 
     def _create_button_callback(self, sender, app_data):
         """
@@ -797,6 +807,7 @@ class CharacterSelector:
             dpg.add_listbox(
                 self._available_characters, callback=self._character_list_callback
             )
+            dpg.add_checkbox(label="Admin Mode", callback=self._admin_button_callback)
             dpg.add_button(label="Edit Character", callback=self._edit_button_callback)
 
     def main(self):
