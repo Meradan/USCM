@@ -11,7 +11,7 @@
     },
     "Config": {
         "Starting EP": 117,
-        "Starting AP": 22,
+        "Starting AP": 25,
         "specialities": [
             "APC",
             "CBRN",
@@ -118,6 +118,11 @@
                 "max": 5
             },
             "Psyche": {
+                "value": 3,
+                "min": 1,
+                "max": 5
+            },
+            "Perception": {
                 "value": 3,
                 "min": 1,
                 "max": 5
@@ -1503,7 +1508,7 @@
                     "cost": -2
                 },
                 "Soft hearted": {
-                    "value": 0,
+                    "value": 1,
                     "cost": -3
                 },
                 "Voodoo curse": {

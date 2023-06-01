@@ -1,6 +1,7 @@
 import dearpygui.dearpygui as dpg
 import json
 from copy import deepcopy
+from reportlab.pdfgen import canvas
 
 import glob
 import os
@@ -340,12 +341,14 @@ class CharacterGenerator:
         )
 
     def _save_character_callback(self):
-        path = os.path.abspath(
+        file_path = os.path.abspath(
             "local_characters/"
             + self._current_character["Player Info"]["Name"].replace(" ", "_").lower()
-            + ".json"
         )
-        CharacterExport.to_json(path, self._current_character)
+        CharacterExport.to_json(file_path + ".json", self._current_character)
+
+        ctp = CharacterToPdf(self._current_character, self._stats, file_path + ".pdf")
+        ctp.write_pdf()
 
     @staticmethod
     def _split_dict(source, num_per_part, max_row_count=24):
@@ -894,6 +897,70 @@ class CharacterExport:
             out_file.write(as_json)
         return cls(character_path, character)
 
+
+class CharacterToPdf:
+    def __init__(self, character, stats, out_file):
+        self._line_height = 15
+        self._current_y = 820
+        self._current_x = 20
+        self._font_size = 12
+        self._character = character
+        self._stats = stats
+        self.out_file = out_file
+        self._canvas = canvas.Canvas(self.out_file, pagesize=(595, 842))
+
+    def _write_line(self, line, title=False):
+        if title:
+            self._canvas.setFont('Helvetica-Bold', self._font_size)
+        else:
+            self._canvas.setFont('Helvetica', self._font_size)
+        self._canvas.drawString(self._current_x, self._current_y, line)
+        self._current_y = self._current_y - self._line_height
+        if self._current_y < 0:
+            self._current_y = 820
+            self._current_x = 200
+
+    def write_pdf(self):
+
+        self._write_line("Character Info", title=True)
+        for key, value in self._character["Player Info"].items():
+            self._write_line(f"{key}: {value}")
+
+        total_xp = self._character["Config"]["Starting EP"]
+        remaing_xp = self._stats["Experience Points"]
+        total_ap = self._character["Config"]["Starting AP"]
+        remaing_ap = self._stats["Attribute Points"]
+
+        self._write_line(" ")
+        self._write_line(f"Total XP: {total_xp}")
+        self._write_line(f"Remaining XP: {remaing_xp}")
+        self._write_line(f"Total AP: {total_ap}")
+        self._write_line(f"Remaining AP: {remaing_ap}")
+        self._write_line(" ")
+
+        self._write_line("Attributes", title=True)
+        for attribute, content in self._character["Integer"]["Attributes"].items():
+            value = content["value"]
+            self._write_line(f"{attribute}: {value}")
+
+        self._write_line("Skills", title=True)
+        for content in self._character["Integer"]["Skills"].values():
+            for skill, skill_content in content.items():
+                value = skill_content["value"]
+                if value > 0:
+                    self._write_line(f"{skill}: {value}")
+
+        for label, content in self._character["Boolean"].items():
+            self._write_line(label, title=True)
+            for sub_content in content.values():
+                for property, propery_content in sub_content.items():
+                    value = propery_content["value"]
+                    cost = propery_content["cost"]
+                    if value > 0:
+                        self._write_line(f"{property} ({cost})")
+
+        self._canvas.showPage()
+        self._canvas.save()
 
 if __name__ == "__main__":
     dpg.create_context()
