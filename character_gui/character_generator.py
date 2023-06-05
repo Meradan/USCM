@@ -14,6 +14,13 @@ class CharacterGenerator:
 
         self._current_character = deepcopy(self._imported_character)
 
+        self._serial_properties = self._serialize_properties(
+            self._current_character["Integer"]
+        )
+        self._serial_properties.update(
+            self._serialize_properties(self._current_character["Boolean"])
+        )
+
         self._text_input_width = 200
 
         self._platoon_alternatives = self._current_character["Config"]["platoons"]
@@ -50,6 +57,15 @@ class CharacterGenerator:
             "Experience Points": self._get_base_experience_points()
             - self._get_total_xp_usage(),
         }
+
+    def _serialize_properties(self, character):
+        properties = dict()
+        for key, value in character.items():
+            if "value" in character[key]:
+                properties.update({key: value})
+            else:
+                properties.update(self._serialize_properties(character[key]))
+        return properties
 
     def _get_base_attribute_points(self) -> int:
         return self._imported_character["Config"]["Starting AP"]
@@ -224,7 +240,28 @@ class CharacterGenerator:
             label=user_data["label"],
             value=app_data,
         )
+
+        #dpg.configure_item("Criminal", enabled=False)
+        #dpg.configure_item(
+        #    "Criminal",
+        #)
+
         self._update_xp_status()
+        self._check_property_disable()
+
+    def _check_property_disable(self):
+        for property in self._serial_properties:
+            if "requirements" in self._serial_properties[property]:
+                if "not_allowed" in self._serial_properties[property]["requirements"]:
+                    for criterium in self._serial_properties[property]["requirements"]["not_allowed"]:
+                        if self._serial_properties[criterium["ref"]]["value"]:
+                            dpg.configure_item(property, enabled=False)
+                            print(f"Enable: {property}")
+                        else:
+                            dpg.configure_item(property, enabled=True)
+                            print(f"Disable: {property}")
+
+        
 
     def _player_info_callback(self, sender, app_data, user_data: dict):
         """
@@ -390,6 +427,7 @@ class CharacterGenerator:
                 with dpg.table_row():
                     dpg.add_text(f"{attribute_key}:")
                     item_id = dpg.add_slider_int(
+                        tag=attribute_key,
                         default_value=attribute_values["value"],
                         min_value=self._get_allowed_min_value(attribute_values),
                         max_value=attribute_values["max"],
@@ -565,6 +603,7 @@ class CharacterGenerator:
                                             cost = None
                                         with dpg.table_row():
                                             item_id = dpg.add_checkbox(
+                                                tag=property_key,
                                                 user_data={
                                                     "property": property,
                                                     "category": category_key,
@@ -616,6 +655,7 @@ class CharacterGenerator:
                                     with dpg.table_row():
                                         dpg.add_text(skill_key, indent=5)
                                         item_id = dpg.add_slider_int(
+                                            tag=skill_key,
                                             default_value=skill_value["value"],
                                             min_value=self._get_allowed_min_value(
                                                 skill_value
@@ -766,7 +806,9 @@ class CharacterSelector:
         ]
 
         ci = CharacterImport.from_json(self._selected_character_file)
-        cg = CharacterGenerator(character=ci.get_character(), create_mode=self._create_mode)
+        cg = CharacterGenerator(
+            character=ci.get_character(), create_mode=self._create_mode
+        )
         cg.main()
 
     def _admin_button_callback(self, sender, app_data):
@@ -911,9 +953,9 @@ class CharacterToPdf:
 
     def _write_line(self, line, title=False):
         if title:
-            self._canvas.setFont('Helvetica-Bold', self._font_size)
+            self._canvas.setFont("Helvetica-Bold", self._font_size)
         else:
-            self._canvas.setFont('Helvetica', self._font_size)
+            self._canvas.setFont("Helvetica", self._font_size)
         self._canvas.drawString(self._current_x, self._current_y, line)
         self._current_y = self._current_y - self._line_height
         if self._current_y < 0:
@@ -921,7 +963,6 @@ class CharacterToPdf:
             self._current_x = 200
 
     def write_pdf(self):
-
         self._write_line("Character Info", title=True)
         for key, value in self._character["Player Info"].items():
             self._write_line(f"{key}: {value}")
@@ -962,13 +1003,23 @@ class CharacterToPdf:
         self._canvas.showPage()
         self._canvas.save()
 
+
 if __name__ == "__main__":
     dpg.create_context()
+
+    with dpg.theme() as disabled_theme:
+        with dpg.theme_component(dpg.mvCheckbox, enabled_state=False):
+            dpg.add_theme_color(dpg.mvThemeCol_FrameBg, [0, 0, 0])
+            dpg.add_theme_color(dpg.mvThemeCol_FrameBgHovered, [0, 0, 0])
+            dpg.add_theme_color(dpg.mvThemeCol_FrameBgActive, [0, 0, 0])
+    dpg.bind_theme(disabled_theme)
+
     cs = CharacterSelector()
     cs.main()
 
     dpg.create_viewport(title="USCM Character Editor", width=1730, height=1050)
     dpg.setup_dearpygui()
+
     dpg.show_viewport()
     dpg.start_dearpygui()
     dpg.destroy_context()

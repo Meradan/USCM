@@ -392,10 +392,6 @@
                             {
                                 "type": "trait",
                                 "ref": "Religious"
-                            },
-                            {
-                                "type": "trait",
-                                "ref": "Righteous"
                             }
                         ]
                     }
