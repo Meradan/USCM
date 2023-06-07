@@ -22,6 +22,7 @@
             "HW",
             "Mechanic",
             "Medic",
+            "Pilot",
             "Recon",
             "Rifleman",
             "Science",
@@ -277,7 +278,7 @@
                     "max": 5
                 },
                 "Welding": {
-                    "value": 1,
+                    "value": 0,
                     "min": 0,
                     "max": 5
                 },
@@ -287,7 +288,7 @@
                     "max": 5
                 },
                 "Starship Bridge": {
-                    "value": 1,
+                    "value": 0,
                     "min": 0,
                     "max": 5
                 }
@@ -372,28 +373,28 @@
                     "value": 0,
                     "cost": 0,
                     "requirements": {
-                        "not_allowed": [
-                            {
-                                "type": "trait",
-                                "ref": "Live long and prosper"
-                            }
-                        ]
+                        "Live long and prosper": {
+                            "type": "==",
+                            "value": 0
+                        }
                     }
                 },
                 "Bloodthirst": {
-                    "value": 1,
+                    "value": 0,
                     "cost": 0,
                     "requirements": {
-                        "not_allowed": [
-                            {
-                                "type": "trait",
-                                "ref": "Domesticated"
-                            },
-                            {
-                                "type": "trait",
-                                "ref": "Religious"
-                            }
-                        ]
+                        "Domesticated": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Religious": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Live long and prosper": {
+                            "type": "==",
+                            "value": 0
+                        }
                     }
                 },
                 "Collector": {
@@ -406,7 +407,13 @@
                 },
                 "Domesticated": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Charisma": {
+                            "type": ">=",
+                            "value": 4
+                        }
+                    }
                 },
                 "Dr. Gamble": {
                     "value": 0,
@@ -422,7 +429,17 @@
                 },
                 "Live long and prosper": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "ARM Sympathizer": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Bloodthirst": {
+                            "type": "==",
+                            "value": 0
+                        }
+                    }
                 },
                 "Nosy": {
                     "value": 0,
@@ -430,11 +447,39 @@
                 },
                 "Paranoid": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Psycho Points": {
+                            "type": ">=",
+                            "value": 1
+                        }
+                    }
                 },
                 "Private who?": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Rank": {
+                            "type": "<=",
+                            "value": 1
+                        },
+                        "Charisma": {
+                            "type": "<",
+                            "value": 5
+                        },
+                        "Canary": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Impressive Stature": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Tacticool": {
+                            "type": "==",
+                            "value": 0
+                        }
+                    }
                 },
                 "Religious": {
                     "value": 0,
@@ -442,15 +487,41 @@
                 },
                 "Small frame": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Impressive Stature": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Strategic reserves": {
+                            "type": "==",
+                            "value": 0
+                        }
+                    }
                 },
                 "Strategic reserves": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Small frame": {
+                            "type": "==",
+                            "value": 0
+                        },
+                        "Tunnel Rat": {
+                            "type": "==",
+                            "value": 0
+                        }
+                    }
                 },
                 "Tacticool": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "requirements": {
+                        "Private who?": {
+                            "type": "==",
+                            "value": 0
+                        }
+                    }
                 },
                 "Trigger-happy": {
                     "value": 0,
@@ -604,7 +675,7 @@
                 }
             },
             "Hand Held Weapons": {
-                "M41 Pulse Rifle 5": {
+                "M41 Pulse Rifle": {
                     "value": 0,
                     "cost": 5
                 },
@@ -1076,7 +1147,7 @@
                 },
                 "Field Surgery": {
                     "value": 0,
-                    "cost": 5
+                    "cost": 8
                 },
                 "Hot climate": {
                     "value": 0,
@@ -1124,20 +1195,14 @@
                     "value": 0,
                     "cost": 3,
                     "requirements": {
-                        "atleast": [
-                            {
-                                "type": "skill",
-                                "ref": "Computer Operation",
-                                "value": 4
-                            }
-                        ],
-                        "exact": [
-                            {
-                                "type": "character",
-                                "ref": "rank",
-                                "value": "Staff Sergeant"
-                            }
-                        ]
+                        "Computer Operation": {
+                            "type": ">=",
+                            "value": 4
+                        },
+                        "rank": {
+                            "type": ">=",
+                            "value": 4
+                        }
                     }
                 },
                 "Access to the files": {
@@ -1404,16 +1469,7 @@
                 },
                 "Blabbermouth": {
                     "value": 0,
-                    "cost": -1,
-                    "requirements": {
-                        "atleast": [
-                            {
-                                "type": "attribute",
-                                "ref": "charisma",
-                                "value": 3
-                            }
-                        ]
-                    }
+                    "cost": -1
                 },
                 "Canary": {
                     "value": 0,
@@ -1504,7 +1560,7 @@
                     "cost": -2
                 },
                 "Soft hearted": {
-                    "value": 1,
+                    "value": 0,
                     "cost": -3
                 },
                 "Voodoo curse": {
