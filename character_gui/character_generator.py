@@ -5,7 +5,6 @@ from reportlab.pdfgen import canvas
 
 import glob
 import os
-import time
 
 
 class CharacterGenerator:
@@ -672,12 +671,16 @@ class CharacterGenerator:
                                         width_fixed=True, init_width_or_weight=100
                                     )
                                     with dpg.table_row():
-                                        dpg.add_text(skill_key, indent=5)
+                                        dpg.add_text(
+                                            skill_key,
+                                            tag="tooltip_" + skill_key,
+                                            indent=5,
+                                        )
                                         item_id = dpg.add_slider_int(
                                             tag=skill_key,
                                             default_value=skill_value["value"],
                                             min_value=self._get_allowed_min_value(
-                                                skill_value
+                                                skill_value,
                                             ),
                                             max_value=skill_value["max"],
                                             width=50,
@@ -689,6 +692,10 @@ class CharacterGenerator:
                                             callback=callback,
                                         )
                                         item_refs[skill_key] = item_id
+
+                                        if "tooltip" in skill_value:
+                                            with dpg.tooltip("tooltip_" + skill_key):
+                                                dpg.add_text(skill_value["tooltip"])
         return item_refs
 
     def main(self):
@@ -778,6 +785,7 @@ class CharacterGenerator:
         self._update_leadership_points()
         self._update_carry_capacity()
         self._update_combat_load()
+        self._check_property_disable()
 
 
 class CharacterSelector:
@@ -1027,12 +1035,23 @@ class CharacterToPdf:
 if __name__ == "__main__":
     dpg.create_context()
 
-    with dpg.theme() as disabled_theme:
+    with dpg.theme() as global_theme:
+        with dpg.theme_component(dpg.mvAll):
+            dpg.add_theme_style(
+                dpg.mvStyleVar_FrameRounding, 5, category=dpg.mvThemeCat_Core
+            )
+
+        with dpg.theme_component(dpg.mvCheckbox):
+            dpg.add_theme_color(
+                dpg.mvThemeCol_CheckMark, [150, 250, 150], category=dpg.mvThemeCat_Core
+            )
+
         with dpg.theme_component(dpg.mvCheckbox, enabled_state=False):
             dpg.add_theme_color(dpg.mvThemeCol_FrameBg, [0, 0, 0])
             dpg.add_theme_color(dpg.mvThemeCol_FrameBgHovered, [0, 0, 0])
             dpg.add_theme_color(dpg.mvThemeCol_FrameBgActive, [0, 0, 0])
-    dpg.bind_theme(disabled_theme)
+
+    dpg.bind_theme(global_theme)
 
     cs = CharacterSelector()
     cs.main()

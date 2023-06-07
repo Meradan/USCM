@@ -134,7 +134,8 @@
                 "Shooting: Aimed": {
                     "value": 3,
                     "min": 0,
-                    "max": 5
+                    "max": 5,
+                    "tooltip": "Using sights/scope at long range also requires you to know your ammunition and account for target movement, wind speed etc."
                 },
                 "Shooting: Dynamic": {
                     "value": 3,
@@ -223,7 +224,8 @@
                 "Pilot: Space": {
                     "value": 0,
                     "min": 0,
-                    "max": 5
+                    "max": 5,
+                    "tooltip": "Flight in space including docking and landing where no atmosphere exist.\nFor flying large spacecraft your pilot die cannot be higher than your Space Crew die.\nExpertises: Starships and space-capable aircraft"
                 },
                 "Remote Piloting": {
                     "value": 0,
