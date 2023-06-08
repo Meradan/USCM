@@ -397,7 +397,19 @@
                             "type": "==",
                             "value": 0
                         }
-                    }
+                    },
+                    "bonus": [
+                        {   
+                            "target": "Stress Limit",
+                            "type": "permanent",
+                            "value": 1
+                        },
+                        {
+                            "target": "Psycho Limit",
+                            "type": "permanent",
+                            "value": -1
+                        }
+                    ]
                 },
                 "Collector": {
                     "value": 0,
@@ -405,7 +417,14 @@
                 },
                 "Criminal": {
                     "value": 0,
-                    "cost": 0
+                    "cost": 0,
+                    "bonus": [
+                        {
+                            "target": "Charisma",
+                            "type": "conditional",
+                            "value": 1
+                        }
+                    ]
                 },
                 "Domesticated": {
                     "value": 0,
@@ -415,7 +434,19 @@
                             "type": ">=",
                             "value": 4
                         }
-                    }
+                    },
+                    "bonus": [
+                        {   
+                            "target": "Charisma",
+                            "type": "conditional",
+                            "value": 1
+                        },
+                        {
+                            "target": "Charisma",
+                            "type": "conditional",
+                            "value": -1
+                        }
+                    ]
                 },
                 "Dr. Gamble": {
                     "value": 0,

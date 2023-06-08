@@ -32,17 +32,6 @@ class CharacterGenerator:
         self._create_mode = create_mode
         self._section_title_color = [150, 250, 150]
 
-        self._item_refs = {
-            "attributes": dict(),
-            "traits": dict(),
-            "advantages": dict(),
-            "disadvantages": dict(),
-            "psychotic disadvantages": dict(),
-            "skills": dict(),
-            "stats": dict(),
-            "expertise": dict(),
-        }
-
         self._stats = {
             "Carry Capacity": 55,
             "Combat Load": 25,
@@ -55,6 +44,7 @@ class CharacterGenerator:
             - self._get_total_attribute_cost(),
             "Experience Points": self._get_base_experience_points()
             - self._get_total_xp_usage(),
+            "Psycho Points": 0,
         }
 
     def _serialize_properties(self, character):
@@ -242,6 +232,7 @@ class CharacterGenerator:
 
         self._update_xp_status()
         self._check_property_disable()
+        self._update_stress_limit()
 
     def _check_property_disable(self):
         for property in self._serial_properties:
@@ -261,6 +252,20 @@ class CharacterGenerator:
                 else:
                     dpg.configure_item(property, enabled=False)
 
+    def _check_active_bonuses(self, target: str) -> list:
+        final_bonus = []
+        for property in self._serial_properties:
+            if "bonus" in self._serial_properties[property]:
+                if self._serial_properties[property]["value"] > 0:
+                    for bonus in self._serial_properties[property]["bonus"]:
+                        if bonus["target"] == target:
+                            this_bonus = bonus["value"]
+                            if bonus["type"] == "permanent":
+                                final_bonus.append(f"{this_bonus:+g}")
+                            else: 
+                                final_bonus.append(f"({this_bonus:+g})")
+        return final_bonus
+
     def _player_info_callback(self, sender, app_data, user_data: dict):
         """
         Triggered when changing player info such as name, platoon etc.
@@ -278,7 +283,7 @@ class CharacterGenerator:
         ]
         self._stats["Psycho Limit"] = psycho_limit
         dpg.set_value(
-            item=self._item_refs["stats"]["Psycho Limit"],
+            item="Psycho Limit",
             value=psycho_limit,
         )
 
@@ -291,10 +296,11 @@ class CharacterGenerator:
         stress_limit = (
             self._current_character["Integer"]["Attributes"]["Psyche"]["value"] + 1
         )
-        self._stats["Health"] = stress_limit
+        bonus_string = "".join(self._check_active_bonuses("Stress Limit"))
+        self._stats["Stress Limit"] = stress_limit
         dpg.set_value(
-            item=self._item_refs["stats"]["Stress Limit"],
-            value=stress_limit,
+            item="Stress Limit",
+            value=f"{stress_limit} {bonus_string}",
         )
 
     def _update_stunt_cap(self):
@@ -306,9 +312,9 @@ class CharacterGenerator:
         stunt_cap = self._current_character["Integer"]["Attributes"]["Charisma"][
             "value"
         ]
-        self._stats["Health"] = stunt_cap
+        self._stats["Stunt Cap"] = stunt_cap
         dpg.set_value(
-            item=self._item_refs["stats"]["Stunt Cap"],
+            item="Stunt Cap",
             value=stunt_cap,
         )
 
@@ -323,7 +329,7 @@ class CharacterGenerator:
         )
         self._stats["Health"] = health
         dpg.set_value(
-            item=self._item_refs["stats"]["Health"],
+            item="Health",
             value=health,
         )
 
@@ -337,7 +343,7 @@ class CharacterGenerator:
         ]
         self._stats["Carry Capacity"] = carry_capacity
         dpg.set_value(
-            item=self._item_refs["stats"]["Carry Capacity"],
+            item="Carry Capacity",
             value=carry_capacity,
         )
 
@@ -351,7 +357,7 @@ class CharacterGenerator:
         ]
         self._stats["Combat Load"] = combat_load
         dpg.set_value(
-            item=self._item_refs["stats"]["Combat Load"],
+            item="Combat Load",
             value=combat_load,
         )
 
@@ -369,7 +375,7 @@ class CharacterGenerator:
         )
         self._stats["Attribute Points"] = leadership_points
         dpg.set_value(
-            item=self._item_refs["stats"]["Leadership Points"],
+            item="Leadership Points",
             value=leadership_points,
         )
 
@@ -380,9 +386,7 @@ class CharacterGenerator:
         """
         remaining = self._get_base_attribute_points() - self._get_total_attribute_cost()
         self._stats["Attribute Points"] = remaining
-        dpg.set_value(
-            item=self._item_refs["stats"]["Attribute Points"], value=remaining
-        )
+        dpg.set_value(item="Attribute Points", value=remaining)
 
     def _update_xp_status(self):
         """
@@ -391,9 +395,7 @@ class CharacterGenerator:
         """
         remaining = self._get_base_experience_points() - self._get_total_xp_usage()
         self._stats["Experience Points"] = remaining
-        dpg.set_value(
-            item=self._item_refs["stats"]["Experience Points"], value=remaining
-        )
+        dpg.set_value(item="Experience Points", value=remaining)
 
     def _save_character_callback(self):
         file_path = os.path.abspath(
@@ -724,9 +726,7 @@ class CharacterGenerator:
                     for stat_label, stat_value in self._stats.items():
                         with dpg.table_row():
                             dpg.add_text(stat_label)
-                            self._item_refs["stats"][stat_label] = dpg.add_text(
-                                stat_value
-                            )
+                            dpg.add_text(tag=stat_label, default_value=stat_value)
 
             with dpg.group(width=300):
                 dpg.add_spacer(height=50)
@@ -734,12 +734,14 @@ class CharacterGenerator:
                     label="Save Character", callback=self._save_character_callback
                 )
 
+            """ Hide button for character upload until implemented
             with dpg.group(width=300):
                 dpg.add_spacer(height=50)
                 if self._create_mode:
                     dpg.add_button(label="Submit new character to Skynet")
                 else:
                     dpg.add_button(label="Submit update to Skynet")
+            """
 
         with dpg.window(
             width=1400,
@@ -755,22 +757,20 @@ class CharacterGenerator:
                 with dpg.tab_bar(tag="Tabs"):
                     with dpg.tab(label="Attributes"):
                         # Display attributes
-                        self._item_refs["Attributes"] = self._add_attributes_tab(
+                        self._add_attributes_tab(
                             self._current_character["Integer"]["Attributes"],
                             callback=self._attribute_callback,
                         )
 
                     with dpg.tab(label="Skills"):
-                        self._item_refs["Skills"] = self._add_skill_input(
+                        self._add_skill_input(
                             character=self._current_character["Integer"],
                             property="Skills",
                             callback=self._skills_callback,
                         )
                     for bool_propery in self._current_character["Boolean"].keys():
                         with dpg.tab(label=bool_propery):
-                            self._item_refs[
-                                bool_propery
-                            ] = self._add_property_check_boxes(
+                            self._add_property_check_boxes(
                                 character=self._current_character["Boolean"],
                                 property=bool_propery,
                                 num_per_row=3,
@@ -877,7 +877,9 @@ class CharacterSelector:
             dpg.add_spacer(height=20)
 
             dpg.add_listbox(
-                self._available_characters, callback=self._character_list_callback
+                self._available_characters,
+                callback=self._character_list_callback,
+                num_items=10,
             )
             dpg.add_checkbox(label="Admin Mode", callback=self._admin_button_callback)
             dpg.add_button(label="Edit Character", callback=self._edit_button_callback)
@@ -909,7 +911,9 @@ class CharacterSelector:
             no_resize=True,
             no_title_bar=True,
         ):
-            self._add_login()
+            # Skip login for now and go directly to the character selector
+            # self._add_login()
+            self._add_character_selection()
 
 
 class CharacterImport:
@@ -1032,9 +1036,7 @@ class CharacterToPdf:
         self._canvas.save()
 
 
-if __name__ == "__main__":
-    dpg.create_context()
-
+def set_theme():
     with dpg.theme() as global_theme:
         with dpg.theme_component(dpg.mvAll):
             dpg.add_theme_style(
@@ -1052,6 +1054,12 @@ if __name__ == "__main__":
             dpg.add_theme_color(dpg.mvThemeCol_FrameBgActive, [0, 0, 0])
 
     dpg.bind_theme(global_theme)
+
+
+if __name__ == "__main__":
+    dpg.create_context()
+
+    set_theme()
 
     cs = CharacterSelector()
     cs.main()
