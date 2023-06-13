@@ -33,19 +33,29 @@ class CharacterGenerator:
         self._section_title_color = [150, 250, 150]
 
         self._stats = {
-            "Carry Capacity": 55,
-            "Combat Load": 25,
-            "Psycho Limit": 4,
-            "Stress Limit": 4,
-            "Stunt Cap": 2,
-            "Leadership Points": 1,
-            "Health": 1,
-            "Attribute Points": self._get_base_attribute_points()
-            - self._get_total_attribute_cost(),
-            "Experience Points": self._get_base_experience_points()
-            - self._get_total_xp_usage(),
-            "Psycho Points": 0,
+            "Carry Capacity": {"value": 55},
+            "Combat Load": {"value": 25},
+            "Psycho Limit": {"value": 4},
+            "Stress Limit": {"value": 4},
+            "Stunt Cap": {"value": 2},
+            "Leadership Points": {"value": 1},
+            "Health": {"value": 2},
+            "Attribute Points": {
+                "value": self._get_base_attribute_points()
+                - self._get_total_attribute_cost()
+            },
+            "Experience Points": {
+                "value": self._get_base_experience_points() - self._get_total_xp_usage()
+            },
+            "Psycho Points": {"value": 0},
         }
+
+        self._serial_properties.update(self._serialize_properties(self._stats))
+        self._serial_properties.update(
+            self._serialize_properties(
+                {"Rank": {"value": self._current_character["Player Info"]["Rank"]}}
+            )
+        )
 
     def _serialize_properties(self, character):
         properties = dict()
@@ -147,6 +157,7 @@ class CharacterGenerator:
         self._update_leadership_points()
         self._update_carry_capacity()
         self._update_combat_load()
+        self._check_property_disable()
 
     def _get_value_from_character_state(
         self, state: dict, property: str, label: str, category: str = None
@@ -247,6 +258,19 @@ class CharacterGenerator:
                             == self._serial_properties[req_name]["value"]
                         ):
                             enabled = False
+                    if criterium["type"] == ">=":
+                        if not (
+                            self._serial_properties[req_name]["value"]
+                            >= criterium["value"]
+                        ):
+                            enabled = False
+                    if criterium["type"] == "<=":
+                        if not (
+                            self._serial_properties[req_name]["value"]
+                            <= criterium["value"]
+                        ):
+                            enabled = False
+
                 if enabled:
                     dpg.configure_item(property, enabled=True)
                 else:
@@ -262,7 +286,7 @@ class CharacterGenerator:
                             this_bonus = bonus["value"]
                             if bonus["type"] == "permanent":
                                 final_bonus.append(f"{this_bonus:+g}")
-                            else: 
+                            else:
                                 final_bonus.append(f"({this_bonus:+g})")
         return final_bonus
 
@@ -281,7 +305,7 @@ class CharacterGenerator:
         psycho_limit = self._current_character["Integer"]["Attributes"]["Psyche"][
             "value"
         ]
-        self._stats["Psycho Limit"] = psycho_limit
+        self._stats["Psycho Limit"]["value"] = psycho_limit
         dpg.set_value(
             item="Psycho Limit",
             value=psycho_limit,
@@ -297,7 +321,7 @@ class CharacterGenerator:
             self._current_character["Integer"]["Attributes"]["Psyche"]["value"] + 1
         )
         bonus_string = "".join(self._check_active_bonuses("Stress Limit"))
-        self._stats["Stress Limit"] = stress_limit
+        self._stats["Stress Limit"]["value"] = stress_limit
         dpg.set_value(
             item="Stress Limit",
             value=f"{stress_limit} {bonus_string}",
@@ -312,7 +336,7 @@ class CharacterGenerator:
         stunt_cap = self._current_character["Integer"]["Attributes"]["Charisma"][
             "value"
         ]
-        self._stats["Stunt Cap"] = stunt_cap
+        self._stats["Stunt Cap"]["value"] = stunt_cap
         dpg.set_value(
             item="Stunt Cap",
             value=stunt_cap,
@@ -327,7 +351,7 @@ class CharacterGenerator:
         health = (
             self._current_character["Integer"]["Attributes"]["Endurance"]["value"] + 3
         )
-        self._stats["Health"] = health
+        self._stats["Health"]["value"] = health
         dpg.set_value(
             item="Health",
             value=health,
@@ -341,7 +365,7 @@ class CharacterGenerator:
         carry_capacity = self._current_character["Config"]["Carry Capacity Table"][
             self._current_character["Integer"]["Attributes"]["Strength"]["value"] - 1
         ]
-        self._stats["Carry Capacity"] = carry_capacity
+        self._stats["Carry Capacity"]["value"] = carry_capacity
         dpg.set_value(
             item="Carry Capacity",
             value=carry_capacity,
@@ -355,7 +379,7 @@ class CharacterGenerator:
         combat_load = self._current_character["Config"]["Combat Load Table"][
             self._current_character["Integer"]["Attributes"]["Strength"]["value"] - 1
         ]
-        self._stats["Combat Load"] = combat_load
+        self._stats["Combat Load"]["value"] = combat_load
         dpg.set_value(
             item="Combat Load",
             value=combat_load,
@@ -366,14 +390,12 @@ class CharacterGenerator:
         Update the printout of current health.
         Must be called whenever a related value have been change.
         """
-        rank_index = self._rank_alternatives.index(
-            self._current_character["Player Info"]["Rank"]
-        )
+        rank_index = self._current_character["Player Info"]["Rank"]
         leadership_points = (
             self._current_character["Config"]["Rank Bonus"][rank_index]
             + self._current_character["Integer"]["Attributes"]["Charisma"]["value"]
         )
-        self._stats["Attribute Points"] = leadership_points
+        self._stats["Attribute Points"]["value"] = leadership_points
         dpg.set_value(
             item="Leadership Points",
             value=leadership_points,
@@ -385,7 +407,7 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
         remaining = self._get_base_attribute_points() - self._get_total_attribute_cost()
-        self._stats["Attribute Points"] = remaining
+        self._stats["Attribute Points"]["value"] = remaining
         dpg.set_value(item="Attribute Points", value=remaining)
 
     def _update_xp_status(self):
@@ -394,7 +416,7 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
         remaining = self._get_base_experience_points() - self._get_total_xp_usage()
-        self._stats["Experience Points"] = remaining
+        self._stats["Experience Points"]["value"] = remaining
         dpg.set_value(item="Experience Points", value=remaining)
 
     def _save_character_callback(self):
@@ -523,7 +545,11 @@ class CharacterGenerator:
 
             with dpg.table_row():
                 dpg.add_text("Rank:")
-                dpg.add_text(self._current_character["Player Info"]["Rank"])
+                rank_index = self._current_character["Player Info"]["Rank"]
+                rank_label = self._current_character["Config"]["Rank Labels"][
+                    rank_index
+                ]
+                dpg.add_text(rank_label)
 
             with dpg.table_row():
                 dpg.add_text("Speciality:")
@@ -726,7 +752,9 @@ class CharacterGenerator:
                     for stat_label, stat_value in self._stats.items():
                         with dpg.table_row():
                             dpg.add_text(stat_label)
-                            dpg.add_text(tag=stat_label, default_value=stat_value)
+                            dpg.add_text(
+                                tag=stat_label, default_value=stat_value["value"]
+                            )
 
             with dpg.group(width=300):
                 dpg.add_spacer(height=50)
@@ -997,12 +1025,19 @@ class CharacterToPdf:
     def write_pdf(self):
         self._write_line("Character Info", title=True)
         for key, value in self._character["Player Info"].items():
-            self._write_line(f"{key}: {value}")
+            if key == "Rank":
+                rank_index = self._character["Player Info"]["Rank"]
+                rank_label = self._character["Config"]["Rank Labels"][
+                    rank_index
+                ]
+                self._write_line(f"{key}: {rank_label}")
+            else:
+                self._write_line(f"{key}: {value}")
 
         total_xp = self._character["Config"]["Starting EP"]
-        remaing_xp = self._stats["Experience Points"]
+        remaing_xp = self._stats["Experience Points"]["value"]
         total_ap = self._character["Config"]["Starting AP"]
-        remaing_ap = self._stats["Attribute Points"]
+        remaing_ap = self._stats["Attribute Points"]["value"]
 
         self._write_line(" ")
         self._write_line(f"Total XP: {total_xp}")

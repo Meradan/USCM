@@ -4,7 +4,7 @@
         "E-mail": "test@test.com",
         "Name": "Test Player",
         "Platoon": "BF5",
-        "Rank": "Pvt",
+        "Rank": 0,
         "Speciality": "APC",
         "Gender": "Male",
         "Age": 21
@@ -497,8 +497,8 @@
                             "value": 1
                         },
                         "Charisma": {
-                            "type": "<",
-                            "value": 5
+                            "type": "<=",
+                            "value": 4
                         },
                         "Canary": {
                             "type": "==",
@@ -1228,11 +1228,11 @@
                     "value": 0,
                     "cost": 3,
                     "requirements": {
-                        "Computer Operation": {
+                        "Computer Systems": {
                             "type": ">=",
                             "value": 4
                         },
-                        "rank": {
+                        "Rank": {
                             "type": ">=",
                             "value": 4
                         }
