@@ -339,7 +339,7 @@ function traits($characterId) {
           FROM uscm_trait_names tn
           LEFT JOIN uscm_traits t ON t.trait_name_id=tn.id
           LEFT JOIN uscm_characters c ON c.id=t.character_id
-          WHERE t.character_id=cid ORDER BY trait_name";
+          WHERE t.character_id=:cid ORDER BY trait_name";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':cid', $characterId, PDO::PARAM_INT);
   $stmt->execute();
