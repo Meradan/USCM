@@ -201,8 +201,8 @@ foreach ($platoons as $platoon) { ?>
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 // 		$lastMission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid']) ?>
-    <TD><?php echo $lastMission['date'];?></TD>
-    <TD><?php echo $lastMission['mission_name_short'];?></TD>
+    <TD><?php echo $lastMission['date'] ?? '';?></TD>
+    <TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
     <TD><?php echo $character['status_desc'];?></TD>
 
 
