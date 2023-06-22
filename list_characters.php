@@ -127,7 +127,7 @@ foreach ($platoons as $platoon ) { ?>
     ?><?php echo $character['forname'] . " " . $character['lastname'];?><?php echo $link ? "</a>" : ""; ?></TD>
     <TD><?php echo $character['specialty_name'];?></TD>
     <TD class="center"><?php echo $character['missions'];?></TD>
-	<TD><?php echo $lastMission['mission_name_short'];?></TD>
+	<TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
     <TD><?php echo $character['enlisted'];?></TD>
 <?php
       $medals = "";
