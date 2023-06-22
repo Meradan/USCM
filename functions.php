@@ -17,7 +17,6 @@ require_once ("classes/player.php");
 require_once ("classes/platoon.php");
 require_once ("classes/rank.php");
 require_once ("classes/score.php");
-require_once ("classes/simulation.php");
 require_once ("classes/skill.php");
 require_once ("classes/specialty.php");
 require_once ("classes/trait.php");
@@ -29,7 +28,6 @@ require_once ("controllers/mission_controller.php");
 require_once ("controllers/platoon_controller.php");
 require_once ("controllers/player_controller.php");
 require_once ("controllers/rank_controller.php");
-require_once ("controllers/simulation_controller.php");
 require_once ("controllers/user_controller.php");
 
 $db_connection = NULL;
