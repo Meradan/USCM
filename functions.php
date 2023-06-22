@@ -104,7 +104,7 @@ function login($level) {
         $stmt->bindValue(':password', $_POST['losenord'], PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row['howmany'] == 1) {
+        if (!is_null($row['howmany'] ) && $row['howmany'] == 1) {
           $userinfo = $row;
           if ($userinfo['Admin']) {
             $userlevel = 3;
@@ -123,7 +123,7 @@ function login($level) {
           $db->exec("UPDATE Users SET logintime = NOW() WHERE id = {$userinfo['id']}");
           return 1;
           exit();
-        } elseif ($row['howmany'] > 1) {
+        } elseif (!is_null($row['howmany'] ) && $row['howmany'] > 1) {
           $_SESSION['inloggad'] = 0;
           $_SESSION['level'] = "0";
           return 0;
