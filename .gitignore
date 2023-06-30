@@ -1,7 +1,16 @@
+# ide
 .vscode
 .idea
 .iml
+
+# file system
 .DS_Store
+
+# logs
+*.log
+
+# local env files
+.env*.local
 
 config.php
 .settings
