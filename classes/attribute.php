@@ -1,5 +1,5 @@
 <?php
-Class Attribute extends DbEntity {
+Class CharacterAttribute extends DbEntity {
   private $name = NULL;
 
   public function getName() {
