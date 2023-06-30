@@ -89,7 +89,9 @@ class CharacterGenerator:
 
     def _get_total_attribute_cost(self) -> int:
         sum_points = 0
-        for attribute in self._current_character["Character"]["Attributes"]["All"]["Attribute"].values():
+        for attribute in self._current_character["Character"]["Attributes"]["All"][
+            "Attribute"
+        ].values():
             sum_points = sum_points + attribute["value"]
         return sum_points
 
@@ -157,9 +159,7 @@ class CharacterGenerator:
         self._update_combat_load()
         self._check_property_disable()
 
-    def _get_value_from_character_state(
-        self, property_data: dict
-    ) -> int:
+    def _get_value_from_character_state(self, property_data: dict) -> int:
         """
         Helper function to get a specific value.
         """
@@ -168,8 +168,9 @@ class CharacterGenerator:
         sub_tab_label = property_data["sub_tab_label"]
         category = property_data["category"]
         label = property_data["label"]
-        return self._current_character[section][tab_label][sub_tab_label][category][label]["value"]
-
+        return self._current_character[section][tab_label][sub_tab_label][category][
+            label
+        ]["value"]
 
     def _set_value_in_character_state(self, property_data: dict, new_value: int):
         """
@@ -181,9 +182,10 @@ class CharacterGenerator:
         category = property_data["category"]
         label = property_data["label"]
 
-        #print(f"{section} - {tab_label} - {sub_tab_label} - {category} - {label}")
-        self._current_character[section][tab_label][sub_tab_label][category][label]["value"] = new_value
-
+        # print(f"{section} - {tab_label} - {sub_tab_label} - {category} - {label}")
+        self._current_character[section][tab_label][sub_tab_label][category][label][
+            "value"
+        ] = new_value
 
     def _set_value_and_display_difference(
         self,
@@ -197,7 +199,7 @@ class CharacterGenerator:
         """
         self._set_value_in_character_state(
             property_data=property_data,
-            new_value = new_value,
+            new_value=new_value,
         )
         difference = new_value - self._get_value_from_character_state(
             property_data=property_data,
@@ -216,7 +218,7 @@ class CharacterGenerator:
         """
         Triggered when any slider for skill points have changed.
         """
-        
+
         self._set_value_and_display_difference(
             property_data=user_data,
             sender=sender,
@@ -230,7 +232,7 @@ class CharacterGenerator:
         """
         self._set_value_in_character_state(
             property_data=user_data,
-            new_value = app_data,
+            new_value=app_data,
         )
 
         self._update_xp_status()
@@ -294,9 +296,9 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
 
-        psycho_limit = self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Psyche"][
-            "value"
-        ]
+        psycho_limit = self._current_character["Character"]["Attributes"]["All"][
+            "Attribute"
+        ]["Psyche"]["value"]
         self._stats["Psycho Limit"]["value"] = psycho_limit
         dpg.set_value(
             item="Psycho Limit",
@@ -310,7 +312,10 @@ class CharacterGenerator:
         """
 
         stress_limit = (
-            self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Psyche"]["value"] + 1
+            self._current_character["Character"]["Attributes"]["All"]["Attribute"][
+                "Psyche"
+            ]["value"]
+            + 1
         )
         bonus_string = "".join(self._check_active_bonuses("Stress Limit"))
         self._stats["Stress Limit"]["value"] = stress_limit
@@ -325,9 +330,9 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
 
-        stunt_cap = self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Charisma"][
-            "value"
-        ]
+        stunt_cap = self._current_character["Character"]["Attributes"]["All"][
+            "Attribute"
+        ]["Charisma"]["value"]
         self._stats["Stunt Cap"]["value"] = stunt_cap
         dpg.set_value(
             item="Stunt Cap",
@@ -341,7 +346,10 @@ class CharacterGenerator:
         """
 
         health = (
-            self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Endurance"]["value"] + 3
+            self._current_character["Character"]["Attributes"]["All"]["Attribute"][
+                "Endurance"
+            ]["value"]
+            + 3
         )
         self._stats["Health"]["value"] = health
         dpg.set_value(
@@ -355,7 +363,10 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
         carry_capacity = self._current_character["Config"]["Carry Capacity Table"][
-            self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Strength"]["value"] - 1
+            self._current_character["Character"]["Attributes"]["All"]["Attribute"][
+                "Strength"
+            ]["value"]
+            - 1
         ]
         self._stats["Carry Capacity"]["value"] = carry_capacity
         dpg.set_value(
@@ -369,7 +380,10 @@ class CharacterGenerator:
         Must be called whenever a related value have been change.
         """
         combat_load = self._current_character["Config"]["Combat Load Table"][
-            self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Strength"]["value"] - 1
+            self._current_character["Character"]["Attributes"]["All"]["Attribute"][
+                "Strength"
+            ]["value"]
+            - 1
         ]
         self._stats["Combat Load"]["value"] = combat_load
         dpg.set_value(
@@ -385,7 +399,9 @@ class CharacterGenerator:
         rank_index = self._current_character["Player Info"]["Rank"]
         leadership_points = (
             self._current_character["Config"]["Rank Bonus"][rank_index]
-            + self._current_character["Character"]["Attributes"]["All"]["Attribute"]["Charisma"]["value"]
+            + self._current_character["Character"]["Attributes"]["All"]["Attribute"][
+                "Charisma"
+            ]["value"]
         )
         self._stats["Attribute Points"]["value"] = leadership_points
         dpg.set_value(
@@ -415,11 +431,20 @@ class CharacterGenerator:
         file_path = os.path.abspath(
             "local_characters/"
             + self._current_character["Player Info"]["Name"].replace(" ", "_").lower()
+            + ".json"
         )
-        CharacterExport.to_json(file_path + ".json", self._current_character)
+        CharacterExport.to_json(file_path, self._current_character)
 
-        ctp = CharacterToPdf(self._current_character, self._stats, file_path + ".pdf")
+    def _export_to_pdf_callback(self):
+        file_path = os.path.abspath(
+            "local_characters/"
+            + self._current_character["Player Info"]["Name"].replace(" ", "_").lower()
+            + ".pdf"
+        )
+        ctp = CharacterToPdf(self._current_character, self._stats, file_path)
         ctp.write_pdf()
+        print(f"Created: {file_path}")
+        os.startfile(file_path, "open")
 
     @staticmethod
     def _split_dict(source, num_per_part, max_row_count=24):
@@ -627,7 +652,9 @@ class CharacterGenerator:
                                                 },
                                                 indent=5,
                                                 callback=callback,
-                                                default_value=bool(propery_value["value"]),
+                                                default_value=bool(
+                                                    propery_value["value"]
+                                                ),
                                                 enabled=self._is_check_box_change_allowed(
                                                     propery_value
                                                 ),
@@ -641,7 +668,13 @@ class CharacterGenerator:
         return item_refs
 
     def _add_slider_input(
-        self, section, tab_label, sub_tab_label, num_per_row=3, label_width=170, callback=None
+        self,
+        section,
+        tab_label,
+        sub_tab_label,
+        num_per_row=3,
+        label_width=170,
+        callback=None,
     ):
         """
         Add sliders for skills.
@@ -733,6 +766,9 @@ class CharacterGenerator:
                 dpg.add_button(
                     label="Save Character", callback=self._save_character_callback
                 )
+                dpg.add_button(
+                    label="Export to PDF", callback=self._export_to_pdf_callback
+                )
 
             """ Hide button for character upload until implemented
             with dpg.group(width=300):
@@ -756,7 +792,6 @@ class CharacterGenerator:
             with dpg.group(width=300):
                 with dpg.tab_bar(tag="Tabs"):
                     with dpg.tab(label="Attributes"):
-
                         self._add_slider_input(
                             section="Character",
                             tab_label="Attributes",
@@ -771,12 +806,13 @@ class CharacterGenerator:
                             sub_tab_label="All",
                             callback=self._skills_callback,
                         )
-                    
 
                     for tab_label in ["Traits", "Expertise"]:
                         with dpg.tab(label=tab_label):
                             with dpg.tab_bar():
-                                for sub_tab_label in self._current_character["Character"][tab_label].keys():
+                                for sub_tab_label in self._current_character[
+                                    "Character"
+                                ][tab_label].keys():
                                     with dpg.tab(label=sub_tab_label):
                                         self._add_property_check_boxes(
                                             section="Character",
@@ -827,9 +863,9 @@ class CharacterSelector:
             self._selected_character = None
             self._selected_character_file = None
 
-        #ci = CharacterImport.from_json(self._selected_character_file)
-        #cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
-        #cg.main()
+        # ci = CharacterImport.from_json(self._selected_character_file)
+        # cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
+        # cg.main()
 
     def _character_list_callback(self, sender, app_data):
         """
@@ -905,7 +941,7 @@ class CharacterSelector:
 
         # Uncomment this and comment below to skip selector page and
         # go directly to character creation.
-        """ 
+        """
         self._selected_character_file = r"local_characters/template/template.json"
 
         ci = CharacterImport.from_json(self._selected_character_file)
@@ -942,7 +978,6 @@ class CharacterImport:
         with open(character_path) as setup_file:
             imported_character = json.load(setup_file)
 
-
         return cls(imported_character)
 
     def get_character(self):
@@ -964,11 +999,18 @@ class CharacterExport:
         # Convert from true/false to 1/0
         for tab_label in character_out["Character"]:
             for sub_tab_label in character_out["Character"][tab_label].keys():
-                for category in character_out["Character"][tab_label][sub_tab_label].keys():
-                    print(character_out["Character"][tab_label][sub_tab_label])
-                    for label in character_out["Character"][tab_label][sub_tab_label][category].keys():
-                        character_out["Character"][tab_label][sub_tab_label][category][label]["value"] = int(
-                            character_out["Character"][tab_label][sub_tab_label][category][label]["value"]
+                for category in character_out["Character"][tab_label][
+                    sub_tab_label
+                ].keys():
+                    for label in character_out["Character"][tab_label][sub_tab_label][
+                        category
+                    ].keys():
+                        character_out["Character"][tab_label][sub_tab_label][category][
+                            label
+                        ]["value"] = int(
+                            character_out["Character"][tab_label][sub_tab_label][
+                                category
+                            ][label]["value"]
                         )
         as_json = json.dumps(character_out, indent=4)
         with open(character_path, "w") as out_file:
@@ -1003,9 +1045,7 @@ class CharacterToPdf:
         for key, value in self._character["Player Info"].items():
             if key == "Rank":
                 rank_index = self._character["Player Info"]["Rank"]
-                rank_label = self._character["Config"]["Rank Labels"][
-                    rank_index
-                ]
+                rank_label = self._character["Config"]["Rank Labels"][rank_index]
                 self._write_line(f"{key}: {rank_label}")
             else:
                 self._write_line(f"{key}: {value}")
@@ -1023,7 +1063,9 @@ class CharacterToPdf:
         self._write_line(" ")
 
         self._write_line("Attributes", title=True)
-        for attribute, content in self._character["Character"]["Attributes"]["All"]["Attribute"].items():
+        for attribute, content in self._character["Character"]["Attributes"]["All"][
+            "Attribute"
+        ].items():
             value = content["value"]
             self._write_line(f"{attribute}: {value}")
 
@@ -1034,14 +1076,18 @@ class CharacterToPdf:
                 if value > 0:
                     self._write_line(f"{skill}: {value}")
 
-        for label, content in self._character["Character"].items():
-            self._write_line(label, title=True)
-            for sub_content in content.values():
-                for property, propery_content in sub_content.items():
-                    value = propery_content["value"]
-                    cost = propery_content["cost"]
-                    if value > 0:
-                        self._write_line(f"{property} ({cost})")
+        for tab_label in ["Traits", "Expertise"]:
+            self._write_line(tab_label, title=True)
+            for sub_tab_label, sub_tab_content in self._character["Character"][
+                tab_label
+            ].items():
+                self._write_line(sub_tab_label, title=True)
+                for category_content in sub_tab_content.values():
+                    for label, label_content in category_content.items():
+                        value = label_content["value"]
+                        cost = label_content["cost"]
+                        if value > 0:
+                            self._write_line(f"{label} ({cost})")
 
         self._canvas.showPage()
         self._canvas.save()

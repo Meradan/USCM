@@ -95,12 +95,27 @@
                         "min": 1,
                         "max": 5
                     },
+                    "Charisma": {
+                        "value": 3,
+                        "min": 1,
+                        "max": 5
+                    },
                     "Reaction": {
                         "value": 3,
                         "min": 1,
                         "max": 5
                     },
+                    "Perception": {
+                        "value": 3,
+                        "min": 1,
+                        "max": 5
+                    },
                     "Dexterity": {
+                        "value": 3,
+                        "min": 1,
+                        "max": 5
+                    },
+                    "Psyche": {
                         "value": 3,
                         "min": 1,
                         "max": 5
@@ -111,21 +126,6 @@
                         "max": 5
                     },
                     "Toughness": {
-                        "value": 3,
-                        "min": 1,
-                        "max": 5
-                    },
-                    "Charisma": {
-                        "value": 3,
-                        "min": 1,
-                        "max": 5
-                    },
-                    "Psyche": {
-                        "value": 3,
-                        "min": 1,
-                        "max": 5
-                    },
-                    "Perception": {
                         "value": 3,
                         "min": 1,
                         "max": 5
