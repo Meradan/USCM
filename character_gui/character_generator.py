@@ -238,6 +238,7 @@ class CharacterGenerator:
         self._update_xp_status()
         self._check_property_disable()
         self._update_stress_limit()
+        self._update_overview()
 
     def _check_property_disable(self):
         for property in self._serial_properties:
@@ -426,6 +427,15 @@ class CharacterGenerator:
         remaining = self._get_base_experience_points() - self._get_total_xp_usage()
         self._stats["Experience Points"]["value"] = remaining
         dpg.set_value(item="Experience Points", value=remaining)
+
+    def _update_overview(self):
+        overview_list = ""
+        for property_key, property_value in self._serial_properties.items():
+            if "cost" in property_value and property_value["value"]:
+                cost = property_value["cost"]
+                print(property_key)
+                overview_list = overview_list + f"{property_key} ({cost})\n"
+        dpg.set_value("overview_list", overview_list)
 
     def _save_character_callback(self):
         file_path = os.path.abspath(
@@ -780,7 +790,7 @@ class CharacterGenerator:
             """
 
         with dpg.window(
-            width=1400,
+            width=900,
             height=1000,
             pos=[301, 0],
             no_move=True,
@@ -819,8 +829,25 @@ class CharacterGenerator:
                                             tab_label=tab_label,
                                             sub_tab_label=sub_tab_label,
                                             num_per_row=3,
+                                            label_width=180,
                                             callback=self._property_callback,
                                         )
+        with dpg.window(
+            width=300,
+            height=1000,
+            pos=[1202, 0],
+            no_move=True,
+            no_close=True,
+            no_collapse=True,
+            no_resize=True,
+            no_title_bar=True,
+        ):
+            with dpg.group(width=300):
+                dpg.add_text(
+                    "Traits and Experise Overview", color=self._section_title_color
+                )
+                dpg.add_text("", tag="overview_list", indent=5)
+                self._update_overview()
 
         self._update_xp_status()
         self._update_psycho_limit()
