@@ -683,7 +683,7 @@
                         "value": 0,
                         "cost": 2
                     },
-                    "I’ve been through worse": {
+                    "I've been through worse": {
                         "value": 0,
                         "cost": 2
                     },
@@ -703,7 +703,7 @@
                         "value": 0,
                         "cost": 4
                     },
-                    "Let’s Rock!": {
+                    "Let's Rock!": {
                         "value": 0,
                         "cost": 1
                     },
@@ -777,7 +777,7 @@
                         "value": 0,
                         "cost": 5
                     },
-                    "Shake n’ Bake Colonist ": {
+                    "Shake n' Bake Colonist ": {
                         "value": 0,
                         "cost": 3
                     },
@@ -1191,7 +1191,7 @@
                     }
                 }
             },
-            "Weapons":{
+            "Weapons": {
                 "Hand Held Weapons": {
                     "M41 Pulse Rifle": {
                         "value": 0,
@@ -1371,7 +1371,7 @@
                     }
                 }
             },
-            "Misc.":{
+            "Misc.": {
                 "Terrain": {
                     "Urban": {
                         "value": 0,

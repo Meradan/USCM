@@ -433,7 +433,6 @@ class CharacterGenerator:
         for property_key, property_value in self._serial_properties.items():
             if "cost" in property_value and property_value["value"]:
                 cost = property_value["cost"]
-                print(property_key)
                 overview_list = overview_list + f"{property_key} ({cost})\n"
         dpg.set_value("overview_list", overview_list)
 
