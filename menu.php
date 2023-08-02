@@ -1,8 +1,5 @@
 <?php /*<div class="colorfont" style="text-align:center">
 <p> */ ?>
-<TABLE BGCOLOR="#000000" ALIGN="center" WIDTH="627" CELLSPACING="0" CELLPADDING="0" BORDER="0">
-<TR><TD HEIGHT="10"></TD></TR><TR><TD>
-
 <TABLE BACKGROUND="images/logo_top_index.jpg" ALIGN="center" WIDTH="627" HEIGHT="129" >
 <TR><TD WIDTH="10"></TD><TD WIDTH="607"></TD><TD WIDTH="10"></TD></TR></TABLE>
 

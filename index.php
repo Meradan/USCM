@@ -18,7 +18,7 @@
 
   //if(validate(1)){?>
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="sv">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -41,6 +41,8 @@
     } ?>
     >
     <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+
+    <div class="main">
       <?php include("menu.php");
         if(isset($_GET['url'])){
           // To make sure the file loaded is in the local file system and not a remote url
@@ -54,8 +56,9 @@
         }
         include("footer.php");
       ?>
+    </div>
     </body>
-    </html>
+  </html>
 <?php
   /*}
   else{
