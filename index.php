@@ -15,6 +15,7 @@
   }
 
   include("functions.php");
+  include("security-headers.php");
 
   //if(validate(1)){?>
   <!DOCTYPE html>
