@@ -44,7 +44,7 @@
       <?php include("menu.php");
         if(isset($_GET['url'])){
           // To make sure the file loaded is in the local file system and not a remote url
-          $pages = recursive_dirlist('/var/www/html/skynet/');
+          $pages = recursive_dirlist('./');
           if( in_array("/".$_GET['url'], $pages) ) {
             include($_GET['url']);
           }
