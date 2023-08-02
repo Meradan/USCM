@@ -13,7 +13,7 @@
   if (!array_key_exists('table_prefix', $_SESSION)) {
     $_SESSION['table_prefix']="uscm_";
   }
-  
+
   include("functions.php");
   //if(validate(1)){?>
     <html>
@@ -45,6 +45,8 @@
         }
         include("footer.php");
       ?>
+
+      <script data-respect-dnt data-no-cookie async src="https://cdn.splitbee.io/sb.js"></script>
     </body>
     </html>
 <?php
