@@ -1,5 +1,4 @@
-BODY {color: #FFFFFF; background-color: #000000; font-family: verdana, tahoma; font-size: 9pt; font-style: normal;
-scrollbar-face-color: #33CC00; scrollbar-3dlight-color: #339900; scrollbar-highlight-color: #00FF00; scrollbar-shadow-color: #339900; scrollbar-darkshadow-color: #339900; scrollbar-track-color: #000000; scrollbar-arrow-color: #339900;} 
+BODY {scrollbar-face-color: #33CC00; scrollbar-3dlight-color: #339900; scrollbar-highlight-color: #00FF00; scrollbar-shadow-color: #339900; scrollbar-darkshadow-color: #339900; scrollbar-track-color: #000000; scrollbar-arrow-color: #339900;}
 A:link {text-decoration: underline; color: #33CC00}
 A:visited {text-decoration: underline; color: #339900}
 A:hover {text-decoration: none; color: #00FF00}
@@ -8,3 +7,16 @@ TD {font-family: verdana, tahoma; font-size: 9pt; font-style: normal;}
 .title {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal; font-weight: bold;}
 .center {text-align: center;}
 .thead {font-weight: bold; text-decoration: underline;}
+
+
+:root {
+  background-color: #111;
+  color: #f9f9f9;
+  font-family: Verdana, sans-serif;
+  font-size: calc(12rem / 16);
+}
+
+.main {
+  margin: 10px auto;
+  max-width: 627px;
+}
