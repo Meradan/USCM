@@ -1,0 +1,21 @@
+{
+  "short_name": "USCM",
+  "name": "Skynet - USCM",
+  "description": "USCM Role Playing Game Campaign Web Site",
+  "display": "browser",
+  "start_url": "/",
+  "background_color": "#0b0132",
+  "theme_color": "#33cc00",
+  "icons": [
+    {
+      "src": "assets/logo/uscm-blip-logo@192px.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/logo/uscm-blip-logo@512px.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

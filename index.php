@@ -13,12 +13,21 @@
   if (!array_key_exists('table_prefix', $_SESSION)) {
     $_SESSION['table_prefix']="uscm_";
   }
-  
+
   include("functions.php");
+
   //if(validate(1)){?>
-    <html>
+  <!DOCTYPE html>
+  <html lang="en">
     <head>
-    <title>Skynet</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <title>Skynet - USCM</title>
+      <link rel="icon" href="assets/logo/uscm-blip-logo@32px.png" sizes="any">
+      <link rel="icon" href="assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="assets/logo/uscm-blip-logo@180px.png">
+      <link rel="manifest" href="assets/manifest.json">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="-1">
