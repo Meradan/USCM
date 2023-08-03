@@ -54,6 +54,8 @@
         }
         include("footer.php");
       ?>
+
+      <script data-respect-dnt data-no-cookie async src="https://cdn.splitbee.io/sb.js"></script>
     </body>
     </html>
 <?php
