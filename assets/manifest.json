@@ -4,7 +4,7 @@
   "description": "USCM Role Playing Game Campaign Web Site",
   "display": "browser",
   "start_url": "/",
-  "background_color": "#0b0132",
+  "background_color": "#111",
   "theme_color": "#33cc00",
   "icons": [
     {

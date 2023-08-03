@@ -6,7 +6,7 @@
 <head>
 <title>Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<LINK REL="stylesheet" HREF="style.css" TYPE="text/css"></LINK>
+<LINK REL="stylesheet" HREF="assets/style.css" TYPE="text/css"></LINK>
 </head>
 <body style="margin-top:40px">
 
