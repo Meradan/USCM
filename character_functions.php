@@ -292,7 +292,7 @@ function servedWith($characterid) {
 	$characters = array ();
 	$dbReference = getDatabaseConnection();
 	$stmt = $dbReference->query("select concat(oc.forname, ' ', oc.lastname) as name,count(om.id) as missions, oc.status from uscm_missions as m join uscm_characters as c on m.character_id=c.id join uscm_missions as om on m.mission_id=om.mission_id and m.id!=om.id join uscm_characters as oc on om.character_id=oc.id where m.character_id=$characterid group by oc.id order by missions desc, status asc");
-	
+
 	while ( $character = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 		$characters [sizeof($characters)] = $character;
 	}
@@ -313,10 +313,10 @@ function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
   $missions = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $characters [$key] ['missions'] = $missions [0] ['missions'];
 
-  $commendationssql = "SELECT medal_short,medal_glory FROM characters c
-                LEFT JOIN missions as missions
+  $commendationssql = "SELECT medal_short,medal_glory FROM uscm_characters c
+                LEFT JOIN uscm_missions as missions
                   ON missions.character_id = c.id
-                LEFT JOIN medal_names as mn
+                LEFT JOIN uscm_medal_names as mn
                   ON mn.id = missions.medal_id
                 WHERE character_id=:cid ORDER BY medal_glory DESC";
   $stmt = $db->prepare($commendationssql);
