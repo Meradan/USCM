@@ -326,7 +326,7 @@ function setMedalsAndGloryOnCharacter(&$characters, $key, $character) {
     if ($commendations ['medal_short'] != "") {
       $medals = $medals . " " . $commendations ['medal_short'];
     }
-    $glory = $glory + $commendations ['medal_glory'];
+    $glory = (int)$glory + $commendations ['medal_glory'];
   }
   $characters [$key] ['medals'] = ($medals != "") ? ($medals) : ("-");
   $characters [$key] ['glory'] = ($glory != "") ? ($glory) : ("0");
