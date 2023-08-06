@@ -56,3 +56,23 @@ tr:nth-child(even) {
   border-top: 1px solid;
   border-image: linear-gradient(to right, transparent, var(--uscm-color-green), transparent) 1;
 }
+
+.table {
+  min-width: 100%;
+}
+
+.table th,
+.table caption {
+  color: var(--uscm-color-green);
+  font-weight: normal;
+}
+
+.table th,
+.table td {
+  padding: 2px 6px;
+  text-align: left;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

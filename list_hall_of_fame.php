@@ -60,29 +60,45 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 //echo $retiredcharactersql . "<br><br><br><br><br><br>";
 
 ?>
-<div style="text-align:center;">
-<a href="index.php?url=list_hall_of_fame.php">All platoons</a><br><br>
-<?php
-$platoons = $platoonController->getPlatoons();
-foreach ($platoons as $platoon) { ?>
-  <a href="index.php?url=list_hall_of_fame.php&platoon=<?php echo $platoon->getId(); ?>"><?php
-    echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)</a>
-<?php } ?>
-</div>
-<br/><center><img src="images/line.jpg" width="449" height="1"></center><br/>
-<center>All time top 5 most glorious soldiers</center>
-<br/>
-<table width="700" align="center" cellspacing="3">
+
+<label for="select-platoon" style="display: block; margin-bottom: 20px;">
+  Select platoon
+  <select id="select-platoon" onchange="window.location.href = this.value">
+    <option value="index.php?url=list_hall_of_fame.php">All platoons</option>
+    <?php
+    $platoons = $platoonController->getPlatoons();
+    foreach ($platoons as $platoon ) {
+      ?>
+      <option
+        <?php if (array_key_exists("platoon", $_GET) && $_GET['platoon'] == $platoon->getId()) echo "selected"; ?>
+        value="index.php?url=list_hall_of_fame.php&platoon=<?php echo $platoon->getId(); ?>"
+      >
+        <?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)
+      </option>
+      <?php
+    }
+    ?>
+  </select>
+</label>
+
+<table class="table">
+  <caption>
+    All time top 5 most glorious soldiers
+    <hr class="line">
+  </caption>
+  <thead>
   <tr>
-    <td class="colorfont">Glory</td>
-    <td class="colorfont">Medals</td>
-    <td class="colorfont">Missions</td>
-    <td class="colorfont">Rank</td>
-    <td class="colorfont">Name</td>
-    <td class="colorfont">Specialty</td>
-    <td class="colorfont">Player Name</td>
-    <td class="colorfont">Status</td>
+    <th>Glory</th>
+    <th>Medals</th>
+    <th>Missions</th>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Player Name</th>
+    <th>Status</th>
   </tr>
+  </thead>
+  <tbody>
 <?php
 // 	$characterres=mysql_query($glorytopsql);
     $characterarray = listCharacters($glorytopsql, "glory");
@@ -112,27 +128,30 @@ foreach ($platoons as $platoon) { ?>
     <TD><?php echo $character['status'];?></TD>
   </TR>
 <?php } ?>
+  </tbody>
 </table>
-<br/><center><img src="images/line.jpg" width="449" height="1"></center><br/>
-<center>They who sacrificed their lives in the line of duty</center>
-<br/>
-<TABLE WIDTH="950" ALIGN="center" cellspacing="3">
-  <TR>
-    <TD WIDTH="53" class="colorfont">Missions</TD>
-    <TD WIDTH="32" class="colorfont">Rank</TD>
-    <TD WIDTH="104" class="colorfont">Name</TD>
-    <TD WIDTH="59" class="colorfont">Specialty</TD>
-    <TD WIDTH="116" class="colorfont">Commendations</TD>
-    <TD WIDTH="34" class="colorfont">Glory</TD>
-    <TD WIDTH="126" class="colorfont">Player</TD>
-    <TD WIDTH="71" class="colorfont">Enlisted</TD>
-    <TD WIDTH="76" class="colorfont">Dead</TD>
-    <TD WIDTH="51" class="colorfont">Mission</TD>
-    <TD WIDTH="168" class="colorfont">Cause of death</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="11" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
-  </TR>
+
+<table class="table" style="margin-top: 20px;">
+  <caption>
+    They who sacrificed their lives in the line of duty
+    <hr class="line">
+  </caption>
+  <thead>
+  <tr>
+    <th>Missions</th>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Commendations</th>
+    <th>Glory</th>
+    <th>Player</th>
+    <th>Enlisted</th>
+    <th>Dead</th>
+    <th>Mission</th>
+    <th>Cause of death</th>
+  </tr>
+  </thead>
+  <tbody>
 <?php
 // 	$characterres=mysql_query($deadcharactersql);
     $characterarray = listCharacters($deadcharactersql, "dead");
@@ -147,41 +166,41 @@ foreach ($platoons as $platoon) { ?>
     <TD><?php echo $character['medals'];?></TD>
     <TD><?php echo $character['glory'];?></TD>
     <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
-    <TD><?php echo $character['enlisted'];?></TD>
+    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 //     $lastmission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid'])?>
-    <TD><?php echo $lastMission['date'] ?? '';?></TD>
-    <TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
+    <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
+    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
     <TD><?php echo $character['status_desc'];?></TD>
-
-
   </TR>
 <?php unset($medals,$glory);
   } ?>
-</TABLE>
+  </tbody>
+</table>
 
-<br/><center><img src="images/line.jpg" width="449" height="1"></center><br/>
-<center>Retirements</center>
-<br/>
-<TABLE WIDTH="950" ALIGN="center" cellspacing="3">
-  <TR>
-    <TD WIDTH="53" class="colorfont">Missions</TD>
-    <TD WIDTH="32" class="colorfont">Rank</TD>
-    <TD WIDTH="104" class="colorfont">Name</TD>
-    <TD WIDTH="59" class="colorfont">Specialty</TD>
-    <TD WIDTH="116" class="colorfont">Commendations</TD>
-    <TD WIDTH="34" class="colorfont">Glory</TD>
-    <TD WIDTH="126" class="colorfont">Player</TD>
-    <TD WIDTH="71" class="colorfont">Enlisted</TD>
-    <TD WIDTH="76" class="colorfont">Retired</TD>
-    <TD WIDTH="51" class="colorfont">Mission</TD>
-    <TD WIDTH="168" class="colorfont">Cause of retirement</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="11" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
-  </TR>
+<table class="table" style="margin-top: 20px;">
+  <caption>
+    Retirements
+    <hr class="line">
+  </caption>
+  <thead>
+  <tr>
+    <th>Missions</th>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Commendations</th>
+    <th>Glory</th>
+    <th>Player</th>
+    <th>Enlisted</th>
+    <th>Retired</th>
+    <th>Mission</th>
+    <th>Cause of retirement</th>
+  </tr>
+  </thead>
+  <tbody>
 <?php
 //$characterres=mysql_query($retiredcharactersql);
     $characterarray = listCharacters($retiredcharactersql,"retired");
@@ -196,17 +215,16 @@ foreach ($platoons as $platoon) { ?>
     <TD><?php echo $character['medals'];?></TD>
     <TD><?php echo $character['glory'];?></TD>
     <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
-    <TD><?php echo $character['enlisted'];?></TD>
+    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 // 		$lastMission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid']) ?>
-    <TD><?php echo $lastMission['date'] ?? '';?></TD>
+    <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
     <TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
     <TD><?php echo $character['status_desc'];?></TD>
-
-
   </TR>
 <?php unset($medals,$glory);
   } ?>
-</TABLE>
+  </tbody>
+</table>

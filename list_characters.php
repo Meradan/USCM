@@ -53,34 +53,46 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
 //echo $charactersql . "<br><br><br><br><br><br>";
 
 ?>
-<div style="text-align:center;">
 
-<?php
-$platoons = $platoonController->getPlatoons();
-foreach ($platoons as $platoon ) { ?>
-  <a href="index.php?url=list_characters.php&platoon=<?php echo $platoon->getId(); ?>"><?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)</a>
-<?php } ?>
+<label for="select-platoon" style="display: block; margin-bottom: 20px;">
+  Select platoon
+  <select id="select-platoon" onchange="window.location.href = this.value">
+    <?php
+      $platoons = $platoonController->getPlatoons();
+      foreach ($platoons as $platoon ) {
+    ?>
+        <option
+          <?php if (array_key_exists("platoon", $_GET) && $_GET['platoon'] == $platoon->getId()) echo "selected"; ?>
+          value="index.php?url=list_characters.php&platoon=<?php echo $platoon->getId(); ?>"
+        >
+          <?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)
+        </option>
+    <?php
+      }
+    ?>
+  </select>
+</label>
 
-</div>
-<br/><center><img src="images/line.jpg" width="449" height="1"></center><br/>
-<div class="colorfont">Player Characters</div>
-<br/>
-<TABLE WIDTH="750" ALIGN="center" cellspacing="3">
-  <TR>
-    <TD WIDTH="32" class="colorfont">Rank</TD>
-    <TD WIDTH="93" class="colorfont">Name</TD>
-    <TD WIDTH="82" class="colorfont">Specialty</TD>
-    <TD WIDTH="53" class="colorfont">Missions</TD>
-	<TD WIDTH="40" class="colorfont">Last</TD>
-    <TD WIDTH="62" class="colorfont">Enlisted</TD>
-    <TD WIDTH="100" class="colorfont">Commendations</TD>
-    <TD WIDTH="34" class="colorfont">Glory</TD>
-    <TD WIDTH="42" class="colorfont">Player</TD>
-    <TD WIDTH="42" class="colorfont">Status</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="7" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
-  </TR>
+<table class="table">
+  <caption>
+    Player Characters
+    <hr class="line">
+  </caption>
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Missions</th>
+	  <th>Last</th>
+    <th>Enlisted</th>
+    <th>Commendations</th>
+    <th>Glory</th>
+    <th>Player</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
 <?php
   $characterarray = listCharacters($charactersql, "alive");
   foreach ($characterarray as $character) { ?>
@@ -145,23 +157,26 @@ foreach ($platoons as $platoon ) { ?>
   </TR>
 <?php unset($medals,$glory);
   } ?>
-</TABLE>
-<br/>
-<div class="colorfont">Non-Player Characters</div>
-<br/>
-<TABLE WIDTH="590" ALIGN="center" cellspacing="3">
-  <TR>
-    <TD WIDTH="32" class="colorfont">Rank</TD>
-    <TD WIDTH="93" class="colorfont">Name</TD>
-    <TD WIDTH="82" class="colorfont">Specialty</TD>
-    <TD WIDTH="53" class="colorfont">Missions</TD>
-    <TD WIDTH="62" class="colorfont">Enlisted</TD>
-    <TD WIDTH="100" class="colorfont">Commendations</TD>
-    <TD WIDTH="42" class="colorfont">Status</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="7" align="center"><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></TD>
-  </TR>
+  </tbody>
+</table>
+
+<table class="table" style="margin-top: 20px;">
+  <caption class="colorfont">
+    Non-Player Characters
+    <hr class="line">
+  </caption>
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Missions</th>
+    <th>Enlisted</th>
+    <th>Commendations</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
 <?php
   $npcarray = listCharacters($npcsql,"alive");
   $medals = "";
@@ -209,7 +224,7 @@ foreach ($platoons as $platoon ) { ?>
 <?php
   $missionCount = getNumberOfMissionsForCharacter($npc['cid'])?>
     <TD><?php echo $missionCount;?></TD>
-    <TD><?php echo $npc['enlisted'];?></TD>
+    <TD class="no-wrap"><?php echo $npc['enlisted'];?></TD>
 <?php
   $medals = "";
   $glory = 0;
@@ -227,95 +242,84 @@ foreach ($platoons as $platoon ) { ?>
   unset($medals,$glory);
 }
 ?>
-</TABLE>
-<br/>
+  </tbody>
+</table>
+
+<?php if ($_GET['platoon'] == "1" || $_GET['platoon'] == "5" || $_GET['platoon'] == "6") { ?>
+<table class="table" style="margin-top: 20px;">
+  <caption>
+    Special Non-Player Characters
+    <hr class="line">
+  </caption>
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Enlisted</th>
+	  <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+<?php if ($_GET['platoon'] == "1") {?>
+  <tr>
+    <td>Lieutenant</td>
+    <td>Louise Wheatly</td>
+    <td>Officer</td>
+    <td class="no-wrap">19-08-10</td>
+    <td>KIA</td>
+  </tr>
+  <tr>
+    <td>Lieutenant</td>
+    <td>Michael Brixton</td>
+    <td>Officer</td>
+    <td class="no-wrap">00-10-14</td>
+    <td>Active</td>
+  </tr>
+  <tr>
+    <td>Android</td>
+    <td>Garth</td>
+    <td>Synthetic</td>
+    <td class="no-wrap">00-11-28</td>
+    <td>Active</td>
+  </tr>
+<?php } elseif ($_GET['platoon'] == "5") {?>
+  <tr>
+    <td>Lieutenant</td>
+    <td>Lionel Lee</td>
+    <td>Officer</td>
+    <td class="no-wrap">18-01-21</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Android</td>
+    <td>Ishmael</td>
+    <td>Synthetic</td>
+    <td class="no-wrap">18-01-21</td>
+    <td></td>
+  </tr>
+<?php } elseif ($_GET['platoon'] == "6") {?>
+  <tr>
+    <td>Lieutenant</td>
+    <td>Drake</td>
+    <td>Officer</td>
+    <td class="no-wrap">17-10-31</td>
+    <td></td>
+  </tr>
+<?php } ?>
+  </tbody>
+</table>
+<?php } ?>
+
 <?php if ($_GET['platoon'] == "1") { ?>
-<div class="colorfont">Special Non-Player Characters</div>
-<br/>
-<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-  <TR>
-    <TD WIDTH="120" CLASS="colorfont">Rank</TD>
-    <TD WIDTH="120" CLASS="colorfont">Name</TD>
-    <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
-    <TD CLASS="colorfont">Enlisted</TD>
-	<TD CLASS="colorfont">Status</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Lieutenant</TD>
-    <TD WIDTH="120">Louise Wheatly</TD>
-    <TD WIDTH="107">Officer</TD>
-    <TD WIDTH="20">19-08-10</TD>
-	<TD WIDTH="335">KIA</TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Lieutenant</TD>
-    <TD WIDTH="120">Michael Brixton</TD>
-    <TD WIDTH="107">Officer</TD>
-    <TD WIDTH="20">00-10-14</TD>
-	<TD WIDTH="335">Active</TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Android</TD>
-    <TD WIDTH="120">Garth</TD>
-    <TD WIDTH="107">Synthetic</TD>
-    <TD WIDTH="20">00-11-28</TD>
-	<TD WIDTH="335">Active</TD>
-  </TR>
-</TABLE><br/>
+  <br/>
 <div class="colorfont">Other platoon info</div>
 Assigned ship: USS Deliverance (Conestoga-class frigate)<br/>
 <?php } elseif ($_GET['platoon'] == "5") {?>
-<div class="colorfont">Special Non-Player Characters</div>
-<br/>
-<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-  <TR>
-    <TD WIDTH="120" CLASS="colorfont">Rank</TD>
-    <TD WIDTH="120" CLASS="colorfont">Name</TD>
-    <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
-    <TD CLASS="colorfont">Enlisted</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Lieutenant</TD>
-    <TD WIDTH="120">Lionel Lee</TD>
-    <TD WIDTH="107">Officer</TD>
-    <TD WIDTH="355">18-01-21</TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Android</TD>
-    <TD WIDTH="120">Ishmael</TD>
-    <TD WIDTH="107">Synthetic</TD>
-    <TD WIDTH="355">18-01-21</TD>
-  </TR>
-</TABLE><br/>
 <div class="colorfont">Other platoon info</div>
 Assigned ship: USS Nautilus (Conestoga-class frigate)<br/>
-<?php } elseif ($_GET['platoon'] == "6") {?>
-<div class="colorfont">Special Non-Player Characters</div>
-<br/>
-<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-  <TR>
-    <TD WIDTH="120" CLASS="colorfont">Rank</TD>
-    <TD WIDTH="120" CLASS="colorfont">Name</TD>
-    <TD WIDTH="107" CLASS="colorfont">Specialty</TD>
-    <TD CLASS="colorfont">Enlisted</TD>
-  </TR>
-  <TR>
-    <TD COLSPAN="4"><CENTER><IMG SRC="images/line.jpg" WIDTH="449" HEIGHT="1"></CENTER></TD>
-  </TR>
-  <TR>
-    <TD WIDTH="20">Lieutenant</TD>
-    <TD WIDTH="120">Drake</TD>
-    <TD WIDTH="107">Officer</TD>
-    <TD WIDTH="355">17-10-31</TD>
-  </TR>
-</TABLE>
 <?php } ?>
+
 <br/>
 <div class="colorfont">Ranks</div>
 <br/>
