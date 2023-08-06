@@ -8,7 +8,7 @@ Class Mission {
   private $date = "";
   private $briefing = "";
   private $debriefing = "";
-  private $PlatoonId = NULL;
+  private $platoonId = NULL;
 
   public function getName() {
     return $this->longName;
