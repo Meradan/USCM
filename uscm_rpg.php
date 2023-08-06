@@ -28,7 +28,7 @@ we focus on action and tactical planning.<BR><BR>
 
 Most roleplaying is done in the traditional pen & paper style, but there are occasional PBEM scenarios as well.<BR><BR>
 
-<br/><img src="images/line.jpg" width="449" height="1" align="middle"><br/>
+<br/><hr class="line"><br/>
 
 <div class="title">USCM v3 Resources</div>
 Coming soon...<BR><BR>
