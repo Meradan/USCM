@@ -35,7 +35,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     </tr>
     <tr>
         <td></td>
-        <td><center><img src="images/line.jpg" width="449" height="1"></center></td>
+        <td><hr class="line"></td>
         <td></td>
     </tr>
     <tr>
