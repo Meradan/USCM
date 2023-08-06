@@ -27,11 +27,6 @@
       <link rel="icon" href="assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
       <link rel="apple-touch-icon" href="assets/logo/uscm-blip-logo@180px.png">
       <link rel="manifest" href="assets/manifest.json">
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Expires" CONTENT="-1">
-
       <link href="https://unpkg.com/sanitize.css" rel="stylesheet">
       <link href="assets/style.css" rel="stylesheet">
       <script type="text/javascript" src="overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
