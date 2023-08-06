@@ -39,8 +39,13 @@
     >
     <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 
-    <div class="main">
-      <?php include("menu.php");
+    <div class="wrapper">
+      <?php
+        include("menu.php");
+      ?>
+
+      <main class="main">
+        <?php
         if(isset($_GET['url'])){
           // To make sure the file loaded is in the local file system and not a remote url
           $pages = recursive_dirlist('./');
@@ -51,6 +56,10 @@
         else {
           include('news.php');
         }
+        ?>
+      </main>
+
+      <?php
         include("footer.php");
       ?>
     </div>
