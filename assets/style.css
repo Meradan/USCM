@@ -51,3 +51,8 @@ a:hover {text-decoration: none; color: #00FF00}
 tr:nth-child(even) {
   background: #222;
 }
+
+.line {
+  border-top: 1px solid;
+  border-image: linear-gradient(to right, transparent, var(--uscm-color-green), transparent) 1;
+}
