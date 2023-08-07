@@ -1,3 +1,4 @@
+<h1 class="heading heading-h1">Missions</h1>
 <?php
 $missionController = new MissionController();
 $missions = $missionController->getMissions();

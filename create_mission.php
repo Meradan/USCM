@@ -3,7 +3,8 @@ $userController = new UserController();
 $user = $userController->getCurrentUser();
 if ($user->isAdmin() || $user->isGm()) {
 ?>
-<br><br>
+  <h1 class="heading heading-h1">Create mission</h1>
+
 <form method="post" action="mission.php?what=create_mission">
 <input type="hidden" name="platoon_id" value="<?php echo $user->getPlatoonId(); ?>">
 <table width="50%"  border="0">

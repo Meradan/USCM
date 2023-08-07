@@ -1,3 +1,5 @@
+<h1 class="heading heading-h1">About</h1>
+
 <div class="title">USCM RPG</div>
 
 <div class="title">Swedish Info</div>

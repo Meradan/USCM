@@ -54,6 +54,8 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
 
 ?>
 
+<h1 class="heading heading-h1">Characters</h1>
+
 <label for="select-platoon" style="display: block; margin-bottom: 20px;">
   Select platoon
   <select id="select-platoon" onchange="window.location.href = this.value">

@@ -14,12 +14,14 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $player = $character->getPlayer();
   $playerPlatoon = NULL;
     ?>
+  <h1 class="heading heading-h1">Modify character</h1>
+  <h2 class="heading heading-h2"><?php echo $character->getGivenName(); ?> <?php echo $character->getSurname(); ?></h2>
 
     <?php
 	if ($user->isAdmin() || ($user->isGm() && $character->getPlatoonId() == $user->getPlatoonId())) {
 		$canmodify = TRUE;
 	}
-	
+
 	if ($canmodify) { ?><form method="post" action="character.php?action=update_character"><?php } ?>
         <table width="50%"  border="0">
             <tr>

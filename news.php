@@ -8,13 +8,8 @@ $userController = new UserController();
 $user = $userController->getCurrentUser();
 
 if (isset($_GET['action'])!=true) { ?>
-        <div class="title">Brixton's Fightin' Fives - US Colonial Marine Corps 5th Platoon</div>
-        <div align="justify">Website for a roleplaying campaign partially based on the Alien movies. The players are members of one of the platoons in the 4th US Colonial Marine brigade.<br/>
-        </div>
+  <h1 class="heading heading-h1">News</h1>
 
-        <br/><hr class="line"><br/>
-
-        <div class="title">News</div>
         <?php
           $listOfNews = $newsController->getLastYearsNews();
           foreach ($listOfNews as $news) {
@@ -23,38 +18,36 @@ if (isset($_GET['action'])!=true) { ?>
             <div><?php echo $news->getText(); ?></div><br/>
         <?php } ?>
         <br/>
-        <div align="center"><a href="index.php?url=news_old.php">Old News</a></div><br/>
+        <div class="center"><a href="index.php?url=news_old.php">News archive</a></div>
 
-        <?php if ($user->isAdmin() || $user->isGm()) {
-            ?>
-            <form action="news.php?action=post" method="post">
-                <table width="50%"  border="0" cellspacing="1" cellpadding="1">
-                    <tr>
-                        <td>Datum:</td>
-                        <td><input name="date" type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Skrivet av</td>
-                        <td><input name="written_by" type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Text (htmlkod)</td>
-                        <td><textarea name="text" cols="70" rows="7"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input type="submit"></td>
-                    </tr>
-                </table>
-            </form>
+  <?php if ($user->isAdmin() || $user->isGm()): ?>
+    <h2 class="heading heading-h2">Create news</h2>
+    <form class="form" action="news.php?action=post" method="post">
+      <label for="date">
+        Datum
+        <input type="text" id="date" name="date">
+      </label>
 
-			<br/>
-			Note, to put in links within the site do it like this:<br/>
-			<code>
-			&lt;a href="index.php?url=uscm_rpg.php"&gt;USCM RPG&lt;/a&gt;
-			</code>
+      <label for="written_by">
+        Skrivet av
+        <input type="text" id="written_by" name="written_by">
+      </label>
+
+      <label for="text">
+        Text (htmlkod)
+        <textarea name="text" rows="7"></textarea>
+      </label>
+
+      <input class="button" type="submit">
+    </form>
+
+    Note, to put in links within the site do it like this:<br>
+    <code>
+      &lt;a href="index.php?url=uscm_rpg.php"&gt;USCM RPG&lt;/a&gt;
+    </code>
+  <?php endif ?>
+
             <?php
-
-        }
 } elseif ($_GET['action'] == "post") {
     if ($user->isAdmin() || $user->isGm()) {
       $news = new News();
