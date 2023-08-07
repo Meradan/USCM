@@ -8,7 +8,7 @@ if (array_key_exists('platoon', $_GET)) {
 } else {
   $where = "";
 }
-$deadcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
+$deadcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%Y-%m-%d') as enlisted,c.status,
               rank_short,rank_id,specialty_name, p.forname,p.lastname,c.userid,c.status_desc
           FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
@@ -24,7 +24,7 @@ $deadcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE
               uscm_specialty.specialty_name_id
               WHERE c.status = 'Dead' AND c.userid != '0' {$where}
               ORDER BY rank_id DESC";
-$retiredcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
+$retiredcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%Y-%m-%d') as enlisted,c.status,
               rank_short,rank_id,specialty_name, p.forname,p.lastname,c.userid,c.status_desc
           FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
@@ -41,7 +41,7 @@ $retiredcharactersql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,D
               WHERE c.status = 'Retired' {$where}
               ORDER BY rank_id DESC";
 $platoonsql="SELECT id,name_short,name_long FROM uscm_platoon_names";
-$glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
+$glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORMAT(c.enlisted,'%Y-%m-%d') as enlisted,c.status,
               rank_short,rank_id,specialty_name, p.forname,p.lastname,c.userid,c.status
           FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
@@ -170,7 +170,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
     <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
-// $lastmissionsql="SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
+// $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 //     $lastmission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid'])?>
     <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
@@ -219,7 +219,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
     <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
-// $lastmissionsql="SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
+// $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 // 		$lastMission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid']) ?>
     <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>

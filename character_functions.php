@@ -351,7 +351,7 @@ function traits($characterId) {
 
 function lastMissionForCharacter($characterId) {
   $db = getDatabaseConnection();
-  $sql = "SELECT DATE_FORMAT(date,'%y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = :characterId ORDER BY date DESC LIMIT 1";
+  $sql = "SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = :characterId ORDER BY date DESC LIMIT 1";
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':characterId', $characterId, PDO::PARAM_INT);
   $stmt->execute();

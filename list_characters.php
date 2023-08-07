@@ -16,7 +16,7 @@ if (!array_key_exists('platoon', $_GET)) {
 
 $where="AND c.platoon_id={$_GET['platoon']}";
 
-$charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
+$charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%d') as enlisted,c.status,
               rank_short,specialty_name, p.forname as playerforname,p.lastname as playerlastname,p.nickname,
               p.use_nickname,c.userid
           FROM uscm_characters c
@@ -33,7 +33,7 @@ $charactersql="SELECT rank_id,c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enl
               uscm_specialty.specialty_name_id
               WHERE c.status != 'Dead' AND c.status != 'Retired' AND p.id != '0' AND p.id != '59' {$where}
               ORDER BY rank_id DESC";
-$npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%d') as enlisted,c.status,
+$npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%d') as enlisted,c.status,
               rank_id,rank_short,specialty_name,c.userid
           FROM uscm_characters c
           LEFT JOIN Users as p ON c.userid = p.id
@@ -74,6 +74,12 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
     ?>
   </select>
 </label>
+
+<?php if ($_GET['platoon'] == "1") { ?>
+  Assigned ship: USS Deliverance (Conestoga-class frigate)<br>
+<?php } elseif ($_GET['platoon'] == "5") {?>
+  Assigned ship: USS Nautilus (Conestoga-class frigate)<br>
+<?php } ?>
 
 <table class="table">
   <caption>
@@ -142,7 +148,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
     <TD><?php echo $character['specialty_name'];?></TD>
     <TD class="center"><?php echo $character['missions'];?></TD>
 	<TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
-    <TD><?php echo $character['enlisted'];?></TD>
+    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
       $medals = "";
       $glory = 0;
@@ -313,56 +319,60 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%y-%m-%
 </table>
 <?php } ?>
 
-<?php if ($_GET['platoon'] == "1") { ?>
-  <br/>
-<div class="colorfont">Other platoon info</div>
-Assigned ship: USS Deliverance (Conestoga-class frigate)<br/>
-<?php } elseif ($_GET['platoon'] == "5") {?>
-<div class="colorfont">Other platoon info</div>
-Assigned ship: USS Nautilus (Conestoga-class frigate)<br/>
+<hr class="line mt-40">
+
+<h2 class="heading heading-h2">Ranks</h2>
+
+<?php
+$ranks = $rankController->getRanks();
+foreach ($ranks as $rank) { ?>
+  <dl class="list-description">
+    <dt>
+      <span class="tag"><?php echo $rank->getShortName() ?></span>
+    </dt>
+    <dd>
+      <?php echo $rank->getName() ?>
+    </dd>
+  </dl>
 <?php } ?>
 
-<br/>
-<div class="colorfont">Ranks</div>
-<br/>
-<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-<?php
-  $ranks = $rankController->getRanks();
-  foreach ($ranks as $rank) { ?>
-  <TR>
-    <TD WIDTH="60"><?php echo $rank->getShortName() ?></TD>
-    <TD><?php echo $rank->getName() ?></TD>
-  </TR>
-<?php } ?>
-</TABLE>
-<br/>
-<div class="colorfont">USCM Medals</div>
-<br/>
-<TABLE WIDTH="590" CELLSPACING="0" ALIGN="center">
-<?php
-  $medals = $medalController->getUscmMedals();
-  foreach ($medals as $medal) { ?>
-  <TR>
-    <TD WIDTH="60"><?php echo $medal->getShortName() ?></TD>
-    <TD width="200"><?php echo $medal->getName() ?></TD>
-    <TD>Glory <?php echo $medal->getGlory() ?></TD>
-  </TR>
-<?php } ?>
-</TABLE>
+<hr class="line mt-40">
 
-<br/>
-<div class="colorfont">Non-USCM Medals</div>
-<br/>
+<h2 class="heading heading-h2">Medals</h2>
 
-<TABLE WIDTH="650" CELLSPACING="0" ALIGN="center">
+<h3 class="heading heading-h3">USCM Medals</h3>
+
 <?php
-  $foreignmedals = $medalController->getForeignMedals();
-  foreach ($foreignmedals as $medal) { ?>
-  <TR>
-    <TD WIDTH="40"><?php echo $medal->getShortName() ?></TD>
-    <TD width="200"><?php echo $medal->getName() ?></TD>
-    <TD width="60">Glory <?php echo $medal->getGlory() ?></TD>
-    <TD><?php echo $medal->getDescription() ?></TD>
-  </TR>
+$medals = $medalController->getUscmMedals();
+foreach ($medals as $medal) { ?>
+  <dl class="list-description">
+    <dt class="no-wrap">
+      <span class="tag"><?php echo $medal->getShortName() ?></span>
+      Glory <?php echo $medal->getGlory() ?>
+    </dt>
+    <dd>
+      <details class="details">
+        <summary><?php echo $medal->getName() ?></summary>
+        <?php echo $medal->getDescription() ?>
+      </details>
+    </dd>
+  </dl>
 <?php } ?>
-</TABLE>
+
+<h3 class="heading heading-h3">Non-USCM Medals</h3>
+<?php
+$foreignmedals = $medalController->getForeignMedals();
+foreach ($foreignmedals as $medal) { ?>
+<dl class="list-description">
+  <dt class="no-wrap">
+    <span class="tag"><?php echo $medal->getShortName() ?></span>
+    Glory <?php echo $medal->getGlory() ?>
+  </dt>
+  <dd>
+    <details class="details">
+      <summary><?php echo $medal->getName() ?></summary>
+      <?php echo $medal->getDescription() ?>
+    </details>
+  </dd>
+</dl>
+<?php } ?>
