@@ -91,7 +91,7 @@ Class CharacterController {
     }
     return $character;
   }
-  
+
     /**
    *
    * @return Character[]
@@ -117,7 +117,7 @@ Class CharacterController {
     }
     return $characters;
   }
-  
+
 
     /**
    *
@@ -193,7 +193,7 @@ Class CharacterController {
 
   /**
    *
-   * @return Attribute[]
+   * @return CharacterAttribute[]
    */
   public function getAttributes() {
     $attributesql = "SELECT id, attribute_name FROM uscm_attribute_names ORDER BY id";
@@ -201,7 +201,7 @@ Class CharacterController {
     $stmt->execute();
     $attributes = array();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $attribute = new Attribute();
+      $attribute = new CharacterAttribute();
       $attribute->setId($row['id']);
       $attribute->setName($row['attribute_name']);
       $attributes[] = $attribute;
@@ -212,7 +212,7 @@ Class CharacterController {
   /**
    *
    * @param Character $character
-   * @return Attribute[]
+   * @return CharacterAttribute[]
    */
   function getAttributesForCharacter($character) {
     $db = getDatabaseConnection();
@@ -224,7 +224,7 @@ Class CharacterController {
     $stmt->execute();
     $attributes = array();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      $attribute = new Attribute();
+      $attribute = new CharacterAttribute();
       $attribute->setId($row['id']);
       $attribute->setName($row['attribute_name']);
       $attributes[] = $attribute;
