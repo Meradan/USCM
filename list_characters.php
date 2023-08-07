@@ -140,11 +140,17 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   }
   $lastMission = lastMissionForCharacter($character['cid']);
     ?><TD><?php echo $character['rank_short'];?></TD>
-    <TD <?php if ($overlib) {?> onmouseover='return overlib("<?php echo $overlibtext;?>");' onmouseout="return nd();" <?php } ?>><?php
+    <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>><?php
     $link = false;
     if ($admin || $gm || $_SESSION['user_id']==$character['userid']) { $link = true;?>
         <a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"><?php }
-    ?><?php echo $character['forname'] . " " . $character['lastname'];?><?php echo $link ? "</a>" : ""; ?></TD>
+    ?><?php echo $character['forname'] . " " . $character['lastname'];?><?php echo $link ? "</a>" : ""; ?>
+          <?php if ($overlib) {?>
+            <div class="popover-panel">
+              <?php echo $overlibtext ?>
+            </div>
+          <?php } ?>
+    </td>
     <TD><?php echo $character['specialty_name'];?></TD>
     <TD class="center"><?php echo $character['missions'];?></TD>
 	<TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
@@ -227,7 +233,20 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     }
   }
     ?><TD><?php echo $npc['rank_short'];?></TD>
-    <TD <?php if ($overlib) {?> onmouseover='return overlib("<?php echo $overlibtext;?>");' onmouseout="return nd();" <?php } ?>><?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?><a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>"> <?php } ?><?php echo $npc['forname'] . " " . $npc['lastname'];?></a></TD>
+    <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>>
+      <?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?>
+        <a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>">
+          <?php echo $npc['forname'] . " " . $npc['lastname'];?>
+        </a>
+      <?php } else { ?>
+        <?php echo $npc['forname'] . " " . $npc['lastname'];?>
+      <?php } ?>
+      <?php if ($overlib) {?>
+        <div class="popover-panel">
+          <?php echo $overlibtext ?>
+        </div>
+      <?php } ?>
+    </td>
     <TD><?php echo $npc['specialty_name'];?></TD>
 <?php
   $missionCount = getNumberOfMissionsForCharacter($npc['cid'])?>

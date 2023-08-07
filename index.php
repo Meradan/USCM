@@ -28,7 +28,6 @@
       <link rel="apple-touch-icon" href="assets/logo/uscm-blip-logo@180px.png">
       <link rel="manifest" href="assets/manifest.json">
       <link href="assets/style.css" rel="stylesheet">
-      <script type="text/javascript" src="overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
     </head>
 
     <body <?php

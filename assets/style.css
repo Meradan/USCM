@@ -221,3 +221,23 @@ a:hover {
   font-style: normal;
   font-weight: normal;
 }
+
+.popover {
+  position: relative;
+}
+
+.popover:focus .popover-panel,
+.popover:hover .popover-panel {
+  display: grid;
+}
+
+.popover-panel {
+  background-color: #333;
+  display: none;
+  grid-template-columns: max-content;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 100px;
+  z-index: 100;
+}
