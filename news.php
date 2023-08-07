@@ -10,15 +10,21 @@ $user = $userController->getCurrentUser();
 if (isset($_GET['action'])!=true) { ?>
   <h1 class="heading heading-h1">News</h1>
 
-        <?php
-          $listOfNews = $newsController->getLastYearsNews();
-          foreach ($listOfNews as $news) {
-            ?>
-            <div> <font class="colorfont"><?php echo $news->getDate(); ?></font> <?php echo $news->getWrittenBy(); ?></div>
-            <div><?php echo $news->getText(); ?></div><br/>
-        <?php } ?>
-        <br/>
-        <div class="center"><a href="index.php?url=news_old.php">News archive</a></div>
+  <?php
+    $listOfNews = $newsController->getLastYearsNews();
+    foreach ($listOfNews as $news) { ?>
+      <article class="news">
+        <header>
+          <h2 class="heading"><?php echo $news->getDate(); ?></h2>
+          <?php echo $news->getWrittenBy(); ?>
+        </header>
+        <div>
+          <?php echo $news->getText(); ?>
+        </div>
+      </article>
+    <?php } ?>
+
+  <div class="p-10 center"><a href="index.php?url=news_old.php">News archive</a></div>
 
   <?php if ($user->isAdmin() || $user->isGm()): ?>
     <h2 class="heading heading-h2">Create news</h2>
