@@ -52,7 +52,7 @@
         <?php if ($_SESSION['inloggad']==1): ?>
           <a href="login.php?alt=logout">Log Out</a>
         <?php else: ?>
-          <a href="login2.php?alt=login">Log In</a>
+          <a href="index.php?url=login2.php&alt=login">Log In</a>
         <?php endif ?>
       </li>
     </ul>
