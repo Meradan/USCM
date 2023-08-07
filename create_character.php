@@ -8,6 +8,8 @@ $userController = new UserController();
 $user = $userController->getCurrentUser();
 
 if ($user->isAdmin() || $user->isGm()) { ?>
+  <h1 class="heading heading-h1">Create character</h1>
+
 <form method="post" action="character.php?action=create_character">
 <table width="50%"  border="0">
     <tr>

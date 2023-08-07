@@ -1,4 +1,4 @@
-<div class="title">Old News</div><br/>
+<h1 class="heading heading-h1">News archive</h1>
 <?php
 $newsController = new NewsController();
 $listOfNews = $newsController->getNewsOlderThanAYear();
@@ -147,7 +147,7 @@ Ny finns en uppdaterad version av utrustningslistan att ladda hem i b�de Excel
 <div>Efter vissa problem med den nya hemsidan �r den gamla tillbaka igen. Den �r dessutom uppdaterad t.o.m. senaste uppdraget, M51.</div><br/>
 
 <div><font class="colorfont">2004-02-01 � Totte</font></div>
-Version 2.00 av webbsidan �r nu uppe p� n�tet, hoppas ni gillar den :).</div><br/>
+<div>Version 2.00 av webbsidan �r nu uppe p� n�tet, hoppas ni gillar den :).</div><br/>
 
 <div><font class="colorfont">2004-01-14 � Oskar</font></div>
 <div>Karakt�rsgeneratorn har f�tt ytterligare n�gra uppdateringar. Version 3.07 finns nu att ladda hem under USCM RPG. En ny utrustningslista �r ocks� p� g�ng inom den n�rmaste framtiden.</div><br/>

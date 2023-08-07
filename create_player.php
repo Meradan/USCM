@@ -4,7 +4,8 @@ $user = $userController->getCurrentUser();
 $platoonController = new PlatoonController();
 if ($user->isAdmin()) {
 ?>
-<br><br>
+  <h1 class="heading heading-h1">Create player</h1>
+
 <form method="post" action="player.php?what=create">
 <table width="50%"  border="0" cellspacing="1" cellpadding="1">
   <tr>

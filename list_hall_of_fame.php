@@ -61,6 +61,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 
 ?>
 
+<h1 class="heading heading-h1">Hall of Fame</h1>
+
 <label for="select-platoon" style="display: block; margin-bottom: 20px;">
   Select platoon
   <select id="select-platoon" onchange="window.location.href = this.value">

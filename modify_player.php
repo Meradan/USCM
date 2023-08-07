@@ -1,3 +1,5 @@
+<h1 class="heading heading-h1">Modify player</h1>
+
 <?php
 $userController = new UserController();
 $playerController = new PlayerController();
@@ -12,6 +14,9 @@ if ($user->isAdmin() || $user->getId() == $playerId) {
     if ($playerId > 0) {
         $player = $playerController->getPlayer($playerId)
         ?>
+
+      <h2 class="heading heading-h2"><?php echo stripslashes($player->getNameWithNickname()); ?></h2>
+
         <form method="post" action="player.php?what=modify">
             <table width="50%"  border="0" cellspacing="1" cellpadding="1">
                 <input type="hidden" name="id" value="<?php echo $player->getId(); ?>">

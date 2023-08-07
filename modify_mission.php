@@ -22,7 +22,8 @@ if ($admin || $gm) {
       $postCharacter = array();
     }
     ?>
-    <br><br>
+  <h1 class="heading heading-h1">Modify mission</h1>
+  <h2 class="heading heading-h2"><?php echo $mission->getShortName(); ?></h2>
 
     <table width="50%"  border="0">
     <?php if ($_GET['what'] == "names") { ?>
