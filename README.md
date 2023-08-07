@@ -18,6 +18,7 @@ ssh -p $port $user@$machine
 3. Edit config.php
 ```php
 $db_host="localhost:3306";
+$url_root="http://localhost:8000";
 ```
 
 4. Open tunnel forwarding to remote database
