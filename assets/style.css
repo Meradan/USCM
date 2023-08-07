@@ -45,8 +45,14 @@ a:hover {
   background-color: var(--uscm-color-background);
   font-size: calc(12rem / 16);
   margin: 0 auto;
-  max-width: 667px;
+  max-width: 100%;
   padding: 20px;
+}
+
+@media (min-width: 799px) {
+  .wrapper {
+    max-width: 800px;
+  }
 }
 
 .header {
