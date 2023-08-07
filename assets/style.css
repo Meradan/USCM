@@ -33,16 +33,19 @@
 a {
   color: var(--uscm-color-green);
   text-decoration: underline;
-  transition: 2s all;
 }
 a:focus,
 a:hover {
   color: var(--uscm-color-green-hover);
   text-decoration: none;
+  transition: color 1s;
 }
 
 .wrapper {
   background-color: var(--uscm-color-background);
+  border: 2px solid var(--uscm-color-green);
+  border-top: 0;
+  border-bottom: 0;
   font-size: calc(12rem / 16);
   margin: 0 auto;
   max-width: 100%;
@@ -144,7 +147,7 @@ a:hover {
   color: var(--uscm-color-background);
   cursor: pointer;
   padding: 4px 10px;
-  transition: 2s all;
+  transition: background-color 1s, color 1s;
 }
 
 .button:focus,
