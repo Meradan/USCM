@@ -26,7 +26,7 @@
           <td>Game:</td>
           <td><select name="rpg" style="width:100%">
         <?php
-        $db = new PDO('mysql:host=localhost;dbname=skynet;charset=utf8', 'skynet', 'Br1xt0n');
+        $db = getDatabaseConnection();
         $rpgsql="select rpg_name_short,table_prefix from RPG order by rpg_name";
 
         $stmt = $db->query($rpgsql);
