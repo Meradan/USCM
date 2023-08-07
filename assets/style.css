@@ -1,14 +1,13 @@
-a:link {text-decoration: underline; color: #33CC00}
-a:visited {text-decoration: underline; color: #339900}
-a:hover {text-decoration: none; color: #00FF00}
+@import url("https://unpkg.com/sanitize.css");
 
-.colorfont {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal;}
-.title {font-family: verdana, tahoma; font-size: 9pt; color: #33CC00; font-style: normal; font-weight: bold;}
+.colorfont {color: #33CC00; font-style: normal;}
+.title {color: #33CC00; font-style: normal; font-weight: bold;}
 .center {text-align: center;}
 .thead {font-weight: bold; text-decoration: underline;}
 
 :root {
   --uscm-color-green: #33cc00;
+  --uscm-color-green-hover: #00ff00;
   --uscm-color-background: #111;
   --uscm-color-text: #f9f9f9;
 }
@@ -17,12 +16,24 @@ a:hover {text-decoration: none; color: #00FF00}
   background-color: #000;
   color: var(--uscm-color-text);
   font-family: Verdana, sans-serif;
-  font-size: calc(12rem / 16);
+  font-size: 16px;
   text-underline-offset: 2px;
+}
+
+a {
+  color: var(--uscm-color-green);
+  text-decoration: underline;
+  transition: 2s all;
+}
+a:focus,
+a:hover {
+  color: var(--uscm-color-green-hover);
+  text-decoration: none;
 }
 
 .wrapper {
   background-color: var(--uscm-color-background);
+  font-size: calc(12rem / 16);
   margin: 0 auto;
   max-width: 667px;
   padding: 20px;
@@ -35,7 +46,7 @@ a:hover {text-decoration: none; color: #00FF00}
 .nav > ul {
   display: flex;
   flex-wrap: wrap;
-  font-size: 16px;
+  font-size: calc(16rem / 16);
   gap: 10px;
   justify-content: center;
 }
