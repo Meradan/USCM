@@ -1,8 +1,8 @@
 <h1 class="heading heading-h1">About</h1>
 
-<div class="title">USCM RPG</div>
+<h2 class="heading heading-h2">USCM Roleplaying game</h2>
 
-<div class="title">Swedish Info</div>
+<h3 class="heading heading-h3">Swedish info</h3>
 
 Det här är en rollspelskampanj i militär science fiction-miljö inspirerad främst av Alien-filmerna, men även Starship Troopers, XCOM m.m. Spelarnas karaktärer är soldater i framtidens motsvarighet till den amerikanska marinkåren. Stämningen i kampanjen inriktas i första hand på action, spänning och taktisk planering, men det kan vara stor variation mellan olika uppdrag.<BR><BR>
 
@@ -20,9 +20,8 @@ briefing-text som spelarna fick ut innan uppdraget och med sammanfattningen som 
 Kampanjen håller mestadels till i Linköping där den startade. Det har periodvis även funnits aktiva spelgrupper (plutoner) på andra orter och på senare tid kör vi ibland missions över mail också. USCM brukar även dyka upp som arrangemang på spelkonventet <A HREF="http://www.lincon.se" TARGET="_blank">LinCon</A>.<BR><BR>
 Det finns för tillfället plats för fler spelare, kom in på vår Discord om du är intresserad.<BR><BR>
 
-<br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
+<h3 class="heading heading-h3">English info</h3>
 
-<div class="title">English Info</div>
 This is the homepage for a roleplaying game set in a universe inspired by the Alien movies.<BR><BR>
 
 The goal of this campaign is to mix the atmosphere of the Alien movies with a military-style RPG campaign where
@@ -30,12 +29,19 @@ we focus on action and tactical planning.<BR><BR>
 
 Most roleplaying is done in the traditional pen & paper style, but there are occasional PBEM scenarios as well.<BR><BR>
 
-<br/><hr class="line"><br/>
+<hr class="line">
 
-<div class="title">USCM v3 Resources</div>
-Coming soon...<BR><BR>
+<h2 class="heading heading-h2">Resources</h2>
 
-<div class="title">USCM v2 Resources (old edition)</div>
+<h3 class="heading heading-h3">
+  USCM v3 <span class="tag tag-bf5">current version</span>
+</h3>
+Coming soon...
+
+<h3 class="heading heading-h3">
+  USCM v2 <span class="tag">old version</span>
+</h3>
+
 To use the Character Generator you need LibreOffice (free, open source) which can be downloaded from <a href="http://www.libreoffice.org" target="_blank">www.libreoffice.org</a>
 <br/>
 You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".
@@ -48,14 +54,16 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 <A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
 <br/>
 <A HREF="resources/USCM-Rules2.pdf" TARGET="_blank">Rules - Properties/Cert</A> (PDF, description of all properties etc.)<br/>
-<br/>
-<br/><img src="images/linje.jpg" width="449" height="1" align="middle"><br/>
 
-<div class="title">Other campaign material</div>
+<h3 class="heading heading-h3">Other material</h3>
+
 <A HREF="resources/InofficiellBriefingBF5.pdf" TARGET="_blank">Unofficial briefing</A> (BF5 campaign knowledge about aliens, in swedish)<br/>
 <br/>
 
-<div class="title">Creators</div>
+<hr class="line">
+
+<h2 class="heading heading-h2">Creators</h2>
+
 Campaign &amp; Content: Oskar (<A HREF="mailto:oskar.grindemyr@gmail.com?subject=USCM">oskar.grindemyr@gmail.com</A>)<BR>
-Web Production: Totte (<A HREF="mailto:tottemans@hotmail.com?subject=USCM">tottemans@hotmail.com</A>)<BR>
-Database Production: Pontus (<A HREF="mailto:meradan+uscm@gmail.com?subject=USCM">meradan@gmail.com</A>)<BR>
+Web Design: Totte (<A HREF="mailto:totte@nordstrom.ax?subject=USCM">totte@nordstrom.ax</A>)<BR>
+Server & Database: Pontus (<A HREF="mailto:meradan+uscm@gmail.com?subject=USCM">meradan@gmail.com</A>)<BR>
