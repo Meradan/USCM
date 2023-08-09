@@ -86,6 +86,14 @@ a:hover {
   margin-top: 40px;
 }
 
+.copyright {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: calc(10rem / 16);
+  padding-top: 10px;
+}
+
 .line {
   border-top: 1px solid;
   border-image: linear-gradient(to right, transparent, var(--uscm-color-green), transparent) 1;
@@ -121,6 +129,10 @@ a:hover {
 
 .p-10 {
   padding: 10px;
+}
+
+.pl-10 {
+  padding-left: 10px;
 }
 
 .mt-40 {
