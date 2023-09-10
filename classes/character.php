@@ -275,43 +275,43 @@ class Character extends DbEntity {
   public function setSpecialtyId($id) {
     $this->specialtyId = $id;
   }
-  
+
   public function getEncounterAlien() {
 	  return $this->encounteralien;
   }
-  
+
   public function setEncounterAlien($val) {
 	  $this->encounteralien = $val;
   }
-  
+
   public function getEncounterGrey() {
 	  return $this->encountergrey;
   }
-  
+
   public function setEncounterGrey($val) {
 	  $this->encountergrey = $val;
   }
-  
+
   public function getEncounterPredator() {
 	  return $this->encounterpredator;
   }
-  
+
   public function setEncounterPredator($val) {
 	  $this->encounterpredator = $val;
   }
-  
+
   public function getEncounterAI() {
 	  return $this->encounterai;
   }
-  
+
   public function setEncounterAI($val) {
 	  $this->encounterai = $val;
   }
-  
+
   public function getEncounterArachnid() {
 	  return $this->encounterarachnid;
   }
-  
+
   public function setEncounterArachnid($val) {
 	  $this->encounterarachnid = $val;
   }
@@ -398,7 +398,19 @@ class Character extends DbEntity {
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $row['value'];
+
+    $modifier = 0;
+    if ($this->hasCharacterAdvantage(/*Mule*/62)) {
+      $modifier = $modifier + 5;
+    }
+    if ($this->hasCharacterAdvantage(/*Efficient Packing*/59)) {
+      $modifier = $modifier + 5;
+    }
+    if ($this->hasCharacterDisadvantage(/*Hunchback*/16)) {
+      $modifier = $modifier - 5;
+    }
+
+    return ($row['value'] + $modifier);
   }
 
   function getCombatLoad() {
@@ -409,10 +421,16 @@ class Character extends DbEntity {
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $modifier = 0;
+    if ($this->hasCharacterAdvantage(/*Mule*/62)) {
+      $modifier = $modifier + 1;
+    }
+
     if ($row['value'] >= 3) {
-      return ($row['mvalue'] - 5);
+      return ($row['mvalue'] - 5 + $modifier);
     } else {
-      return $row['mvalue'];
+      return ($row['mvalue'] + $modifier);
     }
   }
 
@@ -505,7 +523,7 @@ class Character extends DbEntity {
     }
     return $medalarray;
   }
-  
+
   /**
    * @return int
    */
@@ -735,7 +753,7 @@ class Character extends DbEntity {
     }
     return $chosencertarray;
   }
-  
+
   public function getCertsBuyableWithoutReqCheck() {
 	  $certarray = array ();
 	  $certsql = "select id from uscm_certificate_names where id not in (select cn.id from uscm_characters as c
@@ -851,7 +869,7 @@ where c.id=:cid group by cn.id)";
     }
     return $traits;
   }
-  
+
     /**
    * @param int $characterId Id of a Character
    * @return int
@@ -871,7 +889,7 @@ where c.id=:cid";
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	return $row['xpval'];
   }
-  
+
   /**
    *
    * @param int $advantageId Id of a Advantage object
