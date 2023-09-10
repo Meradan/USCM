@@ -5,6 +5,7 @@ Web site to support the [USCM RPG](https://www.uscm.se/) campaign
 ## Prerequisite
 
 1. [Install php](https://www.php.net/manual/en/install.php)
+2. [Install Composer](https://getcomposer.org/)
 
 ## Setup
 
@@ -26,7 +27,12 @@ $url_root="http://localhost:8000";
 ssh -p $port -N -L 3306:127.0.0.1:3306 $user@$machine
 ```
 
-5. Run php server
+5. Install dependencies
+```sh
+composer install
+```
+
+6. Run php server
 ```sh
 php -S localhost:8000
 ```
