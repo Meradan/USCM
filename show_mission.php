@@ -8,6 +8,7 @@ $playerController = new PlayerController();
 $gmUser = $playerController->getPlayer($mission->getGmId());
 ?>
 
+<div class="mission">
 <h1 class="heading heading-h1">
   Mission <?php echo $mission->getShortName();?>
   <span class="tag tag-<?php echo strtolower($mission->getPlatoonShortName());?>"><?php echo $mission->getPlatoonShortName();?></span>
@@ -79,4 +80,5 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
 
 <div>
   <?php echo $mission->getDebriefing();?><br>
-  </div>
+</div>
+</div>
