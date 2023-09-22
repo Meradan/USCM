@@ -342,18 +342,18 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 
 <h2 class="heading heading-h2">Ranks</h2>
 
+<dl class="list-description">
 <?php
 $ranks = $rankController->getRanks();
 foreach ($ranks as $rank) { ?>
-  <dl class="list-description">
     <dt>
       <span class="tag"><?php echo $rank->getShortName() ?></span>
     </dt>
     <dd>
       <?php echo $rank->getName() ?>
     </dd>
-  </dl>
 <?php } ?>
+  </dl>
 
 <hr class="line mt-40">
 
@@ -361,10 +361,10 @@ foreach ($ranks as $rank) { ?>
 
 <h3 class="heading heading-h3">USCM Medals</h3>
 
+<dl class="list-description">
 <?php
 $medals = $medalController->getUscmMedals();
 foreach ($medals as $medal) { ?>
-  <dl class="list-description">
     <dt class="no-wrap">
       <span class="tag"><?php echo $medal->getShortName() ?></span>
       Glory <?php echo $medal->getGlory() ?>
@@ -375,14 +375,15 @@ foreach ($medals as $medal) { ?>
         <?php echo $medal->getDescription() ?>
       </details>
     </dd>
-  </dl>
 <?php } ?>
+</dl>
 
 <h3 class="heading heading-h3">Non-USCM Medals</h3>
+
+<dl class="list-description">
 <?php
 $foreignmedals = $medalController->getForeignMedals();
 foreach ($foreignmedals as $medal) { ?>
-<dl class="list-description">
   <dt class="no-wrap">
     <span class="tag"><?php echo $medal->getShortName() ?></span>
     Glory <?php echo $medal->getGlory() ?>
@@ -393,5 +394,5 @@ foreach ($foreignmedals as $medal) { ?>
       <?php echo $medal->getDescription() ?>
     </details>
   </dd>
-</dl>
 <?php } ?>
+</dl>

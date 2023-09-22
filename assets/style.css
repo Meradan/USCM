@@ -223,12 +223,12 @@ a:hover {
 
 .list-description {
   display: grid;
+  grid-gap: 8px 20px;
   grid-template-columns: auto 1fr;
 }
 
 .list-description dd {
   margin: 0;
-  padding-left: 40px;
 }
 
 .list-description .odd {
