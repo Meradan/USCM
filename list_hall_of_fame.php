@@ -92,7 +92,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   <thead>
   <tr>
     <th>Glory</th>
-    <th>Medals</th>
+    <th>Commendations</th>
     <th>Missions</th>
     <th>Rank</th>
     <th>Name</th>
@@ -147,8 +147,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <th>Rank</th>
     <th>Name</th>
     <th>Specialty</th>
-    <th>Commendations</th>
     <th>Glory</th>
+    <th>Commendations</th>
     <th>Player</th>
     <th>Enlisted</th>
     <th>Dead</th>
@@ -168,8 +168,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
-    <td><?php echo $character['medals'];?></td>
     <td><?php echo $character['glory'];?></td>
+    <td><?php echo $character['medals'];?></td>
     <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
     <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php

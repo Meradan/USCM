@@ -254,7 +254,6 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 <?php
   $missionCount = getNumberOfMissionsForCharacter($npc['cid'])?>
     <td><?php echo $missionCount;?></td>
-    <td class="no-wrap"><?php echo $npc['enlisted'];?></td>
 <?php
   $medals = "";
   $glory = 0;
@@ -263,9 +262,9 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     if ($commendationsArray[$key]['medal_short'] != "") $medals = $medals . " " . $commendationsArray[$key]['medal_short'];
     $glory = $glory + $commendationsArray[$key]['medal_glory'];
   }
-
 ?>
     <td><?php echo ($medals!="")?($medals):("-");?></td>
+    <td class="no-wrap"><?php echo $npc['enlisted'];?></td>
     <td><?php echo $npc['status'];?></td>
   </tr>
 <?php
