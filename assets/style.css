@@ -103,6 +103,7 @@ a:hover {
 
 .table {
   min-width: 100%;
+  position: relative;
 }
 
 .table th,
@@ -117,8 +118,18 @@ a:hover {
   text-align: left;
 }
 
+.table th {
+  background-color: var(--uscm-color-background);
+  position: sticky;
+  top: 0;
+}
+
 .table tbody tr:nth-child(odd) {
   background-color: #222;
+}
+
+.table-wrapper {
+  overflow-x: auto;
 }
 
 .no-wrap {
@@ -135,6 +146,10 @@ a:hover {
 
 .pl-10 {
   padding-left: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
 }
 
 .mt-40 {
@@ -223,12 +238,13 @@ a:hover {
 
 .list-description {
   display: grid;
-  grid-gap: 8px 20px;
+  grid-gap: 8px 0;
   grid-template-columns: auto 1fr;
 }
 
 .list-description dd {
   margin: 0;
+  padding-left: 20px;
 }
 
 .list-description .odd {

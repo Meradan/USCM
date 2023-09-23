@@ -83,6 +83,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   </select>
 </label>
 
+<div class="table-wrapper mt-20">
 <table class="table">
   <caption>
     All time top 5 most glorious soldiers
@@ -117,23 +118,25 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 		$glory = $glory + $commendationsArray[$key]['medal_glory'];
 	}
 	?>
-  <TR>
-    <TD><?php echo $glory;?></TD>
-    <TD><?php echo $medals;?></TD>
-    <TD><?php echo $character['missions'];?></TD>
-    <TD><?php echo $character['rank_short'];?></TD>
-    <TD><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
+  <tr>
+    <td><?php echo $glory;?></td>
+    <td><?php echo $medals;?></td>
+    <td><?php echo $character['missions'];?></td>
+    <td><?php echo $character['rank_short'];?></td>
+    <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
-        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></TD>
-    <TD><?php echo $character['specialty_name'];?></TD>
-    <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
-    <TD><?php echo $character['status'];?></TD>
-  </TR>
+        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
+    <td><?php echo $character['specialty_name'];?></td>
+    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
+    <td><?php echo $character['status'];?></td>
+  </tr>
 <?php } ?>
   </tbody>
 </table>
+</div>
 
-<table class="table" style="margin-top: 20px;">
+<div class="table-wrapper mt-20">
+<table class="table">
   <caption>
     They who sacrificed their lives in the line of duty
     <hr class="line">
@@ -158,16 +161,16 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 // 	$characterres=mysql_query($deadcharactersql);
     $characterarray = listCharacters($deadcharactersql, "dead");
     foreach ($characterarray as $character) { ?>
-  <TR>
-    <TD><?php echo $character['missions'];?></TD>
-    <TD><?php echo $character['rank_short'];?></TD>
-    <TD><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
+  <tr>
+    <td><?php echo $character['missions'];?></td>
+    <td><?php echo $character['rank_short'];?></td>
+    <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
-        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></TD>
-    <TD><?php echo $character['specialty_name'];?></TD>
-    <TD><?php echo $character['medals'];?></TD>
-    <TD><?php echo $character['glory'];?></TD>
-    <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
+        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
+    <td><?php echo $character['specialty_name'];?></td>
+    <td><?php echo $character['medals'];?></td>
+    <td><?php echo $character['glory'];?></td>
+    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
     <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
@@ -175,14 +178,16 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     $lastMission = lastMissionForCharacter($character['cid'])?>
     <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
     <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
-    <TD><?php echo $character['status_desc'];?></TD>
-  </TR>
+    <td><?php echo $character['status_desc'];?></td>
+  </tr>
 <?php unset($medals,$glory);
   } ?>
   </tbody>
 </table>
+</div>
 
-<table class="table" style="margin-top: 20px;">
+<div class="table-wrapper mt-20">
+<table class="table">
   <caption>
     Retirements
     <hr class="line">
@@ -207,26 +212,27 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 //$characterres=mysql_query($retiredcharactersql);
     $characterarray = listCharacters($retiredcharactersql,"retired");
     foreach ($characterarray as $character) { ?>
-  <TR>
-    <TD><?php echo $character['missions'];?></TD>
-    <TD><?php echo $character['rank_short'];?></TD>
-    <TD><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
+  <tr>
+    <td><?php echo $character['missions'];?></td>
+    <td><?php echo $character['rank_short'];?></td>
+    <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
-        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></TD>
-    <TD><?php echo $character['specialty_name'];?></TD>
-    <TD><?php echo $character['medals'];?></TD>
-    <TD><?php echo $character['glory'];?></TD>
-    <TD><?php echo $character['forname'] . " " . $character['lastname'];?></TD>
+        } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
+    <td><?php echo $character['specialty_name'];?></td>
+    <td><?php echo $character['medals'];?></td>
+    <td><?php echo $character['glory'];?></td>
+    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
     <td class="no-wrap"><?php echo $character['enlisted'];?></td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 // 		$lastMission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid']) ?>
     <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
-    <TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
-    <TD><?php echo $character['status_desc'];?></TD>
-  </TR>
+    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
+    <td><?php echo $character['status_desc'];?></td>
+  </tr>
 <?php unset($medals,$glory);
   } ?>
   </tbody>
 </table>
+</div>

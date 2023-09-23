@@ -81,6 +81,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   Assigned ship: USS Nautilus (Conestoga-class frigate)<br>
 <?php } ?>
 
+<div class="table-wrapper">
 <table class="table">
   <caption>
     Player Characters
@@ -93,10 +94,10 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <th>Specialty</th>
     <th>Missions</th>
 	  <th>Last</th>
-    <th>Enlisted</th>
-    <th>Commendations</th>
     <th>Glory</th>
+    <th>Commendations</th>
     <th>Player</th>
+    <th>Enlisted</th>
     <th>Status</th>
   </tr>
   </thead>
@@ -104,7 +105,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 <?php
   $characterarray = listCharacters($charactersql, "alive");
   foreach ($characterarray as $character) { ?>
-  <TR><?php $overlib = false;
+  <tr><?php $overlib = false;
   if ($_SESSION['level']>=1  ) {
     $overlib = true;
     $attributearray = characterAttributes($character['cid']);
@@ -139,7 +140,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     }
   }
   $lastMission = lastMissionForCharacter($character['cid']);
-    ?><TD><?php echo $character['rank_short'];?></TD>
+    ?><td><?php echo $character['rank_short'];?></td>
     <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>><?php
     $link = false;
     if ($admin || $gm || $_SESSION['user_id']==$character['userid']) { $link = true;?>
@@ -151,10 +152,9 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
             </div>
           <?php } ?>
     </td>
-    <TD><?php echo $character['specialty_name'];?></TD>
-    <TD class="center"><?php echo $character['missions'];?></TD>
-	<TD><?php echo $lastMission['mission_name_short'] ?? '';?></TD>
-    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
+    <td><?php echo $character['specialty_name'];?></td>
+    <td class="center"><?php echo $character['missions'];?></td>
+	<td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
 <?php
       $medals = "";
       $glory = 0;
@@ -164,17 +164,20 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
         $glory = $glory + $commendationsArray[$key]['medal_glory'];
       }
       ?>
-    <TD><?php echo ($medals != "")?($medals):("-");?></TD>
-    <TD><?php echo ($glory != "0")?($glory):("");?></TD>
-    <TD><?php echo ($character['use_nickname']=="1")?(stripslashes($character['nickname'])):(stripslashes($character['playerforname']) . " " . stripslashes($character['playerlastname']));?></TD>
-    <TD><?php echo $character['status'];?></TD>
-  </TR>
+    <td><?php echo ($glory != "0")?($glory):("");?></td>
+    <td><?php echo ($medals != "")?($medals):("-");?></td>
+    <td><?php echo ($character['use_nickname']=="1")?(stripslashes($character['nickname'])):(stripslashes($character['playerforname']) . " " . stripslashes($character['playerlastname']));?></td>
+    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
+    <td><?php echo $character['status'];?></td>
+  </tr>
 <?php unset($medals,$glory);
   } ?>
   </tbody>
 </table>
+</div>
 
-<table class="table" style="margin-top: 20px;">
+<div class="table-wrapper mt-20">
+<table class="table">
   <caption class="colorfont">
     Non-Player Characters
     <hr class="line">
@@ -185,8 +188,8 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <th>Name</th>
     <th>Specialty</th>
     <th>Missions</th>
-    <th>Enlisted</th>
     <th>Commendations</th>
+    <th>Enlisted</th>
     <th>Status</th>
   </tr>
   </thead>
@@ -196,7 +199,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   $medals = "";
   $glory = 0;
   foreach ($npcarray as $npc) { ?>
-  <TR><?php $overlib = false;
+  <tr><?php $overlib = false;
   if ( $_SESSION['level']>=1  ) {
     $overlib = true;
       $attributearray = characterAttributes($character['cid']);
@@ -232,7 +235,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
       $overlibtext = $overlibtext . htmlentities($dis,ENT_QUOTES) . "<br>";
     }
   }
-    ?><TD><?php echo $npc['rank_short'];?></TD>
+    ?><td><?php echo $npc['rank_short'];?></td>
     <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>>
       <?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?>
         <a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>">
@@ -247,11 +250,11 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
         </div>
       <?php } ?>
     </td>
-    <TD><?php echo $npc['specialty_name'];?></TD>
+    <td><?php echo $npc['specialty_name'];?></td>
 <?php
   $missionCount = getNumberOfMissionsForCharacter($npc['cid'])?>
-    <TD><?php echo $missionCount;?></TD>
-    <TD class="no-wrap"><?php echo $npc['enlisted'];?></TD>
+    <td><?php echo $missionCount;?></td>
+    <td class="no-wrap"><?php echo $npc['enlisted'];?></td>
 <?php
   $medals = "";
   $glory = 0;
@@ -262,18 +265,20 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   }
 
 ?>
-    <TD><?php echo ($medals!="")?($medals):("-");?></TD>
-    <TD><?php echo $npc['status'];?></TD>
-  </TR>
+    <td><?php echo ($medals!="")?($medals):("-");?></td>
+    <td><?php echo $npc['status'];?></td>
+  </tr>
 <?php
   unset($medals,$glory);
 }
 ?>
   </tbody>
 </table>
+</div>
 
 <?php if ($_GET['platoon'] == "1" || $_GET['platoon'] == "5" || $_GET['platoon'] == "6") { ?>
-<table class="table" style="margin-top: 20px;">
+<div class="table-wrapper mt-20">
+<table class="table">
   <caption>
     Special Non-Player Characters
     <hr class="line">
@@ -293,21 +298,21 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td>Lieutenant</td>
     <td>Louise Wheatly</td>
     <td>Officer</td>
-    <td class="no-wrap">19-08-10</td>
+    <td class="no-wrap">2019-08-10</td>
     <td>KIA</td>
   </tr>
   <tr>
     <td>Lieutenant</td>
     <td>Michael Brixton</td>
     <td>Officer</td>
-    <td class="no-wrap">00-10-14</td>
+    <td class="no-wrap">2000-10-14</td>
     <td>Active</td>
   </tr>
   <tr>
     <td>Android</td>
     <td>Garth</td>
     <td>Synthetic</td>
-    <td class="no-wrap">00-11-28</td>
+    <td class="no-wrap">2000-11-28</td>
     <td>Active</td>
   </tr>
 <?php } elseif ($_GET['platoon'] == "5") {?>
@@ -315,14 +320,14 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td>Lieutenant</td>
     <td>Lionel Lee</td>
     <td>Officer</td>
-    <td class="no-wrap">18-01-21</td>
+    <td class="no-wrap">2018-01-21</td>
     <td></td>
   </tr>
   <tr>
     <td>Android</td>
     <td>Ishmael</td>
     <td>Synthetic</td>
-    <td class="no-wrap">18-01-21</td>
+    <td class="no-wrap">2018-01-21</td>
     <td></td>
   </tr>
 <?php } elseif ($_GET['platoon'] == "6") {?>
@@ -330,12 +335,13 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td>Lieutenant</td>
     <td>Drake</td>
     <td>Officer</td>
-    <td class="no-wrap">17-10-31</td>
+    <td class="no-wrap">2017-10-31</td>
     <td></td>
   </tr>
 <?php } ?>
   </tbody>
 </table>
+</div>
 <?php } ?>
 
 <hr class="line mt-40">
