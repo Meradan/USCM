@@ -59,6 +59,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 <label for="select-platoon" style="display: block; margin-bottom: 20px;">
   Select platoon
   <select id="select-platoon" onchange="window.location.href = this.value">
+    <option value=""></option>
     <?php
       $platoons = $platoonController->getPlatoons();
       foreach ($platoons as $platoon ) {
