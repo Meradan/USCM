@@ -8,12 +8,12 @@
   "theme_color": "#33cc00",
   "icons": [
     {
-      "src": "assets/logo/uscm-blip-logo@192px.png",
+      "src": "logo/uscm-blip-logo@192px.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "assets/logo/uscm-blip-logo@512px.png",
+      "src": "logo/uscm-blip-logo@512px.png",
       "type": "image/png",
       "sizes": "512x512"
     }
