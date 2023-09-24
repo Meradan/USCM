@@ -122,6 +122,7 @@ a:hover {
   background-color: var(--uscm-color-background);
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 .table tbody tr:nth-child(odd) {
@@ -129,7 +130,7 @@ a:hover {
 }
 
 .table-wrapper {
-  overflow-x: auto;
+  overflow: auto;
 }
 
 .no-wrap {
@@ -265,8 +266,8 @@ a:hover {
   position: relative;
 }
 
-.popover:focus .popover-panel,
-.popover:hover .popover-panel {
+.popover a:focus + .popover-panel,
+.popover a:hover + .popover-panel {
   display: grid;
 }
 

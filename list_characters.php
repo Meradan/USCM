@@ -81,7 +81,6 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   Assigned ship: USS Nautilus (Conestoga-class frigate)<br>
 <?php } ?>
 
-<div class="table-wrapper">
 <table class="table">
   <caption>
     Player Characters
@@ -141,7 +140,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   }
   $lastMission = lastMissionForCharacter($character['cid']);
     ?><td><?php echo $character['rank_short'];?></td>
-    <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>><?php
+    <td <?php if ($overlib) {?>class="popover"<?php } ?>><?php
     $link = false;
     if ($admin || $gm || $_SESSION['user_id']==$character['userid']) { $link = true;?>
         <a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"><?php }
@@ -174,10 +173,8 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
   } ?>
   </tbody>
 </table>
-</div>
 
-<div class="table-wrapper mt-20">
-<table class="table">
+<table class="table mt-20">
   <caption class="colorfont">
     Non-Player Characters
     <hr class="line">
@@ -236,7 +233,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     }
   }
     ?><td><?php echo $npc['rank_short'];?></td>
-    <td <?php if ($overlib) {?>class="popover" tabindex="0"<?php } ?>>
+    <td <?php if ($overlib) {?>class="popover"<?php } ?>>
       <?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?>
         <a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>">
           <?php echo $npc['forname'] . " " . $npc['lastname'];?>
@@ -273,11 +270,9 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 ?>
   </tbody>
 </table>
-</div>
 
 <?php if ($_GET['platoon'] == "1" || $_GET['platoon'] == "5" || $_GET['platoon'] == "6") { ?>
-<div class="table-wrapper mt-20">
-<table class="table">
+<table class="table mt-20">
   <caption>
     Special Non-Player Characters
     <hr class="line">
@@ -340,7 +335,6 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
 <?php } ?>
   </tbody>
 </table>
-</div>
 <?php } ?>
 
 <hr class="line mt-40">

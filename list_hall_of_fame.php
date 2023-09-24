@@ -83,8 +83,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   </select>
 </label>
 
-<div class="table-wrapper mt-20">
-<table class="table">
+<table class="table mt-20">
   <caption>
     All time top 5 most glorious soldiers
     <hr class="line">
@@ -133,10 +132,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 <?php } ?>
   </tbody>
 </table>
-</div>
 
-<div class="table-wrapper mt-20">
-<table class="table">
+<table class="table mt-20">
   <caption>
     They who sacrificed their lives in the line of duty
     <hr class="line">
@@ -184,10 +181,8 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   } ?>
   </tbody>
 </table>
-</div>
 
-<div class="table-wrapper mt-20">
-<table class="table">
+<table class="table mt-20">
   <caption>
     Retirements
     <hr class="line">
@@ -235,4 +230,3 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   } ?>
   </tbody>
 </table>
-</div>
