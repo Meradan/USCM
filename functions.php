@@ -89,6 +89,13 @@ function login($level) {
       unset($_SESSION['platoon_id']);
       return 0;
     } elseif ($alt == "login") {
+      if (empty($_POST['anvandarnamn']) || empty($_POST['losenord'])) {
+        $_SESSION['inloggad'] = 0;
+        $_SESSION['level'] = "0";
+        return 0;
+        exit();
+      }
+
         $query = "SELECT Users.id, emailadress, platoon_id, Admins.userid AS Admin, GMs.userid AS GM,
                 logintime, count(Users.id) AS howmany
                 FROM Users
@@ -523,6 +530,4 @@ function print_text_without_br($text) {
   return strtr($text, array ("<br/>" => ""
   ));
 }
-
-
 ?>
