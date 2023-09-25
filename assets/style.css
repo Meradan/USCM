@@ -165,7 +165,7 @@ a:hover {
   margin-bottom: 10px;
 }
 
-.form input,
+.form input:not([type="radio"],[type="checkbox"]),
 .form select,
 .form textarea {
   width: 100%;

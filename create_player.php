@@ -6,50 +6,55 @@ if ($user->isAdmin()) {
 ?>
   <h1 class="heading heading-h1">Create player</h1>
 
-<form method="post" action="player.php?what=create">
-<table width="50%"  border="0" cellspacing="1" cellpadding="1">
-  <tr>
-    <td>Forname</td>
-    <td><input type="text" name="forname"></td>
-  </tr>
-  <tr>
-    <td>Nickname</td>
-    <td><input type="text" name="nickname"></td>
-  </tr>
-  <tr>
-    <td>Use nickname instead of real name</td>
-    <td><input type="radio" name="use_nickname" value="1">Yes
-        <input type="radio" name="use_nickname" value="0" checked >No
-    </td>
-  </tr>
-  <tr>
-    <td>Lastname</td>
-    <td><input type="text" name="lastname"></td>
-  </tr>
-  <tr>
-    <td>emailadress</td>
-    <td><input type="text" name="emailadress"></td>
-  </tr>
-  <tr>
-    <td>Platoon</td>
-    <td><?php
+<form class="form" method="post" action="player.php?what=create">
+  <label for="forname">
+    Firstname
+    <input type="text" id="forname" name="forname">
+  </label>
+
+  <label for="lastname">
+    Lastname
+    <input type="text" id="lastname" name="lastname">
+  </label>
+
+  <label for="nickname">
+    Nickname
+    <input type="text" id="nickname" name="nickname">
+  </label>
+
+  <fieldset>
+    <legend>Use nickname</legend>
+    <label for="use_nickname">
+      <input type="radio" id="use_nickname_1" name="use_nickname" value="1"> Yes
+    </label>
+    <label for="use_nickname">
+      <input type="radio" id="use_nickname_0" name="use_nickname" value="0"> No
+    </label>
+  </fieldset>
+
+  <label for="emailadress">
+    Email
+    <input type="email" id="emailadress" name="emailadress">
+  </label>
+
+  <label for="password">
+    Password
+    <input type="password" id="password" name="password">
+  </label>
+
+  <label for="platoon_id">
+    Platoon
+    <?php
                 $platoons = $platoonController->getPlatoons();
     ?>
-        <select name="platoon_id">
+        <select id="platoon_id" name="platoon_id">
     <?php foreach ($platoons as $platoon) { ?>
           <option value="<?php echo $platoon->getId(); ?>"><?php echo $platoon->getName(); ?></option>
     <?php } ?>
         </select>
-    </td>
-  </tr>
-  <tr>
-    <td>password</td>
-    <td><input type="password" name="password"></td>
-  </tr>
-  <tr>
-    <td colspan="2"><input type="submit" value="Create Player"/></td>
-</tr>
-</table>
+  </label>
+
+  <input class="button" type="submit" value="Create Player">
 </form>
 <?php }
 else {
