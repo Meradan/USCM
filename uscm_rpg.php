@@ -22,12 +22,12 @@ Det finns för tillfället plats för fler spelare, kom in på vår Discord om d
 
 <h3 class="heading heading-h3">English info</h3>
 
-This is the homepage for a roleplaying game set in a universe inspired by the Alien movies.<BR><BR>
+This is the homepage for a roleplaying game set in a universe inspired mainly by the Alien movies.<BR><BR>
 
 The goal of this campaign is to mix the atmosphere of the Alien movies with a military-style RPG campaign where
 we focus on action and tactical planning.<BR><BR>
 
-Most roleplaying is done in the traditional pen & paper style, but there are occasional PBEM scenarios as well.<BR><BR>
+Most roleplaying sessions are done in the traditional tabletop style, but there are occasional PBM or online scenarios as well.<BR><BR>
 
 <hr class="line">
 
@@ -37,6 +37,13 @@ Most roleplaying is done in the traditional pen & paper style, but there are occ
   USCM v3 <span class="tag tag-bf5">current version</span>
 </h3>
 Coming soon...
+
+<h3 class="heading heading-h3">Campaign material</h3>
+<A HREF="resources/EquipmentListPrint2.pdf" TARGET="_blank">Equipment list</A> Version 2.01<br/>
+<A HREF="resources/EquipmentBookletPrint.pdf" TARGET="_blank">Reference Booklet</A> Background info and equipment details. 2019 version<br/>
+<br/>
+<A HREF="resources/InofficiellBriefingBF5.pdf" TARGET="_blank">Unofficial briefing</A> (BF5 campaign knowledge about aliens, in swedish)<br/>
+
 
 <h3 class="heading heading-h3">
   USCM v2 <span class="tag">old version</span>
@@ -48,17 +55,11 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 <br/><br/>
 
 <A HREF="resources/USCM_Generator.ods" TARGET="_blank">Character Generator</A> (OpenDocument - LibreOffice)<br/>
-<A HREF="resources/EquipmentListPrint2.pdf" TARGET="_blank">Equipment list</A> Version 2.01<br/>
-<A HREF="resources/EquipmentBookletPrint.pdf" TARGET="_blank">Reference Booklet</A> Background info and equipment details. 2019 version<br/>
 <br/>
 <A HREF="resources/charactersheet.pdf" TARGET="_blank">Character Sheet</A> (PDF, for manual character creation)<br/>
+<A HREF="resources/USCM-Rules2.pdf" TARGET="_blank">Rules - Properties/Cert</A> (PDF, description of all v2 properties etc.)<br/>
 <br/>
-<A HREF="resources/USCM-Rules2.pdf" TARGET="_blank">Rules - Properties/Cert</A> (PDF, description of all properties etc.)<br/>
 
-<h3 class="heading heading-h3">Other material</h3>
-
-<A HREF="resources/InofficiellBriefingBF5.pdf" TARGET="_blank">Unofficial briefing</A> (BF5 campaign knowledge about aliens, in swedish)<br/>
-<br/>
 
 <hr class="line">
 
