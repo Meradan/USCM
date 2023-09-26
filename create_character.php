@@ -86,67 +86,67 @@ if ($user->isAdmin() || $user->isGm()) { ?>
 
     <label for="xp">
       Unused XP
-      <input type="number" id="xp" name="xp">
+      <input type="number" id="xp" name="xp" min="0">
     </label>
   </div>
 
-  <fieldset class="grid grid--1x3">
+  <fieldset class="form--inline grid grid--small">
     <legend>Attributes</legend>
     <?php //Ta ut alla attribut
     $attributes = $characterController->getAttributes();
     foreach ($attributes as $attribute) { ?>
       <label for="attribute_<?php echo $attribute->getId();?>">
         <?php echo $attribute->getName();?>
-        <input type="number" id="attribute_<?php echo $attribute->getId();?>" name="attribute[<?php echo $attribute->getId();?>]">
+        <input type="number" id="attribute_<?php echo $attribute->getId();?>" name="attribute[<?php echo $attribute->getId();?>]" min="0" max="10">
       </label>
     <?php } ?>
   </fieldset>
 
-  <fieldset class="grid grid--1x3">
+  <fieldset class="form--inline grid grid--small">
     <legend>Points</legend>
 
     <label for="ap">
       Awareness Points
-      <input type="number" id="ap" name="ap" value="0">
+      <input type="number" id="ap" name="ap" value="0" min="0">
     </label>
 
     <label for="cp">
       Cool Points
-      <input type="number" id="cp" name="cp" value="0">
+      <input type="number" id="cp" name="cp" value="0" min="0">
     </label>
 
     <label for="ep">
       Exhaustion Points
-      <input type="number" id="ep" name="ep" value="0">
+      <input type="number" id="ep" name="ep" value="0" min="0">
     </label>
 
     <label for="fp">
       Fear Points
-      <input type="number" id="fp" name="fp" value="0">
+      <input type="number" id="fp" name="fp" value="0" min="0">
     </label>
 
     <label for="lp">
       Leadership Points
-      <input type="number" id="lp" name="lp" value="0">
+      <input type="number" id="lp" name="lp" value="0" min="0">
     </label>
 
     <label for="pp">
       Psycho Points
-      <input type="number" id="pp" name="pp" value="0">
+      <input type="number" id="pp" name="pp" value="0" min="0">
     </label>
 
     <label for="tp">
       Trauma Points
-      <input type="number" id="tp" name="tp" value="0">
+      <input type="number" id="tp" name="tp" value="0" min="0">
     </label>
 
     <label for="mp">
       Mental Points
-      <input type="number" id="mp" name="mp" value="0">
+      <input type="number" id="mp" name="mp" value="0" min="0">
     </label>
   </fieldset>
 
-  <fieldset class="grid grid--1x3">
+  <fieldset class="form--inline grid grid--small">
     <legend>Skills</legend>
 
     <?php //Ta ut alla skills
@@ -154,7 +154,7 @@ if ($user->isAdmin() || $user->isGm()) { ?>
     foreach ($skills as $skill) { ?>
       <label for="skill_<?php echo $skill->getId();?>">
         <?php echo $skill->getName();?>
-        <input type="number" id="skill_<?php echo $skill->getId();?>" name="skill[<?php echo $skill->getId();?>]">
+        <input type="number" id="skill_<?php echo $skill->getId();?>" name="skill[<?php echo $skill->getId();?>]" min="0" max="10">
       </label>
 
       <input type="hidden" name="optional[<?php echo $skill->getId();?>]" value="<?php echo $skill->getOptional();?>">

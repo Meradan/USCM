@@ -171,17 +171,43 @@ a:hover {
   width: 100%;
 }
 
+.form .form--inline label {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form .form--inline input {
+  width: 40px;
+}
+
 .grid {
   display: grid;
-  gap: 8px;
+  gap: 8px 20px;
 }
 
 .grid--1x2 {
   grid-template-columns: 1fr 1fr;
 }
 
-.grid--1x3 {
+.grid--small {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 599px) {
+  .grid--small {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.grid--medium {
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (min-width: 599px) {
+  .grid--medium {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .button {
