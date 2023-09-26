@@ -192,6 +192,7 @@ a:hover {
 .news .heading {
   display: inline-flex;
   font-size: calc(12rem / 16);
+  margin: 0;
 }
 
 .mission .heading-h1 {
@@ -248,7 +249,8 @@ a:hover {
   padding-left: 20px;
 }
 
-.list-description .odd {
+.list-description dt:nth-of-type(odd),
+.list-description dd:nth-of-type(odd) {
   background-color: #222;
 }
 
