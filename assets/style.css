@@ -171,6 +171,19 @@ a:hover {
   width: 100%;
 }
 
+.grid {
+  display: grid;
+  gap: 8px;
+}
+
+.grid--1x2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid--1x3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .button {
   background-color: var(--uscm-color-green);
   border: none;
