@@ -73,7 +73,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     foreach ($missions as $mission) {
         ?>
 		<tr>
-			<td><?php echo $mission['mission_name']; ?></td>
+			<td><a href="index.php?url=show_mission.php&id=<?php echo $mission['id'];?>"><?php echo $mission['mission_name'];?></a></td>
 			<td colspan="3"><?php echo $mission['text']; ?></td>
 		</tr>
 		<?php
