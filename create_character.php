@@ -83,11 +83,6 @@ if ($user->isAdmin() || $user->isGm()) { ?>
         <option value="Female">Female</option>
       </select>
     </label>
-
-    <label for="xp">
-      Unused XP
-      <input type="number" id="xp" name="xp" min="0">
-    </label>
   </div>
 
   <fieldset class="form--inline grid grid--small">
@@ -143,6 +138,11 @@ if ($user->isAdmin() || $user->isGm()) { ?>
     <label for="mp">
       Mental Points
       <input type="number" id="mp" name="mp" value="0" min="0">
+    </label>
+
+    <label for="xp">
+      Unused XP
+      <input type="number" id="xp" name="xp" min="0">
     </label>
   </fieldset>
 

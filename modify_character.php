@@ -27,7 +27,6 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       <a href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a>
     </span>
   </h2>
-  <h3 class="heading heading-h3"><?php echo $player->getName(); ?></h3>
 
     <?php
 	if ($user->isAdmin() || ($user->isGm() && $character->getPlatoonId() == $user->getPlatoonId())) {
@@ -39,7 +38,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <input type="hidden" name="character" value="<?php echo $characterId; ?>">
 
   <div class="grid grid--1x2">
-    <div></div>
+    <h3 class="heading heading-h3"><?php echo $player->getName(); ?></h3>
     <label for="platoon">
       Platoon
       <?php
@@ -109,11 +108,6 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
         <option <?php echo ($character->getGender() == "Male") ? ("selected ") : (""); ?>value="Male">Male</option>
         <option <?php echo ($character->getGender() == "Female") ? ("selected ") : (""); ?>value="Female">Female</option>
       </select>
-    </label>
-
-    <label for="xp">
-      Unused XP
-      <input type="number" id="xp" name="xp" min="0" value="<?php echo $character->getUnusedXp(); ?>">
     </label>
 
     <label for="status">
@@ -197,6 +191,11 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       Mental Points
       <input type="number" id="mp" name="mp" min="0" value="<?php echo $character->getMentalPoints(); ?>">
     </label>
+
+    <label for="xp">
+      Unused XP
+      <input type="number" id="xp" name="xp" min="0" value="<?php echo $character->getUnusedXp(); ?>">
+    </label>
   </fieldset>
 
   <fieldset class="form--inline grid grid--small">
@@ -278,7 +277,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
         <?php } ?>
   </fieldset>
 
-    <fieldset class="form--inline grid grid--medium">
+    <fieldset class="form--inline grid grid--small">
       <legend>Encounters</legend>
 
       <label for="cbalien">

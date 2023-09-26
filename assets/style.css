@@ -200,16 +200,6 @@ a:hover {
   }
 }
 
-.grid--medium {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-@media (min-width: 599px) {
-  .grid--medium {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-
 .button {
   background-color: var(--uscm-color-green);
   border: none;
