@@ -40,17 +40,17 @@ if (isset($_GET['action'])!=true) { ?>
       </label>
 
       <label for="text">
-        Text (htmlkod)
+        Text (htmlkod)<br>
+        Note, to put in links within the site do it like this
+        <code>
+          &lt;a href="index.php?url=show_mission.php&id=224"&gt;Mission 192&lt;/a&gt;
+        </code>
         <textarea name="text" rows="7"></textarea>
       </label>
 
-      <input class="button" type="submit">
+      <input class="button" type="submit" value="Create News">
     </form>
 
-    Note, to put in links within the site do it like this:<br>
-    <code>
-      &lt;a href="index.php?url=uscm_rpg.php"&gt;USCM RPG&lt;/a&gt;
-    </code>
   <?php endif ?>
 
             <?php
