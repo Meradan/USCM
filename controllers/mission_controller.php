@@ -93,19 +93,15 @@ class MissionController {
    * @param int $missionId
    * @return Mission
    */
-  function getMission($missionId) {
-    $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, " .
-        "pn.name_short as platoonnameshort, gm, date, briefing, debriefing, platoon_id, count(*) as howmany ".
-        "FROM uscm_mission_names mn " .
-        "LEFT JOIN uscm_platoon_names pn ON pn.id=mn.platoon_id ".
-        "WHERE mn.id = :missionId ORDER BY date DESC,mission_name_short DESC";
+  function getMission($missionId) {        
+    $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, pn.name_short as platoonnameshort, gm, date, briefing, debriefing, platoon_id, GROUP_CONCAT(t.tag SEPARATOR ', ') as tags FROM uscm_mission_names mn LEFT JOIN uscm_platoon_names pn ON pn.id=mn.platoon_id LEFT JOIN uscm_mission_tags mt ON mn.id=mt.missionid LEFT JOIN uscm_tags t ON mt.tagid=t.id WHERE mn.id = :missionId GROUP BY mn.id LIMIT 1";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':missionId', $missionId, PDO::PARAM_INT);
     $mission = new Mission();
     try {
       $stmt->execute();
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      if ($row['howmany'] == 1) {
+      if (!empty($row)) {
         $mission->setId($row['missionid']);
         $mission->setName($row['mission_name']);
         $mission->setShortName($row['mission_name_short']);
@@ -115,6 +111,7 @@ class MissionController {
         $mission->setBriefing($row['briefing']);
         $mission->setDebriefing($row['debriefing']);
         $mission->setPlatoonId($row['platoon_id']);
+        $mission->setTags($row['tags']);
       }
     } catch (PDOException $e) {
     }

@@ -22,17 +22,21 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
 </h2>
 
 <dl class="list-description">
-  <dt class="odd">Date</dt>
+  <dt class="odd">Tags</dt>
   <dd class="odd">
+    <?php echo $mission->getTags();?>
+  </dd>
+  <dt>Date</dt>
+  <dd>
     <?php echo $mission->getDate();?>
   </dd>
-  <dt>GM</dt>
-  <dd>
+  <dt class="odd">GM</dt>
+  <dd class="odd">
     <?php echo $gmUser->getName()?><br>
     <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=gm" class="colorfont">Change</a><?php } ?>
   </dd>
-  <dt class="odd">Characters</dt>
-  <dd class="odd">
+  <dt>Characters</dt>
+  <dd>
     <?php
     $charactersAndPlayers = $missionController->getCharactersAndPlayers($mission);
     foreach ($charactersAndPlayers as $character) {
@@ -40,8 +44,8 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     } ?>
     <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=characters" class="colorfont">Change</a><?php } ?>
   </dd>
-  <dt>Commendations</dt>
-  <dd>
+  <dt class="odd">Commendations</dt>
+  <dd class="odd">
     <?php
     $commendations = $missionController->getCommendations($mission);
     foreach ($commendations as $commendation) {
@@ -49,8 +53,8 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     } ?>
     <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=commendations" class="colorfont">Change</a><?php } ?>
   </dd>
-  <dt class="odd">Promotions</dt>
-  <dd class="odd">
+  <dt>Promotions</dt>
+  <dd>
     <?php
     $promotions = $missionController->getPromotions($mission);
     foreach ($promotions as $promotion) {
