@@ -478,6 +478,7 @@ class Character extends DbEntity {
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $missionarray[$row['id']]['id'] = $row['id'];
       $missionarray[$row['id']]['text'] = "";
       if ($length == "short") {
 		$missionarray[$row['id']]['mission_name'] = $row['mission_name_short'];
