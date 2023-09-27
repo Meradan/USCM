@@ -28,21 +28,21 @@ foreach ($listOfNews as $news) {
 <div>Debriefing för M80 är upplagd.</div><br/>
 
 <div class="colorfont">2004-11-19 Oskar</div>
-<div>Besök gärna nyhetssidan <A HREF="http://www.galactic-news.tk/">Galactic News Network</A> som innehåller nyhetsreportage om händelser inom USCM-spelvärlden.<br><br/>
+<div>Besök gärna nyhetssidan <a href="http://www.galactic-news.tk/">Galactic News Network</a> som innehåller nyhetsreportage om händelser inom USCM-spelvärlden.<br><br/>
 
 <div>Vi har även fått tre nya medaljer i USCM-kampanjen, se längst ner på personalsidan för mer detaljer.</div><br/>
 
 <div class="colorfont">2004-11-04 Oskar</div>
-<div>Nu ger sig USCM iväg till Borås för att spelleda på <A HREF="http://bsk.sverok.net/">Borås Spelkonvent</A>. Vi kommer att finnas som drop-in arrangemang under hela konventet.</div><br/>
+<div>Nu ger sig USCM iväg till Borås för att spelleda på <a href="http://bsk.sverok.net/">Borås Spelkonvent</a>. Vi kommer att finnas som drop-in arrangemang under hela konventet.</div><br/>
 
 <div class="colorfont">2004-10-31 Oskar</div>
 <div>Vårt nya regelhäfte är färdigskrivet, det blir traditionsenligt cocktailparty med uppträdande av UA Marine Corps Band i Tottes aula!.</div><br/>
 
 <div class="colorfont">2004-10-28 Oskar</div>
-<div>Nu har <A HREF="cc2.pdf" TARGET="_blank">Nr #2</A> av vår kampanjtidning The Colonial Correspondent kommit ut. Vi hälsar även en ny USCM-pluton välkommen till 4:e brigaden. Det är Markhams Daring Dozens som nyligen har spelat sitt första uppdrag i Kalmar.</div><br/>
+<div>Nu har <a href="cc2.pdf" target="_blank">Nr #2</a> av vår kampanjtidning The Colonial Correspondent kommit ut. Vi hälsar även en ny USCM-pluton välkommen till 4:e brigaden. Det är Markhams Daring Dozens som nyligen har spelat sitt första uppdrag i Kalmar.</div><br/>
 
 <div class="colorfont">2004-10-27 Oskar</div>
-<div>M79 spelades under dagen och debriefingen ligger uppe nu. Glöm inte att anmäla er till <A HREF="http://bsk.sverok.net/">BSK</A> och passa på att spela USCM när ni är där.</div><br/>
+<div>M79 spelades under dagen och debriefingen ligger uppe nu. Glöm inte att anmäla er till <a href="http://bsk.sverok.net/">BSK</a> och passa på att spela USCM när ni är där.</div><br/>
 
 <div class="colorfont">2004-10-19 Oskar</div>
 <div>Debriefingar för M77 och M78 är upplagda. Plutonen har nu även för första gången fått 4st sergeanter.</div><br/>
@@ -57,7 +57,7 @@ foreach ($listOfNews as $news) {
 <div>Debriefing från M73 är uppe och karaktärslistan uppdaterad.</div><br/>
 
 <div class="colorfont">2004-09-11 Oskar</div>
-<div>vår grannpluton i Örebro Terry's Tacklin' Tens har nu fått en egen hemsida på <A HREF="http://www.angelfire.com/art2/pipkin/">http://www.angelfire.com/art2/pipkin/</A>.</div><br/>
+<div>vår grannpluton i Örebro Terry's Tacklin' Tens har nu fått en egen hemsida på <a href="http://www.angelfire.com/art2/pipkin/">http://www.angelfire.com/art2/pipkin/</a>.</div><br/>
 
 <div class="colorfont">2004-09-10 Oskar</div>
 <div>Totte har ändrat lite på rollformuläret och fixat så att man kan fylla i värden i pdf-filen innan man skriver ut den. Det uppdaterade formuläret finns nu att ladda hem.</div><br/>
@@ -66,7 +66,7 @@ foreach ($listOfNews as $news) {
 <div>Debriefing för M70 och M71 är utlagda. M72 spelas idag och M73 som är ett specialmission med flera speltillfällen kommer spelas första gången imorgon, så det är full fart på USCM-kampanjen just nu.</div><br/>
 
 <div class="colorfont">2004-09-07 Oskar & Pontus</div>
-<div>USCM-forumet har nu flyttat till en ny adress <A HREF="http://dallandra.ath.cx/uscm/forum/">http://dallandra.ath.cx/uscm/forum/</A><br>Ni hittar det även genom länken i menyn ovanför.</div><br/>
+<div>USCM-forumet har nu flyttat till en ny adress <a href="http://dallandra.ath.cx/uscm/forum/">http://dallandra.ath.cx/uscm/forum/</a><br>Ni hittar det även genom länken i menyn ovanför.</div><br/>
 
 <div class="colorfont">2004-09-06 Oskar</div>
 <div>Version 3.12 av Karaktärsgeneratorn finns nu att ladda hem. Det finns även en ny utrustningslista i Excelformat samt en ensidesversion som Pontus har gjort för att det ska vara smidigt att skriva ut den.</div><br/>
