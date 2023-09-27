@@ -24,9 +24,10 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <?php echo $character->getGivenName(); ?> <?php echo $character->getSurname(); ?>
     <span class="span">
       <a href="index.php?url=character_more.php&character_id=<?php echo $characterId; ?>">Do you want to know more?</a>
-      <a href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a>
     </span>
   </h2>
+
+  <a href="./create_sheet.php?character_id=<?php echo $characterId; ?>">Generate character sheet</a>
 
     <?php
 	if ($user->isAdmin() || ($user->isGm() && $character->getPlatoonId() == $user->getPlatoonId())) {
@@ -37,8 +38,13 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <input type="hidden" name="player" value="<?php echo $player->getId(); ?>">
     <input type="hidden" name="character" value="<?php echo $characterId; ?>">
 
-  <div class="grid grid--1x2">
-    <h3 class="heading heading-h3"><?php echo $player->getName(); ?></h3>
+  <div class="grid grid--1x2 mt-20">
+    <div>
+      Player
+      <div>
+        <?php echo $player->getName(); ?>
+      </div>
+    </div>
     <label for="platoon">
       Platoon
       <?php
@@ -296,7 +302,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       </label>
 
       <label for="cbai">
-        AI
+        AI/Android
         <input type="checkbox" id="cbai" name="cbai" <?php echo ($character->getEncounterAI()==1) ? ('checked="1"') : (""); ?>>
       </label>
 

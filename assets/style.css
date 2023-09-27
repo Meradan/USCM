@@ -161,6 +161,10 @@ a:hover {
   display: grid;
 }
 
+label {
+  cursor: pointer;
+}
+
 .form > * {
   margin-bottom: 10px;
 }
