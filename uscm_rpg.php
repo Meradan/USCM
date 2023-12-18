@@ -68,3 +68,9 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 Campaign &amp; Content: Oskar (<a href="mailto:oskar.grindemyr@gmail.com?subject=USCM">oskar.grindemyr@gmail.com</a>)<br>
 Web Design: Totte (<a href="mailto:totte@nordstrom.ax?subject=USCM">totte@nordstrom.ax</a>)<br>
 Server & Database: Pontus (<a href="mailto:meradan+uscm@gmail.com?subject=USCM">meradan@gmail.com</a>)<br>
+
+<h3 class="heading heading-h3">
+  Bug reports
+</h3>
+
+<a href="https://github.com/Meradan/USCM/issues">GitHub Issues</a>
