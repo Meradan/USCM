@@ -90,14 +90,13 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
   </caption>
   <thead>
   <tr>
-    <th>Glory</th>
-    <th>Commendations</th>
     <th>Missions</th>
     <th>Rank</th>
     <th>Name</th>
     <th>Specialty</th>
-    <th>Player Name</th>
+    <th>Glory</th>
     <th>Status</th>
+    <th>Player</th>
   </tr>
   </thead>
   <tbody>
@@ -118,16 +117,22 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 	}
 	?>
   <tr>
-    <td><?php echo $glory;?></td>
-    <td><?php echo $medals;?></td>
     <td><?php echo $character['missions'];?></td>
     <td><?php echo $character['rank_short'];?></td>
     <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
+    <td>
+      <details class="details">
+        <summary><?php echo $glory;?></summary>
+        <?php echo $medals;?>
+      </details>
+    </td>
+    <td>
+      <?php if ($character['status'] != "Active") { echo $character['status']; } ?>
+    </td>
     <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
-    <td><?php echo $character['status'];?></td>
   </tr>
 <?php } ?>
   </tbody>
@@ -145,12 +150,10 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <th>Name</th>
     <th>Specialty</th>
     <th>Glory</th>
-    <th>Commendations</th>
-    <th>Player</th>
-    <th>Enlisted</th>
-    <th>Dead</th>
-    <th>Mission</th>
+    <th>Tour of Duty</th>
     <th>Cause of death</th>
+    <th>Mission</th>
+    <th>Player</th>
   </tr>
   </thead>
   <tbody>
@@ -165,17 +168,29 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
-    <td><?php echo $character['glory'];?></td>
-    <td><?php echo $character['medals'];?></td>
-    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
-    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
+    <td>
+      <?php if ($character['glory'] != "0") {?>
+      <details class="details">
+        <summary><?php echo $character['glory'];?></summary>
+        <?php echo $character['medals'];?>
+      </details>
+      <?php } ?>
+    </td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 //     $lastmission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid'])?>
-    <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
-    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
+    <td>
+      <span class="no-wrap">
+        * <?php echo $character['enlisted'];?>
+      </span>
+      <span class="no-wrap">
+        † <?php echo $lastMission['date'] ?? '';?>
+      </span>
+    </td>
     <td><?php echo $character['status_desc'];?></td>
+    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
+    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
   </tr>
 <?php unset($medals,$glory);
   } ?>
@@ -193,13 +208,11 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <th>Rank</th>
     <th>Name</th>
     <th>Specialty</th>
-    <th>Commendations</th>
     <th>Glory</th>
-    <th>Player</th>
-    <th>Enlisted</th>
-    <th>Retired</th>
-    <th>Mission</th>
+    <th>Tour of Duty</th>
     <th>Cause of retirement</th>
+    <th>Mission</th>
+    <th>Player</th>
   </tr>
   </thead>
   <tbody>
@@ -214,17 +227,29 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
           ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
-    <td><?php echo $character['medals'];?></td>
-    <td><?php echo $character['glory'];?></td>
-    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
-    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
+    <td>
+      <?php if ($character['glory'] != "0") {?>
+        <details class="details">
+          <summary><?php echo $character['glory'];?></summary>
+          <?php echo $character['medals'];?>
+        </details>
+      <?php } ?>
+    </td>
 <?php
 // $lastmissionsql="SELECT DATE_FORMAT(date,'%Y-%m-%d') as date,mission_name_short FROM uscm_mission_names LEFT JOIN uscm_missions as m on m.mission_id = uscm_mission_names.id WHERE character_id = '{$character['cid']}' ORDER BY date DESC LIMIT 1";
 // 		$lastMission=mysql_fetch_array(mysql_query($lastmissionsql));
     $lastMission = lastMissionForCharacter($character['cid']) ?>
-    <td class="no-wrap"><?php echo $lastMission['date'] ?? '';?></td>
-    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
+    <td>
+      <span class="no-wrap">
+        * <?php echo $character['enlisted'];?>
+      </span>
+      <span class="no-wrap">
+        † <?php echo $lastMission['date'] ?? '';?>
+      </span>
+    </td>
     <td><?php echo $character['status_desc'];?></td>
+    <td><?php echo $lastMission['mission_name_short'] ?? '';?></td>
+    <td><?php echo $character['forname'] . " " . $character['lastname'];?></td>
   </tr>
 <?php unset($medals,$glory);
   } ?>

@@ -95,10 +95,9 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <th>Missions</th>
 	  <th>Last</th>
     <th>Glory</th>
-    <th>Commendations</th>
-    <th>Player</th>
-    <th>Enlisted</th>
+    <th>Tour of Duty</th>
     <th>Status</th>
+    <th>Player</th>
   </tr>
   </thead>
   <tbody>
@@ -164,11 +163,23 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
         $glory = $glory + $commendationsArray[$key]['medal_glory'];
       }
       ?>
-    <td><?php echo ($glory != "0")?($glory):("");?></td>
-    <td><?php echo ($medals != "")?($medals):("-");?></td>
+    <td>
+      <?php if ($glory != "0") {?>
+      <details class="details">
+        <summary><?php echo $glory;?></summary>
+        <?php echo $medals;?>
+      </details>
+      <?php } ?>
+    </td>
+    <td>
+      <span class="no-wrap">
+        * <?php echo $character['enlisted'];?>
+      </span>
+    </td>
+    <td>
+      <?php if ($character['status'] != "Active") { echo $character['status']; } ?>
+    </td>
     <td><?php echo ($character['use_nickname']=="1")?(stripslashes($character['nickname'])):(stripslashes($character['playerforname']) . " " . stripslashes($character['playerlastname']));?></td>
-    <td class="no-wrap"><?php echo $character['enlisted'];?></td>
-    <td><?php echo $character['status'];?></td>
   </tr>
 <?php unset($medals,$glory);
   } ?>
@@ -186,8 +197,8 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <th>Name</th>
     <th>Specialty</th>
     <th>Missions</th>
-    <th>Commendations</th>
-    <th>Enlisted</th>
+    <th>Glory</th>
+    <th>Tour of Duty</th>
     <th>Status</th>
   </tr>
   </thead>
@@ -261,9 +272,22 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     $glory = $glory + $commendationsArray[$key]['medal_glory'];
   }
 ?>
-    <td><?php echo ($medals!="")?($medals):("-");?></td>
-    <td class="no-wrap"><?php echo $npc['enlisted'];?></td>
-    <td><?php echo $npc['status'];?></td>
+    <td>
+      <?php if ($glory!=0) {?>
+        <details class="details">
+          <summary><?php echo $glory;?></summary>
+          <?php echo $medals;?>
+        </details>
+      <?php } ?>
+    </td>
+    <td>
+      <span class="no-wrap">
+        * <?php echo $character['enlisted'];?>
+      </span>
+    </td>
+    <td>
+      <?php if ($npc['status'] != "Active") { echo $npc['status']; } ?>
+    </td>
   </tr>
 <?php
   unset($medals,$glory);
@@ -283,7 +307,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <th>Rank</th>
     <th>Name</th>
     <th>Specialty</th>
-    <th>Enlisted</th>
+    <th>Tour of Duty</th>
 	  <th>Status</th>
   </tr>
   </thead>
@@ -293,36 +317,59 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td>Lieutenant</td>
     <td>Louise Wheatly</td>
     <td>Officer</td>
-    <td class="no-wrap">2019-08-10</td>
+    <td>
+      <span class="no-wrap">
+        * 2019-08-10
+      </span>
+      <span class="no-wrap">
+        † 
+      </span>
+    </td>
     <td>KIA</td>
   </tr>
   <tr>
     <td>Lieutenant</td>
     <td>Michael Brixton</td>
     <td>Officer</td>
-    <td class="no-wrap">2000-10-14</td>
-    <td>Active</td>
+    <td>
+      <span class="no-wrap">
+        * 2000-10-14
+      </span>
+    </td>
+    <td></td>
   </tr>
   <tr>
     <td>Android</td>
     <td>Garth</td>
     <td>Synthetic</td>
-    <td class="no-wrap">2000-11-28</td>
-    <td>Active</td>
+    <td>
+      <span class="no-wrap">
+        * 2000-11-28
+      </span>
+    </td>
+    <td></td>
   </tr>
 <?php } elseif ($_GET['platoon'] == "5") {?>
   <tr>
     <td>Lieutenant</td>
     <td>Lionel Lee</td>
     <td>Officer</td>
-    <td class="no-wrap">2018-01-21</td>
+    <td>
+      <span class="no-wrap">
+        * 2018-01-21
+      </span>
+    </td>
     <td></td>
   </tr>
   <tr>
     <td>Android</td>
     <td>Ishmael</td>
     <td>Synthetic</td>
-    <td class="no-wrap">2018-01-21</td>
+    <td>
+      <span class="no-wrap">
+        * 2018-01-21
+      </span>
+    </td>
     <td></td>
   </tr>
 <?php } elseif ($_GET['platoon'] == "6") {?>
@@ -330,7 +377,11 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td>Lieutenant</td>
     <td>Drake</td>
     <td>Officer</td>
-    <td class="no-wrap">2017-10-31</td>
+    <td>
+      <span class="no-wrap">
+        * 2017-10-31
+      </span>
+    </td>
     <td></td>
   </tr>
 <?php } ?>
