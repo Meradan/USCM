@@ -73,29 +73,25 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 
     <label for="specialty">
       Specialty
-      <?php
-          $specialties = $characterController->getSpecialties();
-    ?>
-                    <select id="specialty" name="specialty">
-                    <?php foreach ($specialties as $specialty) {
+      <select id="specialty" name="specialty">
+        <?php $specialties = $characterController->getSpecialties(); ?>
+        <?php foreach ($specialties as $specialty) {
                       $specialtyId = $specialty->getId(); ?>
-                            <option <?php echo ($specialtyId == $character->getSpecialtyId()) ? ("selected") : (""); ?> value="<?php echo $specialtyId; ?>" >
+          <option <?php echo ($specialtyId == $character->getSpecialtyId()) ? ("selected") : (""); ?> value="<?php echo $specialtyId; ?>" >
                             <?php echo $specialty->getName(); ?></option>
-                        <?php } ?>
-                    </select>
+        <?php } ?>
+      </select>
     </label>
 
     <label for="rank">
       Rank (bör ej ändras om karaktären har fått befordran)
-      <?php
-                    $ranks = $rankController->getRanks();
-                    ?>
-                    <select id="rank" name="rank">
-    <?php foreach ($ranks as $rank) { ?>
-                            <option <?php echo ($rank->getId() == $character->getRankId()) ? ("selected") : (""); ?> value="<?php echo $rank->getId(); ?>" >
+      <select id="rank" name="rank">
+        <?php $ranks = $rankController->getRanks(); ?>
+        <?php foreach ($ranks as $rank) { ?>
+          <option <?php echo ($rank->getId() == $character->getRankId()) ? ("selected") : (""); ?> value="<?php echo $rank->getId(); ?>" >
         <?php echo $rank->getName(); ?></option>
-    <?php } ?>
-                    </select>
+        <?php } ?>
+      </select>
     </label>
 
     <label for="enlisted">

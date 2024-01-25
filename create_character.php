@@ -48,6 +48,7 @@ if ($user->isAdmin() || $user->isGm()) { ?>
     <label for="specialty">
       Specialty
       <select id="specialty" name="specialty">
+        <?php $specialties = $characterController->getSpecialties(); ?>
         <?php foreach ($specialties as $specialty) { ?>
           <option value="<?php echo $specialty->getId();?>"><?php echo $specialty->getName(); ?></option>
         <?php } ?>
@@ -56,9 +57,8 @@ if ($user->isAdmin() || $user->isGm()) { ?>
 
     <label for="rank">
       Rank
-      <?php
-      $ranks = $rankController->getRanks(); ?>
       <select id="rank" name="rank">
+        <?php $ranks = $rankController->getRanks(); ?>
         <?php foreach ($ranks as $rank) { ?>
           <option <?php echo ($rank->getId()=="1")?("selected"):("");?> value="<?php echo $rank->getId();?>" >
             <?php echo $rank->getName(); ?></option>
