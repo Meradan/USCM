@@ -118,7 +118,6 @@ Class CharacterController {
     return $characters;
   }
 
-
     /**
    *
    * @return Character[]
@@ -130,6 +129,27 @@ Class CharacterController {
               WHERE c.status!='Dead' AND c.status!='Retired'
               ORDER BY c.lastname,c.forname";
     $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $character = $this->getCharacter($row['id']);
+      $characters[] = $character;
+    }
+    return $characters;
+  }
+  
+    /**
+   *
+   * @param Mission $mission
+   * @return Character[]
+   */
+  public function getAvailableCharactersForMission($mission) {
+    $characters = array();
+    $sql = "SELECT c.id
+              FROM uscm_characters c LEFT JOIN uscm_missions m ON c.id=m.character_id AND m.mission_id=:missionId
+              WHERE m.mission_id=:missionId OR (c.status!='Dead' AND c.status!='Retired')
+              ORDER BY c.lastname,c.forname;";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
     $stmt->execute();
     while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
       $character = $this->getCharacter($row['id']);

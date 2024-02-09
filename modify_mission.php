@@ -108,7 +108,7 @@ if ($admin || $gm) {
           Characters
 
           <select id="characters" name="characters[]" size="24" multiple><?php
-                            $characters = $characterController->getActiveCharacters();
+                            $characters = $characterController->getAvailableCharactersForMission($mission);
                             $withOnMission = $characterController->getCharacterIdsOnMission($mission);
                             foreach ($characters as $character) {
                               ?>
