@@ -19,7 +19,7 @@ class CharacterGenerator:
         self._serial_properties.update(
             self._serialize_properties(self._current_character["Character"])
         )
-
+        self._version = 0.1
         self._text_input_width = 200
 
         self._platoon_alternatives = self._current_character["Config"]["platoons"]
@@ -33,13 +33,35 @@ class CharacterGenerator:
         self._section_title_color = [150, 250, 150]
 
         self._stats = {
-            "Carry Capacity": {"value": 55},
-            "Combat Load": {"value": 25},
-            "Psycho Limit": {"value": 4},
-            "Stress Limit": {"value": 4},
-            "Stunt Cap": {"value": 2},
-            "Leadership Points": {"value": 1},
-            "Health": {"value": 2},
+            "Carry Capacity": {
+                "value": 55,
+                "tooltip": "Affected by Strength and various Traits.",
+            },
+            "Combat Load": {
+                "value": 25,
+                "tooltip": "Affected by Strength and various Traits.",
+            },
+            "Psycho Limit": {
+                "value": 4,
+                "tooltip": "Affected by Psyche and various Traits.",
+            },
+            "Stress Limit": {
+                "value": 4,
+                "tooltip": "Affected by Psyche and various Traits.",
+            },
+            "Stunt Cap": {"value": 2, "tooltip": "Affected by Charisma"},
+            "Leadership Points": {
+                "value": 1,
+                "tooltip": "Affected by Charisma and various Traits",
+            },
+            "Health": {
+                "value": 2,
+                "tooltip": "Affected by Endurance and various Traits.",
+            },
+            "Psycho Points": {
+                "value": 0,
+                "tooltip": "Earned when playing and can be reduced by buying psychotic disadvantages.",
+            },
             "Attribute Points": {
                 "value": self._get_base_attribute_points()
                 - self._get_total_attribute_cost()
@@ -47,7 +69,6 @@ class CharacterGenerator:
             "Experience Points": {
                 "value": self._get_base_experience_points() - self._get_total_xp_usage()
             },
-            "Psycho Points": {"value": 0},
         }
 
         self._serial_properties.update(self._serialize_properties(self._stats))
@@ -765,10 +786,14 @@ class CharacterGenerator:
                     dpg.add_table_column()
                     for stat_label, stat_value in self._stats.items():
                         with dpg.table_row():
-                            dpg.add_text(stat_label)
+                            dpg.add_text(stat_label, tag="tooltip_" + stat_label)
                             dpg.add_text(
-                                tag=stat_label, default_value=stat_value["value"]
+                                tag=stat_label,
+                                default_value=stat_value["value"],
                             )
+                            if "tooltip" in stat_value:
+                                with dpg.tooltip("tooltip_" + stat_label):
+                                    dpg.add_text(stat_value["tooltip"])
 
             with dpg.group(width=300):
                 dpg.add_spacer(height=50)
@@ -789,7 +814,7 @@ class CharacterGenerator:
             """
 
         with dpg.window(
-            width=900,
+            width=1000,
             height=1000,
             pos=[301, 0],
             no_move=True,
@@ -834,7 +859,7 @@ class CharacterGenerator:
         with dpg.window(
             width=300,
             height=1000,
-            pos=[1202, 0],
+            pos=[1302, 0],
             no_move=True,
             no_close=True,
             no_collapse=True,

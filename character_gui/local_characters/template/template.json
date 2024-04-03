@@ -352,10 +352,35 @@
                         "value": 0,
                         "min": 0,
                         "max": 5
+                    },
+                    "Cooking": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
+                    "Gambling": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
+                    "Streetwise": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
                     }
                 },
                 "Expert Skills": {
+                    "Commerce": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
                     "Engineering": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
+                    "Farming": {
                         "value": 0,
                         "min": 0,
                         "max": 5
@@ -365,7 +390,22 @@
                         "min": 0,
                         "max": 5
                     },
+                    "Mining": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
                     "Science": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
+                    "Survey": {
+                        "value": 0,
+                        "min": 0,
+                        "max": 5
+                    },
+                    "Terraforming": {
                         "value": 0,
                         "min": 0,
                         "max": 5
@@ -386,18 +426,14 @@
                             }
                         }
                     },
+                    "Beer Smuggler": {
+                        "value": 0,
+                        "cost": 0
+                    },
                     "Bloodthirst": {
                         "value": 0,
                         "cost": 0,
                         "requirements": {
-                            "Domesticated": {
-                                "type": "==",
-                                "value": 0
-                            },
-                            "Religious": {
-                                "type": "==",
-                                "value": 0
-                            },
                             "Live long and prosper": {
                                 "type": "==",
                                 "value": 0
@@ -420,40 +456,7 @@
                         "value": 0,
                         "cost": 0
                     },
-                    "Criminal": {
-                        "value": 0,
-                        "cost": 0,
-                        "bonus": [
-                            {
-                                "target": "Charisma",
-                                "type": "conditional",
-                                "value": 1
-                            }
-                        ]
-                    },
-                    "Domesticated": {
-                        "value": 0,
-                        "cost": 0,
-                        "requirements": {
-                            "Charisma": {
-                                "type": ">=",
-                                "value": 4
-                            }
-                        },
-                        "bonus": [
-                            {
-                                "target": "Charisma",
-                                "type": "conditional",
-                                "value": 1
-                            },
-                            {
-                                "target": "Charisma",
-                                "type": "conditional",
-                                "value": -1
-                            }
-                        ]
-                    },
-                    "Dr. Gamble": {
+                    "Convict": {
                         "value": 0,
                         "cost": 0
                     },
@@ -462,6 +465,10 @@
                         "cost": 0
                     },
                     "Hamster": {
+                        "value": 0,
+                        "cost": 0
+                    },
+                    "Jarhead": {
                         "value": 0,
                         "cost": 0
                     },
@@ -519,7 +526,11 @@
                             }
                         }
                     },
-                    "Religious": {
+                    "Reckless Driver": {
+                        "value": 0,
+                        "cost": 0
+                    },
+                    "Reckless Pilot": {
                         "value": 0,
                         "cost": 0
                     },
@@ -591,6 +602,14 @@
                         "value": 0,
                         "cost": 2
                     },
+                    "Amphibious": {
+                        "value": 0,
+                        "cost": 2
+                    },
+                    "Arctic Fox": {
+                        "value": 0,
+                        "cost": 2
+                    },
                     "Authority": {
                         "value": 0,
                         "cost": 4
@@ -635,6 +654,10 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Dapper Sapper": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Die bastards!": {
                         "value": 0,
                         "cost": 2
@@ -647,7 +670,19 @@
                         "value": 0,
                         "cost": 2
                     },
-                    "Efficient Packing ": {
+                    "Drill Instructor": {
+                        "value": 0,
+                        "cost": 2
+                    },
+                    "Efficient Packing": {
+                        "value": 0,
+                        "cost": 2
+                    },
+                    "Escape Artist": {
+                        "value": 0,
+                        "cost": 5
+                    },
+                    "Eye of the Tiger": {
                         "value": 0,
                         "cost": 2
                     },
@@ -659,6 +694,10 @@
                         "value": 0,
                         "cost": 5
                     },
+                    "Get to the choppa": {
+                        "value": 0,
+                        "cost": 2
+                    },
                     "Gun Nut": {
                         "value": 0,
                         "cost": 2
@@ -666,7 +705,9 @@
                     "Hardened Veteran": {
                         "value": 0,
                         "cost": 4
-                    },
+                    }
+                },
+                "  ": {
                     "HEMA Fighter": {
                         "value": 0,
                         "cost": 3
@@ -677,9 +718,9 @@
                     },
                     "Instructor": {
                         "value": 0,
-                        "cost": 1
+                        "cost": 2
                     },
-                    "Iron-fist  ": {
+                    "Iron-fist": {
                         "value": 0,
                         "cost": 2
                     },
@@ -693,7 +734,7 @@
                     },
                     "Kendoka": {
                         "value": 0,
-                        "cost": 1
+                        "cost": 2
                     },
                     "Language": {
                         "value": 0,
@@ -713,10 +754,8 @@
                     },
                     "Lucky Bastard": {
                         "value": 0,
-                        "cost": 4
-                    }
-                },
-                "  ": {
+                        "cost": 5
+                    },
                     "Machete": {
                         "value": 0,
                         "cost": 3
@@ -733,6 +772,10 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Mountaineer": {
+                        "value": 0,
+                        "cost": 2
+                    },
                     "Mule": {
                         "value": 0,
                         "cost": 3
@@ -740,6 +783,14 @@
                     "Natural Leader": {
                         "value": 0,
                         "cost": 2
+                    },
+                    "Neon Tan": {
+                        "value": 0,
+                        "cost": 2
+                    },
+                    "Ninja": {
+                        "value": 0,
+                        "cost": 5
                     },
                     "Nintendo Kid": {
                         "value": 0,
@@ -753,13 +804,9 @@
                         "value": 0,
                         "cost": 1
                     },
-                    "Ranger Roll ": {
-                        "value": 0,
-                        "cost": 1
-                    },
                     "Rise and shine ": {
                         "value": 0,
-                        "cost": 1
+                        "cost": 2
                     },
                     "Scarred Veteran": {
                         "value": 0,
@@ -773,15 +820,25 @@
                         "value": 0,
                         "cost": 3
                     },
-                    "Scaling": {
-                        "value": 0,
-                        "cost": 5
-                    },
                     "Shake n' Bake Colonist ": {
                         "value": 0,
                         "cost": 3
-                    },
+                    }
+                },
+                "   ": {
                     "Shellback": {
+                        "value": 0,
+                        "cost": 2
+                    },
+                    "Smuggler Tricks": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Snake-eater": {
+                        "value": 0,
+                        "cost": 1
+                    },
+                    "Spacer": {
                         "value": 0,
                         "cost": 2
                     },
@@ -801,7 +858,7 @@
                         "value": 0,
                         "cost": 2
                     },
-                    "Streetwise": {
+                    "Swamp Rat": {
                         "value": 0,
                         "cost": 2
                     },
@@ -841,15 +898,31 @@
                         "value": 0,
                         "cost": -4
                     },
+                    "All out of bubble gum": {
+                        "value": 0,
+                        "cost": -3
+                    },
+                    "Apricot Eater": {
+                        "value": 0,
+                        "cost": -2
+                    },
                     "Bad aura": {
                         "value": 0,
                         "cost": -2
+                    },
+                    "Bad Hygiene": {
+                        "value": 0,
+                        "cost": -1
                     },
                     "Blabbermouth": {
                         "value": 0,
                         "cost": -1
                     },
                     "Canary": {
+                        "value": 0,
+                        "cost": -1
+                    },
+                    "Combat Shakes": {
                         "value": 0,
                         "cost": -1
                     },
@@ -882,6 +955,10 @@
                         "cost": -2
                     },
                     "Heart Issue": {
+                        "value": 0,
+                        "cost": -2
+                    },
+                    "I'm gonna die!!!": {
                         "value": 0,
                         "cost": -2
                     },
@@ -932,7 +1009,9 @@
                     "Rival": {
                         "value": 0,
                         "cost": -1
-                    },
+                    }
+                },
+                "  ": {
                     "Scapegoat": {
                         "value": 0,
                         "cost": -2
@@ -955,7 +1034,7 @@
                     },
                     "Whisper-voiced": {
                         "value": 0,
-                        "cost": -1
+                        "cost": -3
                     }
                 }
             },
@@ -967,21 +1046,33 @@
                     },
                     "Alcoholic": {
                         "value": 0,
-                        "cost": 1
+                        "cost": 2
                     },
                     "Anger issues": {
                         "value": 0,
                         "cost": 1
                     },
+                    "Confusion": {
+                        "value": 0,
+                        "cost": 2
+                    },
                     "Flashbacks": {
                         "value": 0,
                         "cost": 1
+                    },
+                    "Freezes": {
+                        "value": 0,
+                        "cost": 2
                     },
                     "Killer": {
                         "value": 0,
                         "cost": 3
                     },
                     "Loner": {
+                        "value": 0,
+                        "cost": 1
+                    },
+                    "Lunatic": {
                         "value": 0,
                         "cost": 1
                     },
@@ -1081,7 +1172,7 @@
                     },
                     "PUPS 15": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 15
                     }
                 },
                 "Land Vehicles": {
@@ -1099,7 +1190,7 @@
                     },
                     "Hoverbike": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 4
                     },
                     "Tractor": {
                         "value": 0,
@@ -1109,17 +1200,13 @@
                         "value": 0,
                         "cost": 3
                     },
-                    "M577 APC": {
-                        "value": 0,
-                        "cost": 8
-                    },
-                    "M579 APC": {
+                    "M57 APC": {
                         "value": 0,
                         "cost": 8
                     },
                     "M572 APC": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 6
                     },
                     "M292 Artillery": {
                         "value": 0,
@@ -1192,7 +1279,7 @@
                 }
             },
             "Weapons": {
-                "Hand Held Weapons": {
+                "US military small arms": {
                     "M41 Pulse Rifle": {
                         "value": 0,
                         "cost": 5
@@ -1207,7 +1294,7 @@
                     },
                     "M42 Sniper Rifle": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 10
                     },
                     "M240 Flamer": {
                         "value": 0,
@@ -1215,12 +1302,18 @@
                     },
                     "M56 Smartgun": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 10
+                    },
+                    "Harrington AR": {
+                        "value": 0,
+                        "cost": 3
                     },
                     "Morita I AR": {
                         "value": 0,
                         "cost": 3
-                    },
+                    }
+                },
+                "Generic": {
                     "Pistol": {
                         "value": 0,
                         "cost": 2
@@ -1245,6 +1338,16 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Mortar": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Artillery": {
+                        "value": 0,
+                        "cost": 5
+                    }
+                },
+                "Other military small arms": {
                     "SK813 PR": {
                         "value": 0,
                         "cost": 5
@@ -1262,7 +1365,7 @@
                         "cost": 3
                     }
                 },
-                "Mounted Weapons": {
+                "Fixed/Mounted Weapons": {
                     "HMG": {
                         "value": 0,
                         "cost": 3
@@ -1293,14 +1396,6 @@
                     }
                 },
                 "Support Weapons": {
-                    "Mortar": {
-                        "value": 0,
-                        "cost": 3
-                    },
-                    "Artillery": {
-                        "value": 0,
-                        "cost": 5
-                    },
                     "M112 HIMAT": {
                         "value": 0,
                         "cost": 5
@@ -1427,9 +1522,21 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Electricity": {
+                        "value": 0,
+                        "cost": 15
+                    },
+                    "Engineering machinery": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "EOD": {
                         "value": 0,
                         "cost": 5
+                    },
+                    "Hotwiring": {
+                        "value": 0,
+                        "cost": 3
                     },
                     "Hull breaching": {
                         "value": 0,
@@ -1457,7 +1564,7 @@
                     },
                     "Weaponsmith": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 6
                     }
                 },
                 "Military Training": {
@@ -1489,13 +1596,21 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "HALO": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Interrogation": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Military Law": {
                         "value": 0,
                         "cost": 8
                     },
-                    "Interrogation": {
+                    "Parachute wings": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 2
                     },
                     "Starship Identification": {
                         "value": 0,
@@ -1506,7 +1621,11 @@
                         "cost": 3
                     }
                 },
-                "Sensors & technical": {
+                "Sensors & IT": {
+                    "IR": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Lidar": {
                         "value": 0,
                         "cost": 5
@@ -1549,7 +1668,7 @@
                     },
                     "Tightbeam": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 4
                     },
                     "Interface 2037": {
                         "value": 0,
@@ -1563,6 +1682,14 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Hacking": {
+                        "value": 0,
+                        "cost": 8
+                    },
+                    "Programming": {
+                        "value": 0,
+                        "cost": 8
+                    },
                     "Forensics": {
                         "value": 0,
                         "cost": 3
@@ -1570,7 +1697,9 @@
                     "Laboratory equipment": {
                         "value": 0,
                         "cost": 3
-                    },
+                    }
+                },
+                "  ": {
                     "Meteorology": {
                         "value": 0,
                         "cost": 3
@@ -1585,13 +1714,17 @@
                         "value": 0,
                         "cost": 3
                     },
+                    "Evasion": {
+                        "value": 0,
+                        "cost": 5
+                    },
                     "Fishing": {
                         "value": 0,
                         "cost": 3
                     },
                     "Herbalism": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 5
                     },
                     "Herding": {
                         "value": 0,
@@ -1665,10 +1798,6 @@
                         "value": 0,
                         "cost": 5
                     },
-                    "Field Surgery": {
-                        "value": 0,
-                        "cost": 8
-                    },
                     "Hot climate": {
                         "value": 0,
                         "cost": 5
@@ -1679,17 +1808,29 @@
                     },
                     "IV": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 3
+                    },
+                    "Surgery": {
+                        "value": 0,
+                        "cost": 8
                     },
                     "Toxicology": {
                         "value": 0,
                         "cost": 5
+                    },
+                    "Veterinary": {
+                        "value": 0,
+                        "cost": 8
                     }
                 },
                 "Other": {
                     "Powerloader": {
                         "value": 0,
                         "cost": 4
+                    },
+                    "Card Cheating": {
+                        "value": 0,
+                        "cost": 3
                     },
                     "Crane": {
                         "value": 0,
@@ -1703,9 +1844,25 @@
                         "value": 0,
                         "cost": 3
                     },
-                    "HALO": {
+                    "Parkour": {
                         "value": 0,
                         "cost": 3
+                    },
+                    "Party Tricks": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Pickpocketing": {
+                        "value": 0,
+                        "cost": 5
+                    },
+                    "Rope Work": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Scaling": {
+                        "value": 0,
+                        "cost": 5
                     }
                 }
             }
