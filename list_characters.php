@@ -282,7 +282,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     </td>
     <td>
       <span class="no-wrap">
-        * <?php echo $character['enlisted'];?>
+        * <?php echo $npc['enlisted'];?>
       </span>
     </td>
     <td>
