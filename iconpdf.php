@@ -32,9 +32,7 @@
  *
  ***********************************************************************/
 
-
-@include_once( 'tcpdf/config/lang/eng.php');
-@include_once( 'tcpdf/tcpdf.php');
+@include_once('vendor/tecnickcom/tcpdf/tcpdf.php');
 
 if ( !function_exists( "PDF_new" ) ) { // only create subclass if PDFLib not installed
     class IconPDF extends TCPDF {
@@ -50,8 +48,6 @@ if ( !function_exists( "PDF_new" ) ) { // only create subclass if PDFLib not ins
 
         function __construct() {
             parent::__construct( "p","pt","letter",true, true );
-            // this has to be done to remove the default cell margin
-            $this->cMargin = 0;
             $this->setViewerPreferences( array( "PrintScaling"=>"None" ) );
         }
 
