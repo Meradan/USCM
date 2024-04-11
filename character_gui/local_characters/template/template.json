@@ -297,7 +297,8 @@
                     "Starship Bridge": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "navy"
                     }
                 },
                 "Military Skills": {
@@ -351,12 +352,14 @@
                     "Colonist": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Cooking": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Gambling": {
                         "value": 0,
@@ -373,17 +376,20 @@
                     "Commerce": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Engineering": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Farming": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Medical": {
                         "value": 0,
@@ -393,7 +399,8 @@
                     "Mining": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Science": {
                         "value": 0,
@@ -403,12 +410,14 @@
                     "Survey": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     },
                     "Terraforming": {
                         "value": 0,
                         "min": 0,
-                        "max": 5
+                        "max": 5,
+                        "extended": "colonist"
                     }
                 }
             }
@@ -1152,7 +1161,8 @@
                     },
                     "Cargo Platform": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "colonist"
                     },
                     "COTS Drone": {
                         "value": 0,
@@ -1194,7 +1204,8 @@
                     },
                     "Tractor": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Truck": {
                         "value": 0,
@@ -1220,7 +1231,8 @@
                     },
                     "Kayak": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 2,
+                        "extended": "colonist"
                     },
                     "Motorboat": {
                         "value": 0,
@@ -1228,53 +1240,65 @@
                     },
                     "Sailing": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "colonist"
                     }
                 },
                 "Starship": {
                     "Freighter": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Colony Ship": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Salvage Vessel": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Survey Ship": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Tanker": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Conestoga Frigate": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Bougainville Attack Transport": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Tientsin Assault Ship": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Valley Forge Class": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Henderson Field Transport": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Okinawa Assault Carrier": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     }
                 }
             },
@@ -1306,11 +1330,13 @@
                     },
                     "Harrington AR": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "military"
                     },
                     "Morita I AR": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "military"
                     }
                 },
                 "Generic": {
@@ -1324,7 +1350,8 @@
                     },
                     "Deer Rifle": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Hand Grenade": {
                         "value": 0,
@@ -1350,19 +1377,23 @@
                 "Other military small arms": {
                     "SK813 PR": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "military"
                     },
                     "NSG23 AR": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "military"
                     },
                     "Weyland Storm Rifle": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "military"
                     },
                     "X-9 AR": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "military"
                     }
                 },
                 "Fixed/Mounted Weapons": {
@@ -1432,7 +1463,8 @@
                     },
                     "ASAT": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "navy"
                     },
                     "ASM": {
                         "value": 0,
@@ -1516,19 +1548,23 @@
                     },
                     "Carpentry": {
                         "value": 0,
-                        "cost": 4
+                        "cost": 4,
+                        "extended": "colonist"
                     },
                     "Chainsaw": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Electricity": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "colonist"
                     },
                     "Engineering machinery": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "EOD": {
                         "value": 0,
@@ -1614,7 +1650,8 @@
                     },
                     "Starship Identification": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "navy"
                     },
                     "Vehicle Identification": {
                         "value": 0,
@@ -1648,7 +1685,8 @@
                     },
                     "FTL Communication": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "navy"
                     },
                     "Morse": {
                         "value": 0,
@@ -1668,7 +1706,8 @@
                     },
                     "Tightbeam": {
                         "value": 0,
-                        "cost": 4
+                        "cost": 4,
+                        "extended": "navy"
                     },
                     "Interface 2037": {
                         "value": 0,
@@ -1680,7 +1719,8 @@
                     },
                     "USN Interface": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "navy"
                     },
                     "Hacking": {
                         "value": 0,
@@ -1702,17 +1742,20 @@
                 "  ": {
                     "Meteorology": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Oceanography": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     }
                 },
                 "Nature & Animals": {
                     "Bushcrafting": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Evasion": {
                         "value": 0,
@@ -1720,15 +1763,18 @@
                     },
                     "Fishing": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Herbalism": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "colonist"
                     },
                     "Herding": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "colonist"
                     },
                     "Hunting": {
                         "value": 0,
@@ -1766,7 +1812,8 @@
                     },
                     "Interstellar": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 15,
+                        "extended": "navy"
                     },
                     "Oceanic": {
                         "value": 0,

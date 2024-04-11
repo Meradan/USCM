@@ -5,12 +5,14 @@ from reportlab.pdfgen import canvas
 
 import glob
 import os
+import sys
+import subprocess
 
 
 class CharacterGenerator:
-    def __init__(self, character, create_mode) -> None:
+    def __init__(self, character, create_mode, extend_character) -> None:
         self._imported_character = character
-
+        self._extend_character = extend_character
         self._current_character = deepcopy(self._imported_character)
 
         self._serial_properties = self._serialize_properties(
@@ -30,6 +32,7 @@ class CharacterGenerator:
         self._rank_alternatives = self._current_character["Config"]["Rank Labels"]
 
         self._create_mode = create_mode
+
         self._section_title_color = [150, 250, 150]
 
         self._stats = {
@@ -474,7 +477,13 @@ class CharacterGenerator:
         ctp = CharacterToPdf(self._current_character, self._stats, file_path)
         ctp.write_pdf()
         print(f"Created: {file_path}")
-        os.startfile(file_path, "open")
+
+        if sys.platform == "win32":
+            os.startfile(file_path, "open")
+        elif sys.platform == "darwin":
+            subprocess.call(["open", file_path])
+        else:
+            subprocess.call(["xdg-open", file_path])
 
     @staticmethod
     def _split_dict(source, num_per_part, max_row_count=24):
@@ -648,53 +657,60 @@ class CharacterGenerator:
                     for category_key, category_value in part.items():
                         with dpg.group(width=300):
                             dpg.add_text(category_key, color=self._section_title_color)
-                            for property_key, propery_value in category_value.items():
-                                with dpg.group(horizontal=True):
-                                    with dpg.table(
-                                        header_row=False,
-                                        row_background=False,
-                                        no_host_extendX=True,
-                                    ):
-                                        dpg.add_table_column(
-                                            width_fixed=True, init_width_or_weight=20
-                                        )
-                                        dpg.add_table_column(
-                                            width_fixed=True,
-                                            init_width_or_weight=label_width,
-                                        )
-                                        if show_cost and "cost" in propery_value:
+                            for property_key, property_value in category_value.items():
+                                if (
+                                    "extended" not in property_value
+                                    or self._extend_character[
+                                        property_value["extended"]
+                                    ]
+                                ):
+                                    with dpg.group(horizontal=True):
+                                        with dpg.table(
+                                            header_row=False,
+                                            row_background=False,
+                                            no_host_extendX=True,
+                                        ):
                                             dpg.add_table_column(
                                                 width_fixed=True,
-                                                init_width_or_weight=cost_width,
+                                                init_width_or_weight=20,
                                             )
-                                            cost = propery_value["cost"]
-                                        else:
-                                            cost = None
-                                        with dpg.table_row():
-                                            item_id = dpg.add_checkbox(
-                                                tag=property_key,
-                                                user_data={
-                                                    "section": section,
-                                                    "tab_label": tab_label,
-                                                    "sub_tab_label": sub_tab_label,
-                                                    "category": category_key,
-                                                    "label": property_key,
-                                                },
-                                                indent=5,
-                                                callback=callback,
-                                                default_value=bool(
-                                                    propery_value["value"]
-                                                ),
-                                                enabled=self._is_check_box_change_allowed(
-                                                    propery_value
-                                                ),
+                                            dpg.add_table_column(
+                                                width_fixed=True,
+                                                init_width_or_weight=label_width,
                                             )
-                                            item_refs[property_key] = item_id
-                                            dpg.add_text(property_key)
-                                            if show_cost:
-                                                dpg.add_text(
-                                                    f"({propery_value['cost']})"
+                                            if show_cost and "cost" in property_value:
+                                                dpg.add_table_column(
+                                                    width_fixed=True,
+                                                    init_width_or_weight=cost_width,
                                                 )
+                                                cost = property_value["cost"]
+                                            else:
+                                                cost = None
+                                            with dpg.table_row():
+                                                item_id = dpg.add_checkbox(
+                                                    tag=property_key,
+                                                    user_data={
+                                                        "section": section,
+                                                        "tab_label": tab_label,
+                                                        "sub_tab_label": sub_tab_label,
+                                                        "category": category_key,
+                                                        "label": property_key,
+                                                    },
+                                                    indent=5,
+                                                    callback=callback,
+                                                    default_value=bool(
+                                                        property_value["value"]
+                                                    ),
+                                                    enabled=self._is_check_box_change_allowed(
+                                                        property_value
+                                                    ),
+                                                )
+                                                item_refs[property_key] = item_id
+                                                dpg.add_text(property_key)
+                                                if show_cost:
+                                                    dpg.add_text(
+                                                        f"({property_value['cost']})"
+                                                    )
         return item_refs
 
     def _add_slider_input(
@@ -719,46 +735,56 @@ class CharacterGenerator:
                         with dpg.group(width=300):
                             dpg.add_text(category_key, color=self._section_title_color)
                             for property_key, property_value in category_value.items():
-                                with dpg.table(
-                                    header_row=False,
-                                    row_background=False,
-                                    no_host_extendX=True,
+                                if (
+                                    "extended" not in property_value
+                                    or self._extend_character[
+                                        property_value["extended"]
+                                    ]
                                 ):
-                                    dpg.add_table_column(
-                                        width_fixed=True,
-                                        init_width_or_weight=label_width,
-                                    )
-                                    dpg.add_table_column(
-                                        width_fixed=True, init_width_or_weight=100
-                                    )
-                                    with dpg.table_row():
-                                        dpg.add_text(
-                                            property_key,
-                                            tag="tooltip_" + property_key,
-                                            indent=5,
+                                    with dpg.table(
+                                        header_row=False,
+                                        row_background=False,
+                                        no_host_extendX=True,
+                                    ):
+                                        dpg.add_table_column(
+                                            width_fixed=True,
+                                            init_width_or_weight=label_width,
                                         )
-                                        item_id = dpg.add_slider_int(
-                                            tag=property_key,
-                                            default_value=property_value["value"],
-                                            min_value=self._get_allowed_min_value(
-                                                property_value,
-                                            ),
-                                            max_value=property_value["max"],
-                                            width=50,
-                                            user_data={
-                                                "section": section,
-                                                "tab_label": tab_label,
-                                                "sub_tab_label": sub_tab_label,
-                                                "category": category_key,
-                                                "label": property_key,
-                                            },
-                                            callback=callback,
+                                        dpg.add_table_column(
+                                            width_fixed=True, init_width_or_weight=100
                                         )
-                                        item_refs[property_key] = item_id
+                                        with dpg.table_row():
+                                            dpg.add_text(
+                                                property_key,
+                                                tag="tooltip_" + property_key,
+                                                indent=5,
+                                            )
+                                            item_id = dpg.add_slider_int(
+                                                tag=property_key,
+                                                default_value=property_value["value"],
+                                                min_value=self._get_allowed_min_value(
+                                                    property_value,
+                                                ),
+                                                max_value=property_value["max"],
+                                                width=50,
+                                                user_data={
+                                                    "section": section,
+                                                    "tab_label": tab_label,
+                                                    "sub_tab_label": sub_tab_label,
+                                                    "category": category_key,
+                                                    "label": property_key,
+                                                },
+                                                callback=callback,
+                                            )
+                                            item_refs[property_key] = item_id
 
-                                        if "tooltip" in property_value:
-                                            with dpg.tooltip("tooltip_" + property_key):
-                                                dpg.add_text(property_value["tooltip"])
+                                            if "tooltip" in property_value:
+                                                with dpg.tooltip(
+                                                    "tooltip_" + property_key
+                                                ):
+                                                    dpg.add_text(
+                                                        property_value["tooltip"]
+                                                    )
         return item_refs
 
     def main(self):
@@ -901,6 +927,8 @@ class CharacterSelector:
         """
         self._create_mode = False
 
+        self._extend_character = {"military": True, "navy": True, "colonist": True}
+
         self._characters_files = glob.glob("local_characters/*.json")
         for file in self._characters_files:
             path, file = os.path.split(file)
@@ -915,7 +943,7 @@ class CharacterSelector:
             self._selected_character_file = None
 
         # ci = CharacterImport.from_json(self._selected_character_file)
-        # cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
+        # cg = CharacterGenerator(character=ci.get_character(), create_mode=True, extend_character=self._extend_character)
         # cg.main()
 
     def _character_list_callback(self, sender, app_data):
@@ -934,7 +962,9 @@ class CharacterSelector:
 
         ci = CharacterImport.from_json(self._selected_character_file)
         cg = CharacterGenerator(
-            character=ci.get_character(), create_mode=self._create_mode
+            character=ci.get_character(),
+            create_mode=self._create_mode,
+            extend_character=self._extend_character,
         )
         cg.main()
 
@@ -951,8 +981,22 @@ class CharacterSelector:
         self._selected_character_file = r"local_characters/template/template.json"
 
         ci = CharacterImport.from_json(self._selected_character_file)
-        cg = CharacterGenerator(character=ci.get_character(), create_mode=True)
+
+        cg = CharacterGenerator(
+            character=ci.get_character(),
+            create_mode=True,
+            extend_character=self._extend_character,
+        )
         cg.main()
+
+    def _extend_with_military_callback(self, sender, app_data):
+        self._extend_character["military"] = app_data
+
+    def _extend_with_navy_callback(self, sender, app_data):
+        self._extend_character["navy"] = app_data
+
+    def _extend_with_colonist_callback(self, sender, app_data):
+        self._extend_character["colonist"] = app_data
 
     def _connect_button_callback(self, sender, app_data):
         self._add_character_selection()
@@ -983,6 +1027,23 @@ class CharacterSelector:
             )
             dpg.add_checkbox(label="Admin Mode", callback=self._admin_button_callback)
             dpg.add_button(label="Edit Character", callback=self._edit_button_callback)
+
+            dpg.add_text("Extend character:")
+            dpg.add_checkbox(
+                label="Other Military",
+                default_value=self._extend_character["military"],
+                callback=self._extend_with_military_callback,
+            )
+            dpg.add_checkbox(
+                label="Space Navy",
+                default_value=self._extend_character["navy"],
+                callback=self._extend_with_navy_callback,
+            )
+            dpg.add_checkbox(
+                label="Colonist",
+                default_value=self._extend_character["colonist"],
+                callback=self._extend_with_colonist_callback,
+            )
 
     def main(self):
         """
