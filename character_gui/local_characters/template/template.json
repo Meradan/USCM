@@ -180,12 +180,12 @@
                         "max": 5
                     },
                     "Close Combat: Standup": {
-                        "value": 3,
+                        "value": 2,
                         "min": 0,
                         "max": 5
                     },
                     "Close Combat: Grappling": {
-                        "value": 3,
+                        "value": 1,
                         "min": 0,
                         "max": 5
                     },
@@ -200,7 +200,7 @@
                         "max": 5
                     },
                     "Sleight of Hand": {
-                        "value": 2,
+                        "value": 0,
                         "min": 0,
                         "max": 5
                     },
@@ -238,12 +238,12 @@
                         "max": 5
                     },
                     "Seamanship": {
-                        "value": 0,
+                        "value": 1,
                         "min": 0,
                         "max": 5
                     },
                     "Utility Equipment": {
-                        "value": 0,
+                        "value": 1,
                         "min": 0,
                         "max": 5
                     }
@@ -265,7 +265,7 @@
                         "max": 5
                     },
                     "Sensor Systems": {
-                        "value": 0,
+                        "value": 1,
                         "min": 0,
                         "max": 5
                     },
@@ -275,7 +275,7 @@
                         "max": 5
                     },
                     "Electronic Tools": {
-                        "value": 1,
+                        "value": 0,
                         "min": 0,
                         "max": 5
                     },
@@ -304,8 +304,8 @@
                 "Military Skills": {
                     "Soldiering": {
                         "value": 1,
-                        "min": 0,
-                        "max": 5
+                        "min": 1,
+                        "max": 1
                     },
                     "CBRN Warfare ": {
                         "value": 1,
@@ -330,7 +330,7 @@
                     "Tactics": {
                         "value": 1,
                         "min": 0,
-                        "max": 5
+                        "max": 3
                     }
                 },
                 "General Skills": {
@@ -789,10 +789,6 @@
                         "value": 0,
                         "cost": 3
                     },
-                    "Natural Leader": {
-                        "value": 0,
-                        "cost": 2
-                    },
                     "Neon Tan": {
                         "value": 0,
                         "cost": 2
@@ -1166,7 +1162,7 @@
                     },
                     "COTS Drone": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "UD4 Dropship": {
                         "value": 0,
