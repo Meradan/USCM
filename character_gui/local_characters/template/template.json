@@ -1552,6 +1552,10 @@
                         "cost": 3,
                         "extended": "colonist"
                     },
+                    "Damage Control": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Electricity": {
                         "value": 0,
                         "cost": 15,
@@ -1867,9 +1871,9 @@
                     }
                 },
                 "Other": {
-                    "Powerloader": {
+                    "Acrobatics": {
                         "value": 0,
-                        "cost": 4
+                        "cost": 3
                     },
                     "Card Cheating": {
                         "value": 0,
@@ -1898,6 +1902,10 @@
                     "Pickpocketing": {
                         "value": 0,
                         "cost": 5
+                    },
+                    "Powerloader": {
+                        "value": 0,
+                        "cost": 4
                     },
                     "Rope Work": {
                         "value": 0,
