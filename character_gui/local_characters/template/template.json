@@ -469,10 +469,6 @@
                         "value": 0,
                         "cost": 0
                     },
-                    "Glory Hunter": {
-                        "value": 0,
-                        "cost": 0
-                    },
                     "Hamster": {
                         "value": 0,
                         "cost": 0
@@ -1586,10 +1582,6 @@
                         "value": 0,
                         "cost": 8
                     },
-                    "Ordnance": {
-                        "value": 0,
-                        "cost": 5
-                    },
                     "Power Tools": {
                         "value": 0,
                         "cost": 2
@@ -1624,15 +1616,15 @@
                         "value": 0,
                         "cost": 5
                     },
+                    "Ordnance": {
+                        "value": 0,
+                        "cost": 5
+                    },
                     "Forward Observer": {
                         "value": 0,
                         "cost": 3
                     },
                     "FAC": {
-                        "value": 0,
-                        "cost": 3
-                    },
-                    "HALO": {
                         "value": 0,
                         "cost": 3
                     },
