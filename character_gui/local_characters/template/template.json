@@ -1162,7 +1162,7 @@
                     },
                     "UD4 Dropship": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 12
                     },
                     "M421 Firefly": {
                         "value": 0,
@@ -1170,11 +1170,11 @@
                     },
                     "M86 UAV": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
-                    "PUPS 15": {
+                    "PUPS": {
                         "value": 0,
-                        "cost": 15
+                        "cost": 12
                     }
                 },
                 "Land Vehicles": {
@@ -1205,7 +1205,7 @@
                     },
                     "M57 APC": {
                         "value": 0,
-                        "cost": 8
+                        "cost": 6
                     },
                     "M572 APC": {
                         "value": 0,
@@ -1310,7 +1310,7 @@
                     },
                     "M42 Sniper Rifle": {
                         "value": 0,
-                        "cost": 10
+                        "cost": 8
                     },
                     "M240 Flamer": {
                         "value": 0,
@@ -1318,7 +1318,7 @@
                     },
                     "M56 Smartgun": {
                         "value": 0,
-                        "cost": 10
+                        "cost": 8
                     },
                     "Harrington AR": {
                         "value": 0,
