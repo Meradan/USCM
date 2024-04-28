@@ -1207,10 +1207,6 @@
                         "value": 0,
                         "cost": 6
                     },
-                    "M572 APC": {
-                        "value": 0,
-                        "cost": 6
-                    },
                     "M292 Artillery": {
                         "value": 0,
                         "cost": 5
@@ -1486,7 +1482,7 @@
                     },
                     "Sword": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 4
                     }
                 }
             },
