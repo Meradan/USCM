@@ -759,7 +759,7 @@
                     },
                     "Lucky Bastard": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Machete": {
                         "value": 0,
@@ -993,7 +993,7 @@
                     },
                     "Mentally unstable": {
                         "value": 0,
-                        "cost": -1
+                        "cost": -2
                     },
                     "Nervous": {
                         "value": 0,
@@ -1572,11 +1572,11 @@
                     },
                     "IED": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Lockpicking": {
                         "value": 0,
-                        "cost": 8
+                        "cost": 7
                     },
                     "Power Tools": {
                         "value": 0,
@@ -1588,7 +1588,7 @@
                     },
                     "Weaponsmith": {
                         "value": 0,
-                        "cost": 6
+                        "cost": 5
                     }
                 },
                 "Military Training": {
@@ -1649,11 +1649,11 @@
                 "Sensors & IT": {
                     "IR": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "Lidar": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Life Support": {
                         "value": 0,
@@ -1678,15 +1678,15 @@
                     },
                     "Morse": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "Radar": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Radio": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "Sensor Networking": {
                         "value": 0,
@@ -1699,20 +1699,20 @@
                     },
                     "Interface 2037": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "USCM Interface ": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "USN Interface": {
                         "value": 0,
-                        "cost": 3,
+                        "cost": 2,
                         "extended": "navy"
                     },
                     "Hacking": {
                         "value": 0,
-                        "cost": 8
+                        "cost": 6
                     },
                     "Programming": {
                         "value": 0,
@@ -1761,7 +1761,7 @@
                     },
                     "Herding": {
                         "value": 0,
-                        "cost": 5,
+                        "cost": 4,
                         "extended": "colonist"
                     },
                     "Hunting": {
@@ -1774,7 +1774,7 @@
                     },
                     "Riding": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Skiing": {
                         "value": 0,
@@ -1786,7 +1786,7 @@
                     },
                     "Trapping": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     }
                 },
                 "Navigation": {
@@ -1800,7 +1800,7 @@
                     },
                     "Interstellar": {
                         "value": 0,
-                        "cost": 15,
+                        "cost": 12,
                         "extended": "navy"
                     },
                     "Oceanic": {
@@ -1811,11 +1811,11 @@
                 "Medical": {
                     "Aerospace Medicine": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 3
                     },
                     "Altitude Medicine": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 3
                     },
                     "Autodoc": {
                         "value": 0,
@@ -1823,23 +1823,27 @@
                     },
                     "CBRN Treatment": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Cold climate": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 3
+                    },
+                    "Cryogenics": {
+                        "value": 0,
+                        "cost": 3
                     },
                     "Dive Medicine": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Hot climate": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 3
                     },
                     "Infections": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "IV": {
                         "value": 0,
@@ -1855,7 +1859,7 @@
                     },
                     "Veterinary": {
                         "value": 0,
-                        "cost": 8
+                        "cost": 6
                     }
                 },
                 "Other": {
@@ -1901,7 +1905,7 @@
                     },
                     "Scaling": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     }
                 }
             }
