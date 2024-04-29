@@ -326,11 +326,6 @@
                         "value": 1,
                         "min": 0,
                         "max": 5
-                    },
-                    "Tactics": {
-                        "value": 1,
-                        "min": 0,
-                        "max": 3
                     }
                 },
                 "General Skills": {
@@ -1594,11 +1589,11 @@
                 "Military Training": {
                     "Infantry Tactics": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Mobile Tactics": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 4
                     },
                     "Airforce Tactics": {
                         "value": 0,
