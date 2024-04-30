@@ -72,6 +72,9 @@ class CharacterGenerator:
             "Experience Points": {
                 "value": self._get_base_experience_points() - self._get_total_xp_usage()
             },
+            "Available Traits": {
+                "value": self._get_base_available_traits() - self._get_count_traits()
+            },
         }
 
         self._serial_properties.update(self._serialize_properties(self._stats))
@@ -95,6 +98,9 @@ class CharacterGenerator:
 
     def _get_base_experience_points(self) -> int:
         return self._imported_character["Config"]["Starting EP"]
+        
+    def _get_base_available_traits(self) -> int:
+        return self._imported_character["Config"]["Starting Traits"]
 
     @staticmethod
     def _get_total_knowledge_cost(skills: dict, default_cost: list) -> int:
@@ -132,6 +138,15 @@ class CharacterGenerator:
                 self._current_character["Character"]["Traits"]
             )
         )
+        
+    def _get_count_traits(self) -> int:
+        sum_traits = 0
+        for main_group in self._current_character["Character"]["Traits"]:
+            for sub_group in self._current_character["Character"]["Traits"][main_group]:
+                for property in self._current_character["Character"]["Traits"][main_group][sub_group].values():
+                    if property["value"]:
+                        sum_traits = sum_traits + 1
+        return sum_traits
 
     @staticmethod
     def _get_total_property_cost(properties: dict) -> int:
@@ -261,6 +276,7 @@ class CharacterGenerator:
 
         self._update_xp_status()
         self._check_property_disable()
+        self._update_trait_status()
         self._update_stress_limit()
         self._update_overview()
 
@@ -451,6 +467,15 @@ class CharacterGenerator:
         remaining = self._get_base_experience_points() - self._get_total_xp_usage()
         self._stats["Experience Points"]["value"] = remaining
         dpg.set_value(item="Experience Points", value=remaining)
+        
+    def _update_trait_status(self):
+        """
+        Update the printout of remaining traits.
+        Must be called whenever a related value have been change.
+        """
+        remaining = self._get_base_available_traits() - self._get_count_traits()
+        self._stats["Available Traits"]["value"] = remaining
+        dpg.set_value(item="Available Traits", value=remaining)
 
     def _update_overview(self):
         overview_list = ""
@@ -1166,6 +1191,8 @@ class CharacterToPdf:
         remaing_xp = self._stats["Experience Points"]["value"]
         total_ap = self._character["Config"]["Starting AP"]
         remaing_ap = self._stats["Attribute Points"]["value"]
+        total_traits = self._character["Config"]["Starting Traits"]
+        remaing_traits = self._stats["Available Traits"]["value"]
 
         self._write_line(" ")
         self._write_line(f"Total XP: {total_xp}")
