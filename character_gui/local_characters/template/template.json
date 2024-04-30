@@ -12,6 +12,7 @@
     "Config": {
         "Starting EP": 125,
         "Starting AP": 25,
+        "Starting Traits": 8,
         "specialities": [
             "APC",
             "CBRN",
@@ -582,21 +583,27 @@
                 " ": {
                     "2nd in Command": {
                         "value": 0,
-                        "cost": 3,
+                        "cost": 2,
                         "requirements": {
-                            "Computer Systems": {
-                                "type": ">=",
-                                "value": 4
-                            },
-                            "Rank": {
-                                "type": ">=",
-                                "value": 4
+                            "Infantry Tactics": {
+                                "type": "==",
+                                "value": 1
                             }
                         }
                     },
                     "Access to the files": {
                         "value": 0,
-                        "cost": 1
+                        "cost": 1,
+                        "requirements": {
+                            "Computer Systems": {
+                                "type": ">=",
+                                "value": 4
+                            },
+                            "Hacking": {
+                                "type": "==",
+                                "value": 1
+                            }
+                        }
                     },
                     "Alert": {
                         "value": 0,
@@ -604,7 +611,13 @@
                     },
                     "Amphibious": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 2,
+                        "requirements": {
+                            "Sea": {
+                                "type": "==",
+                                "value": 1
+                            }
+                        }
                     },
                     "Arctic Fox": {
                         "value": 0,
