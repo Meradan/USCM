@@ -1485,43 +1485,43 @@
                 "Terrain": {
                     "Urban": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Barren": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Temperate": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Jungle": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Swamp": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Arctic": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Mountain": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Sea": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Desert": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     },
                     "Space": {
                         "value": 0,
-                        "cost": 2
+                        "cost": 0
                     }
                 },
                 "Engineering": {
