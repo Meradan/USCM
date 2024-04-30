@@ -10,7 +10,7 @@
         "Age": 21
     },
     "Config": {
-        "Starting EP": 117,
+        "Starting EP": 125,
         "Starting AP": 25,
         "specialities": [
             "APC",
@@ -175,7 +175,7 @@
                 },
                 "Physical Skills": {
                     "Throwing": {
-                        "value": 3,
+                        "value": 2,
                         "min": 0,
                         "max": 5
                     },
