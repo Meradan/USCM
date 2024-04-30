@@ -428,7 +428,7 @@ class CharacterGenerator:
                 "Charisma"
             ]["value"]
         )
-        self._stats["Attribute Points"]["value"] = leadership_points
+        self._stats["Leadership Points"]["value"] = leadership_points
         dpg.set_value(
             item="Leadership Points",
             value=leadership_points,
