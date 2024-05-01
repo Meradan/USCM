@@ -633,7 +633,7 @@
                     },
                     "Bilingual": {
                         "value": 0,
-                        "cost": 6
+                        "cost": 3
                     },
                     "Brown Noser ": {
                         "value": 0,
@@ -748,10 +748,6 @@
                     "Kendoka": {
                         "value": 0,
                         "cost": 2
-                    },
-                    "Language": {
-                        "value": 0,
-                        "cost": 3
                     },
                     "Leading from the front": {
                         "value": 0,
@@ -1798,20 +1794,20 @@
                     }
                 },
                 "Navigation": {
-                    "Land": {
+                    "Orienteering": {
                         "value": 0,
                         "cost": 2
                     },
                     "Interplanetary": {
                         "value": 0,
-                        "cost": 8
+                        "cost": 6
                     },
                     "Interstellar": {
                         "value": 0,
-                        "cost": 12,
+                        "cost": 10,
                         "extended": "navy"
                     },
-                    "Oceanic": {
+                    "Nautical Charts": {
                         "value": 0,
                         "cost": 3
                     }
@@ -1868,6 +1864,28 @@
                     "Veterinary": {
                         "value": 0,
                         "cost": 6
+                    }
+                },
+                "Language": {
+                    "Chinese": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "English": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Japanese": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Russian": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Spanish": {
+                        "value": 0,
+                        "cost": 3
                     }
                 },
                 "Other": {
