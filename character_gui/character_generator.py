@@ -97,7 +97,7 @@ class CharacterGenerator:
         return self._imported_character["Config"]["Starting AP"]
 
     def _get_base_experience_points(self) -> int:
-        return self._imported_character["Config"]["Starting EP"]
+        return self._imported_character["Config"]["Starting XP"]
         
     def _get_base_available_traits(self) -> int:
         return self._imported_character["Config"]["Starting Traits"]
@@ -1187,7 +1187,7 @@ class CharacterToPdf:
             else:
                 self._write_line(f"{key}: {value}")
 
-        total_xp = self._character["Config"]["Starting EP"]
+        total_xp = self._character["Config"]["Starting XP"]
         remaing_xp = self._stats["Experience Points"]["value"]
         total_ap = self._character["Config"]["Starting AP"]
         remaing_ap = self._stats["Attribute Points"]["value"]

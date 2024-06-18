@@ -10,7 +10,7 @@
         "Age": 21
     },
     "Config": {
-        "Starting EP": 128,
+        "Starting XP": 128,
         "Starting AP": 25,
         "Starting Traits": 8,
         "specialities": [
