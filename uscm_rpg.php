@@ -39,7 +39,7 @@ Most roleplaying sessions are done in the traditional tabletop style, but there 
 Coming soon...
 
 <h3 class="heading heading-h3">Campaign material</h3>
-<a href="resources/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Version 2.01<br/>
+<a href="resources/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
 <a href="resources/EquipmentBookletPrint.pdf" target="_blank">Reference Booklet</a> Background info and equipment details. 2019 version<br/>
 <br/>
 <a href="resources/InofficiellBriefingBF5.pdf" target="_blank">Unofficial briefing</a> (BF5 campaign knowledge about aliens, in swedish)<br/>
