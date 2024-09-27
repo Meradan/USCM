@@ -210,7 +210,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
             ?>
     <label for="skills_<?php echo $skillId; ?>">
       <?php echo $skill->getName(); ?>
-                  <input type="text" id="skills_<?php echo $skillId; ?>" name="skills[<?php echo $skillId; ?>]" value="<?php echo (array_key_exists($skillId, $characterSkills)) ? ($characterSkills[$skillId]['value']) : (""); ?>">
+                  <input type="number" min="0" max="10" id="skills_<?php echo $skillId; ?>" name="skills[<?php echo $skillId; ?>]" value="<?php echo (array_key_exists($skillId, $characterSkills)) ? ($characterSkills[$skillId]['value']) : (""); ?>">
     </label>
                   <input type="hidden" name="optional[<?php echo $skillId; ?>]" value="<?php echo $skill->getOptional(); ?>">
             <?php } ?>
