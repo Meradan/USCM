@@ -12,6 +12,9 @@
 # local env files
 .env*.local
 
+# composer
+/vendor/
+
 config.php
 .settings
 .buildpath
