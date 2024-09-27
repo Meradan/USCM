@@ -41,6 +41,10 @@ a:hover {
   transition: color 1s;
 }
 
+input {
+  accent-color: var(--uscm-color-green);
+}
+
 .wrapper {
   background-color: var(--uscm-color-background);
   border: 2px solid var(--uscm-color-green);
