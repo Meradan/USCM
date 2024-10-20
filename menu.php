@@ -1,6 +1,6 @@
 <header class="header">
   <div class="logo">
-    <img src="assets/logo/uscm-blip-logo.svg" height="129" alt="USCM Logotype">
+    <img src="assets/logo/uscm-blip-logo-animate.svg" height="129" alt="USCM Logotype">
     <div class="p-10 center">
       Roleplaying game partially based on the Alien movies. The players are members of one of the platoons in the 4th US Colonial Marine brigade.
     </div>
