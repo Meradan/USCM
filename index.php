@@ -28,7 +28,7 @@
       <link rel="icon" href="assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
       <link rel="apple-touch-icon" href="assets/logo/uscm-blip-logo@180px.png">
       <link rel="manifest" href="assets/manifest.json">
-      <link href="assets/style.css" rel="stylesheet">
+      <link href="assets/style.css?v3" rel="stylesheet">
     </head>
 
     <body <?php
