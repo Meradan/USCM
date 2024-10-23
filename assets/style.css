@@ -76,6 +76,10 @@ input {
   font-size: calc(16rem / 16);
   font-style: italic;
 }
+.logo svg {
+  height: 129px;
+  width: 151px;
+}
 
 .nav > ul {
   display: flex;
