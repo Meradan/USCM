@@ -1,0 +1,9 @@
+**/.git*
+**/.git*/**
+**/node_modules/**
+_notes/
+other/
+utilities/
+.editorconfig
+README.md
+config.php
