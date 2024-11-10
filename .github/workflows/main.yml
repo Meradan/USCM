@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+name: Deploy
+jobs:
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/main' && 'main' || github.ref == 'refs/heads/master' && 'main' || 'branch' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Upload files
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ${{ secrets.ftp_server }}
+          user: ${{ secrets.ftp_username }}
+          pass: ${{ secrets.ftp_password }}
+          port: ${{ secrets.ftp_port }}
+          localDir: '.'
+          remoteDir: '/var/www/html/uscm/skynet/'
+          ignoreFile: '.lftp_ignore'
