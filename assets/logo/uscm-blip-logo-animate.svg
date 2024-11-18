@@ -5,7 +5,6 @@
   <circle cx="97.083" cy="95.001" r="2" fill="#33cc00" stroke="#33cc00" stroke-miterlimit="10" stroke-width="3" opacity="0.3">
     <animate attributeName="r" from="2" to="80" dur="1.2s" begin="4s"/>
   </circle>
-  <rect x="18" y="124" width="158" height="40" fill="black" />
   <path fill="none" stroke="#33cc00" stroke-miterlimit="10" stroke-width="3" d="M174.597 125c3.637-9.357 5.653-19.523 5.653-30.166 0-46.024-37.31-83.333-83.333-83.333-46.024 0-83.333 37.31-83.333 83.333 0 10.643 2.017 20.809 5.653 30.166"/>
   <path fill="none" stroke="#33cc00" stroke-miterlimit="10" stroke-width="3" d="M146.501 125c5.135-8.639 8.092-18.722 8.092-29.5 0-31.94-25.893-57.833-57.834-57.833-31.939 0-57.833 25.893-57.833 57.833 0 10.779 2.958 20.862 8.092 29.5"/>
   <circle cx="95.145" cy="84.106" r="2" fill="#33cc00" stroke="#33cc00" stroke-miterlimit="10" stroke-width="5"/>
