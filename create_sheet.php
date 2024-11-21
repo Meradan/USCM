@@ -50,7 +50,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $font = PDF_load_font($pdf, "Helvetica", "host", 0);
   pdf_setfont($pdf, $font, 10);
 
-  PDF_image($pdf, "./resources/logoimage_sized.png", 50, 700, 280, 102);
+  PDF_image($pdf, "./assets/files/sheet/logoimage_sized.png", 50, 700, 280, 102);
 
   pdf_set_text_pos($pdf, 50, 690);
   pdf_show($pdf, "Character sheet");
