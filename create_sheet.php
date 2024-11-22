@@ -55,7 +55,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   pdf_set_text_pos($pdf, 50, 690);
   pdf_show($pdf, "Character sheet");
   pdf_set_text_pos($pdf, 290, 690);
-  pdf_show($pdf, "www.uscm.tk");
+  pdf_show($pdf, "www.uscm.se");
 
   pdf_set_text_pos($pdf, 50, 670);
   pdf_show($pdf, "Player");
