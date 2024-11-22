@@ -40,7 +40,7 @@
 
     <div class="wrapper">
       <?php
-        include("menu.php");
+        include("components/header.php");
       ?>
 
       <main class="main">
@@ -59,7 +59,7 @@
       </main>
 
       <?php
-        include("footer.php");
+        include("components/footer.php");
       ?>
     </div>
     </body>

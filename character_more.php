@@ -186,6 +186,6 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 
   <?php
 } else {
-    include("not_allowed.php");
+    include("components/403.php");
 }
 ?>

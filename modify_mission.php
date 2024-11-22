@@ -219,6 +219,6 @@ if ($admin || $gm) {
     <?php
 
 } else {
-    include("not_allowed.php");
+    include("components/403.php");
 }
 ?>

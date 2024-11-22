@@ -58,5 +58,5 @@ if ($user->isAdmin()) {
 </form>
 <?php }
 else {
-include("not_allowed.php");
+include("components/403.php");
 }?>
