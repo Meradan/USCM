@@ -6,7 +6,7 @@ $missions = $missionController->getMissions();
 foreach ($missions as $mission) { ?>
   <li>
     <span class="tag tag-<?php echo strtolower($mission->getPlatoonShortName());?>"><?php echo $mission->getPlatoonShortName();?></span>
-    <a href="index.php?url=show_mission.php&id=<?php echo $mission->getId();?>"><?php echo $mission->getShortName();?></a>
+    <a href="index.php?url=missions/details.php&id=<?php echo $mission->getId();?>"><?php echo $mission->getShortName();?></a>
     <?php echo $mission->getName();?>
   </li>
 <?php } ?>

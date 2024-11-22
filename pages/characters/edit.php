@@ -17,13 +17,13 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   <h1 class="heading heading-h1">
     Modify character
     <span class="span">
-      <a href="index.php?url=list_characters.php&platoon=<?php echo $character->getPlatoonId(); ?>">Back</a>
+      <a href="index.php?url=characters/list.php&platoon=<?php echo $character->getPlatoonId(); ?>">Back</a>
     </span>
   </h1>
   <h2 class="heading heading-h2">
     <?php echo $character->getGivenName(); ?> <?php echo $character->getSurname(); ?>
     <span class="span">
-      <a href="index.php?url=character_more.php&character_id=<?php echo $characterId; ?>">Do you want to know more?</a>
+      <a href="index.php?url=characters/details.php&character_id=<?php echo $characterId; ?>">Do you want to know more?</a>
     </span>
   </h2>
 

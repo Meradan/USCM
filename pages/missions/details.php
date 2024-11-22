@@ -17,7 +17,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
 <h2 class="heading heading-h2">
   <?php echo $mission->getName();?>
   <span class="span">
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=names" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=names" class="colorfont">Change</a><?php } ?>
   </span>
 </h2>
 
@@ -33,7 +33,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
   <dt>GM</dt>
   <dd>
     <?php echo $gmUser->getName()?><br>
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=gm" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=gm" class="colorfont">Change</a><?php } ?>
   </dd>
   <dt>Characters</dt>
   <dd>
@@ -42,7 +42,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     foreach ($charactersAndPlayers as $character) {
       echo $character['forname'] . " " . $character['lastname'] . " - " .  $character['pforname'] . " " . $character['plastname'] . "<br>";
     } ?>
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=characters" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=characters" class="colorfont">Change</a><?php } ?>
   </dd>
   <dt>Commendations</dt>
   <dd>
@@ -51,7 +51,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     foreach ($commendations as $commendation) {
       echo $commendation['forname'] . " " . $commendation['lastname'] . " - " .  $commendation['medal_short'] . "<br>";
     } ?>
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=commendations" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=commendations" class="colorfont">Change</a><?php } ?>
   </dd>
   <dt>Promotions</dt>
   <dd>
@@ -60,14 +60,14 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     foreach ($promotions as $promotion) {
       echo $promotion['forname'] . " " . $promotion['lastname'] . " - " .  $promotion['rank_short'] . "<br>";
     } ?>
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=promotions" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=promotions" class="colorfont">Change</a><?php } ?>
   </dd>
 </dl>
 
 <h3 class="heading heading-h3">
   Briefing
   <span class="span">
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=briefing" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=briefing" class="colorfont">Change</a><?php } ?>
   </span>
 </h3>
 
@@ -78,7 +78,7 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
 <h3 class="heading heading-h3">
   Debriefing
   <span class="span">
-    <?php if ($admin or $gm) {?><a href="index.php?url=modify_mission.php&mission=<?php echo $mission->getId();?>&what=debriefing" class="colorfont">Change</a><?php } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=debriefing" class="colorfont">Change</a><?php } ?>
   </span>
 </h3>
 

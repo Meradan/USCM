@@ -66,7 +66,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     ?>
         <option
           <?php if (array_key_exists("platoon", $_GET) && $_GET['platoon'] == $platoon->getId()) echo "selected"; ?>
-          value="index.php?url=list_characters.php&platoon=<?php echo $platoon->getId(); ?>"
+          value="index.php?url=characters/list.php&platoon=<?php echo $platoon->getId(); ?>"
         >
           <?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)
         </option>
@@ -143,7 +143,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     <td <?php if ($overlib) {?>class="popover"<?php } ?>><?php
     $link = false;
     if ($admin || $gm || $_SESSION['user_id']==$character['userid']) { $link = true;?>
-        <a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"><?php }
+        <a href="index.php?url=characters/edit.php&character_id=<?php echo $character['cid'];?>"><?php }
     ?><?php echo $character['forname'] . " " . $character['lastname'];?><?php echo $link ? "</a>" : ""; ?>
           <?php if ($overlib) {?>
             <div class="popover-panel">
@@ -247,7 +247,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
     ?><td><?php echo $npc['rank_short'];?></td>
     <td <?php if ($overlib) {?>class="popover"<?php } ?>>
       <?php if ($admin || $gm || $_SESSION['user_id']==$npc['userid']) { ?>
-        <a href="index.php?url=modify_character.php&character_id=<?php echo $npc['cid'];?>">
+        <a href="index.php?url=characters/edit.php&character_id=<?php echo $npc['cid'];?>">
           <?php echo $npc['forname'] . " " . $npc['lastname'];?>
         </a>
       <?php } else { ?>
@@ -322,7 +322,7 @@ $npcsql="SELECT c.id as cid,c.forname,c.lastname,DATE_FORMAT(c.enlisted,'%Y-%m-%
         * 2019-08-10
       </span>
       <span class="no-wrap">
-        † 
+        †
       </span>
     </td>
     <td>KIA</td>

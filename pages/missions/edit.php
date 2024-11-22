@@ -125,7 +125,7 @@ if ($admin || $gm) {
             <?php } elseif ($_GET['what'] == "commendations") {
                 ?>
 
-      <form class="form" method="post" action="index.php?url=modify_mission.php&mission=<?php
+      <form class="form" method="post" action="index.php?url=missions/edit.php&mission=<?php
               echo $missionId; ?>&what=commendations&selectedcharacters=true&foreign=false">
 
         För tillfället går det ej att tilldela en medalj från USCM och en nationsmedalj, utan de skriver bara över varandra om man försöker.
@@ -178,7 +178,7 @@ if ($admin || $gm) {
     <?php } elseif ($_GET['what'] == "promotions") {
         ?>
 
-      <form class="form" method="post" action="index.php?url=modify_mission.php&mission=<?php echo $missionId; ?>&what=promotions&selectedcharacters=true">
+      <form class="form" method="post" action="index.php?url=missions/edit.php&mission=<?php echo $missionId; ?>&what=promotions&selectedcharacters=true">
         <label for="character">
           Character
           <select id="character" name="character"><?php

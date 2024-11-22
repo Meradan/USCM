@@ -1,6 +1,6 @@
 <h1 class="heading heading-h1">Log in</h1>
 
-<form class="form" action="login.php?alt=login" method="post">
+<form class="form" action="pages/auth/auth.php?alt=login" method="post">
   <label for="anvandarnamn">
     Username
     <input type="text" id="anvandarnamn" name="anvandarnamn" autocomplete="username">

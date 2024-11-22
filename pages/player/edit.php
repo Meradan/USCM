@@ -90,7 +90,7 @@ if ($user->isAdmin() || $user->getId() == $playerId) {
         foreach ($players as $player) { ?>
                 <tr>
                     <td><?php if ($user->isAdmin() || $user->getId() == $player->getId()) { ?>
-                      <a href="index.php?url=modify_player.php&player=<?php echo $player->getId(); ?>"><?php
+                      <a href="index.php?url=player/edit.php&player=<?php echo $player->getId(); ?>"><?php
                     }
                     echo stripslashes($player->getNameWithNickname());
                     if ($user->isAdmin() || $user->getId() == $player->getId()) { ?>

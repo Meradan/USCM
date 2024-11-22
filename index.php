@@ -47,13 +47,13 @@
         <?php
         if(isset($_GET['url'])){
           // To make sure the file loaded is in the local file system and not a remote url
-          $pages = recursive_dirlist('./');
-          if( in_array("/".$_GET['url'], $pages) ) {
-            include($_GET['url']);
+          $pages = recursive_dirlist('./pages');
+          if( in_array('/'.$_GET['url'], $pages) ) {
+            include('pages/'.$_GET['url']);
           }
         }
         else {
-          include('news.php');
+          include('pages/news/news.php');
         }
         ?>
       </main>

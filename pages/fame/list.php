@@ -66,14 +66,14 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
 <label for="select-platoon" style="display: block; margin-bottom: 20px;">
   Select platoon
   <select id="select-platoon" onchange="window.location.href = this.value">
-    <option value="index.php?url=list_hall_of_fame.php">All platoons</option>
+    <option value="index.php?url=fame/list.php">All platoons</option>
     <?php
     $platoons = $platoonController->getPlatoons();
     foreach ($platoons as $platoon ) {
       ?>
       <option
         <?php if (array_key_exists("platoon", $_GET) && $_GET['platoon'] == $platoon->getId()) echo "selected"; ?>
-        value="index.php?url=list_hall_of_fame.php&platoon=<?php echo $platoon->getId(); ?>"
+        value="index.php?url=fame/list.php&platoon=<?php echo $platoon->getId(); ?>"
       >
         <?php echo $platoon->getName(); ?> (<?php echo $platoon->getShortName(); ?>)
       </option>
@@ -120,7 +120,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <td><?php echo $character['missions'];?></td>
     <td><?php echo $character['rank_short'];?></td>
     <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
-          ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
+          ?><a href="index.php?url=characters/edit.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
     <td>
@@ -165,7 +165,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <td><?php echo $character['missions'];?></td>
     <td><?php echo $character['rank_short'];?></td>
     <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
-          ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
+          ?><a href="index.php?url=characters/edit.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
     <td>
@@ -224,7 +224,7 @@ $glorytopsql="SELECT c.id as cid,c.forname as cfor,c.lastname as clast,DATE_FORM
     <td><?php echo $character['missions'];?></td>
     <td><?php echo $character['rank_short'];?></td>
     <td><?php if ($admin || $gm || $_SESSION['user_id']==$character['userid']) {
-          ?><a href="index.php?url=modify_character.php&character_id=<?php echo $character['cid'];?>"> <?php
+          ?><a href="index.php?url=characters/edit.php&character_id=<?php echo $character['cid'];?>"> <?php
         } ?><?php echo $character['cfor'] . " " . $character['clast'];?></a></td>
     <td><?php echo $character['specialty_name'];?></td>
     <td>
