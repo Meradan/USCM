@@ -95,6 +95,6 @@ if ($user->isAdmin() || $user->isGm()) {
   }
 }
 
-header("location:{$url_root}/index.php?url=show_mission.php&id={$_GET['mission']}");
+header("location:{$url_root}/index.php?url=missions/details.php&id={$_GET['mission']}");
 
 ?>

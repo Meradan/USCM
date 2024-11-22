@@ -28,7 +28,7 @@ foreach ($listOfNews as $news) {
 <div>Debriefing för M80 är upplagd.</div><br/>
 
 <div class="colorfont">2004-11-19 Oskar</div>
-<div>Besök gärna nyhetssidan <a href="http://www.galactic-news.tk/">Galactic News Network</a> som innehåller nyhetsreportage om händelser inom USCM-spelvärlden.<br><br/>
+<div>Besök gärna nyhetssidan Galactic News Network som innehåller nyhetsreportage om händelser inom USCM-spelvärlden.<br><br/>
 
 <div>Vi har även fått tre nya medaljer i USCM-kampanjen, se längst ner på personalsidan för mer detaljer.</div><br/>
 
@@ -39,7 +39,7 @@ foreach ($listOfNews as $news) {
 <div>Vårt nya regelhäfte är färdigskrivet, det blir traditionsenligt cocktailparty med uppträdande av UA Marine Corps Band i Tottes aula!.</div><br/>
 
 <div class="colorfont">2004-10-28 Oskar</div>
-<div>Nu har <a href="cc2.pdf" target="_blank">Nr #2</a> av vår kampanjtidning The Colonial Correspondent kommit ut. Vi hälsar även en ny USCM-pluton välkommen till 4:e brigaden. Det är Markhams Daring Dozens som nyligen har spelat sitt första uppdrag i Kalmar.</div><br/>
+<div>Nu har Nr #2 av vår kampanjtidning The Colonial Correspondent kommit ut. Vi hälsar även en ny USCM-pluton välkommen till 4:e brigaden. Det är Markhams Daring Dozens som nyligen har spelat sitt första uppdrag i Kalmar.</div><br/>
 
 <div class="colorfont">2004-10-27 Oskar</div>
 <div>M79 spelades under dagen och debriefingen ligger uppe nu. Glöm inte att anmäla er till <a href="http://bsk.sverok.net/">BSK</a> och passa på att spela USCM när ni är där.</div><br/>

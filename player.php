@@ -50,6 +50,6 @@ elseif ($_GET['what']=="modify" && ($user->isAdmin() || $user->isGm() || $user->
   $playerController->update($player);
 }
 
-header("location:{$url_root}/index.php?url=modify_player.php");
+header("location:{$url_root}/index.php?url=player/edit.php");
 
 ?>

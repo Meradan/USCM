@@ -70,7 +70,7 @@ if ($_GET['action'] == "update_character") {
   if (isset($_POST['cbpredator'])) { $cbpredator = 1; }
   if (isset($_POST['cbai'])) { $cbai = 1; }
   if (isset($_POST['cbarachnid'])) { $cbarachnid = 1; }
-  
+
   $charactersql = "UPDATE uscm_characters SET userid=:playerid,
                          platoon_id=:platoonid,
                          forname=:givenname,
@@ -424,7 +424,7 @@ if ($_GET['action'] == "update_character") {
     $stmt->execute();
   }
 
-  header("location:{$url_root}/index.php?url=list_characters.php");
+  header("location:{$url_root}/index.php?url=characters/list.php");
 } elseif ($_GET['action'] == "create_character") {
   /*
    * Creates a new character
@@ -540,5 +540,5 @@ if ($_GET['action'] == "update_character") {
   $stmt->bindValue(':rankid', $rank, PDO::PARAM_INT);
   $stmt->execute();
 
-  header("location:{$url_root}/index.php?url=list_characters.php");
+  header("location:{$url_root}/index.php?url=characters/list.php");
 }

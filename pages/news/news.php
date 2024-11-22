@@ -1,5 +1,5 @@
 <?php
-require_once 'functions.php';
+require_once('./functions.php');
 $newsController = new NewsController();
 if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
@@ -24,7 +24,7 @@ if (isset($_GET['action'])!=true) { ?>
       </article>
     <?php } ?>
 
-  <div class="p-10 center"><a href="index.php?url=news_old.php">News archive</a></div>
+  <div class="p-10 center"><a href="index.php?url=news/archive.php">News archive</a></div>
 
   <?php if ($user->isAdmin() || $user->isGm()): ?>
     <h2 class="heading heading-h2">Create news</h2>
@@ -43,7 +43,7 @@ if (isset($_GET['action'])!=true) { ?>
         Text (htmlkod)<br>
         Note, to put in links within the site do it like this
         <code>
-          &lt;a href="index.php?url=show_mission.php&id=224"&gt;Mission 192&lt;/a&gt;
+          &lt;a href="index.php?url=missions/details.php&id=224"&gt;Mission 192&lt;/a&gt;
         </code>
         <textarea name="text" rows="7"></textarea>
       </label>

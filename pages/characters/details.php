@@ -10,7 +10,7 @@ $user = $userController->getCurrentUser();
 <h1 class="heading heading-h1">
   Do you want to know more?
   <span class="span">
-    <a href="index.php?url=modify_character.php&character_id=<?php echo $characterId;?>">Back</a>
+    <a href="index.php?url=characters/edit.php&character_id=<?php echo $characterId;?>">Back</a>
   </span>
 </h1>
 <h2 class="heading heading-h2">
@@ -88,7 +88,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     foreach ($missions as $mission) {
         ?>
 		<tr>
-			<td><a href="index.php?url=show_mission.php&id=<?php echo $mission['id'];?>"><?php echo $mission['mission_name'];?></a></td>
+			<td><a href="index.php?url=missions/details.php&id=<?php echo $mission['id'];?>"><?php echo $mission['mission_name'];?></a></td>
 			<td><?php echo $mission['text']; ?></td>
 		</tr>
 		<?php
