@@ -33,7 +33,7 @@ foreach ($listOfNews as $news) {
 <div>Vi har även fått tre nya medaljer i USCM-kampanjen, se längst ner på personalsidan för mer detaljer.</div><br/>
 
 <div class="colorfont">2004-11-04 Oskar</div>
-<div>Nu ger sig USCM iväg till Borås för att spelleda på <a href="http://bsk.sverok.net/">Borås Spelkonvent</a>. Vi kommer att finnas som drop-in arrangemang under hela konventet.</div><br/>
+<div>Nu ger sig USCM iväg till Borås för att spelleda på Borås Spelkonvent. Vi kommer att finnas som drop-in arrangemang under hela konventet.</div><br/>
 
 <div class="colorfont">2004-10-31 Oskar</div>
 <div>Vårt nya regelhäfte är färdigskrivet, det blir traditionsenligt cocktailparty med uppträdande av UA Marine Corps Band i Tottes aula!.</div><br/>
@@ -66,16 +66,16 @@ foreach ($listOfNews as $news) {
 <div>Debriefing för M70 och M71 är utlagda. M72 spelas idag och M73 som är ett specialmission med flera speltillfällen kommer spelas första gången imorgon, så det är full fart på USCM-kampanjen just nu.</div><br/>
 
 <div class="colorfont">2004-09-07 Oskar & Pontus</div>
-<div>USCM-forumet har nu flyttat till en ny adress <a href="http://dallandra.ath.cx/uscm/forum/">http://dallandra.ath.cx/uscm/forum/</a><br>Ni hittar det även genom länken i menyn ovanför.</div><br/>
+<div>USCM-forumet har nu flyttat till en ny adress http://dallandra.ath.cx/uscm/forum/br>Ni hittar det även genom länken i menyn ovanför.</div><br/>
 
 <div class="colorfont">2004-09-06 Oskar</div>
 <div>Version 3.12 av Karaktärsgeneratorn finns nu att ladda hem. Det finns även en ny utrustningslista i Excelformat samt en ensidesversion som Pontus har gjort för att det ska vara smidigt att skriva ut den.</div><br/>
 
 <div class="colorfont">2004-08-24 Oskar</div>
-<div>Nu finns debriefingar för M67 och M68 under missions.</div>
+<div>Nu finns debriefingar för M67 och M68 under missions.</div><br>
 
 <div class="colorfont">2004-08-23 Oskar</div>
-<div>USCM kommer åka på konvent igen. Den här gången blir det på  <a href="http://narcon.sverok.net" target="_blank">NärCon</a> i Örebro som börjar den 27/8. Kom dit och spela med oss, vi kommer ha drop-in rollspel på NärCon också även om vi inte blir lika många spelledare som på LinCon.</div><br/>
+<div>USCM kommer åka på konvent igen. Den här gången blir det på NärCon i Örebro som börjar den 27/8. Kom dit och spela med oss, vi kommer ha drop-in rollspel på NärCon också även om vi inte blir lika många spelledare som på LinCon.</div><br/>
 
 <div class="colorfont">2004-08-19 Oskar</div>
 <div>Personallistan är uppdaterad efter M66 och borde stämma nu. Debriefing för M64 upplagd.</div><br/>
@@ -121,7 +121,7 @@ Karaktärsgeneratorn kan laddas hem under USCM RPG.</div><br/>
 <div>Nu finns Bävers lista över dom mest medaljprydda soldaterna i plutonen med på Hall of Fame.</div><br/>
 
 <div class="colorfont">2004-04-30 Oskar & Totte</div>
-Ny finns en uppdaterad version av utrustningslistan att ladda hem i både Excel och PDF-format.</div><br/>
+<div>Ny finns en uppdaterad version av utrustningslistan att ladda hem i både Excel och PDF-format.</div><br/>
 
 <div class="colorfont">2004-04-27 Oskar</div>
 <div>Nu är uppdateringarna efter M56 och M57 klara.</div><br/>
