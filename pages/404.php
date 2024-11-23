@@ -14,8 +14,8 @@ if (!array_key_exists('table_prefix', $_SESSION)) {
   $_SESSION['table_prefix']="uscm_";
 }
 
-include("{$_SERVER['DOCUMENT_ROOT']}/functions.php");
-include("{$_SERVER['DOCUMENT_ROOT']}/components/security-headers.php");
+include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/functions.php");
+include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/security-headers.php");
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -34,17 +34,17 @@ include("{$_SERVER['DOCUMENT_ROOT']}/components/security-headers.php");
 
 <div class="wrapper">
   <?php
-  include("{$_SERVER['DOCUMENT_ROOT']}/components/header.php");
+  include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/header.php");
   ?>
 
   <main class="main">
     <?php
-    include("{$_SERVER['DOCUMENT_ROOT']}/components/404.php");
+    include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/404.php");
     ?>
   </main>
 
   <?php
-  include("{$_SERVER['DOCUMENT_ROOT']}/components/footer.php");
+  include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/footer.php");
   ?>
 </div>
 </body>
