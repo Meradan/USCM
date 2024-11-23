@@ -26,9 +26,6 @@
         <a href="index.php?url=fame/list.php">Hall of Fame</a>
       </li>
       <li>
-        <a href="https://uscm.swedishforum.net/" target="_blank">Forum</a>
-      </li>
-      <li>
         <a href="https://discord.gg/nEp7kwd4h7" target="_blank">Discord</a>
       </li>
       <?php if ($_SESSION['level']>=2): ?>
