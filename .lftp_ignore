@@ -1,8 +1,7 @@
 **/.git*
 **/.git*/**
 **/node_modules/**
-other/
-utilities/
+_debug/
 .editorconfig
 README.md
 config.php
