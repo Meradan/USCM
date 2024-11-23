@@ -1,7 +1,7 @@
 <header class="header">
   <div class="logo">
     <div class="image">
-      <?php echo file_get_contents("assets/logo/uscm-blip-logo-animate.svg") ?>
+      <?php echo file_get_contents("{$_SERVER['DOCUMENT_ROOT']}/assets/logo/uscm-blip-logo-animate.svg", true) ?>
     </div>
     <div class="p-10 center">
       Roleplaying game partially based on the Alien movies. The players are members of one of the platoons in the 4th US Colonial Marine brigade.
