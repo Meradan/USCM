@@ -1,7 +1,8 @@
-**/.git*
-**/.git*/**
-**/node_modules/**
+.git/
+.github/
 _debug/
 .editorconfig
+.gitignore
+.lftp_ignore
 README.md
 config.php
