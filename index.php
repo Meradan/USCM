@@ -17,18 +17,18 @@
   include("functions.php");
   include("components/security-headers.php");
 
-  //if(validate(1)){?>
+?>
   <!DOCTYPE html>
   <html lang="sv">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
       <title>Skynet - USCM</title>
-      <link rel="icon" href="assets/logo/uscm-blip-logo@32px.png" sizes="any">
-      <link rel="icon" href="assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
-      <link rel="apple-touch-icon" href="assets/logo/uscm-blip-logo@180px.png">
-      <link rel="manifest" href="assets/manifest.json">
-      <link href="assets/style.css?v3" rel="stylesheet">
+      <link rel="icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo@32px.png" sizes="any">
+      <link rel="icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo@180px.png">
+      <link rel="manifest" href="<?php echo $url_root ?>/assets/manifest.json">
+      <link href="<?php echo $url_root ?>/assets/style.css?v3" rel="stylesheet">
     </head>
 
     <body <?php
@@ -64,9 +64,3 @@
     </div>
     </body>
   </html>
-<?php
-  /*}
-  else{
-    header("location:{$url_root}/login2.php");
-  }*/
-?>
