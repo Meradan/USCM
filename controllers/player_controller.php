@@ -12,7 +12,7 @@ Class PlayerController {
    */
   public function save($player) {
     $sql="INSERT INTO Users SET forname=:givenName,nickname=:nickname,lastname=:surname,
-           emailadress=:emailadress,password=PASSWORD(:password),use_nickname=:useNickname
+           emailadress=:emailadress,`password`=PASSWORD(:password),use_nickname=:useNickname
            ,platoon_id=:platoonId";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':givenName', $player->getGivenName(), PDO::PARAM_STR);
@@ -58,7 +58,7 @@ Class PlayerController {
   }
 
   public function updatePassword($player) {
-    $sql="UPDATE Users SET password=PASSWORD(:password) WHERE id = :playerId";
+    $sql="UPDATE Users SET `password`=PASSWORD(:password) WHERE id = :playerId";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':playerId', $player->getId(), PDO::PARAM_INT);
     $stmt->bindValue(':password',  $player->getPassword(), PDO::PARAM_STR);

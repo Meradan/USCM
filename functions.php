@@ -100,7 +100,7 @@ function login($level) {
                 LEFT JOIN Admins ON Admins.userid=Users.id
                 LEFT JOIN GMs ON GMs.userid=Users.id AND GMs.active=1
                 WHERE emailadress=:userName
-                AND password=password(:password)
+                AND `password`=password(:password)
                 GROUP BY Users.id";
         $stmt = $db->prepare($query);
         $stmt->bindValue(':userName', $_POST['anvandarnamn'], PDO::PARAM_STR);
