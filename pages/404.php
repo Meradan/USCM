@@ -14,20 +14,14 @@ if (!array_key_exists('table_prefix', $_SESSION)) {
   $_SESSION['table_prefix']="uscm_";
 }
 
-include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/functions.php");
 include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/security-headers.php");
 ?>
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Skynet - USCM</title>
-  <link rel="icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo@32px.png" sizes="any">
-  <link rel="icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="<?php echo $url_root ?>/assets/logo/uscm-blip-logo@180px.png">
-  <link rel="manifest" href="<?php echo $url_root ?>/assets/manifest.json">
-  <link href="<?php echo $url_root ?>/assets/style.css" rel="stylesheet">
+  <?php
+  include("{$_SERVER['DOCUMENT_ROOT']}{$url_root}/components/meta.php");
+  ?>
 </head>
 <body>
 <div class="galaxy"></div>
