@@ -3,8 +3,8 @@
  * Note: libPDF uses coordinates from the lower left corner
  */
 session_start();
-require_once "functions.php";
-require_once "iconpdf.php";
+require_once("../../functions.php");
+require_once("../../classes/iconpdf.php");
 
 $characterId = $_GET['character_id'];
 $characterController = new CharacterController();
@@ -50,12 +50,12 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $font = PDF_load_font($pdf, "Helvetica", "host", 0);
   pdf_setfont($pdf, $font, 10);
 
-  PDF_image($pdf, "./assets/files/sheet/logoimage_sized.png", 50, 700, 280, 102);
+  PDF_image($pdf, "../../assets/logo/uscm-blip-logo@512px.png", 50, 700, 280, 102);
 
+  fontbold($font, $pdf);
   pdf_set_text_pos($pdf, 50, 690);
   pdf_show($pdf, "Character sheet");
-  pdf_set_text_pos($pdf, 290, 690);
-  pdf_show($pdf, "www.uscm.se");
+  fontregular($font, $pdf);
 
   pdf_set_text_pos($pdf, 50, 670);
   pdf_show($pdf, "Player");

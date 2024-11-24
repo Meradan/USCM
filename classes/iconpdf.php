@@ -1,5 +1,4 @@
 <?php
-
 /***********************************************************************
  * IconPDF (c) 2011 Icon Systems, Inc. http://iconcmo.com
  *
@@ -32,9 +31,8 @@
  *
  ***********************************************************************/
 
-
-@include_once( 'tcpdf/config/lang/eng.php');
-@include_once( 'tcpdf/tcpdf.php');
+@include_once('tcpdf/config/lang/eng.php');
+@include_once('tcpdf/tcpdf.php');
 
 if ( !function_exists( "PDF_new" ) ) { // only create subclass if PDFLib not installed
     class IconPDF extends TCPDF {
