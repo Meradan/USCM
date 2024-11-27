@@ -39,10 +39,10 @@ Most roleplaying sessions are done in the traditional tabletop style, but there 
 Coming soon...
 
 <h3 class="heading heading-h3">Campaign material</h3>
-<a href="../../assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
-<a href="../../assets/files/EquipmentBookletPrint.pdf" target="_blank">Reference Booklet</a> Background info and equipment details. 2019 version<br/>
+<a href="assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
+<a href="assets/files/EquipmentBookletPrint.pdf" target="_blank">Reference Booklet</a> Background info and equipment details. 2019 version<br/>
 <br/>
-<a href="../../assets/files/InofficiellBriefingBF5.pdf" target="_blank">Unofficial briefing</a> (BF5 campaign knowledge about aliens, in swedish)<br/>
+<a href="assets/files/InofficiellBriefingBF5.pdf" target="_blank">Unofficial briefing</a> (BF5 campaign knowledge about aliens, in swedish)<br/>
 
 
 <h3 class="heading heading-h3">
@@ -54,10 +54,10 @@ To use the Character Generator you need LibreOffice (free, open source) which ca
 You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".
 <br/><br/>
 
-<a href="../../assets/files/USCM_Generator.ods" target="_blank">Character Generator</a> (OpenDocument - LibreOffice)<br/>
+<a href="assets/files/USCM_Generator.ods" target="_blank">Character Generator</a> (OpenDocument - LibreOffice)<br/>
 <br/>
-<a href="../../assets/files/charactersheet.pdf" target="_blank">Character Sheet</a> (PDF, for manual character creation)<br/>
-<a href="../../assets/files/USCM-Rules2.pdf" target="_blank">Rules - Properties/Cert</a> (PDF, description of all v2 properties etc.)<br/>
+<a href="assets/files/charactersheet.pdf" target="_blank">Character Sheet</a> (PDF, for manual character creation)<br/>
+<a href="assets/files/USCM-Rules2.pdf" target="_blank">Rules - Properties/Cert</a> (PDF, description of all v2 properties etc.)<br/>
 <br/>
 
 
