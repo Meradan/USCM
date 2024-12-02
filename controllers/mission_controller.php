@@ -93,7 +93,7 @@ class MissionController {
    * @param int $missionId
    * @return Mission
    */
-  function getMission($missionId) {        
+  function getMission($missionId) {
     $sql = "SELECT mission_name_short, mission_name, mn.id as missionid, pn.name_short as platoonnameshort, gm, date, briefing, debriefing, platoon_id, GROUP_CONCAT(t.tag SEPARATOR ', ') as tags FROM uscm_mission_names mn LEFT JOIN uscm_platoon_names pn ON pn.id=mn.platoon_id LEFT JOIN uscm_mission_tags mt ON mn.id=mt.missionid LEFT JOIN uscm_tags t ON mt.tagid=t.id WHERE mn.id = :missionId GROUP BY mn.id LIMIT 1";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':missionId', $missionId, PDO::PARAM_INT);
@@ -129,7 +129,24 @@ class MissionController {
                   LEFT JOIN uscm_mission_names mn ON m.mission_id=mn.id
                   LEFT JOIN uscm_characters c ON c.id=m.character_id
                   LEFT JOIN Users p ON p.id=c.userid
-                  WHERE m.mission_id=:missionId ORDER BY c.lastname,c.forname";
+                  WHERE m.mission_id=:missionId AND (p.id != '0' AND p.id != '59') ORDER BY c.lastname,c.forname";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
+    try {
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      return array();
+    }
+  }
+
+  public function getNonPlayerCharacters($mission) {
+    $sql="SELECT c.forname,c.lastname
+                  FROM uscm_missions m
+                  LEFT JOIN uscm_mission_names mn ON m.mission_id=mn.id
+                  LEFT JOIN uscm_characters c ON c.id=m.character_id
+                  LEFT JOIN Users p ON p.id=c.userid
+                  WHERE m.mission_id=:missionId AND (p.id = '0' OR p.id = '59') ORDER BY c.lastname,c.forname";
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':missionId', $mission->getId(), PDO::PARAM_INT);
     try {

@@ -40,7 +40,16 @@ $gmUser = $playerController->getPlayer($mission->getGmId());
     <?php
     $charactersAndPlayers = $missionController->getCharactersAndPlayers($mission);
     foreach ($charactersAndPlayers as $character) {
-      echo $character['forname'] . " " . $character['lastname'] . " - " .  $character['pforname'] . " " . $character['plastname'] . "<br>";
+      echo $character['forname'] . " " . $character['lastname'] . " (" .  $character['pforname'] . " " . $character['plastname'] . ")<br>";
+    } ?>
+    <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=characters" class="colorfont">Change</a><?php } ?>
+  </dd>
+  <dt>Non-Player Characters</dt>
+  <dd>
+    <?php
+    $charactersAndPlayers = $missionController->getNonPlayerCharacters($mission);
+    foreach ($charactersAndPlayers as $character) {
+      echo $character['forname'] . " " . $character['lastname'] . "<br>";
     } ?>
     <?php if ($admin or $gm) {?><a href="index.php?url=missions/edit.php&mission=<?php echo $mission->getId();?>&what=characters" class="colorfont">Change</a><?php } ?>
   </dd>
