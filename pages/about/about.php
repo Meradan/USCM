@@ -65,9 +65,9 @@ You need to activate macros under Tools->Options->LibreOffice->Security. A good 
 
 <h2 class="heading heading-h2">Creators</h2>
 
-Campaign &amp; Content: Oskar (<a href="mailto:oskar.grindemyr@gmail.com?subject=USCM">oskar.grindemyr@gmail.com</a>)<br>
-Web Design: Totte (<a href="mailto:totte@nordstrom.ax?subject=USCM">totte@nordstrom.ax</a>)<br>
-Server & Database: Pontus (<a href="mailto:meradan+uscm@gmail.com?subject=USCM">meradan@gmail.com</a>)<br>
+Campaign &amp; Content: <a href="mailto:oskar.grindemyr@gmail.com?subject=USCM">Oskar</a><br>
+Web Design: <a href="mailto:totte@nordstrom.ax?subject=USCM">Totte</a><br>
+Server & Database: <a href="mailto:meradan+uscm@gmail.com?subject=USCM">Pontus</a><br>
 
 <h3 class="heading heading-h3">
   Bug reports
