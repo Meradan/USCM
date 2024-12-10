@@ -1648,7 +1648,8 @@
                     },
                     "Space Tactics": {
                         "value": 0,
-                        "cost": 5
+                        "cost": 5,
+                        "extended": "navy"
                     },
                     "Naval Tactics": {
                         "value": 0,
@@ -1678,6 +1679,10 @@
                         "value": 0,
                         "cost": 2
                     },
+                    "RTI": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Starship Identification": {
                         "value": 0,
                         "cost": 3,
@@ -1702,10 +1707,6 @@
                         "cost": 3
                     },
                     "Motion Tracker": {
-                        "value": 0,
-                        "cost": 3
-                    },
-                    "Thrusterpack": {
                         "value": 0,
                         "cost": 3
                     },
@@ -1764,26 +1765,6 @@
                         "value": 0,
                         "cost": 8
                     },
-                    "Forensics": {
-                        "value": 0,
-                        "cost": 3
-                    },
-                    "Laboratory equipment": {
-                        "value": 0,
-                        "cost": 3
-                    }
-                },
-                "  ": {
-                    "Meteorology": {
-                        "value": 0,
-                        "cost": 3,
-                        "extended": "colonist"
-                    },
-                    "Oceanography": {
-                        "value": 0,
-                        "cost": 3,
-                        "extended": "colonist"
-                    }
                 },
                 "Nature & Animals": {
                     "Bushcrafting": {
@@ -1854,7 +1835,7 @@
                         "cost": 3
                     }
                 },
-                "Medical": {
+                "Science & Medicine": {
                     "Aerospace Medicine": {
                         "value": 0,
                         "cost": 3
@@ -1894,6 +1875,24 @@
                     "IV": {
                         "value": 0,
                         "cost": 3
+                    },
+                    "Forensics": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Laboratory equipment": {
+                        "value": 0,
+                        "cost": 3
+                    },
+                    "Meteorology": {
+                        "value": 0,
+                        "cost": 3,
+                        "extended": "colonist"
+                    },
+                    "Oceanography": {
+                        "value": 0,
+                        "cost": 3,
+                        "extended": "colonist"
                     },
                     "Surgery": {
                         "value": 0,
@@ -1986,6 +1985,10 @@
                     "Shadowing": {
                         "value": 0,
                         "cost": 4
+                    },
+                    "Thrusterpack": {
+                        "value": 0,
+                        "cost": 3
                     }
                 }
             }
