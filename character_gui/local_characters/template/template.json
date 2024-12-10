@@ -741,6 +741,10 @@
                         "value": 0,
                         "cost": 2
                     },
+                    "Gung Ho": {
+                        "value": 0,
+                        "cost": 3
+                    },
                     "Hardened Veteran": {
                         "value": 0,
                         "cost": 4
@@ -863,7 +867,7 @@
                     },
                     "Smuggler Tricks": {
                         "value": 0,
-                        "cost": 3
+                        "cost": 2
                     },
                     "Snake-eater": {
                         "value": 0,
@@ -1043,9 +1047,17 @@
                         "value": 0,
                         "cost": -2
                     },
+                    "Sleepyhead": {
+                        "value": 0,
+                        "cost": -2
+                    },
                     "Soft hearted": {
                         "value": 0,
                         "cost": -3
+                    },
+                    "Victim": {
+                        "value": 0,
+                        "cost": -1
                     },
                     "Voodoo curse": {
                         "value": 0,
