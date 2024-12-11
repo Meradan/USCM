@@ -36,7 +36,7 @@ Most roleplaying sessions are done in the traditional tabletop style, but there 
 <h3 class="heading heading-h3">
   USCM v3 <span class="tag tag-bf5">current version</span>
 </h3>
-Coming soon...
+<a href="assets/files/USCM-Rules2v3.pdf" target="_blank">Gameworld Reference - Skills/Traits etc.</a> (PDF)<br/>
 
 <h3 class="heading heading-h3">Campaign material</h3>
 <a href="assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
