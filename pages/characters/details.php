@@ -45,7 +45,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <dd>
       <details class="details">
         <summary><?php echo $xpval ?></summary>
-        New v<?php echo $character->getVersion() ?> characters start at <?php echo $startxp ?> XP.
+        New v<?php echo $character->getVersion(); ?> characters start at <?php echo $startxp; ?> XP.
       </details>
     </dd>
     <dt>
