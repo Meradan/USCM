@@ -904,6 +904,7 @@ where c.id=:cid group by cn.id)";
 	  if ($this->version < 3) {
 		  $startxp=117;
 	  }
+	  return $startxp;
   }
 
     /**
