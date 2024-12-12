@@ -9,6 +9,7 @@ require_once ("classes/bonus.php");
 require_once ("classes/certificate.php");
 require_once ("classes/character.php");
 require_once ("classes/disadvantage.php");
+require_once ("classes/expertise.php");
 require_once ("classes/news.php");
 require_once ("classes/medal.php");
 require_once ("classes/mission.php");
