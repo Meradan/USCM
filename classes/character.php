@@ -901,7 +901,7 @@ where c.id=:cid group by cn.id)";
    */
   function getXPstartvalue() {
 	  $startxp=128;
-	  if ($this->version() < 3) {
+	  if ($this->version < 3) {
 		  $startxp=117;
 	  }
   }
@@ -912,7 +912,7 @@ where c.id=:cid group by cn.id)";
    */
   function getXPvalue() {
 	  $sql = "";
-	  if ($this->version() < 3) {
+	  if ($this->version < 3) {
 		  $sql = "select UnusedXP+coalesce(s.skillxp,0)+coalesce(l.langxp,0)+coalesce(a.attrxp,0)+coalesce(av.advxp,0)+coalesce(dv.dadvxp,0)+coalesce(ce.certxp,0) as xpval from uscm_characters as c
 left join (select character_id as cid, sum(round(value*(value+1)/2)) as skillxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name not like('Language:%') group by cid) as s on c.id=s.cid
 left join (select character_id as cid, sum(case value when 1 then 1 when 2 then 3 when 3 then 3 when 4 then 6 when 5 then 6 else 0 end) as langxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name like('Language:%') group by cid) as l on c.id=l.cid
