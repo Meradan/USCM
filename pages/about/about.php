@@ -11,8 +11,7 @@ Varje uppdrag är ett fristående scenario. Alla spelare är med på en maillist
 skickas ett "announcement" för detta ut på maillistan. Detta innehåller tid och plats, antal spelare samt en kort beskrivning
 av uppdraget. Sedan är det först till kvarn. De första spelarna som anmäler sig får en mer detaljerad briefing som bekräftelse
 på att de har kommit med på uppdraget.<br> Det gör att det blir variation i spelgruppen från gång till gång och det går bra att
-vara med i kampanjen även om man inte kan spela så ofta. Ibland när alldeles för många
-har velat vara med på samma uppdrag har det spelats flera gånger med olika spelargrupper.<br><br>
+vara med i kampanjen även om man inte kan spela så ofta.<br><br>
 
 Alla uppdrag som spelats inom kampanjen finns beskrivna under "Missions" med den
 briefing-text som spelarna fick ut innan uppdraget och med sammanfattningen som skrivits efteråt av spelledaren eller någon spelare. Scenarion vi kör på konvent brukar inte få egna debriefingar, men dom spelas ofta som ett kampanjmission också.<br><br>
@@ -36,7 +35,8 @@ Most roleplaying sessions are done in the traditional tabletop style, but there 
 <h3 class="heading heading-h3">
   USCM v3 <span class="tag tag-bf5">current version</span>
 </h3>
-Coming soon...
+<a href="assets/files/USCM-Rules2v3.pdf" target="_blank">Gameworld Reference - Skills/Traits/Expertise etc.</a> (PDF)<br/>
+<a href="assets/files/CharacterSheet.ods" target="_blank">Simple character sheet for manual character generation.</a> (OpenDocument)<br/>
 
 <h3 class="heading heading-h3">Campaign material</h3>
 <a href="assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
@@ -73,4 +73,4 @@ Server & Database: <a href="mailto:meradan+uscm@gmail.com?subject=USCM">Pontus</
   Bug reports
 </h3>
 
-<a href="https://github.com/Meradan/USCM/issues">GitHub Issues</a>
+<a href="https://github.com/USCM-RPG/USCM/issues">GitHub</a>

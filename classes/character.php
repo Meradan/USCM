@@ -42,6 +42,7 @@ class Character extends DbEntity {
   private $encounterpredator = NULL;
   private $encounterai = NULL;
   private $encounterarachnid = NULL;
+  private $version = NULL;
 
   function __construct($characterId = NULL) {
     $this->id = $characterId;
@@ -314,6 +315,14 @@ class Character extends DbEntity {
 
   public function setEncounterArachnid($val) {
 	  $this->encounterarachnid = $val;
+  }
+  
+    public function getVersion() {
+	  return $this->version;
+  }
+
+  public function setVersion($val) {
+	  $this->version = $val;
   }
 
   /**
@@ -870,13 +879,42 @@ where c.id=:cid group by cn.id)";
     }
     return $traits;
   }
+  
+    public function getExpertise() {
+	  $expertise = array ();
+	  $sql = "SELECT en.id,expertise_name, e.id as uid FROM expertise_names en
+              LEFT JOIN expertises e ON e.expertise_id=en.id
+              WHERE e.character_id=:cid ORDER BY en.expertise_name";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+      $traits[$row['id']]['expertise_name'] = $row['expertise_name'];
+      $traits[$row['id']]['uid'] = $row['uid'];
+    }
+    return $expertise;
+  }
+  
+    /**
+   * @param int $characterId Id of a Character
+   * @return int
+   */
+  function getXPstartvalue() {
+	  $startxp=128;
+	  if ($this->version < 3) {
+		  $startxp=117;
+	  }
+	  return $startxp;
+  }
 
     /**
    * @param int $characterId Id of a Character
    * @return int
    */
   function getXPvalue() {
-	  $sql = "select UnusedXP+coalesce(s.skillxp,0)+coalesce(l.langxp,0)+coalesce(a.attrxp,0)+coalesce(av.advxp,0)+coalesce(dv.dadvxp,0)+coalesce(ce.certxp,0) as xpval from uscm_characters as c
+	  $sql = "";
+	  if ($this->version < 3) {
+		  $sql = "select UnusedXP+coalesce(s.skillxp,0)+coalesce(l.langxp,0)+coalesce(a.attrxp,0)+coalesce(av.advxp,0)+coalesce(dv.dadvxp,0)+coalesce(ce.certxp,0) as xpval from uscm_characters as c
 left join (select character_id as cid, sum(round(value*(value+1)/2)) as skillxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name not like('Language:%') group by cid) as s on c.id=s.cid
 left join (select character_id as cid, sum(case value when 1 then 1 when 2 then 3 when 3 then 3 when 4 then 6 when 5 then 6 else 0 end) as langxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id where skill_name like('Language:%') group by cid) as l on c.id=l.cid
 left join (select character_id as cid, sum(value*8)-200 as attrxp from uscm_attributes where attribute_id !=9 group by character_id) as a on c.id=a.cid
@@ -884,6 +922,16 @@ left join (select character_id as cid, sum(value) as advxp from uscm_advantages 
 left join (select character_id as cid, sum(value) as dadvxp from uscm_disadvantages as d join uscm_disadvantage_names as n on d.disadvantage_name_id=n.id group by cid) as dv on c.id=dv.cid
 left join (select character_id as cid, count(distinct certificate_name_id)*2 as certxp from uscm_certificates group by cid) as ce on c.id=ce.cid
 where c.id=:cid";
+	  } else {
+		  $sql = "select UnusedXP+coalesce(s.skillxp,0)+coalesce(a.attrxp,0)+coalesce(av.advxp,0)+coalesce(dv.dadvxp,0)+coalesce(ex.expxp,0) as xpval from uscm_characters as c
+left join (select character_id as cid, sum(round(value*(value+1)/2)) as skillxp from uscm_skills as s join uscm_skill_names as n on s.skill_name_id=n.id group by cid) as s on c.id=s.cid
+left join (select character_id as cid, sum(value*8)-200 as attrxp from uscm_attributes where attribute_id !=9 group by character_id) as a on c.id=a.cid
+left join (select character_id as cid, sum(value) as advxp from uscm_advantages as a join uscm_advantage_names as n on a.advantage_name_id=n.id group by cid) as av on c.id=av.cid
+left join (select character_id as cid, sum(value) as dadvxp from uscm_disadvantages as d join uscm_disadvantage_names as n on d.disadvantage_name_id=n.id group by cid) as dv on c.id=dv.cid
+left join (select character_id as cid, sum(value) as expxp from expertises as e join expertise_names as n on e.expertise_id=n.id group by cid) as ex on c.id=ex.cid
+where c.id=:cid";
+	  }
+	  
 	$stmt = $this->db->prepare($sql);
     $stmt->bindValue(':cid', $this->id, PDO::PARAM_INT);
     $stmt->execute();

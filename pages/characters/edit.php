@@ -154,23 +154,13 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   <fieldset class="form--inline grid grid--small">
     <legend>Points</legend>
 
-    <label for="ap">
-      Awareness Points
-      <input type="number" id="ap" name="ap" min="0" value="<?php echo $character->getAwarenessPoints(); ?>">
-    </label>
-
     <label for="cp">
-      Cool Points
+      Stunts
       <input type="number" id="cp" name="cp" min="0" value="<?php echo $character->getCoolPoints(); ?>">
     </label>
 
-    <label for="ep">
-      Exhaustion Points
-      <input type="number" id="ep" name="ep" min="0" value="<?php echo $character->getExhaustionPoints(); ?>">
-    </label>
-
     <label for="fp">
-      Fear Points
+      Stress
       <input type="number" id="fp" name="fp" min="0" value="<?php echo $character->getFearPoints(); ?>">
     </label>
 
@@ -182,16 +172,6 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <label for="pp">
       Psycho Points
       <input type="number" id="pp" name="pp" min="0" value="<?php echo $character->getPsychoPoints(); ?>">
-    </label>
-
-    <label for="tp">
-      Trauma Points
-      <input type="number" id="tp" name="tp" min="0" value="<?php echo $character->getTraumaPoints(); ?>">
-    </label>
-
-    <label for="mp">
-      Mental Points
-      <input type="number" id="mp" name="mp" min="0" value="<?php echo $character->getMentalPoints(); ?>">
     </label>
 
     <label for="xp">
@@ -260,6 +240,9 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   </fieldset>
 
   <fieldset class="form--inline grid grid--small">
+<?php
+if ($character->getVersion() < 3) {
+?>
     <legend>Certificates</legend>
             <?php
             $allPlatoonCertificates = array();
@@ -277,6 +260,14 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
                 <input type="checkbox" id="certs_<?php echo $certificateId; ?>" name="certs[<?php echo $certificateId; ?>]" <?php echo (array_key_exists($certificateId, $characterCertificates)) ? ("checked ") : (""); echo (in_array($certificateId, $allPlatoonCertificates)) ? ("disabled ") : (""); ?>>
               </label>
         <?php } ?>
+<?php
+} else {
+?>
+    <legend>Expertise</legend>
+    Todo: add expertise here
+<?php
+}
+?>
   </fieldset>
 
     <fieldset class="form--inline grid grid--small">

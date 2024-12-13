@@ -22,6 +22,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
   $player = $character->getPlayer();
   $missionCount = getNumberOfMissionsForCharacter($characterId);
   $xpval = $character->getXPvalue();
+  $startxp = $character->getXPstartvalue();
   $totglory = $character->getGlory();
   $skillarray = $character->getSkillsForCharacter();
   $attribarray = $character->getAttributesForCharacter();
@@ -44,7 +45,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     <dd>
       <details class="details">
         <summary><?php echo $xpval ?></summary>
-        New characters start at 117 XP.
+        New v<?php echo $character->getVersion(); ?> characters start at <?php echo $startxp; ?> XP.
       </details>
     </dd>
     <dt>
@@ -52,7 +53,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     </dt>
     <dd>
       <details class="details">
-        <summary><?php echo ($missionCount>0 ? round(($xpval-117)/$missionCount,2) : 0) ?></summary>
+        <summary><?php echo ($missionCount>0 ? round(($xpval-$startxp)/$missionCount,2) : 0) ?></summary>
         Disadvantages earned through play can reduce this number.
       </details>
     </dd>
@@ -111,6 +112,9 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
       ?>
     </ul>
 
+<?php
+if ($character->getVersion() < 3) {
+?>
     <h3 class="heading heading-h3">
       Certificate courses you qualify for
     </h3>
@@ -155,7 +159,9 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
 	}
 	?>
     </ul>
-
+<?php
+}
+?>
     <h3 class="heading heading-h3">
       Others you served with
     </h3>

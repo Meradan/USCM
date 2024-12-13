@@ -19,7 +19,7 @@ Class CharacterController {
     $sql = "SELECT userid, platoon_id, forname, lastname, Enlisted, Age, Gender, UnusedXP,
         AwarenessPoints, CoolPoints, ExhaustionPoints, FearPoints, LeadershipPoints, PsychoPoints,
         TraumaPoints, MentalPoints, status, status_desc, specialty_name, uscm_specialty_names.id as specialty_id,
-        rank_id, rank_short, rank_long, rank_desc, encalien, encgrey, encpred, encai, encarach
+        rank_id, rank_short, rank_long, rank_desc, encalien, encgrey, encpred, encai, encarach, version
         FROM uscm_characters
         LEFT JOIN uscm_ranks ON uscm_characters.id = uscm_ranks.character_id
         LEFT JOIN uscm_rank_names ON  uscm_ranks.rank_id = uscm_rank_names.id
@@ -63,6 +63,7 @@ Class CharacterController {
 	  $character->setEncounterPredator($row['encpred']);
 	  $character->setEncounterAI($row['encai']);
 	  $character->setEncounterArachnid($row['encarach']);
+	  $character->setVersion($row['version']);
       $platoonController = new PlatoonController();
       $playerController = new PlayerController();
       $medalController = new MedalController();
@@ -326,6 +327,67 @@ Class CharacterController {
     }
     return $skills;
   }
+  
+    /**
+   * Get all expertise for character
+   * @param Character $character
+   * @return Expertise[]
+   */
+  function getExpertise($character) {
+	  $expertisearray = array();
+	      if ($character->getVersion() < 3) {
+		return $expertisearray;
+	}
+	$expertisesql = "SELECT en.id,expertise_name, expertise_group_id, value FROM expertise_names en
+              JOIN expertises e ON e.expertise_id=en.id
+              JOIN expertise_groups eg ON en.expertise_group_id=eg.id
+              WHERE e.character_id=:cid ORDER BY en.expertise_name";
+	$db = getDatabaseConnection();
+	$stmt = $db->prepare($expertisesql);
+    $stmt->bindValue(':cid', $character->getId(), PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+	  $expertise = new Expertise();
+	  $expertise->setId($row['id']);
+	  $expertise->setExpertiseGroupId($row['expertise_group_id']);
+	  $expertise->setName($row['expertise_name']);
+	  $expertise->setValue($row['value']);
+	  $expertisearray[] = $expertise;
+    }
+    
+    return $expertisearray;
+  }
+  
+    /**
+   * Get only expertise not linked to skill for character
+   * @param Character $character
+   * @return Expertise[]
+   */
+  function getExpertiseNotOnSkills($character) {
+	  $expertisearray = array();
+	      if ($character->getVersion() < 3) {
+		return $expertisearray;
+	}
+	$expertisesql = "SELECT en.id,expertise_name, expertise_group_id, value FROM expertise_names en
+              LEFT JOIN expertise_skill es on en.id=es.expertiseid
+              JOIN expertises e ON e.expertise_id=en.id
+              JOIN expertise_groups eg ON en.expertise_group_id=eg.id
+              WHERE e.character_id=:cid ORDER BY en.expertise_name AND es.expertiseid IS NULL";
+	$db = getDatabaseConnection();
+	$stmt = $db->prepare($expertisesql);
+    $stmt->bindValue(':cid', $character->getId(), PDO::PARAM_INT);
+    $stmt->execute();
+    while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+	  $expertise = new Expertise();
+	  $expertise->setId($row['id']);
+	  $expertise->setExpertiseGroupId($row['expertise_group_id']);
+	  $expertise->setName($row['expertise_name']);
+	  $expertise->setValue($row['value']);
+	  $expertisearray[] = $expertise;
+    }
+    
+    return $expertisearray;
+  }
 
   /**
    *
@@ -507,6 +569,9 @@ Class CharacterController {
    */
   function getAllCertificatesForCharacter($character) {
     $certificatesForCharacter = array ();
+    if ($character->getVersion() > 2) {
+		return $certificatesForCharacter;
+	}
     $platoon = $character->getPlatoon();
     $aquiredCertificates = $this->getAquiredCertificatesForCharacter($character);
     $platoonCertificates = $platoon->getCertificates();
