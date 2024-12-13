@@ -558,8 +558,12 @@ class Character extends DbEntity {
     return $this->skills("Vehicle", $this->getCertificates());
   }
   
-    public function getTechnicalSkills() {
+  public function getTechnicalSkills() {
     return $this->skills("Technical", $this->getCertificates());
+  }
+  
+  public function getMilitarySkills() {
+    return $this->skills("Military", $this->getCertificates());
   }
 
   public function getOtherSkills() {
