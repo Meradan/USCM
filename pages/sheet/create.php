@@ -500,7 +500,7 @@ if ($user->getId() == $character->getPlayerId() || $user->isAdmin() || $user->is
     $skillsheight -= 12;
   }
   $skillsheight -= 12;
-  $skillarray = $character->getOtherSkills();
+  $skillarray = array_merge($character->getTechnicalSkills(), $character->getOtherSkills());
   foreach ( $skillarray as $skill ) {
     pdf_set_text_pos($pdf, 380, $skillsheight);
     pdf_show($pdf, $skill['name']);

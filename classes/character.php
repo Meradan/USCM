@@ -547,7 +547,7 @@ class Character extends DbEntity {
   }
 
   public function getWeaponSkills() {
-    return $this->skills("Weapons", $this->getCertificates());
+    return $this->skills("Weapon", $this->getCertificates());
   }
 
   public function getPhysicalSkills() {
@@ -555,11 +555,15 @@ class Character extends DbEntity {
   }
 
   public function getVehiclesSkills() {
-    return $this->skills("Vehicles", $this->getCertificates());
+    return $this->skills("Vehicle", $this->getCertificates());
+  }
+  
+    public function getTechnicalSkills() {
+    return $this->skills("Technical", $this->getCertificates());
   }
 
   public function getOtherSkills() {
-    return $this->skills("Other", $this->getCertificates());
+    return $this->skills("General", $this->getCertificates());
   }
 
   public function getLanguagesSkills() {
