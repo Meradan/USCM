@@ -32,30 +32,29 @@ Most roleplaying sessions are done in the traditional tabletop style, but there 
 
 <h2 class="heading heading-h2">Resources</h2>
 
+<h3 class="heading heading-h3">Campaign material</h3>
+<a href="assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> (PDF) Overview for printing<br/>
+<a href="assets/files/EquipmentBookletPrint.pdf" target="_blank">Reference Booklet</a> (PDF) Background info and equipment details. 2019 version<br/>
+<br/>
+<a href="assets/files/InofficiellBriefingBF5.pdf" target="_blank">Unofficial briefing</a> (PDF) BF5s knowledge about aliens, in swedish<br/>
+
+
 <h3 class="heading heading-h3">
   USCM v3 <span class="tag tag-bf5">current version</span>
 </h3>
-<a href="assets/files/v3/USCM-Rules2v3.pdf" target="_blank">Gameworld Reference - Skills/Traits/Expertise etc.</a> (PDF)<br/>
-<a href="assets/files/v3/CharacterSheet.ods" target="_blank">Simple character sheet for manual character generation.</a> (OpenDocument)<br/>
-
-<h3 class="heading heading-h3">Campaign material</h3>
-<a href="assets/files/EquipmentListPrint2.pdf" target="_blank">Equipment list</a> Overview for printing<br/>
-<a href="assets/files/EquipmentBookletPrint.pdf" target="_blank">Reference Booklet</a> Background info and equipment details. 2019 version<br/>
-<br/>
-<a href="assets/files/InofficiellBriefingBF5.pdf" target="_blank">Unofficial briefing</a> (BF5 campaign knowledge about aliens, in swedish)<br/>
+<a href="assets/files/v3/USCM-Rules2v3.pdf" target="_blank">Gameworld Reference - Skills/Traits/Expertise etc</a> (PDF)<br/>
+<a href="assets/files/v3/CharacterSheet.ods" target="_blank">Simple character sheet for manual character generation</a> (OpenDocument)<br/>
 
 <h3 class="heading heading-h3">
   USCM v2 <span class="tag">old version</span>
 </h3>
 
-To use the Character Generator you need <a href="http://www.libreoffice.org" target="_blank">LibreOffice</a> (free, open source).<br/>
-You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".<br/><br/>
+<a href="assets/files/v2/charactersheet.pdf" target="_blank">Character Sheet</a> (PDF)<br/>
+<a href="assets/files/v2/USCM-Rules2.pdf" target="_blank">Rules - Properties/Cert</a> (PDF)<br/><br/>
 
 <a href="assets/files/v2/USCM_Generator.ods" target="_blank">Character Generator</a> (OpenDocument - LibreOffice)<br/>
-<br/>
-<a href="assets/files/v2/charactersheet.pdf" target="_blank">Character Sheet</a> (PDF, for manual character creation)<br/>
-<a href="assets/files/v2/USCM-Rules2.pdf" target="_blank">Rules - Properties/Cert</a> (PDF, description of all v2 properties etc.)<br/>
-<br/>
+To use the Character Generator you need <a href="http://www.libreoffice.org" target="_blank">LibreOffice</a> (free, open source).<br/>
+You need to activate macros under Tools->Options->LibreOffice->Security. A good way to do it is to set the folder with the Character generator in it as a "Trusted Source".<br/><br/>
 
 <hr class="line">
 
