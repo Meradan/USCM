@@ -1840,10 +1840,6 @@
                         "value": 0,
                         "cost": 3
                     },
-                    "Altitude Medicine": {
-                        "value": 0,
-                        "cost": 3
-                    },
                     "Autodoc": {
                         "value": 0,
                         "cost": 5
@@ -1852,10 +1848,6 @@
                         "value": 0,
                         "cost": 4
                     },
-                    "Cold climate": {
-                        "value": 0,
-                        "cost": 3
-                    },
                     "Cryogenics": {
                         "value": 0,
                         "cost": 3
@@ -1863,10 +1855,6 @@
                     "Dive Medicine": {
                         "value": 0,
                         "cost": 4
-                    },
-                    "Hot climate": {
-                        "value": 0,
-                        "cost": 3
                     },
                     "Infections": {
                         "value": 0,
