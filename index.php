@@ -25,11 +25,7 @@
       ?>
     </head>
 
-    <body <?php
-    if (array_key_exists('uppdaterad', $_GET) && $_GET['uppdaterad']==1) {
-      echo "onLoad=\"alert('uppgifterna har uppdaterats')\"";
-    } ?>
-    >
+    <body>
 
     <?php
       $urlParam = $_GET["url"] ?? "";
@@ -46,7 +42,7 @@
         if(isset($_GET['url'])){
           // To make sure the file loaded is in the local file system and not a remote url
           $pages = recursive_dirlist('./pages');
-          if( in_array('/'.$_GET['url'], $pages) ) {
+          if(in_array('/'.$_GET['url'], $pages)) {
             include('pages/'.$_GET['url']);
           }
         }
