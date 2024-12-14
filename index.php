@@ -24,13 +24,8 @@
       include("components/meta.php");
       ?>
     </head>
-
     <body>
-
-    <?php
-      $urlParam = $_GET["url"] ?? "";
-    ?>
-    <div class="galaxy <?php echo str_contains($urlParam, "about") ? "animate" : "" ?>"></div>
+    <div class="galaxy <?php echo !($_GET["url"] ?? "") ? "animate" : "" ?>"></div>
 
     <div class="wrapper">
       <?php
