@@ -9,45 +9,68 @@
   </div>
 
   <nav class="nav">
+    <?php
+      $urlParam = $_GET["url"] ?? "";
+    ?>
     <ul>
       <li>
-        <a href="index.php?url=news/news.php">News</a>
+        <a href="index.php?url=news/news.php" <?php echo !$urlParam || $urlParam == "news/news.php" ? "aria-current='page'" : ""?>>
+          News
+        </a>
       </li>
       <li>
-        <a href="index.php?url=about/about.php">About</a>
+        <a href="index.php?url=about/about.php" <?php echo $urlParam == "about/about.php" ? "aria-current='page'" : ""?>>
+          About
+        </a>
       </li>
       <li>
-        <a href="index.php?url=characters/list.php">Characters</a>
+        <a href="index.php?url=characters/list.php" <?php echo $urlParam == "characters/list.php" ? "aria-current='page'" : ""?>>
+          Characters
+        </a>
       </li>
       <li>
-        <a href="index.php?url=missions/list.php">Missions</a>
+        <a href="index.php?url=missions/list.php" <?php echo $urlParam == "missions/list.php" ? "aria-current='page'" : ""?>>
+          Missions
+        </a>
       </li>
       <li>
-        <a href="index.php?url=fame/list.php">Hall of Fame</a>
+        <a href="index.php?url=fame/list.php" <?php echo $urlParam == "fame/list.php" ? "aria-current='page'" : ""?>>
+          Hall of Fame
+        </a>
       </li>
       <li>
         <a href="https://discord.gg/nEp7kwd4h7" target="_blank">Discord</a>
       </li>
       <?php if ($_SESSION['level']>=2): ?>
         <li>
-          <a href="index.php?url=characters/create.php">Create character</a>
+          <a href="index.php?url=characters/create.php" <?php echo $urlParam == "characters/create.php" ? "aria-current='page'" : ""?>>
+            Create character
+          </a>
         </li>
         <li>
-          <a href="index.php?url=missions/create.php">Create mission</a>
+          <a href="index.php?url=missions/create.php" <?php echo $urlParam == "missions/create.php" ? "aria-current='page'" : ""?>>
+            Create mission
+          </a>
         </li>
       <?php endif ?>
       <?php if ($_SESSION['level']>=3): ?>
         <li>
-          <a href="index.php?url=player/create.php">Create player</a>
+          <a href="index.php?url=player/create.php" <?php echo $urlParam == "player/create.php" ? "aria-current='page'" : ""?>>
+            Create player
+          </a>
         </li>
       <?php endif ?>
       <?php if ($_SESSION['level']==3): ?>
         <li>
-          <a href="index.php?url=player/edit.php">Modify player</a>
+          <a href="index.php?url=player/edit.php" <?php echo $urlParam == "player/edit.php" ? "aria-current='page'" : ""?>>
+            Modify player
+          </a>
         </li>
       <?php elseif ($_SESSION['level']>=1): ?>
         <li>
-          <a href="index.php?url=player/edit.php&player=<?php echo $_SESSION['user_id']; ?>">Modify player</a>
+          <a href="index.php?url=player/edit.php&player=<?php echo $_SESSION['user_id']; ?>" <?php echo $urlParam == "player/edit.php&player=" . $_SESSION['user_id'] ? "aria-current='page'" : ""?>>
+            Modify player
+          </a>
         </li>
       <?php endif ?>
       <li>

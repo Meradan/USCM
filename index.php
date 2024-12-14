@@ -30,7 +30,11 @@
       echo "onLoad=\"alert('uppgifterna har uppdaterats')\"";
     } ?>
     >
-    <div class="galaxy"></div>
+
+    <?php
+      $urlParam = $_GET["url"] ?? "";
+    ?>
+    <div class="galaxy <?php echo str_contains($urlParam, "about") ? "animate" : "" ?>"></div>
 
     <div class="wrapper">
       <?php
