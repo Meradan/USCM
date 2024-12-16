@@ -40,6 +40,7 @@ if ($_GET['action'] == "update_character") {
   $old_certificate = array ();
   $character_id = $_POST['character'];
   $character = $characterController->getCharacter($character_id);
+  $version=$character->getVersion();
 
   // updates character basic stats
   $player = $_POST['player'];
@@ -50,14 +51,14 @@ if ($_GET['action'] == "update_character") {
   $age = $_POST['age'];
   $gender = $_POST['gender'];
   $xp = $_POST['xp'];
-  $ap = $_POST['ap'];
+  //$ap = $_POST['ap'];
   $cp = $_POST['cp'];
-  $ep = $_POST['ep'];
+  //$ep = $_POST['ep'];
   $fp = $_POST['fp'];
   $lp = $_POST['lp'];
   $pp = $_POST['pp'];
-  $tp = $_POST['tp'];
-  $mp = $_POST['mp'];
+  //$tp = $_POST['tp'];
+  //$mp = $_POST['mp'];
   $status = $_POST['status'];
   $status_desc = $_POST['status_desc'];
   $cbalien = 0;
@@ -79,14 +80,10 @@ if ($_GET['action'] == "update_character") {
                          Age=:age,
                          Gender=:gender,
                          UnusedXP=:xp,
-                         AwarenessPoints=:ap,
                          CoolPoints=:cp,
-                         ExhaustionPoints=:ep,
                          FearPoints=:fp,
                          LeadershipPoints=:lp,
                          PsychoPoints=:pp,
-                         TraumaPoints=:tp,
-                         MentalPoints=:mp,
                          status=:status,
                          status_desc=:status_desc,
 						 encalien=:cbalien,
@@ -94,8 +91,8 @@ if ($_GET['action'] == "update_character") {
 						 encpred=:cbpredator,
 						 encai=:cbai,
 						 encarach=:cbarachnid
-                    WHERE id=:character_id";
-
+						 WHERE id=:character_id";
+  
   $stmt = $db->prepare($charactersql);
   $stmt->bindValue(':playerid', $player, PDO::PARAM_INT);
   $stmt->bindValue(':platoonid', $platoon, PDO::PARAM_INT);
@@ -105,14 +102,14 @@ if ($_GET['action'] == "update_character") {
   $stmt->bindValue(':age', $age, PDO::PARAM_INT);
   $stmt->bindValue(':gender', $gender, PDO::PARAM_STR);
   $stmt->bindValue(':xp', $xp, PDO::PARAM_INT);
-  $stmt->bindValue(':ap', $ap, PDO::PARAM_INT);
+  //$stmt->bindValue(':ap', $ap, PDO::PARAM_INT);
+  //$stmt->bindValue(':ep', $ep, PDO::PARAM_INT);
   $stmt->bindValue(':cp', $cp, PDO::PARAM_INT);
-  $stmt->bindValue(':ep', $ep, PDO::PARAM_INT);
   $stmt->bindValue(':fp', $fp, PDO::PARAM_INT);
   $stmt->bindValue(':lp', $lp, PDO::PARAM_INT);
   $stmt->bindValue(':pp', $pp, PDO::PARAM_INT);
-  $stmt->bindValue(':tp', $tp, PDO::PARAM_INT);
-  $stmt->bindValue(':mp', $mp, PDO::PARAM_INT);
+  //$stmt->bindValue(':tp', $tp, PDO::PARAM_INT);
+  //$stmt->bindValue(':mp', $mp, PDO::PARAM_INT);
   $stmt->bindValue(':status', $status, PDO::PARAM_STR);
   $stmt->bindValue(':status_desc', $status_desc, PDO::PARAM_STR);
   $stmt->bindValue(':cbalien', $cbalien, PDO::PARAM_INT);
@@ -384,6 +381,7 @@ if ($_GET['action'] == "update_character") {
   //
   // Certificates
   //
+  if ($version < 3) {
   // Finds all certificates currently in database for character
   $characterCertificates = $character->getCertsForCharacterWithoutReqCheck();
   foreach ( $characterCertificates as $certificate_name_id => $certificate ) {
@@ -423,7 +421,7 @@ if ($_GET['action'] == "update_character") {
     $stmt->bindValue(':certificate_name_id', $certificate_id, PDO::PARAM_INT);
     $stmt->execute();
   }
-
+  }
   header("location:{$url_root}/index.php?url=characters/list.php");
 } elseif ($_GET['action'] == "create_character") {
   /*
